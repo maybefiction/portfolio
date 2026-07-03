@@ -63,7 +63,7 @@ function renderMeta(item) {
   if (item.basics) {
     html += `
       <div class="xp-meta-block">
-        <h3 class="xp-meta-label">Basics</h3>
+        <h3 class="xp-meta-label">Details</h3>
         <dl class="xp-meta-list">
           ${Object.entries(item.basics)
             .map(
@@ -98,8 +98,12 @@ function renderMeta(item) {
 
   side.innerHTML = html;
 
-  document.getElementById("xp-description").textContent =
-    item.fullSynopsis || item.description || "";
+  const shortDescription = item.shortDescription || item.description || "";
+  const fullSynopsis = item.fullSynopsis || "";
+  document.getElementById("xp-description").innerHTML = `
+    ${shortDescription ? `<p class="xp-description-lead">${shortDescription}</p>` : ""}
+    ${fullSynopsis ? `<p class="xp-description-body">${fullSynopsis}</p>` : ""}
+  `;
 }
 
 function formatLabel(key) {
@@ -140,7 +144,7 @@ function renderDesignFlow(item) {
         .map(
           (stage, i) => `
         <button class="xp-flow-node ${i === 0 ? "is-active" : ""}" data-stage="${i}" role="tab" aria-selected="${i === 0}">
-          <span class="xp-flow-node-dot" aria-hidden="true"></span>
+          ${stage.image ? `<img class="xp-flow-node-thumb" src="${stage.image}" alt="${stage.title}" loading="lazy">` : ""}
           <span class="xp-flow-node-label">${stage.title}</span>
         </button>`
         )
@@ -151,7 +155,6 @@ function renderDesignFlow(item) {
         .map(
           (stage, i) => `
         <div class="xp-flow-panel ${i === 0 ? "is-open" : ""}" data-panel="${i}" role="tabpanel">
-          ${stage.image ? `<img class="xp-flow-panel-image" src="${stage.image}" alt="${stage.title}" loading="lazy">` : ""}
           <h3>${stage.title}</h3>
           <p>${stage.text}</p>
         </div>`

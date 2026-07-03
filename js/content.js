@@ -74,16 +74,17 @@ const SITE_CONTENT = {
     },
     {
       id: "spontaneous-attachment",
-      title: "Spontaneous Attachment",
+      title: "In Between Things",
       category: "performance",
       tag: "Performance",
-      description: "Spontaneous Attachment explores intimacy and human connection through ritual, movement, and sound. Two dance works—a duet and a quartet, set to live original music—anchor the evening.",
+      shortDescription: "The thing around the thing is sometimes richer than the thing itself. In Between Things invites you to linger in the spaces around an experience and notice what emerges.",
+      description: "The thing around the thing is sometimes richer than the thing itself. In Between Things invites you to linger in the spaces around an experience and notice what emerges.",
       placeholderSrc: "/assets/experiences/spontaneous-attachment.jpg",
       gradient: "grad-purple",
       hasImage: true,
       hasDetailPage: true,
 
-      // ---- Detail page content (source: Spontaneous Attachment Bio doc) ----
+      // ---- Detail page content (source: Spontaneous Attachment / In Between Things Bio doc) ----
       basics: {
         dateRun: "January 31, 2026",
         venue: "The Brooklyn Peace Center",
@@ -97,7 +98,7 @@ const SITE_CONTENT = {
         "Photographers": "Sophia Loo, Sophia Marcontell Reyes",
         "Videographers": "Jeff Fan, Makenna Finch",
       },
-      fullSynopsis: "The experience examines how attachments develop in overlooked moments and spaces. Through immersive performances combining gathering, contemporary dance, and live music, audiences explore indirect ways connections form between people, within ourselves, and with our surroundings. The work emphasizes how small frictions and shared contexts facilitate genuine attachment, contrasting with digitally-mediated experiences that may diminish such opportunities.",
+      fullSynopsis: "The work explores how attachments form between people, within ourselves, and with places through immersive performances integrating gathering, contemporary dance, and live music. Rather than isolating performance from surrounding social moments, the entire experience constitutes the work.",
       heroVideo: "/assets/experiences/spontaneous-attachment-recap.mp4",
       gallery: Array.from({ length: 15 }, (_, i) =>
         `/assets/experiences/spontaneous-attachment-gallery/photo-${String(i + 1).padStart(2, "0")}.jpg`
@@ -105,28 +106,28 @@ const SITE_CONTENT = {
       experienceDesign: [
         {
           title: "Gathering",
-          image: "/assets/experiences/spontaneous-attachment-gallery/photo-01.jpg",
-          text: "Doors open and the audience enters a transformed Brooklyn Peace Center. Activations woven through the space invite people to engage with the night's theme of surprise intimacy before a single dancer takes the floor — priming the room to feel like a ritual from the moment you walk in.",
+          image: "/assets/experiences/spontaneous-attachment.jpg",
+          text: "Central fire installation where attendees craft jewelry using beads and twine, view local artwork, and engage in conversation before the formal program.",
         },
         {
-          title: "1st Dance — The Duet",
+          title: "Dance Piece #1",
           image: "/assets/experiences/spontaneous-attachment-gallery/photo-02.jpg",
-          text: "Two figures in pointe shoes, faces covered, move through a transformation: from being perceived as shapes — dance in its most abstract form — to being almost disturbingly human — dance in its most intimate form.",
+          text: "Two dancers in pointe shoes perform on a runway-style arrangement. Their choreography transitions from abstract geometry toward vulnerable humanity, constrained by \"never break eye contact with each other.\"",
         },
         {
-          title: "Intermission",
-          image: "/assets/experiences/spontaneous-attachment-gallery/photo-10.jpg",
-          text: "The audience returns to the activations scattered through the venue, carrying the duet's imagery with them as they mingle, explore, and continue building their own small moments of connection before the second piece begins.",
+          title: "Interlude",
+          image: "/assets/experiences/spontaneous-attachment-gallery/photo-01.jpg",
+          text: "Participants ascend to the third level for a pond installation where they cast small mirror circles as symbolic offerings.",
         },
         {
-          title: "2nd Dance — The Quartet",
+          title: "Dance Piece #2",
           image: "/assets/experiences/spontaneous-attachment-gallery/photo-04.jpg",
-          text: "Created in collaboration with composer Samuel Mutter, the quartet explores ritual, intimacy, and repetition — themes at the core of both music and dance — built from a shared desire to understand the relationship between the two art forms.",
+          text: "A work examining ritual and closeness, developed with composer Samuel Mutter, using rhythmic repetition.",
         },
         {
           title: "Ending",
-          image: "/assets/experiences/spontaneous-attachment-gallery/photo-14.jpg",
-          text: "As the evening closes, the goal isn't for the audience to simply think 'that was cool' — it's for them to leave carrying something: a texture of intimacy they found by being spontaneously, physically present with strangers for one night.",
+          image: "/assets/experiences/spontaneous-attachment-gallery/photo-06.jpg",
+          text: "Audience members receive dark chocolate upon exit.",
         },
       ],
     },
