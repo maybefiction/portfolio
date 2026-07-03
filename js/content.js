@@ -88,8 +88,8 @@ const SITE_CONTENT = {
 
       // ---- Detail page content (source: Spontaneous Attachment / In Between Things Bio doc) ----
       basics: {
-        dateRun: "January 31, 2026",
-        venue: "The Brooklyn Peace Center",
+        dateRun: "January 31, 2026 — Ongoing",
+        venue: "The Brooklyn Peace Center (January 31, 2026)",
         format: "Interdisciplinary Performance",
         runtime: "1 hour 30 minutes",
       },
@@ -101,7 +101,6 @@ const SITE_CONTENT = {
         "Videographers": "Jeff Fan, Makenna Finch",
       },
       fullSynopsis: [
-        "The thing around the thing is sometimes richer than the thing itself. In Between Things invites you to linger in the spaces around an experience and notice what emerges.",
         "Through a series of immersive performances integrating gathering, contemporary dance, and live music, audiences will explore and practice the often indirect ways attachments form between people, within ourselves, and with the places we inhabit.",
         "Attachments don't happen when you're looking for them. They form in the cracks and crevices of daily life: building rapport with a neighbor through repeated hallway run-ins, understanding yourself by processing lingering thoughts on a walk to work, or feeling connected to a place by noticing the trees that line a familiar route. As more of our needs are met digitally, remotely, and on demand, we accidentally curate away many of the small frictions and shared contexts through which attachment emerges and deepens.",
         "Each show centers around contemporary dance works exploring ritual, repetition, intimacy, and attachment. Surrounding them is a participatory environment where audiences gather, create, move through shared spaces, and celebrate together. Rather than isolating the performance from the social moments surrounding it, the entire experience is the work.",

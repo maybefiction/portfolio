@@ -59,14 +59,6 @@ function renderHero(item) {
   heroTag.classList.add(`tag-${item.category}`);
 
   document.getElementById("xp-hero-title").textContent = item.title;
-
-  const shortDescription = item.shortDescription || item.description || "";
-  const heroDescription = document.getElementById("xp-hero-description");
-  if (shortDescription) {
-    heroDescription.textContent = shortDescription;
-  } else {
-    heroDescription.remove();
-  }
 }
 
 /* ---------- Section 2: Basics/Credits (1/4) + Description (3/4) ---------- */
@@ -112,16 +104,18 @@ function renderMeta(item) {
 
   side.innerHTML = html;
 
+  const shortDescription = item.shortDescription || item.description || "";
+  document.getElementById("xp-short-description").textContent = shortDescription;
+
   const allParagraphs = Array.isArray(item.fullSynopsis)
     ? item.fullSynopsis
     : [item.fullSynopsis].filter(Boolean);
-  const shortDescription = item.shortDescription || item.description || "";
   // Skip the lead paragraph if it duplicates the short description already
-  // shown in the hero, so the synopsis doesn't repeat itself.
-  const synopsisParagraphs =
+  // shown as the header above, so the detailed description doesn't repeat itself.
+  const detailedParagraphs =
     allParagraphs[0] === shortDescription ? allParagraphs.slice(1) : allParagraphs;
-  document.getElementById("xp-description").innerHTML = synopsisParagraphs
-    .map((para, i) => `<p class="${i === 0 ? "xp-description-lead" : "xp-description-body"}">${para}</p>`)
+  document.getElementById("xp-description").innerHTML = detailedParagraphs
+    .map((para) => `<p class="xp-description-body">${para}</p>`)
     .join("");
 }
 

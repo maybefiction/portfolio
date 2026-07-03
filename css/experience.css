@@ -39,27 +39,23 @@
   margin: 0 auto;
 }
 .xp-back {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  z-index: 2;
   display: block;
   width: fit-content;
   color: var(--white);
   opacity: 0.85;
   font-weight: 600;
-  margin-bottom: 16px;
   transition: opacity 0.25s ease, transform 0.25s var(--ease-bounce);
 }
 .xp-back:hover { opacity: 1; transform: translateX(-4px); }
 .xp-hero-title {
   color: var(--white);
   font-size: clamp(2.2rem, 6vw, 4rem);
-  margin: 0 0 0.35em;
-  max-width: 24ch;
-}
-.xp-hero-description {
-  color: rgba(255,255,255,0.85);
-  font-size: clamp(1rem, 1.6vw, 1.2rem);
-  line-height: 1.5;
-  max-width: 56ch;
   margin: 0;
+  max-width: 24ch;
 }
 
 /* ---------- 2. META: BASICS/CREDITS + DESCRIPTION ---------- */
@@ -101,13 +97,15 @@
   line-height: 1.5;
 }
 
-.xp-description-lead {
+.xp-short-description {
   font-family: var(--font-display);
-  font-size: clamp(1.15rem, 1.8vw, 1.4rem);
-  line-height: 1.5;
+  font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+  line-height: 1.4;
   color: var(--ink);
-  margin: 0 0 24px;
+  max-width: 44ch;
+  margin: 0 0 32px;
 }
+
 .xp-description-body {
   font-size: 1rem;
   line-height: 1.6;
@@ -121,11 +119,12 @@
   overflow: hidden;
   box-shadow: var(--shadow-lift);
   background: var(--ink);
+  margin-bottom: 32px;
 }
 .xp-video { width: 100%; display: block; aspect-ratio: 16 / 9; background: var(--ink); }
 
 /* ---------- 4. EXPERIENCE DESIGN FLOW ---------- */
-.xp-design { padding-top: 0; padding-bottom: 72px; }
+.xp-design { padding-top: 72px; padding-bottom: 72px; background: var(--brand-purple-light); }
 .xp-design .section-heading { margin-bottom: 40px; }
 
 .xp-flow-nodes {
@@ -147,21 +146,55 @@
   width: 100%;
   transition: transform 0.3s var(--ease-bounce);
 }
+/* Connecting line + arrowhead linking each thumbnail to the next,
+   so the sequence — and that each step is clickable — reads at a glance. */
+.xp-flow-node-thumb-wrap::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  width: 16px;
+  height: 3px;
+  background: var(--brand-purple);
+  transform: translateY(-50%);
+  z-index: 0;
+}
+.xp-flow-node-thumb-wrap::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: calc(100% + 10px);
+  width: 0;
+  height: 0;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  border-left: 6px solid var(--brand-purple);
+  transform: translateY(-50%);
+  z-index: 0;
+}
+.xp-flow-node:last-child .xp-flow-node-thumb-wrap::after,
+.xp-flow-node:last-child .xp-flow-node-thumb-wrap::before {
+  display: none;
+}
 .xp-flow-node-thumb {
+  position: relative;
+  z-index: 1;
   width: 100%;
   aspect-ratio: 1 / 1;
   border-radius: var(--radius-md);
   object-fit: cover;
   box-shadow: var(--shadow-soft);
-  border: 3px solid transparent;
-  opacity: 0.6;
-  filter: grayscale(40%);
+  border: 3px solid var(--white);
+  cursor: pointer;
+  opacity: 0.65;
+  filter: grayscale(35%);
   transition: opacity 0.3s ease, filter 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 .xp-flow-node-index {
   position: absolute;
   top: 8px;
   left: 8px;
+  z-index: 2;
   padding: 2px 8px;
   border-radius: var(--radius-pill);
   background: rgba(38, 37, 34, 0.55);
@@ -174,12 +207,12 @@
   font-family: var(--font-display);
   font-weight: 600;
   font-size: 0.92rem;
-  color: var(--ink-soft);
+  color: var(--ink);
   transition: color 0.3s ease;
 }
 .xp-flow-node:hover .xp-flow-node-thumb-wrap { transform: translateY(-3px); }
 .xp-flow-node:hover .xp-flow-node-thumb {
-  opacity: 0.85;
+  opacity: 0.9;
   filter: grayscale(0%);
 }
 .xp-flow-node.is-active .xp-flow-node-thumb-wrap { transform: translateY(-4px) scale(1.03); }
@@ -192,10 +225,11 @@
 .xp-flow-node.is-active .xp-flow-node-label { color: var(--brand-purple); }
 
 .xp-flow-panels {
-  background: var(--bg-tint);
+  background: var(--white);
   border-radius: var(--radius-md);
   padding: 40px;
   min-height: 160px;
+  box-shadow: var(--shadow-soft);
 }
 .xp-flow-panel { display: none; }
 .xp-flow-panel.is-open {
