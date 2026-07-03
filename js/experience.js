@@ -33,6 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
   renderVideo(item);
   renderDesignFlow(item);
   renderGallery(item);
+  renderNextExperience(item);
   setupNav();
 });
 
@@ -52,6 +53,11 @@ function renderHero(item) {
   const heroImg = document.getElementById("xp-hero-image");
   heroImg.src = item.placeholderSrc;
   heroImg.alt = item.title;
+
+  const heroTag = document.getElementById("xp-hero-tag");
+  heroTag.textContent = item.tag;
+  heroTag.classList.add(`tag-${item.category}`);
+
   document.getElementById("xp-hero-title").textContent = item.title;
 
   const shortDescription = item.shortDescription || item.description || "";
@@ -115,7 +121,7 @@ function renderMeta(item) {
   const synopsisParagraphs =
     allParagraphs[0] === shortDescription ? allParagraphs.slice(1) : allParagraphs;
   document.getElementById("xp-description").innerHTML = synopsisParagraphs
-    .map((para) => `<p class="xp-description-body">${para}</p>`)
+    .map((para, i) => `<p class="${i === 0 ? "xp-description-lead" : "xp-description-body"}">${para}</p>`)
     .join("");
 }
 
@@ -157,7 +163,10 @@ function renderDesignFlow(item) {
         .map(
           (stage, i) => `
         <button class="xp-flow-node ${i === 0 ? "is-active" : ""}" data-stage="${i}" role="tab" aria-selected="${i === 0}">
-          ${stage.image ? `<img class="xp-flow-node-thumb" src="${stage.image}" alt="${stage.title}" loading="lazy">` : ""}
+          <div class="xp-flow-node-thumb-wrap">
+            ${stage.image ? `<img class="xp-flow-node-thumb" src="${stage.image}" alt="${stage.title}" loading="lazy">` : ""}
+            <span class="xp-flow-node-index">${String(i + 1).padStart(2, "0")}</span>
+          </div>
           <span class="xp-flow-node-label">${stage.title}</span>
         </button>`
         )
@@ -255,6 +264,25 @@ function renderGallery(item) {
   });
 }
 
+/* ---------- Next Experience — only shown once 2+ detail pages exist ---------- */
+function renderNextExperience(item) {
+  const el = document.getElementById("xp-next");
+  const detailPages = SITE_CONTENT.experiences.filter((e) => e.hasDetailPage);
+
+  if (detailPages.length < 2) {
+    el.remove();
+    return;
+  }
+
+  const currentIndex = detailPages.findIndex((e) => e.id === item.id);
+  const next = detailPages[(currentIndex + 1) % detailPages.length];
+
+  el.href = `/experiences/${next.id}`;
+  document.getElementById("xp-next-image").src = next.placeholderSrc;
+  document.getElementById("xp-next-image").alt = next.title;
+  document.getElementById("xp-next-title").textContent = next.title;
+}
+
 /* ---------- Nav mobile toggle (shared behavior with main.js) ---------- */
 function setupNav() {
   const toggle = document.getElementById("nav-toggle");
@@ -271,4 +299,16 @@ function setupNav() {
       toggle.setAttribute("aria-expanded", "false");
     });
   });
+
+  // Nav is transparent over the hero, solid once the hero scrolls out of view
+  const header = document.getElementById("site-header");
+  const hero = document.getElementById("xp-hero");
+  if (header && hero) {
+    const navHeight = getComputedStyle(document.documentElement).getPropertyValue("--nav-height").trim();
+    const heroObserver = new IntersectionObserver(
+      ([entry]) => header.classList.toggle("is-scrolled", !entry.isIntersecting),
+      { rootMargin: `-${navHeight} 0px 0px 0px` }
+    );
+    heroObserver.observe(hero);
+  }
 }

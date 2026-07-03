@@ -75,7 +75,7 @@ function renderExperiences() {
 
       const overlay = `
           <div class="experience-card-overlay">
-            <span class="experience-tag">${item.tag}</span>
+            <span class="experience-tag tag-${item.category}">${item.tag}</span>
             <h3>${item.title}</h3>
           </div>`;
 
@@ -203,6 +203,18 @@ function setupNav() {
     { rootMargin: "-50% 0px -45% 0px" }
   );
   sections.forEach((section) => sectionObserver.observe(section));
+
+  // Nav is transparent over the hero, solid once the hero scrolls out of view
+  const header = document.getElementById("site-header");
+  const hero = document.getElementById("hero");
+  if (header && hero) {
+    const navHeight = getComputedStyle(document.documentElement).getPropertyValue("--nav-height").trim();
+    const heroObserver = new IntersectionObserver(
+      ([entry]) => header.classList.toggle("is-scrolled", !entry.isIntersecting),
+      { rootMargin: `-${navHeight} 0px 0px 0px` }
+    );
+    heroObserver.observe(hero);
+  }
 }
 
 /* ---------- Experiences filter bar ---------- */
