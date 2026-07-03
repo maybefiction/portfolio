@@ -141,6 +141,12 @@
   margin-bottom: 32px;
 }
 .xp-video { width: 100%; display: block; aspect-ratio: 16 / 9; background: var(--ink); }
+.xp-video-fallback-image {
+  width: 100%;
+  display: block;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
 
 /* ---------- 4. EXPERIENCE DESIGN FLOW ---------- */
 .xp-design {

@@ -67,6 +67,7 @@ const SITE_CONTENT = {
       shortDescription: "A performance art festival that transforms private homes into a stage for collective encounter, creation, and play.",
       description: "A performance art festival that transforms private homes into a stage for collective encounter, creation, and play.",
       placeholderSrc: "/assets/experiences/jornada-de-puertas-abiertas.jpg",
+      heroPhoto: "/assets/experiences/jornada-gallery/nyc-2024/photo-04.jpg",
       gradient: "grad-blue",
       hasImage: true,
       hasDetailPage: true,

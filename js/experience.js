@@ -165,15 +165,22 @@ function formatLabel(key) {
 }
 
 /* ---------- Section 3: Video (lives under the description in xp-meta-main) ---------- */
+// Falls back to a photo when no video is available, so this slot always
+// carries a visual instead of leaving a gap between the short and detailed
+// description.
 function renderVideo(item) {
   const wrap = document.getElementById("xp-video-wrap");
-  if (!item.heroVideo) {
-    wrap.remove();
+  if (item.heroVideo) {
+    const video = document.getElementById("xp-video");
+    video.src = item.heroVideo;
+    video.poster = item.placeholderSrc;
     return;
   }
-  const video = document.getElementById("xp-video");
-  video.src = item.heroVideo;
-  video.poster = item.placeholderSrc;
+  if (item.heroPhoto) {
+    wrap.innerHTML = `<img class="xp-video-fallback-image" src="${item.heroPhoto}" alt="${item.title}" />`;
+    return;
+  }
+  wrap.remove();
 }
 
 /* ---------- Section 4: Experience Design flow (interactive accordion) ---------- */
