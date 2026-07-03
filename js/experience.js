@@ -32,7 +32,9 @@ document.addEventListener("DOMContentLoaded", () => {
   renderMeta(item);
   renderVideo(item);
   renderDesignFlow(item);
-  renderGallery(item);
+  // Items with editions render their gallery from renderMeta's edition
+  // switcher instead (each tab has its own gallery), so skip the flat one.
+  if (!item.editions) renderGallery(item);
   renderNextExperience(item);
   setupNav();
 });
@@ -64,45 +66,36 @@ function renderHero(item) {
 /* ---------- Section 2: Basics/Credits (1/4) + Description (3/4) ---------- */
 function renderMeta(item) {
   const side = document.getElementById("xp-meta-side");
-  let html = "";
 
-  if (item.basics) {
-    html += `
-      <div class="xp-meta-block">
-        <h3 class="xp-meta-label">Details</h3>
-        <dl class="xp-meta-list">
-          ${Object.entries(item.basics)
-            .map(
-              ([key, value]) => `
-            <div class="xp-meta-row">
-              <dt>${formatLabel(key)}</dt>
-              <dd>${value}</dd>
-            </div>`
-            )
-            .join("")}
-        </dl>
-      </div>`;
+  if (item.editions && item.editions.length) {
+    const switcher = document.createElement("div");
+    switcher.className = "xp-edition-switcher";
+    switcher.innerHTML = item.editions
+      .map(
+        (ed, i) => `<button class="xp-edition-tab ${i === 0 ? "is-active" : ""}" data-edition="${i}">${ed.label}</button>`
+      )
+      .join("");
+    const metaBlock = document.createElement("div");
+    side.innerHTML = "";
+    side.append(switcher, metaBlock);
+
+    const selectEdition = (index) => {
+      const edition = item.editions[index];
+      switcher.querySelectorAll(".xp-edition-tab").forEach((tab, i) => {
+        tab.classList.toggle("is-active", i === index);
+      });
+      metaBlock.innerHTML = renderMetaBlockHTML(edition.basics, edition.credits);
+      renderGallery(item, edition.gallery);
+    };
+
+    switcher.querySelectorAll(".xp-edition-tab").forEach((tab) => {
+      tab.addEventListener("click", () => selectEdition(Number(tab.dataset.edition)));
+    });
+
+    selectEdition(0);
+  } else {
+    side.innerHTML = renderMetaBlockHTML(item.basics, item.credits);
   }
-
-  if (item.credits) {
-    html += `
-      <div class="xp-meta-block">
-        <h3 class="xp-meta-label">Credits</h3>
-        <dl class="xp-meta-list">
-          ${Object.entries(item.credits)
-            .map(
-              ([role, names]) => `
-            <div class="xp-meta-row">
-              <dt>${role}</dt>
-              <dd>${names}</dd>
-            </div>`
-            )
-            .join("")}
-        </dl>
-      </div>`;
-  }
-
-  side.innerHTML = html;
 
   const shortDescription = item.shortDescription || item.description || "";
   document.getElementById("xp-short-description").textContent = shortDescription;
@@ -117,6 +110,48 @@ function renderMeta(item) {
   document.getElementById("xp-description").innerHTML = detailedParagraphs
     .map((para) => `<p class="xp-description-body">${para}</p>`)
     .join("");
+}
+
+function renderMetaBlockHTML(basics, credits) {
+  let html = "";
+
+  if (basics) {
+    html += `
+      <div class="xp-meta-block">
+        <h3 class="xp-meta-label">Details</h3>
+        <dl class="xp-meta-list">
+          ${Object.entries(basics)
+            .map(
+              ([key, value]) => `
+            <div class="xp-meta-row">
+              <dt>${formatLabel(key)}</dt>
+              <dd>${value}</dd>
+            </div>`
+            )
+            .join("")}
+        </dl>
+      </div>`;
+  }
+
+  if (credits) {
+    html += `
+      <div class="xp-meta-block">
+        <h3 class="xp-meta-label">Credits</h3>
+        <dl class="xp-meta-list">
+          ${Object.entries(credits)
+            .map(
+              ([role, names]) => `
+            <div class="xp-meta-row">
+              <dt>${role}</dt>
+              <dd>${names}</dd>
+            </div>`
+            )
+            .join("")}
+        </dl>
+      </div>`;
+  }
+
+  return html;
 }
 
 function formatLabel(key) {
@@ -195,18 +230,22 @@ function renderDesignFlow(item) {
 }
 
 /* ---------- Section 5: Gallery + lightbox ---------- */
-function renderGallery(item) {
+// gallery defaults to item.gallery, but experiences with multiple editions
+// (see renderMeta) pass the active edition's gallery instead, and re-call
+// this on every tab switch to swap the grid + lightbox source in place.
+function renderGallery(item, gallery) {
+  gallery = gallery || item.gallery;
   const section = document.getElementById("xp-gallery-section");
-  if (!item.gallery || !item.gallery.length) {
+  if (!gallery || !gallery.length) {
     section.remove();
     return;
   }
 
   const grid = document.getElementById("xp-gallery-grid");
-  grid.innerHTML = item.gallery
+  grid.innerHTML = gallery
     .map(
       (src, i) => `
-      <button class="xp-gallery-thumb" data-index="${i}" aria-label="Open photo ${i + 1} of ${item.gallery.length}">
+      <button class="xp-gallery-thumb" data-index="${i}" aria-label="Open photo ${i + 1} of ${gallery.length}">
         <img src="${src}" alt="${item.title} — photo ${i + 1}" loading="lazy" />
       </button>`
     )
@@ -221,7 +260,7 @@ function renderGallery(item) {
 
   function openLightbox(index) {
     currentIndex = index;
-    lightboxImage.src = item.gallery[currentIndex];
+    lightboxImage.src = gallery[currentIndex];
     lightboxImage.alt = `${item.title} — photo ${currentIndex + 1}`;
     lightbox.classList.add("is-open");
     lightbox.setAttribute("aria-hidden", "false");
@@ -235,8 +274,8 @@ function renderGallery(item) {
   }
 
   function showDelta(delta) {
-    currentIndex = (currentIndex + delta + item.gallery.length) % item.gallery.length;
-    lightboxImage.src = item.gallery[currentIndex];
+    currentIndex = (currentIndex + delta + gallery.length) % gallery.length;
+    lightboxImage.src = gallery[currentIndex];
     lightboxImage.alt = `${item.title} — photo ${currentIndex + 1}`;
   }
 
@@ -244,19 +283,30 @@ function renderGallery(item) {
     thumb.addEventListener("click", () => openLightbox(Number(thumb.dataset.index)));
   });
 
-  closeBtn.addEventListener("click", closeLightbox);
-  prevBtn.addEventListener("click", () => showDelta(-1));
-  nextBtn.addEventListener("click", () => showDelta(1));
-  lightbox.addEventListener("click", (e) => {
+  closeBtn.onclick = closeLightbox;
+  prevBtn.onclick = () => showDelta(-1);
+  nextBtn.onclick = () => showDelta(1);
+  lightbox.onclick = (e) => {
     if (e.target === lightbox) closeLightbox();
-  });
-  document.addEventListener("keydown", (e) => {
-    if (!lightbox.classList.contains("is-open")) return;
-    if (e.key === "Escape") closeLightbox();
-    if (e.key === "ArrowLeft") showDelta(-1);
-    if (e.key === "ArrowRight") showDelta(1);
-  });
+  };
+  // Editions re-call renderGallery on every tab switch, which would otherwise
+  // stack a new document-level listener each time (and old ones would keep
+  // firing against a stale gallery). Route through module-level state instead
+  // so a single listener always dispatches to the current closures.
+  activeLightboxHandlers = { closeLightbox, showDelta };
+  if (!documentKeydownBound) {
+    documentKeydownBound = true;
+    document.addEventListener("keydown", (e) => {
+      const lb = document.getElementById("xp-lightbox");
+      if (!lb.classList.contains("is-open") || !activeLightboxHandlers) return;
+      if (e.key === "Escape") activeLightboxHandlers.closeLightbox();
+      if (e.key === "ArrowLeft") activeLightboxHandlers.showDelta(-1);
+      if (e.key === "ArrowRight") activeLightboxHandlers.showDelta(1);
+    });
+  }
 }
+let activeLightboxHandlers = null;
+let documentKeydownBound = false;
 
 /* ---------- Next Experience — only shown once 2+ detail pages exist ---------- */
 function renderNextExperience(item) {

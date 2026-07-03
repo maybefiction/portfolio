@@ -64,10 +64,58 @@ const SITE_CONTENT = {
       title: "Jornada de Puertas Abiertas",
       category: "event",
       tag: "Event",
-      description: "TODO: replace with real copy — Madrid 2023 edition.",
+      shortDescription: "A performance art festival that transforms private homes into a stage for collective encounter, creation, and play.",
+      description: "A performance art festival that transforms private homes into a stage for collective encounter, creation, and play.",
       placeholderSrc: "/assets/experiences/jornada-de-puertas-abiertas.jpg",
       gradient: "grad-blue",
       hasImage: true,
+      hasDetailPage: true,
+
+      fullSynopsis: [
+        "Jornada de Puertas Abiertas (Open Doors Day) transforms the private, intimate space of a home into a space for collective encounter, creation, and play. A host opens their house to strangers, in an exercise of mutual trust, and each room becomes a potential stage — the domestic box becomes a magic box.",
+        "The festival is also a political stance: in the absence of free, open, spontaneous spaces where we can create for the joy of it, we wanted to recover spaces and times to explore playfully and whimsically, blurring the line between performer and audience, where everyone can feel safe to be and to become.",
+        "The first edition took place in a one-bedroom apartment in Madrid in June 2023, where 26 guests moved through simultaneous performances in the living room, bedroom, and bathroom. The second edition brought the format to a private home in Brooklyn in June 2024, through an open call for New York-based artists working in performance, theater, music, dance, installation, and visual art.",
+      ],
+
+      editions: [
+        {
+          id: "madrid-2023",
+          label: "2023 · Madrid",
+          basics: {
+            dateRun: "June 2023",
+            venue: "A one-bedroom apartment, Madrid, Spain",
+            format: "Home-based performance art festival",
+            runtime: "~2 hours",
+          },
+          credits: {
+            "Host / Founder": "Super Alex",
+            "Guests": "26 attendees, moving through the living room, bedroom, and bathroom",
+          },
+          gallery: Array.from({ length: 18 }, (_, i) =>
+            `/assets/experiences/jornada-gallery/madrid-2023/photo-${String(i + 1).padStart(2, "0")}.jpg`
+          ),
+        },
+        {
+          id: "nyc-2024",
+          label: "2024 · Brooklyn, NYC",
+          basics: {
+            dateRun: "June 2024",
+            venue: "A private home in Brooklyn, NYC (address released to confirmed guests only)",
+            format: "Home-based performance art festival",
+            runtime: "2–3 hours",
+          },
+          credits: {
+            "Organizers": "Ishaan Goel, Super Alex",
+            "Artists": "Mk7, Brooke Leialoha Dabalos, Taliyah Shepard, Justin Harmon, Zaraith Hernandez (PAZAJEROS), V Tineo, Natalia Durango (Puyaloahi), Gigi Tamayo Boado, Benedicto Figueroa",
+          },
+          gallery: [
+            "/assets/experiences/jornada-gallery/nyc-2024/photo-00-hero.jpg",
+            ...Array.from({ length: 23 }, (_, i) =>
+              `/assets/experiences/jornada-gallery/nyc-2024/photo-${String(i + 1).padStart(2, "0")}.jpg`
+            ),
+          ],
+        },
+      ],
     },
     {
       id: "spontaneous-attachment",
