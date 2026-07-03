@@ -1,8 +1,8 @@
 /* ============================================================
    MAIN.JS — rendering + interactivity for maybe:fiction homepage.
    Reads all copy/data from js/content.js (SITE_CONTENT).
-   Sections: nav, hero/about/donations/footer text injection,
-   experiences render + filter, workshops render, scroll-reveal.
+   Sections: nav, hero/about/footer text injection, experiences
+   render + filter, workshops render, scroll-reveal.
    Contact lives on its own page — see contact.html + js/contact.js.
    ============================================================ */
 
@@ -19,9 +19,9 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("footer-year").textContent = new Date().getFullYear();
 });
 
-/* ---------- Text injection (hero / about / donations / footer) ---------- */
+/* ---------- Text injection (hero / about / footer) ---------- */
 function injectStaticText() {
-  const { hero, about, donations, brand } = SITE_CONTENT;
+  const { hero, about, brand } = SITE_CONTENT;
 
   document.getElementById("hero-heading").textContent = hero.heading;
   document.getElementById("hero-tagline").textContent = hero.tagline;
@@ -29,12 +29,6 @@ function injectStaticText() {
   document.getElementById("about-heading").textContent = about.heading;
   const aboutBody = document.getElementById("about-body");
   aboutBody.innerHTML = about.body.map((para) => `<p>${para}</p>`).join("");
-
-  document.getElementById("donations-heading").textContent = donations.heading;
-  document.getElementById("donations-body").textContent = donations.body;
-  const donationsCta = document.getElementById("donations-cta");
-  donationsCta.textContent = donations.cta.label;
-  donationsCta.href = donations.cta.href;
 
   document.getElementById("footer-tagline").textContent = brand.tagline;
 }
@@ -68,6 +62,7 @@ function renderFounders() {
           }
           <h3 class="founder-name">${founder.name}</h3>
           <p class="founder-bio">${founder.bio}</p>
+          ${founder.extra ? `<p class="founder-extra">${founder.extra}</p>` : ""}
         </div>`
     )
     .join("");
@@ -127,20 +122,18 @@ function renderWorkshops() {
   const grid = document.getElementById("workshop-grid");
   grid.classList.add("reveal-stagger", "reveal");
 
+  // Reuses the same .experience-card component (image-forward, tag + title
+  // overlay) so workshops read as one visual family with Experiences.
   grid.innerHTML = SITE_CONTENT.workshops
     .map(
       (w) => `
-        <article class="workshop-card">
-          <div class="workshop-meta">
-            <span>${w.duration}</span>
-            <span>${w.audience}</span>
+        <a class="experience-card" href="/contact.html?workshop=${encodeURIComponent(w.title)}">
+          <div class="media-placeholder ${w.gradient}"></div>
+          <div class="experience-card-overlay">
+            <span class="experience-tag">${w.tag}</span>
+            <h3>${w.title}</h3>
           </div>
-          <h3>${w.title}</h3>
-          <p>${w.description}</p>
-          <a href="/contact.html?workshop=${encodeURIComponent(w.title)}" class="btn-inquire">
-            Inquire about this workshop →
-          </a>
-        </article>`
+        </a>`
     )
     .join("");
 }
@@ -164,7 +157,7 @@ function setupNav() {
   });
 
   // Highlight the nav link for the section currently in view
-  const sections = ["hero", "about", "experiences", "workshops", "donations"]
+  const sections = ["hero", "about", "experiences", "workshops"]
     .map((id) => document.getElementById(id))
     .filter(Boolean);
   const navLinks = Array.from(document.querySelectorAll(".nav-link"));

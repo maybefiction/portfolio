@@ -43,20 +43,15 @@ const SITE_CONTENT = {
         name: "Ishaan",
         photo: null,
         bio: "TODO: replace with real bio.",
+        extra: "TODO: replace with real copy.",
       },
       {
         name: "Super Alex",
         photo: null,
         bio: "TODO: replace with real bio.",
+        extra: "TODO: replace with real copy.",
       },
     ],
-  },
-
-  // ---------- Donations ----------
-  donations: {
-    heading: "Donations",
-    body: "TODO: replace with real copy about supporting maybe:fiction.",
-    cta: { label: "Donate", href: "#" },
   },
 
   // ---------- Experiences (gallery / portfolio) ----------
@@ -154,6 +149,8 @@ const SITE_CONTENT = {
     {
       id: "beginning-middle-end",
       title: "Beginning | Middle | End",
+      tag: "Workshop",
+      gradient: "grad-purple",
       duration: "TODO: replace with real copy.",
       audience: "TODO: replace with real copy.",
       description: "TODO: replace with real copy.",
@@ -161,6 +158,8 @@ const SITE_CONTENT = {
     {
       id: "corporate-creative",
       title: "Corporate Creative",
+      tag: "Workshop",
+      gradient: "grad-blue",
       duration: "TODO: replace with real copy.",
       audience: "TODO: replace with real copy.",
       description: "TODO: replace with real copy.",

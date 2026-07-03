@@ -84,6 +84,21 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+  position: relative;
+}
+
+/* A faint, fixed film-grain layer over the whole page — gives the flat
+   color-block palette a tactile, printed quality instead of reading as a
+   generic vector-clean template. Purely decorative, ignores interaction. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 img { max-width: 100%; display: block; }
@@ -138,8 +153,22 @@ ul { list-style: none; margin: 0; padding: 0; }
 }
 
 .section-heading {
+  position: relative;
   font-size: clamp(2rem, 4vw, 2.9rem);
   max-width: 20ch;
+  padding-bottom: 22px;
+}
+/* A small recurring signature: every plain title gets the same brand-purple
+   accent bar, so the "no subtitle" titles still carry a visual mark. */
+.section-heading::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 48px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--brand-purple);
 }
 
 .section-subheading {
@@ -353,8 +382,61 @@ ul { list-style: none; margin: 0; padding: 0; }
   text-align: center;
 }
 
+.hero-logo {
+  position: relative;
+  width: clamp(90px, 12vw, 140px);
+  aspect-ratio: 500 / 526;
+  margin: 0 auto 8px;
+  filter: drop-shadow(0 10px 24px rgba(0,0,0,0.35));
+}
+.hero-logo-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform-origin: 50% 82%;
+  animation-name: logoSway;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+/* Each layer is soft-masked to roughly one flame, then swayed on its own
+   timing so the cluster reads as several flames flickering independently
+   rather than one rigid image. Soft (blurred) mask edges keep the overlap
+   between flames forgiving instead of showing hard cut seams. */
+.hero-logo-layer-1 {
+  -webkit-mask-image: radial-gradient(ellipse 34% 42% at 48% 34%, #000 35%, transparent 78%);
+          mask-image: radial-gradient(ellipse 34% 42% at 48% 34%, #000 35%, transparent 78%);
+  animation-duration: 4.2s;
+  animation-delay: -0.6s;
+}
+.hero-logo-layer-2 {
+  -webkit-mask-image: radial-gradient(ellipse 30% 34% at 39% 60%, #000 35%, transparent 80%);
+          mask-image: radial-gradient(ellipse 30% 34% at 39% 60%, #000 35%, transparent 80%);
+  animation-duration: 3.6s;
+  animation-delay: -1.8s;
+}
+.hero-logo-layer-3 {
+  -webkit-mask-image: radial-gradient(ellipse 30% 36% at 69% 47%, #000 35%, transparent 80%);
+          mask-image: radial-gradient(ellipse 30% 36% at 69% 47%, #000 35%, transparent 80%);
+  animation-duration: 4.6s;
+  animation-delay: -2.4s;
+}
+.hero-logo-layer-4 {
+  -webkit-mask-image: radial-gradient(ellipse 26% 32% at 53% 63%, #000 35%, transparent 80%);
+          mask-image: radial-gradient(ellipse 26% 32% at 53% 63%, #000 35%, transparent 80%);
+  animation-duration: 3.9s;
+  animation-delay: -0.2s;
+}
+.hero-logo-layer-5 {
+  -webkit-mask-image: radial-gradient(ellipse 24% 28% at 77% 60%, #000 35%, transparent 80%);
+          mask-image: radial-gradient(ellipse 24% 28% at 77% 60%, #000 35%, transparent 80%);
+  animation-duration: 5s;
+  animation-delay: -3.1s;
+}
+
 .hero-heading {
   font-size: clamp(2.8rem, 8vw, 5.2rem);
+  font-weight: 600;
   margin-bottom: 0.2em;
   color: var(--white);
 }
@@ -393,8 +475,13 @@ ul { list-style: none; margin: 0; padding: 0; }
 
 /* ---------- 6. ABOUT ---------- */
 .about { background: var(--bg-tint); position: relative; }
+/* About and Experiences share the same background — no divider between
+   them, so tighten the join instead of leaving a big same-color gap. */
+.about .section-inner { padding-bottom: 48px; }
+.experiences .section-inner { padding-top: 0; padding-bottom: 56px; }
+.workshops .section-inner { padding-top: 56px; }
 
-.about-body { max-width: 70ch; }
+.about-body { max-width: none; }
 .about-body p { font-size: 1.05rem; }
 
 .founders-grid {
@@ -418,7 +505,8 @@ ul { list-style: none; margin: 0; padding: 0; }
 .founder-photo-placeholder { background: var(--white); }
 
 .founder-name { font-size: 1.15rem; margin-bottom: 6px; }
-.founder-bio { margin: 0; font-size: 0.95rem; }
+.founder-bio { margin: 0 0 10px; font-size: 0.95rem; }
+.founder-extra { margin: 0; font-size: 0.9rem; opacity: 0.8; }
 
 /* ---------- 7. EXPERIENCES ---------- */
 .experiences { background: var(--bg-tint); }
@@ -489,6 +577,11 @@ ul { list-style: none; margin: 0; padding: 0; }
   height: 100%;
   object-fit: cover;
   display: block;
+  transition: transform 0.5s var(--ease-smooth);
+}
+.experience-card:hover .experience-card-media,
+.experience-card:hover .media-placeholder {
+  transform: scale(1.06);
 }
 
 .grad-blue { background: var(--grad-blue); }
@@ -549,56 +642,6 @@ ul { list-style: none; margin: 0; padding: 0; }
 /* ---------- 8. WORKSHOPS ---------- */
 .workshops { background: var(--white); position: relative; }
 
-.workshop-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 28px;
-}
-
-.workshop-card {
-  background: var(--bg-tint);
-  border-radius: var(--radius-md);
-  padding: 32px;
-  transition: transform 0.4s var(--ease-bounce), box-shadow 0.4s var(--ease-bounce);
-}
-.workshop-card:hover {
-  transform: translateY(-6px) rotate(-0.4deg);
-  box-shadow: var(--shadow-soft);
-}
-
-.workshop-meta {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-bottom: 10px;
-}
-.workshop-meta span {
-  font-size: 0.78rem;
-  font-weight: 700;
-  padding: 4px 12px;
-  border-radius: var(--radius-pill);
-  background: var(--white);
-  color: var(--brand-purple);
-}
-
-.workshop-card h3 { font-size: 1.2rem; margin-bottom: 8px; }
-.workshop-card p { font-size: 0.95rem; }
-
-.btn-inquire {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  margin-top: 8px;
-  font-weight: 700;
-  color: var(--brand-pink);
-  transition: transform 0.3s var(--ease-bounce), gap 0.3s ease;
-}
-.btn-inquire:hover { transform: translateX(4px); gap: 10px; }
-
-/* ---------- 8b. DONATIONS ---------- */
-.donations { background: var(--bg-tint); text-align: center; }
-.donations-body { max-width: 60ch; margin: 0 auto 32px; font-size: 1.05rem; }
-
 /* ---------- 9. CONTACT ---------- */
 .contact {
   position: relative;
@@ -618,6 +661,7 @@ ul { list-style: none; margin: 0; padding: 0; }
 }
 
 .contact-intro h1 { color: var(--white); }
+.contact-intro h1::after { background: var(--white); }
 .contact-intro p { color: rgba(255,255,255,0.85); }
 
 .contact-details {
@@ -736,6 +780,11 @@ ul { list-style: none; margin: 0; padding: 0; }
   100% { opacity: 0; }
 }
 
+@keyframes logoSway {
+  0%, 100% { transform: rotate(-2.2deg) scale(1); }
+  50% { transform: rotate(2deg) scale(1.015); }
+}
+
 @keyframes scrollDot {
   0% { transform: translateY(0); opacity: 1; }
   100% { transform: translateY(18px); opacity: 0; }
@@ -782,8 +831,6 @@ ul { list-style: none; margin: 0; padding: 0; }
   .nav-menu .nav-link:hover,
   .nav-menu .nav-link.is-active { color: var(--brand-purple); background: var(--bg-tint); }
 
-  .workshop-grid { grid-template-columns: 1fr; }
-
   .founders-grid { grid-template-columns: 1fr; max-width: 320px; }
 }
 
@@ -800,6 +847,7 @@ ul { list-style: none; margin: 0; padding: 0; }
   html { scroll-behavior: auto; }
   .hero-bg-image, .scroll-cue-dot { animation: none !important; opacity: 1 !important; }
   .hero-bg-image:not(:first-child) { display: none; }
+  .hero-logo-layer { animation: none !important; }
   .reveal, .reveal-stagger > * {
     transition: none !important;
     opacity: 1 !important;
