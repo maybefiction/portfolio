@@ -383,6 +383,8 @@ ul { list-style: none; margin: 0; padding: 0; }
   text-align: center;
 }
 
+.hero-scroll-sentinel { height: 0; }
+
 .hero-logo {
   position: relative;
   width: clamp(220px, 26vw, 420px);
@@ -612,6 +614,7 @@ ul { list-style: none; margin: 0; padding: 0; }
 }
 .experience-tag.tag-exhibition { color: var(--brand-teal-light); }
 .experience-tag.tag-event { color: var(--brand-pink-light); }
+.experience-tag.tag-workshop { color: var(--white); }
 
 .experience-card-overlay h3 {
   color: var(--white);
@@ -672,25 +675,6 @@ ul { list-style: none; margin: 0; padding: 0; }
   gap: 10px;
   font-weight: 700;
   color: var(--white);
-}
-
-.social-links {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-.social-links a {
-  background: rgba(255,255,255,0.7);
-  padding: 10px 18px;
-  border-radius: var(--radius-pill);
-  font-weight: 700;
-  font-size: 0.9rem;
-  transition: transform 0.3s var(--ease-bounce), background 0.3s ease;
-  display: inline-block;
-}
-.social-links a:hover {
-  transform: translateY(-3px) rotate(-2deg);
-  background: var(--white);
 }
 
 .contact-form {

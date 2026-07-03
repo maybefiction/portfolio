@@ -13,11 +13,6 @@ const SITE_CONTENT = {
     email: "hello@maybefiction.com",
     phone: "+1 (555) 010-2026",
     location: "Based in your city — traveling everywhere",
-    socials: [
-      { label: "Instagram", handle: "@maybefiction", url: "#" },
-      { label: "TikTok", handle: "@maybefiction", url: "#" },
-      { label: "LinkedIn", handle: "maybe:fiction", url: "#" },
-    ],
   },
 
   // ---------- Hero ----------

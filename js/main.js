@@ -130,7 +130,7 @@ function renderWorkshops() {
         <a class="experience-card" href="/contact.html?workshop=${encodeURIComponent(w.title)}">
           <div class="media-placeholder ${w.gradient}"></div>
           <div class="experience-card-overlay">
-            <span class="experience-tag">${w.tag}</span>
+            <span class="experience-tag tag-workshop">${w.tag}</span>
             <h3>${w.title}</h3>
           </div>
         </a>`
@@ -176,16 +176,19 @@ function setupNav() {
   );
   sections.forEach((section) => sectionObserver.observe(section));
 
-  // Nav is transparent over the hero, solid once the hero scrolls out of view
+  // Nav is transparent over the hero, solid once the hero's text content
+  // scrolls up to meet it (observing a sentinel at the top of the text block,
+  // not the whole hero section, so the nav goes solid before the heading/
+  // tagline pass behind it instead of after — avoiding text-on-text overlap).
   const header = document.getElementById("site-header");
-  const hero = document.getElementById("hero");
-  if (header && hero) {
+  const heroSentinel = document.getElementById("hero-scroll-sentinel") || document.getElementById("hero");
+  if (header && heroSentinel) {
     const navHeight = getComputedStyle(document.documentElement).getPropertyValue("--nav-height").trim();
     const heroObserver = new IntersectionObserver(
       ([entry]) => header.classList.toggle("is-scrolled", !entry.isIntersecting),
       { rootMargin: `-${navHeight} 0px 0px 0px` }
     );
-    heroObserver.observe(hero);
+    heroObserver.observe(heroSentinel);
   }
 }
 

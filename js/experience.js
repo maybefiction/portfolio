@@ -351,15 +351,18 @@ function setupNav() {
     });
   });
 
-  // Nav is transparent over the hero, solid once the hero scrolls out of view
+  // Nav is transparent over the hero, solid once the hero's title block
+  // scrolls up to meet it (observing a sentinel above the tag/title, not the
+  // whole hero image, so the nav goes solid before the title passes behind
+  // it instead of after — avoiding text-on-text overlap).
   const header = document.getElementById("site-header");
-  const hero = document.getElementById("xp-hero");
-  if (header && hero) {
+  const heroSentinel = document.getElementById("hero-scroll-sentinel") || document.getElementById("xp-hero");
+  if (header && heroSentinel) {
     const navHeight = getComputedStyle(document.documentElement).getPropertyValue("--nav-height").trim();
     const heroObserver = new IntersectionObserver(
       ([entry]) => header.classList.toggle("is-scrolled", !entry.isIntersecting),
       { rootMargin: `-${navHeight} 0px 0px 0px` }
     );
-    heroObserver.observe(hero);
+    heroObserver.observe(heroSentinel);
   }
 }

@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setupContactForm();
 });
 
-/* ---------- Contact info + socials ---------- */
+/* ---------- Contact info ---------- */
 function renderContactInfo() {
   const { brand } = SITE_CONTENT;
 
@@ -23,11 +23,6 @@ function renderContactInfo() {
     <li>${brand.phone}</li>
     <li>${brand.location}</li>
   `;
-
-  const socialList = document.getElementById("social-links");
-  socialList.innerHTML = brand.socials
-    .map((s) => `<li><a href="${s.url}">${s.label}</a></li>`)
-    .join("");
 }
 
 /* ---------- Pre-fill message when arriving from a workshop "Inquire" link ---------- */
