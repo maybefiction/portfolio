@@ -743,6 +743,21 @@ ul { list-style: none; margin: 0; padding: 0; }
 }
 .form-success.is-visible { opacity: 1; transform: translateY(0); }
 
+/* ---------- 9b. NEWSLETTER ---------- */
+.newsletter { background: var(--brand-teal); }
+.newsletter-inner { text-align: center; }
+.newsletter .eyebrow { background: rgba(255,255,255,0.5); }
+.newsletter-embed {
+  max-width: 700px;
+  margin: 0 auto;
+}
+/* Nudge the third-party Kit embed's own fonts toward the site's type system
+   without touching its functional/layout styles (inline on the embed). */
+.newsletter-embed .formkit-header h2 { font-family: var(--font-display); }
+.newsletter-embed .formkit-input,
+.newsletter-embed .formkit-submit,
+.newsletter-embed .formkit-disclaimer { font-family: var(--font-body); }
+
 /* ---------- 10. FOOTER ---------- */
 .site-footer { background: var(--ink); color: var(--white); }
 .footer-inner { text-align: center; padding: 64px 24px; }
