@@ -36,14 +36,13 @@
   --ink-on-color: #262522;
   --white: #FFFFFF;
 
-  /* Gradients */
-  --grad-hero: linear-gradient(135deg, var(--brand-teal-light) 0%, var(--brand-purple-light) 50%, var(--brand-pink-light) 100%);
-  --grad-blue: linear-gradient(135deg, #BAEAEA, #82D9D9);
-  --grad-purple: linear-gradient(135deg, #CEB7CC, #A67CA3);
-  --grad-pink: linear-gradient(135deg, #EAC1C9, #D98F9D);
-  --grad-pink-purple: linear-gradient(135deg, #EAC1C9, #CEB7CC);
-  --grad-blue-purple: linear-gradient(135deg, #BAEAEA, #CEB7CC);
-  --grad-blue-pink: linear-gradient(135deg, #BAEAEA, #EAC1C9);
+  /* Color blocks (flat, no gradients — see card/hero/contact rules) */
+  --grad-blue: var(--brand-teal);
+  --grad-purple: var(--brand-purple);
+  --grad-pink: var(--brand-pink);
+  --grad-pink-purple: var(--brand-teal-light);
+  --grad-blue-purple: var(--brand-purple-light);
+  --grad-blue-pink: var(--brand-pink-light);
 
   /* Shadows */
   --shadow-soft: 0 10px 30px rgba(166, 124, 163, 0.15);
@@ -165,7 +164,7 @@ ul { list-style: none; margin: 0; padding: 0; }
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--brand-purple), var(--brand-pink));
+  background: var(--brand-pink);
   color: var(--white);
   box-shadow: var(--shadow-button);
 }
@@ -272,7 +271,7 @@ ul { list-style: none; margin: 0; padding: 0; }
 .nav-link.is-active { color: var(--brand-purple); background: var(--bg-tint); }
 
 .nav-link-cta {
-  background: linear-gradient(135deg, var(--brand-purple), var(--brand-pink));
+  background: var(--brand-pink);
   color: var(--white) !important;
 }
 .nav-link-cta:hover { transform: translateY(-2px) scale(1.05); }
@@ -307,7 +306,7 @@ ul { list-style: none; margin: 0; padding: 0; }
   justify-content: center;
   padding-top: var(--nav-height);
   overflow: hidden;
-  background: var(--grad-hero);
+  background: var(--ink);
 }
 
 .hero-blobs { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
@@ -347,17 +346,18 @@ ul { list-style: none; margin: 0; padding: 0; }
   text-align: center;
 }
 
-.hero-content .eyebrow { background: rgba(255,255,255,0.6); }
+.hero-content .eyebrow { background: rgba(255,255,255,0.12); color: var(--white); }
 
 .hero-heading {
   font-size: clamp(2.8rem, 8vw, 5.2rem);
   margin-bottom: 0.2em;
+  color: var(--white);
 }
 
 .hero-tagline {
   font-family: var(--font-display);
   font-size: clamp(1.3rem, 3vw, 1.8rem);
-  color: var(--ink);
+  color: var(--white);
   margin-bottom: 0.5em;
 }
 
@@ -365,6 +365,7 @@ ul { list-style: none; margin: 0; padding: 0; }
   font-size: clamp(1rem, 1.5vw, 1.15rem);
   max-width: 56ch;
   margin: 0 auto 2em;
+  color: rgba(255,255,255,0.75);
 }
 
 .hero-ctas {
@@ -381,7 +382,7 @@ ul { list-style: none; margin: 0; padding: 0; }
   transform: translateX(-50%);
   width: 30px;
   height: 46px;
-  border: 2px solid var(--ink);
+  border: 2px solid var(--white);
   border-radius: var(--radius-pill);
   opacity: 0.5;
   display: flex;
@@ -394,7 +395,7 @@ ul { list-style: none; margin: 0; padding: 0; }
 .scroll-cue-dot {
   width: 6px;
   height: 6px;
-  background: var(--ink);
+  background: var(--white);
   border-radius: 50%;
   animation: scrollDot 2s ease-in-out infinite;
 }
@@ -455,7 +456,7 @@ ul { list-style: none; margin: 0; padding: 0; }
 }
 .filter-tag:hover { transform: translateY(-3px) rotate(-1deg); border-color: var(--brand-purple-light); }
 .filter-tag.is-active {
-  background: linear-gradient(135deg, var(--brand-purple), var(--brand-pink));
+  background: var(--brand-purple);
   color: var(--white);
   transform: translateY(-2px);
 }
@@ -622,7 +623,7 @@ ul { list-style: none; margin: 0; padding: 0; }
 /* ---------- 9. CONTACT ---------- */
 .contact {
   position: relative;
-  background: var(--grad-hero);
+  background: var(--brand-purple);
   overflow: hidden;
 }
 
@@ -637,7 +638,9 @@ ul { list-style: none; margin: 0; padding: 0; }
   align-items: start;
 }
 
-.contact-intro .eyebrow { background: rgba(255,255,255,0.6); }
+.contact-intro .eyebrow { background: rgba(255,255,255,0.7); }
+.contact-intro h2 { color: var(--white); }
+.contact-intro p { color: rgba(255,255,255,0.85); }
 
 .contact-details {
   margin: 28px 0;
@@ -645,6 +648,7 @@ ul { list-style: none; margin: 0; padding: 0; }
   flex-direction: column;
   gap: 10px;
   font-weight: 700;
+  color: var(--white);
 }
 .contact-details li::before { content: "📍 "; }
 .contact-details li:nth-child(1)::before { content: "✉️ "; }
