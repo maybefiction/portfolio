@@ -259,10 +259,11 @@ ul { list-style: none; margin: 0; padding: 0; }
   transition: background 0.35s ease, border-color 0.35s ease;
 }
 .site-header.is-scrolled {
-  background: rgba(242, 242, 242, 0.75);
+  background: rgba(242, 242, 242, 0.97);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border-bottom-color: rgba(166, 124, 163, 0.12);
+  box-shadow: var(--shadow-soft);
 }
 
 .nav {
@@ -759,7 +760,16 @@ ul { list-style: none; margin: 0; padding: 0; }
 /* ---------- 10. FOOTER ---------- */
 .site-footer { background: var(--ink); color: var(--white); }
 .footer-inner { text-align: center; padding: 64px 24px; }
-.footer-logo { display: inline-block; color: var(--white); font-size: 1.3rem; margin-bottom: 12px; }
+.footer-logo {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--white);
+  font-size: 1.3rem;
+  margin-bottom: 12px;
+}
+.footer-logo .nav-logo-icon { width: 44px; height: 44px; }
 .footer-tagline { color: rgba(255,255,255,0.7); margin-bottom: 24px; }
 .footer-nav { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; margin-bottom: 24px; }
 .footer-nav a {

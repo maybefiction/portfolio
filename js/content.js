@@ -89,10 +89,13 @@ const SITE_CONTENT = {
         runtime: "1 hour 30 minutes",
       },
       credits: {
-        "Directors/Creators": "Ishaan Goel, Sarah Yasmine Marazzi-Sassoon",
-        "Dancers": "Nadia Benes, Lucia Betelu, Alekzeta Cantu, Magali Johnston-Viens, Chloe Sonnet Brown",
-        "Musicians": "Samuel Mutter (trumpet), Suzuna Ikeda (soprano), Sydney Scarlett (violin), Ealaph Tabbaa (viola)",
-        "Photographers": "Sophia Loo, Sophia Marcontell Reyes",
+        "Directors/Creators": "Ishaan Goel (Co-Director, Producer, Experience Designer), Sarah Yasmine Marazzi-Sassoon (Co-Director, Choreographer), Samuel Mutter (Composer)",
+        "Dancers": "Nadia Benes, Lucia Betelu, Chloe Sonnet Brown, Alekzeta Cantu, Magali Johnston-Viens",
+        "Musicians": "Suzuna Ikeda (soprano), Samuel Mutter (trumpet), Sydney Scarlett (violin), Ealaph Tabbaa (viola)",
+        "Featured Works": "Chloe Sonnet Brown (Sculpture), Augusto Germosen (Jewelry), Veronica Velasquez (Painting)",
+        "Production Design": "Betta Malagon, Sophia Marcontell Reyes, Annie Worford",
+        "Operations": "Jude Icarus (Sound), Peter Smith (Lighting)",
+        "Photographers": "Chris Cabrera, Sophia Loo, Sophia Marcontell Reyes",
         "Videographers": "Jeff Fan, Makenna Finch",
       },
       fullSynopsis: [
