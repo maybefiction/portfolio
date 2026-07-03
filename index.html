@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>maybe:fiction — Experience Design Studio</title>
+  <meta name="description" content="maybe:fiction is an experience design studio crafting IRL performances, exhibitions, workshops, and events." />
+
+  <!-- Google Fonts: Fredoka (playful display) + Nunito (friendly body copy) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <!-- Favicon placeholder — swap for a real icon at assets/icons/favicon.svg -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>" />
+</head>
+<body>
+
+  <!-- =================== SKIP LINK (accessibility) =================== -->
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- =================== NAV =================== -->
+  <header class="site-header" id="site-header">
+    <nav class="nav" aria-label="Primary">
+      <a href="#hero" class="nav-logo">maybe<span class="nav-logo-colon">:</span>fiction</a>
+
+      <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#experiences" class="nav-link">Experiences</a></li>
+        <li><a href="#workshops" class="nav-link">Workshops</a></li>
+        <li><a href="#contact" class="nav-link nav-link-cta">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <!-- =================== HERO =================== -->
+    <section class="hero" id="hero">
+      <!-- Decorative floating blobs — purely visual, aria-hidden -->
+      <div class="hero-blobs" aria-hidden="true">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+        <div class="blob blob-4"></div>
+        <span class="floaty floaty-1">✨</span>
+        <span class="floaty floaty-2">🎈</span>
+        <span class="floaty floaty-3">🌀</span>
+        <span class="floaty floaty-4">🎭</span>
+        <span class="floaty floaty-5">🪩</span>
+      </div>
+
+      <div class="hero-content">
+        <p class="eyebrow reveal" id="hero-eyebrow"></p>
+        <h1 class="hero-heading reveal" id="hero-heading"></h1>
+        <p class="hero-tagline reveal" id="hero-tagline"></p>
+        <p class="hero-subcopy reveal" id="hero-subcopy"></p>
+        <div class="hero-ctas reveal">
+          <a class="btn btn-primary" id="hero-primary-cta" href="#experiences">See Our Work</a>
+          <a class="btn btn-secondary" id="hero-secondary-cta" href="#contact">Say Hello</a>
+        </div>
+      </div>
+
+      <a href="#about" class="scroll-cue" aria-label="Scroll to About section">
+        <span class="scroll-cue-dot"></span>
+      </a>
+    </section>
+
+    <!-- =================== ABOUT =================== -->
+    <section class="about" id="about">
+      <div class="section-inner">
+        <p class="eyebrow reveal" id="about-eyebrow"></p>
+        <h2 class="section-heading reveal" id="about-heading"></h2>
+
+        <div class="about-body" id="about-body"><!-- paragraphs injected by JS --></div>
+
+        <div class="pillars" id="pillars"><!-- pillar cards injected by JS --></div>
+      </div>
+
+      <!-- soft wavy divider into next section -->
+      <div class="wave-divider" aria-hidden="true">
+        <svg viewBox="0 0 1440 100" preserveAspectRatio="none"><path d="M0,40 C360,100 1080,0 1440,50 L1440,100 L0,100 Z"></path></svg>
+      </div>
+    </section>
+
+    <!-- =================== EXPERIENCES =================== -->
+    <section class="experiences" id="experiences">
+      <div class="section-inner">
+        <p class="eyebrow reveal">Our Work</p>
+        <h2 class="section-heading reveal">Experiences we've dreamed up</h2>
+        <p class="section-subheading reveal">A sampling of performances, exhibitions, and events from the studio floor.</p>
+
+        <!-- Filter tags -->
+        <div class="filter-bar reveal" id="filter-bar" role="group" aria-label="Filter experiences by category">
+          <button class="filter-tag is-active" data-filter="all">All</button>
+          <button class="filter-tag" data-filter="performance">🎭 Performance</button>
+          <button class="filter-tag" data-filter="exhibition">🖼️ Exhibition</button>
+          <button class="filter-tag" data-filter="event">🎉 Event</button>
+        </div>
+
+        <div class="experience-grid" id="experience-grid"><!-- cards injected by JS --></div>
+      </div>
+    </section>
+
+    <!-- =================== WORKSHOPS =================== -->
+    <section class="workshops" id="workshops">
+      <div class="wave-divider wave-divider-top" aria-hidden="true">
+        <svg viewBox="0 0 1440 100" preserveAspectRatio="none"><path d="M0,60 C360,0 1080,100 1440,40 L1440,0 L0,0 Z"></path></svg>
+      </div>
+
+      <div class="section-inner">
+        <p class="eyebrow reveal">Learn With Us</p>
+        <h2 class="section-heading reveal">Workshops for curious hands</h2>
+        <p class="section-subheading reveal">Hands-on sessions where you build the skills behind the magic.</p>
+
+        <div class="workshop-grid" id="workshop-grid"><!-- cards injected by JS --></div>
+      </div>
+    </section>
+
+    <!-- =================== CONTACT =================== -->
+    <section class="contact" id="contact">
+      <div class="hero-blobs contact-blobs" aria-hidden="true">
+        <div class="blob blob-5"></div>
+        <div class="blob blob-6"></div>
+      </div>
+
+      <div class="section-inner contact-inner">
+        <div class="contact-intro reveal">
+          <p class="eyebrow">Let's Make Something</p>
+          <h2 class="section-heading">Tell us what you're dreaming up</h2>
+          <p class="section-subheading">Whether it's a performance, an exhibition, a workshop, or something that doesn't have a name yet — we want to hear about it.</p>
+
+          <ul class="contact-details" id="contact-details"><!-- injected by JS --></ul>
+          <ul class="social-links" id="social-links"><!-- injected by JS --></ul>
+        </div>
+
+        <form class="contact-form reveal" id="contact-form" novalidate>
+          <!--
+            Placeholder form: client-side only, no backend wired up.
+            To make this live, add an action/fetch call in js/main.js
+            inside the 'contact-form' submit handler (e.g. Formspree,
+            Netlify Forms, or your own API endpoint).
+          -->
+          <div class="form-field">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Your lovely name" required />
+            <span class="form-error" id="name-error"></span>
+          </div>
+
+          <div class="form-field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="you@example.com" required />
+            <span class="form-error" id="email-error"></span>
+          </div>
+
+          <div class="form-field">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" placeholder="Tell us about your idea..." required></textarea>
+            <span class="form-error" id="message-error"></span>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block" id="contact-submit">
+            <span class="btn-label">Send it off ✨</span>
+          </button>
+
+          <p class="form-success" id="form-success" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =================== FOOTER =================== -->
+  <footer class="site-footer">
+    <div class="section-inner footer-inner">
+      <a href="#hero" class="nav-logo footer-logo">maybe<span class="nav-logo-colon">:</span>fiction</a>
+      <p class="footer-tagline" id="footer-tagline"></p>
+      <ul class="footer-nav">
+        <li><a href="#about">About</a></li>
+        <li><a href="#experiences">Experiences</a></li>
+        <li><a href="#workshops">Workshops</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <p class="footer-copyright">© <span id="footer-year"></span> maybe:fiction. All rights reserved. Made with ✨ and too much confetti.</p>
+    </div>
+  </footer>
+
+  <script src="js/content.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
