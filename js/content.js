@@ -105,22 +105,27 @@ const SITE_CONTENT = {
       experienceDesign: [
         {
           title: "Gathering",
+          image: "/assets/experiences/spontaneous-attachment-gallery/photo-01.jpg",
           text: "Doors open and the audience enters a transformed Brooklyn Peace Center. Activations woven through the space invite people to engage with the night's theme of surprise intimacy before a single dancer takes the floor — priming the room to feel like a ritual from the moment you walk in.",
         },
         {
           title: "1st Dance — The Duet",
+          image: "/assets/experiences/spontaneous-attachment-gallery/photo-02.jpg",
           text: "Two figures in pointe shoes, faces covered, move through a transformation: from being perceived as shapes — dance in its most abstract form — to being almost disturbingly human — dance in its most intimate form.",
         },
         {
           title: "Intermission",
+          image: "/assets/experiences/spontaneous-attachment-gallery/photo-10.jpg",
           text: "The audience returns to the activations scattered through the venue, carrying the duet's imagery with them as they mingle, explore, and continue building their own small moments of connection before the second piece begins.",
         },
         {
           title: "2nd Dance — The Quartet",
+          image: "/assets/experiences/spontaneous-attachment-gallery/photo-04.jpg",
           text: "Created in collaboration with composer Samuel Mutter, the quartet explores ritual, intimacy, and repetition — themes at the core of both music and dance — built from a shared desire to understand the relationship between the two art forms.",
         },
         {
           title: "Ending",
+          image: "/assets/experiences/spontaneous-attachment-gallery/photo-14.jpg",
           text: "As the evening closes, the goal isn't for the audience to simply think 'that was cool' — it's for them to leave carrying something: a texture of intimacy they found by being spontaneously, physically present with strangers for one night.",
         },
       ],

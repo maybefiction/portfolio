@@ -112,11 +112,11 @@ function formatLabel(key) {
   return labels[key] || key;
 }
 
-/* ---------- Section 3: Video ---------- */
+/* ---------- Section 3: Video (lives under the description in xp-meta-main) ---------- */
 function renderVideo(item) {
-  const section = document.getElementById("xp-video-section");
+  const wrap = document.getElementById("xp-video-wrap");
   if (!item.heroVideo) {
-    section.remove();
+    wrap.remove();
     return;
   }
   const video = document.getElementById("xp-video");
@@ -151,6 +151,7 @@ function renderDesignFlow(item) {
         .map(
           (stage, i) => `
         <div class="xp-flow-panel ${i === 0 ? "is-open" : ""}" data-panel="${i}" role="tabpanel">
+          ${stage.image ? `<img class="xp-flow-panel-image" src="${stage.image}" alt="${stage.title}" loading="lazy">` : ""}
           <h3>${stage.title}</h3>
           <p>${stage.text}</p>
         </div>`
