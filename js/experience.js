@@ -1,13 +1,22 @@
 /* ============================================================
    EXPERIENCE.JS — renders an individual experience detail page.
-   Reads ?id=<experience-id> from the URL, looks it up in
+   Reads the experience id from the URL, looks it up in
    SITE_CONTENT.experiences (js/content.js), and renders whichever
    sections that item has data for. Sections with no data simply
    don't render — this template works for partial data too.
+
+   ID is read from the URL path (e.g. /experiences/some-id), since
+   the Vercel rewrite that maps /experiences/:id -> /experience.html
+   does NOT expose its destination query string to client-side JS —
+   window.location always reflects the browser's visible URL. The
+   ?id= query param is kept as a fallback for local testing directly
+   against experience.html.
    ============================================================ */
 
 document.addEventListener("DOMContentLoaded", () => {
-  const id = new URLSearchParams(window.location.search).get("id");
+  const pathId = window.location.pathname.split("/").filter(Boolean).pop();
+  const searchId = new URLSearchParams(window.location.search).get("id");
+  const id = searchId || pathId;
   const item = SITE_CONTENT.experiences.find((e) => e.id === id);
 
   if (!item) {

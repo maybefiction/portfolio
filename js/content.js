@@ -68,7 +68,7 @@ const SITE_CONTENT = {
       category: "event",
       tag: "Event",
       description: "TODO: replace with real copy — Madrid 2023 edition.",
-      placeholderSrc: "assets/experiences/jornada-de-puertas-abiertas.jpg",
+      placeholderSrc: "/assets/experiences/jornada-de-puertas-abiertas.jpg",
       gradient: "grad-blue",
       hasImage: true,
     },
@@ -78,7 +78,7 @@ const SITE_CONTENT = {
       category: "performance",
       tag: "Performance",
       description: "Spontaneous Attachment explores intimacy and human connection through ritual, movement, and sound. Two dance works—a duet and a quartet, set to live original music—anchor the evening.",
-      placeholderSrc: "assets/experiences/spontaneous-attachment.jpg",
+      placeholderSrc: "/assets/experiences/spontaneous-attachment.jpg",
       gradient: "grad-purple",
       hasImage: true,
       hasDetailPage: true,
@@ -98,9 +98,9 @@ const SITE_CONTENT = {
         "Videographers": "Jeff Fan, Makenna Finch",
       },
       fullSynopsis: "The experience examines how attachments develop in overlooked moments and spaces. Through immersive performances combining gathering, contemporary dance, and live music, audiences explore indirect ways connections form between people, within ourselves, and with our surroundings. The work emphasizes how small frictions and shared contexts facilitate genuine attachment, contrasting with digitally-mediated experiences that may diminish such opportunities.",
-      heroVideo: "assets/experiences/spontaneous-attachment-recap.mp4",
+      heroVideo: "/assets/experiences/spontaneous-attachment-recap.mp4",
       gallery: Array.from({ length: 15 }, (_, i) =>
-        `assets/experiences/spontaneous-attachment-gallery/photo-${String(i + 1).padStart(2, "0")}.jpg`
+        `/assets/experiences/spontaneous-attachment-gallery/photo-${String(i + 1).padStart(2, "0")}.jpg`
       ),
       experienceDesign: [
         {
@@ -131,7 +131,7 @@ const SITE_CONTENT = {
       category: "performance",
       tag: "Performance",
       description: "TODO: replace with real copy.",
-      placeholderSrc: "assets/experiences/eclectic-pathetic.jpg",
+      placeholderSrc: "/assets/experiences/eclectic-pathetic.jpg",
       gradient: "grad-pink",
       hasImage: true,
     },
@@ -141,7 +141,7 @@ const SITE_CONTENT = {
       category: "exhibition",
       tag: "Exhibition",
       description: "A family-friendly gallery of oversized paper sculptures exploring the solar system, built entirely from recycled materials.",
-      placeholderSrc: "assets/experiences/paper-planets.jpg",
+      placeholderSrc: "/assets/experiences/paper-planets.jpg",
       gradient: "grad-pink-purple",
     },
     {
@@ -150,7 +150,7 @@ const SITE_CONTENT = {
       category: "performance",
       tag: "Performance",
       description: "A durational sound-and-movement piece staged inside a geodesic dome, new every night for two weeks.",
-      placeholderSrc: "assets/experiences/echo-chamber.jpg",
+      placeholderSrc: "/assets/experiences/echo-chamber.jpg",
       gradient: "grad-blue-purple",
     },
     {
@@ -159,7 +159,7 @@ const SITE_CONTENT = {
       category: "event",
       tag: "Event",
       description: "A full city-block celebration commissioned for a client's 10th anniversary — three stages, one confetti cannon finale.",
-      placeholderSrc: "assets/experiences/confetti-block-party.jpg",
+      placeholderSrc: "/assets/experiences/confetti-block-party.jpg",
       gradient: "grad-blue-pink",
     },
   ],
