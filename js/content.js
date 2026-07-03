@@ -22,39 +22,41 @@ const SITE_CONTENT = {
 
   // ---------- Hero ----------
   hero: {
-    eyebrow: "Experience Design Studio",
     heading: "maybe:fiction",
     tagline: "We turn imagination into IRL experiences.",
-    subcopy: "Performances, exhibitions, workshops, and events dreamed up and built by hand — for people who want to feel something real.",
-    primaryCta: { label: "See Our Work", href: "#experiences" },
-    secondaryCta: { label: "Say Hello", href: "#contact" },
+    backgroundImages: [
+      "/assets/experiences/spontaneous-attachment.jpg",
+      "/assets/experiences/jornada-de-puertas-abiertas.jpg",
+      "/assets/experiences/spontaneous-attachment-gallery/photo-04.jpg",
+      "/assets/experiences/eclectic-pathetic.jpg",
+    ],
   },
 
   // ---------- About ----------
   about: {
-    eyebrow: "Who We Are",
-    heading: "Storytellers who build worlds you can walk into.",
+    heading: "About",
     body: [
       "maybe:fiction is a production studio for experience design — the art of turning an idea into something you can touch, wander through, and remember. We work across live performance, immersive exhibitions, hands-on workshops, and one-night-only events.",
-      "Our philosophy is simple: the best stories aren't told at people, they're built around them. Every project starts with a feeling we want someone to walk away with — wonder, nostalgia, courage, joy — and we reverse-engineer the whole experience from there.",
     ],
-    pillars: [
+    founders: [
       {
-        icon: "✨",
-        title: "Wonder First",
-        text: "We design the emotional arc before we design the room. If it doesn't spark delight on paper, it doesn't make it to the floor.",
+        name: "Ishaan",
+        photo: null,
+        bio: "TODO: replace with real bio.",
       },
       {
-        icon: "🛠️",
-        title: "Built By Makers",
-        text: "Our team designs, fabricates, and stage-manages in-house — set, sound, lighting, and script all live under one very colorful roof.",
-      },
-      {
-        icon: "🌀",
-        title: "Made For Real Life",
-        text: "No screens required. We believe in the magic of shared, physical space — messy, alive, and impossible to replicate at home.",
+        name: "Super Alex",
+        photo: null,
+        bio: "TODO: replace with real bio.",
       },
     ],
+  },
+
+  // ---------- Donations ----------
+  donations: {
+    heading: "Donations",
+    body: "TODO: replace with real copy about supporting maybe:fiction.",
+    cta: { label: "Donate", href: "#" },
   },
 
   // ---------- Experiences (gallery / portfolio) ----------
@@ -146,68 +148,23 @@ const SITE_CONTENT = {
       gradient: "grad-pink",
       hasImage: true,
     },
-    {
-      id: "paper-planets",
-      title: "Paper Planets",
-      category: "exhibition",
-      tag: "Exhibition",
-      description: "A family-friendly gallery of oversized paper sculptures exploring the solar system, built entirely from recycled materials.",
-      placeholderSrc: "/assets/experiences/paper-planets.jpg",
-      gradient: "grad-pink-purple",
-    },
-    {
-      id: "echo-chamber",
-      title: "Echo Chamber",
-      category: "performance",
-      tag: "Performance",
-      description: "A durational sound-and-movement piece staged inside a geodesic dome, new every night for two weeks.",
-      placeholderSrc: "/assets/experiences/echo-chamber.jpg",
-      gradient: "grad-blue-purple",
-    },
-    {
-      id: "confetti-block-party",
-      title: "Confetti Block Party",
-      category: "event",
-      tag: "Event",
-      description: "A full city-block celebration commissioned for a client's 10th anniversary — three stages, one confetti cannon finale.",
-      placeholderSrc: "/assets/experiences/confetti-block-party.jpg",
-      gradient: "grad-blue-pink",
-    },
   ],
 
   // ---------- Workshops ----------
   workshops: [
     {
-      id: "worldbuilding-101",
-      title: "Worldbuilding 101",
-      duration: "3-hour workshop",
-      audience: "For curious beginners",
-      description: "Learn our studio's own framework for building an immersive world from a single feeling, using nothing but paper and imagination.",
-      icon: "🗺️",
+      id: "beginning-middle-end",
+      title: "Beginning | Middle | End",
+      duration: "TODO: replace with real copy.",
+      audience: "TODO: replace with real copy.",
+      description: "TODO: replace with real copy.",
     },
     {
-      id: "devising-for-non-actors",
-      title: "Devising for Non-Actors",
-      duration: "Full-day intensive",
-      audience: "No performance experience needed",
-      description: "A playful introduction to devised theatre-making for people who've never set foot on a stage — and never wanted to, until now.",
-      icon: "🎭",
-    },
-    {
-      id: "prop-and-set-fabrication",
-      title: "Prop & Set Fabrication",
-      duration: "Weekend intensive",
-      audience: "Hands-on makers",
-      description: "Get in the shop with our fabrication team and learn the tricks we use to build sets and props that feel bigger than they cost.",
-      icon: "🧵",
-    },
-    {
-      id: "designing-delight",
-      title: "Designing for Delight",
-      duration: "2-hour talk + Q&A",
-      audience: "For teams & brands",
-      description: "A workshop for marketing and events teams who want to bring experience-design thinking into their own activations.",
-      icon: "🎈",
+      id: "corporate-creative",
+      title: "Corporate Creative",
+      duration: "TODO: replace with real copy.",
+      audience: "TODO: replace with real copy.",
+      description: "TODO: replace with real copy.",
     },
   ],
 };

@@ -1,62 +1,73 @@
 /* ============================================================
-   MAIN.JS — rendering + interactivity for maybe:fiction
+   MAIN.JS — rendering + interactivity for maybe:fiction homepage.
    Reads all copy/data from js/content.js (SITE_CONTENT).
-   Sections: nav, hero/about/footer text injection, experiences
-   render + filter, workshops render, scroll-reveal, contact form.
+   Sections: nav, hero/about/donations/footer text injection,
+   experiences render + filter, workshops render, scroll-reveal.
+   Contact lives on its own page — see contact.html + js/contact.js.
    ============================================================ */
 
 document.addEventListener("DOMContentLoaded", () => {
   injectStaticText();
-  renderPillars();
+  renderHeroBackground();
+  renderFounders();
   renderExperiences();
   renderWorkshops();
-  renderContactInfo();
   setupNav();
   setupFilterBar();
   setupExperiencesCarousel();
   setupScrollReveal();
-  setupContactForm();
   document.getElementById("footer-year").textContent = new Date().getFullYear();
 });
 
-/* ---------- Text injection (hero / about / footer) ---------- */
+/* ---------- Text injection (hero / about / donations / footer) ---------- */
 function injectStaticText() {
-  const { hero, about, brand } = SITE_CONTENT;
+  const { hero, about, donations, brand } = SITE_CONTENT;
 
-  document.getElementById("hero-eyebrow").textContent = hero.eyebrow;
   document.getElementById("hero-heading").textContent = hero.heading;
   document.getElementById("hero-tagline").textContent = hero.tagline;
-  document.getElementById("hero-subcopy").textContent = hero.subcopy;
 
-  const primaryCta = document.getElementById("hero-primary-cta");
-  primaryCta.textContent = hero.primaryCta.label;
-  primaryCta.href = hero.primaryCta.href;
-
-  const secondaryCta = document.getElementById("hero-secondary-cta");
-  secondaryCta.textContent = hero.secondaryCta.label;
-  secondaryCta.href = hero.secondaryCta.href;
-
-  document.getElementById("about-eyebrow").textContent = about.eyebrow;
   document.getElementById("about-heading").textContent = about.heading;
-
   const aboutBody = document.getElementById("about-body");
   aboutBody.innerHTML = about.body.map((para) => `<p>${para}</p>`).join("");
+
+  document.getElementById("donations-heading").textContent = donations.heading;
+  document.getElementById("donations-body").textContent = donations.body;
+  const donationsCta = document.getElementById("donations-cta");
+  donationsCta.textContent = donations.cta.label;
+  donationsCta.href = donations.cta.href;
 
   document.getElementById("footer-tagline").textContent = brand.tagline;
 }
 
-/* ---------- About pillars ---------- */
-function renderPillars() {
-  const container = document.getElementById("pillars");
+/* ---------- Hero background photos (crossfade) ---------- */
+function renderHeroBackground() {
+  const container = document.getElementById("hero-bg-images");
+  const images = SITE_CONTENT.hero.backgroundImages || [];
+
+  container.innerHTML = images
+    .map(
+      (src, i) =>
+        `<img class="hero-bg-image" src="${src}" alt="" style="animation-delay: ${i * 6}s;">`
+    )
+    .join("");
+}
+
+/* ---------- About founders ---------- */
+function renderFounders() {
+  const container = document.getElementById("founders-grid");
   container.classList.add("reveal-stagger", "reveal");
 
-  container.innerHTML = SITE_CONTENT.about.pillars
+  container.innerHTML = SITE_CONTENT.about.founders
     .map(
-      (pillar) => `
-        <div class="pillar-card">
-          <span class="pillar-icon" aria-hidden="true">${pillar.icon}</span>
-          <h3>${pillar.title}</h3>
-          <p>${pillar.text}</p>
+      (founder) => `
+        <div class="founder-card">
+          ${
+            founder.photo
+              ? `<img class="founder-photo" src="${founder.photo}" alt="${founder.name}">`
+              : `<div class="founder-photo founder-photo-placeholder" aria-hidden="true"></div>`
+          }
+          <h3 class="founder-name">${founder.name}</h3>
+          <p class="founder-bio">${founder.bio}</p>
         </div>`
     )
     .join("");
@@ -120,49 +131,17 @@ function renderWorkshops() {
     .map(
       (w) => `
         <article class="workshop-card">
-          <div class="workshop-icon" aria-hidden="true">${w.icon}</div>
-          <div>
-            <div class="workshop-meta">
-              <span>${w.duration}</span>
-              <span>${w.audience}</span>
-            </div>
-            <h3>${w.title}</h3>
-            <p>${w.description}</p>
-            <a href="#contact" class="btn-inquire" data-workshop-title="${w.title}">
-              Inquire about this workshop →
-            </a>
+          <div class="workshop-meta">
+            <span>${w.duration}</span>
+            <span>${w.audience}</span>
           </div>
+          <h3>${w.title}</h3>
+          <p>${w.description}</p>
+          <a href="/contact.html?workshop=${encodeURIComponent(w.title)}" class="btn-inquire">
+            Inquire about this workshop →
+          </a>
         </article>`
     )
-    .join("");
-
-  // Delightful touch: clicking "Inquire" scrolls to contact and
-  // pre-fills the message field referencing the workshop.
-  grid.querySelectorAll(".btn-inquire").forEach((link) => {
-    link.addEventListener("click", () => {
-      const title = link.dataset.workshopTitle;
-      const messageField = document.getElementById("message");
-      if (messageField && !messageField.value) {
-        messageField.value = `Hi! I'd love to learn more about the "${title}" workshop.`;
-      }
-    });
-  });
-}
-
-/* ---------- Contact info + socials ---------- */
-function renderContactInfo() {
-  const { brand } = SITE_CONTENT;
-
-  const detailsList = document.getElementById("contact-details");
-  detailsList.innerHTML = `
-    <li>${brand.email}</li>
-    <li>${brand.phone}</li>
-    <li>${brand.location}</li>
-  `;
-
-  const socialList = document.getElementById("social-links");
-  socialList.innerHTML = brand.socials
-    .map((s) => `<li><a href="${s.url}">${s.label}</a></li>`)
     .join("");
 }
 
@@ -185,7 +164,7 @@ function setupNav() {
   });
 
   // Highlight the nav link for the section currently in view
-  const sections = ["hero", "about", "experiences", "workshops", "contact"]
+  const sections = ["hero", "about", "experiences", "workshops", "donations"]
     .map((id) => document.getElementById(id))
     .filter(Boolean);
   const navLinks = Array.from(document.querySelectorAll(".nav-link"));
@@ -254,53 +233,4 @@ function setupScrollReveal() {
   );
 
   targets.forEach((el) => observer.observe(el));
-}
-
-/* ---------- Contact form (client-side only — see index.html note) ---------- */
-function setupContactForm() {
-  const form = document.getElementById("contact-form");
-  const successMessage = document.getElementById("form-success");
-
-  const fields = {
-    name: { input: document.getElementById("name"), error: document.getElementById("name-error") },
-    email: { input: document.getElementById("email"), error: document.getElementById("email-error") },
-    message: { input: document.getElementById("message"), error: document.getElementById("message-error") },
-  };
-
-  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-  function validateField(key) {
-    const { input, error } = fields[key];
-    const value = input.value.trim();
-    let message = "";
-
-    if (!value) {
-      message = "This field can't be empty.";
-    } else if (key === "email" && !emailPattern.test(value)) {
-      message = "Hmm, that doesn't look like a valid email.";
-    }
-
-    error.textContent = message;
-    input.closest(".form-field").classList.toggle("has-error", Boolean(message));
-    return !message;
-  }
-
-  Object.keys(fields).forEach((key) => {
-    fields[key].input.addEventListener("blur", () => validateField(key));
-  });
-
-  form.addEventListener("submit", (event) => {
-    event.preventDefault();
-
-    const validations = Object.keys(fields).map(validateField);
-    if (!validations.every(Boolean)) return;
-
-    // NOTE: no backend wired up. This is where you'd send the data,
-    // e.g.: fetch("https://formspree.io/f/xxxxx", { method: "POST", body: new FormData(form) })
-    successMessage.textContent = `Thanks, ${fields.name.input.value.split(" ")[0]}! We'll be in touch soon. ✨`;
-    successMessage.classList.add("is-visible");
-    form.reset();
-
-    setTimeout(() => successMessage.classList.remove("is-visible"), 6000);
-  });
 }
