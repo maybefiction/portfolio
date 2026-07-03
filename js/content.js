@@ -98,7 +98,12 @@ const SITE_CONTENT = {
         "Photographers": "Sophia Loo, Sophia Marcontell Reyes",
         "Videographers": "Jeff Fan, Makenna Finch",
       },
-      fullSynopsis: "The work explores how attachments form between people, within ourselves, and with places through immersive performances integrating gathering, contemporary dance, and live music. Rather than isolating performance from surrounding social moments, the entire experience constitutes the work.",
+      fullSynopsis: [
+        "The thing around the thing is sometimes richer than the thing itself. In Between Things invites you to linger in the spaces around an experience and notice what emerges.",
+        "Through a series of immersive performances integrating gathering, contemporary dance, and live music, audiences will explore and practice the often indirect ways attachments form between people, within ourselves, and with the places we inhabit.",
+        "Attachments don't happen when you're looking for them. They form in the cracks and crevices of daily life: building rapport with a neighbor through repeated hallway run-ins, understanding yourself by processing lingering thoughts on a walk to work, or feeling connected to a place by noticing the trees that line a familiar route. As more of our needs are met digitally, remotely, and on demand, we accidentally curate away many of the small frictions and shared contexts through which attachment emerges and deepens.",
+        "Each show centers around contemporary dance works exploring ritual, repetition, intimacy, and attachment. Surrounding them is a participatory environment where audiences gather, create, move through shared spaces, and celebrate together. Rather than isolating the performance from the social moments surrounding it, the entire experience is the work.",
+      ],
       heroVideo: "/assets/experiences/spontaneous-attachment-recap.mp4",
       gallery: Array.from({ length: 15 }, (_, i) =>
         `/assets/experiences/spontaneous-attachment-gallery/photo-${String(i + 1).padStart(2, "0")}.jpg`
@@ -107,27 +112,27 @@ const SITE_CONTENT = {
         {
           title: "Gathering",
           image: "/assets/experiences/spontaneous-attachment.jpg",
-          text: "Central fire installation where attendees craft jewelry using beads and twine, view local artwork, and engage in conversation before the formal program.",
+          text: "Attendees arrived at a central fire installation where they could craft jewelry using beads and twine. Nearby, a curated display of paintings and jewelry by local creators reflected the project's core motifs, complemented by a station for refreshments. This open atmosphere encouraged guests to acknowledge those sharing the space and engage in conversation before the formal program began.",
         },
         {
           title: "Dance Piece #1",
           image: "/assets/experiences/spontaneous-attachment-gallery/photo-02.jpg",
-          text: "Two dancers in pointe shoes perform on a runway-style arrangement. Their choreography transitions from abstract geometry toward vulnerable humanity, constrained by \"never break eye contact with each other.\"",
+          text: "Following the initial half-hour, guests were led to the upper level for the premiere performance. Seated along both sides of a runway-style arrangement, the lack of a traditional front forced a perspective that shifted based on one's physical position in the room. This movement work involves two dancers in pointe shoes, their identities obscured at first. Their choreography transitions from structured, abstract geometry toward a startlingly vulnerable humanity, developed through a creative constraint to \"never break eye contact with each other.\"",
         },
         {
           title: "Interlude",
           image: "/assets/experiences/spontaneous-attachment-gallery/photo-01.jpg",
-          text: "Participants ascend to the third level for a pond installation where they cast small mirror circles as symbolic offerings.",
+          text: "Following the initial performance, guests ascended to the third level to engage with a central pond installation. Here, they were invited to participate in a symbolic \"offering\" by casting small mirror circles into the water. After selecting a light refreshment, the group returned to the main hall. This transitional movement naturally disrupted original seating patterns, prompting most attendees to seek out a fresh vantage point for the subsequent work.",
         },
         {
           title: "Dance Piece #2",
           image: "/assets/experiences/spontaneous-attachment-gallery/photo-04.jpg",
-          text: "A work examining ritual and closeness, developed with composer Samuel Mutter, using rhythmic repetition.",
+          text: "Developed alongside composer Samuel Mutter, this second work examines the intersection of ritual and closeness. By utilizing rhythmic repetition, the choreography highlights the profound reliance between sound and motion as fundamental mirrors of our collective conduct.",
         },
         {
           title: "Ending",
           image: "/assets/experiences/spontaneous-attachment-gallery/photo-06.jpg",
-          text: "Audience members receive dark chocolate upon exit.",
+          text: "Audience members receive dark chocolate on their exit.",
         },
       ],
     },

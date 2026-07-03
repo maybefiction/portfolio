@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
   renderContactInfo();
   setupNav();
   setupFilterBar();
+  setupExperiencesCarousel();
   setupScrollReveal();
   setupContactForm();
   document.getElementById("footer-year").textContent = new Date().getFullYear();
@@ -61,7 +62,7 @@ function renderPillars() {
     .join("");
 }
 
-/* ---------- Experiences gallery ---------- */
+/* ---------- Experiences gallery (image-forward horizontal carousel) ---------- */
 function renderExperiences() {
   const grid = document.getElementById("experience-grid");
   grid.classList.add("reveal-stagger", "reveal");
@@ -70,31 +71,44 @@ function renderExperiences() {
     .map((item) => {
       const media = item.hasImage
         ? `<img class="experience-card-media" src="${item.placeholderSrc}" alt="${item.title}" loading="lazy">`
-        : `<div class="media-placeholder ${item.gradient}">
-            <span class="media-placeholder-icon">🖼️</span>
-            <span class="media-placeholder-label">Image/video placeholder<br>${item.placeholderSrc}</span>
-          </div>`;
+        : `<div class="media-placeholder ${item.gradient}"></div>`;
 
-      const body = `
-          <div class="experience-card-body">
+      const overlay = `
+          <div class="experience-card-overlay">
             <span class="experience-tag">${item.tag}</span>
             <h3>${item.title}</h3>
-            <p>${item.description}</p>
           </div>`;
 
       if (item.hasDetailPage) {
         return `
         <a class="experience-card" data-category="${item.category}" href="/experiences/${item.id}">
-          ${media}${body}
+          ${media}${overlay}
         </a>`;
       }
 
       return `
         <article class="experience-card" data-category="${item.category}">
-          ${media}${body}
+          ${media}${overlay}
         </article>`;
     })
     .join("");
+}
+
+/* ---------- Experiences carousel arrows ---------- */
+function setupExperiencesCarousel() {
+  const grid = document.getElementById("experience-grid");
+  const prevBtn = document.getElementById("experience-prev");
+  const nextBtn = document.getElementById("experience-next");
+  if (!prevBtn || !nextBtn) return;
+
+  const scrollByCard = (direction) => {
+    const card = grid.querySelector(".experience-card");
+    const distance = card ? card.getBoundingClientRect().width + 24 : 320;
+    grid.scrollBy({ left: direction * distance, behavior: "smooth" });
+  };
+
+  prevBtn.addEventListener("click", () => scrollByCard(-1));
+  nextBtn.addEventListener("click", () => scrollByCard(1));
 }
 
 /* ---------- Workshops ---------- */

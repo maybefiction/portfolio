@@ -53,6 +53,14 @@ function renderHero(item) {
   heroImg.src = item.placeholderSrc;
   heroImg.alt = item.title;
   document.getElementById("xp-hero-title").textContent = item.title;
+
+  const shortDescription = item.shortDescription || item.description || "";
+  const heroDescription = document.getElementById("xp-hero-description");
+  if (shortDescription) {
+    heroDescription.textContent = shortDescription;
+  } else {
+    heroDescription.remove();
+  }
 }
 
 /* ---------- Section 2: Basics/Credits (1/4) + Description (3/4) ---------- */
@@ -98,12 +106,17 @@ function renderMeta(item) {
 
   side.innerHTML = html;
 
+  const allParagraphs = Array.isArray(item.fullSynopsis)
+    ? item.fullSynopsis
+    : [item.fullSynopsis].filter(Boolean);
   const shortDescription = item.shortDescription || item.description || "";
-  const fullSynopsis = item.fullSynopsis || "";
-  document.getElementById("xp-description").innerHTML = `
-    ${shortDescription ? `<p class="xp-description-lead">${shortDescription}</p>` : ""}
-    ${fullSynopsis ? `<p class="xp-description-body">${fullSynopsis}</p>` : ""}
-  `;
+  // Skip the lead paragraph if it duplicates the short description already
+  // shown in the hero, so the synopsis doesn't repeat itself.
+  const synopsisParagraphs =
+    allParagraphs[0] === shortDescription ? allParagraphs.slice(1) : allParagraphs;
+  document.getElementById("xp-description").innerHTML = synopsisParagraphs
+    .map((para) => `<p class="xp-description-body">${para}</p>`)
+    .join("");
 }
 
 function formatLabel(key) {

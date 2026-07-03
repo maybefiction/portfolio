@@ -50,8 +50,15 @@
 .xp-hero-title {
   color: var(--white);
   font-size: clamp(2.2rem, 6vw, 4rem);
-  margin: 0;
+  margin: 0 0 0.35em;
   max-width: 24ch;
+}
+.xp-hero-description {
+  color: rgba(255,255,255,0.85);
+  font-size: clamp(1rem, 1.6vw, 1.2rem);
+  line-height: 1.5;
+  max-width: 56ch;
+  margin: 0;
 }
 
 /* ---------- 2. META: BASICS/CREDITS + DESCRIPTION ---------- */
@@ -90,20 +97,12 @@
   line-height: 1.5;
 }
 
-.xp-meta-main .eyebrow { margin-bottom: 16px; }
 .xp-description { max-width: 60ch; }
-.xp-description-lead {
-  font-size: clamp(1.1rem, 2vw, 1.4rem);
-  font-family: var(--font-display);
-  line-height: 1.5;
-  color: var(--ink);
-  margin: 0 0 16px;
-}
 .xp-description-body {
   font-size: 1rem;
   line-height: 1.6;
   color: var(--ink-soft);
-  margin: 0 0 32px;
+  margin: 0 0 20px;
 }
 
 /* ---------- 3. VIDEO (nested under description, same column) ---------- */
@@ -177,7 +176,7 @@
   animation: xpFadeIn 0.4s var(--ease-smooth);
 }
 .xp-flow-panel h3 { margin-bottom: 12px; }
-.xp-flow-panel p { margin: 0; font-size: 1.05rem; max-width: 70ch; }
+.xp-flow-panel p { margin: 0; font-size: 1.05rem; }
 
 @keyframes xpFadeIn {
   from { opacity: 0; transform: translateY(8px); }

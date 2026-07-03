@@ -461,62 +461,43 @@ ul { list-style: none; margin: 0; padding: 0; }
   transform: translateY(-2px);
 }
 
+.experience-carousel { position: relative; }
+
 .experience-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 32px;
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 4px;
+  scrollbar-width: none;
 }
+.experience-grid::-webkit-scrollbar { display: none; }
 
 .experience-card {
-  background: var(--white);
+  position: relative;
+  flex: 0 0 min(320px, 78vw);
+  aspect-ratio: 3 / 4;
   border-radius: var(--radius-md);
   overflow: hidden;
+  scroll-snap-align: start;
   box-shadow: var(--shadow-soft);
-  transition: transform 0.45s var(--ease-bounce), box-shadow 0.45s var(--ease-bounce), opacity 0.4s ease, filter 0.4s ease;
+  display: block;
+  transition: transform 0.4s var(--ease-bounce), box-shadow 0.4s var(--ease-bounce), opacity 0.4s ease;
 }
-.experience-card:hover {
-  transform: translateY(-10px) rotate(0.6deg);
-  box-shadow: var(--shadow-lift);
-}
+.experience-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lift); }
 .experience-card.is-hidden {
   opacity: 0;
-  transform: scale(0.9);
-  filter: blur(4px);
   pointer-events: none;
   position: absolute;
   visibility: hidden;
 }
 
-/* Media placeholder block — swap the <div class="media-placeholder">
-   for a real <img> tag once assets are ready. See per-card HTML
-   comments in js/main.js render function for the exact filename. */
+.experience-card-media,
 .media-placeholder {
-  aspect-ratio: 4 / 3;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  color: rgba(38, 37, 34, 0.55);
-  font-family: var(--font-display);
-  font-size: 0.85rem;
-  text-align: center;
-  padding: 16px;
-  position: relative;
-  overflow: hidden;
-}
-.media-placeholder::after {
-  content: "";
   position: absolute;
   inset: 0;
-  background: repeating-linear-gradient(45deg, rgba(255,255,255,0.25) 0 12px, transparent 12px 24px);
-}
-.media-placeholder-icon { font-size: 2rem; position: relative; z-index: 1; }
-.media-placeholder-label { position: relative; z-index: 1; opacity: 0.85; }
-
-.experience-card-media {
-  aspect-ratio: 4 / 3;
   width: 100%;
+  height: 100%;
   object-fit: cover;
   display: block;
 }
@@ -528,31 +509,51 @@ ul { list-style: none; margin: 0; padding: 0; }
 .grad-blue-purple { background: var(--grad-blue-purple); }
 .grad-blue-pink { background: var(--grad-blue-pink); }
 
-.experience-card-body { padding: 24px; }
+.experience-card-overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 24px;
+  background: linear-gradient(180deg, rgba(38,37,34,0) 45%, rgba(38,37,34,0.85) 100%);
+}
 
 .experience-tag {
   display: inline-block;
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
-  padding: 5px 14px;
-  border-radius: var(--radius-pill);
-  background: var(--bg-tint);
-  color: var(--brand-purple);
-  margin-bottom: 12px;
+  color: rgba(255,255,255,0.8);
+  margin-bottom: 8px;
 }
 
-.experience-card h3 { font-size: 1.3rem; margin-bottom: 8px; }
-.experience-card p { font-size: 0.95rem; margin-bottom: 0; }
-
-.experience-grid-empty {
-  grid-column: 1 / -1;
-  text-align: center;
-  padding: 40px;
-  font-family: var(--font-display);
-  color: var(--ink-soft);
+.experience-card-overlay h3 {
+  color: var(--white);
+  font-size: 1.2rem;
+  margin: 0;
 }
+
+.experience-carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--white);
+  color: var(--ink);
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-lift);
+  z-index: 2;
+  transition: transform 0.3s var(--ease-bounce), background 0.3s ease;
+}
+.experience-carousel-arrow:hover { background: var(--brand-purple); color: var(--white); transform: translateY(-50%) scale(1.08); }
+.experience-carousel-arrow-prev { left: -20px; }
+.experience-carousel-arrow-next { right: -20px; }
 
 /* ---------- 8. WORKSHOPS ---------- */
 .workshops { background: var(--white); position: relative; }
@@ -760,7 +761,6 @@ ul { list-style: none; margin: 0; padding: 0; }
 
 /* Tablet: <= 1024px */
 @media (max-width: 1024px) {
-  .experience-grid { grid-template-columns: repeat(2, 1fr); }
   .pillars { grid-template-columns: 1fr; }
   .contact-inner { grid-template-columns: 1fr; gap: 40px; }
   .section-inner { padding: 80px 24px; }
@@ -804,7 +804,7 @@ ul { list-style: none; margin: 0; padding: 0; }
 /* Small mobile: <= 480px */
 @media (max-width: 480px) {
   .section-inner { padding: 64px 18px; }
-  .experience-grid { grid-template-columns: 1fr; }
+  .experience-carousel-arrow { display: none; }
   .pillar-card { padding: 28px 22px; }
   .contact-form { padding: 28px 22px; }
   .hero-heading { font-size: clamp(2.4rem, 12vw, 3rem); }
