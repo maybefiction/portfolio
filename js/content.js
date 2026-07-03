@@ -194,6 +194,60 @@ const SITE_CONTENT = {
       gradient: "grad-pink",
       hasImage: true,
     },
+    {
+      id: "what-clings",
+      title: "What Clings",
+      category: "exhibition",
+      tag: "Exhibition",
+      shortDescription: "An immersive solo exhibition exploring the textures of our past — from childhood play to community ritual — and how we might reclaim them in a world increasingly dominated by digital commodification.",
+      description: "An immersive solo exhibition exploring the textures of our past — from childhood play to community ritual — and how we might reclaim them in a world increasingly dominated by digital commodification.",
+      placeholderSrc: "/assets/experiences/what-clings.jpg",
+      heroPhoto: "/assets/experiences/what-clings-gallery/photo-24.jpg",
+      gradient: "grad-blue",
+      hasImage: true,
+      hasDetailPage: true,
+
+      basics: {
+        dateRun: "October 3–5, 2025",
+        venue: "Prospect Heights, Brooklyn",
+        format: "Installation",
+        runtime: "1 hour 30 minutes",
+      },
+      credits: {
+        "Director / Producer": "Ishaan Goel",
+        "Co-Director / Co-Producer": "Super Alex",
+        "Exhibition Design": "Annie Worford, Alice Wang, Betta Malagon, Chuckry V., Jackson Schad, Nicole Allina",
+        "Installation Design": "Giovanni Rivera, Shelly Fank, Veronica Velasquez",
+        "Set-Up": "Ashlyn Maes, Julie Kerner, Leah Floyd, Sunny H., Shahzaib Safi, Sean Glatch, Sara Yasmine",
+        "Photo / Video": "Aaron Laserna, Riya Goel",
+        "Community Co-Hosts": "Brian Helfman, Ellen High, Kelly Chang, Alice Wang, Annie Worford, Jasmina Prabhakara, Sanchana, Zet De Castro, Sean Glatch, Becka Olson, Betta Malagon, Genia Blaser, Sara Yasmine",
+        "Contributors": "150+ community members across 14 gatherings, March–September 2025",
+      },
+      fullSynopsis: [
+        "What Clings serves as a proof of concept that wonder, play, and shared creation are still possible, not buried in the past. It brings together artifacts from a summer of community gatherings — water balloon fights, pop-up cafés, and field trips — to create an experience that resists digital commodification. It invites participants to move through three discrete, interactive spaces, encouraging real-time creation and shared intimacy.",
+        "The project explores the textures that remain across time — from prehistory to history, childhood to adulthood — as a form of playful resistance against a culture obsessed with functionality, fossilization under convenience, and the commodification of experience. Between March and September 2025, 150+ people gathered across 14 offline events — water balloon fights, zine-making, printmaking, a cemetery tour — to make the raw material that became the exhibition.",
+      ],
+      gallery: Array.from({ length: 26 }, (_, i) =>
+        `/assets/experiences/what-clings-gallery/photo-${String(i + 1).padStart(2, "0")}.jpg`
+      ),
+      experienceDesign: [
+        {
+          title: "The Cave",
+          image: "/assets/experiences/what-clings-gallery/photo-01.jpg",
+          text: "The things we think are extraordinary today — silence, darkness, shooting stars — were once just day-to-day life for humans before. I often wonder if we can ever know what was lost. Inside, you are welcome to explore, nap, and draw on the walls with special markers.",
+        },
+        {
+          title: "The Anti-Gallery",
+          image: "/assets/experiences/what-clings-gallery/photo-15.jpg",
+          text: "Everything inside of here was made between March and September 2025 across 14 gatherings and with more than 150+ contributors. We only started this work. It is your turn to finish it. Collage, paint, draw, write, and anything else you can think of.",
+        },
+        {
+          title: "Your Birthday Party",
+          image: "/assets/experiences/what-clings-gallery/photo-26.jpg",
+          text: "Make your childhood self a gift, write a card, and add it to our altar.",
+        },
+      ],
+    },
   ],
 
   // ---------- Workshops ----------
