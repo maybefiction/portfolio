@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="page-title">maybe:fiction — Experience</title>
+  <meta name="description" id="page-description" content="An experience by maybe:fiction, an experience design studio." />
+
+  <!-- Google Fonts: Lora (brand display serif) + Poppins (brand body sans) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/experience.css" />
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>" />
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- =================== NAV =================== -->
+  <header class="site-header" id="site-header">
+    <nav class="nav" aria-label="Primary">
+      <a href="index.html#hero" class="nav-logo">maybe<span class="nav-logo-colon">:</span>fiction</a>
+
+      <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="index.html#about" class="nav-link">About</a></li>
+        <li><a href="index.html#experiences" class="nav-link">Experiences</a></li>
+        <li><a href="index.html#workshops" class="nav-link">Workshops</a></li>
+        <li><a href="index.html#contact" class="nav-link nav-link-cta">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <!-- =================== SECTION 1: HERO =================== -->
+    <section class="xp-hero" id="xp-hero">
+      <img class="xp-hero-image" id="xp-hero-image" src="" alt="" />
+      <div class="xp-hero-scrim" aria-hidden="true"></div>
+      <div class="xp-hero-content">
+        <a class="xp-back" href="index.html#experiences">← All Experiences</a>
+        <h1 class="xp-hero-title" id="xp-hero-title"></h1>
+      </div>
+    </section>
+
+    <!-- =================== SECTION 2: BASICS/CREDITS + DESCRIPTION =================== -->
+    <section class="xp-meta section-inner">
+      <div class="xp-meta-grid">
+        <aside class="xp-meta-side" id="xp-meta-side"><!-- Basics + Credits injected by JS --></aside>
+        <div class="xp-meta-main">
+          <p class="eyebrow">About the Experience</p>
+          <p class="xp-description" id="xp-description"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================== SECTION 3: VIDEO =================== -->
+    <section class="xp-video-section section-inner" id="xp-video-section">
+      <div class="xp-meta-grid">
+        <div class="xp-video-spacer" aria-hidden="true"></div>
+        <div class="xp-video-wrap">
+          <video class="xp-video" id="xp-video" controls playsinline preload="metadata"></video>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================== SECTION 4: EXPERIENCE DESIGN FLOW =================== -->
+    <section class="xp-design section-inner" id="xp-design-section">
+      <p class="eyebrow">The Arc</p>
+      <h2 class="section-heading">Experience Design</h2>
+      <div class="xp-flow" id="xp-flow"><!-- stage nodes + accordion injected by JS --></div>
+    </section>
+
+    <!-- =================== SECTION 5: GALLERY =================== -->
+    <section class="xp-gallery section-inner" id="xp-gallery-section">
+      <p class="eyebrow">In the Room</p>
+      <h2 class="section-heading">Gallery</h2>
+      <div class="xp-gallery-grid" id="xp-gallery-grid"><!-- thumbnails injected by JS --></div>
+    </section>
+
+  </main>
+
+  <!-- Lightbox for gallery -->
+  <div class="xp-lightbox" id="xp-lightbox" aria-hidden="true">
+    <button class="xp-lightbox-close" id="xp-lightbox-close" aria-label="Close gallery">✕</button>
+    <button class="xp-lightbox-prev" id="xp-lightbox-prev" aria-label="Previous photo">‹</button>
+    <img class="xp-lightbox-image" id="xp-lightbox-image" src="" alt="" />
+    <button class="xp-lightbox-next" id="xp-lightbox-next" aria-label="Next photo">›</button>
+  </div>
+
+  <!-- =================== FOOTER =================== -->
+  <footer class="site-footer">
+    <div class="section-inner footer-inner">
+      <a href="index.html#hero" class="nav-logo footer-logo">maybe<span class="nav-logo-colon">:</span>fiction</a>
+      <p class="footer-tagline">We turn imagination into IRL experiences.</p>
+      <ul class="footer-nav">
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#experiences">Experiences</a></li>
+        <li><a href="index.html#workshops">Workshops</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+      <p class="footer-copyright">© <span id="footer-year"></span> maybe:fiction. All rights reserved. Made with ✨ and too much confetti.</p>
+    </div>
+  </footer>
+
+  <script src="js/content.js"></script>
+  <script src="js/experience.js"></script>
+</body>
+</html>

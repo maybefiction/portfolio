@@ -67,24 +67,33 @@ function renderExperiences() {
   grid.classList.add("reveal-stagger", "reveal");
 
   grid.innerHTML = SITE_CONTENT.experiences
-    .map(
-      (item) => `
-        <article class="experience-card" data-category="${item.category}">
-          ${
-            item.hasImage
-              ? `<img class="experience-card-media" src="${item.placeholderSrc}" alt="${item.title}" loading="lazy">`
-              : `<div class="media-placeholder ${item.gradient}">
+    .map((item) => {
+      const media = item.hasImage
+        ? `<img class="experience-card-media" src="${item.placeholderSrc}" alt="${item.title}" loading="lazy">`
+        : `<div class="media-placeholder ${item.gradient}">
             <span class="media-placeholder-icon">🖼️</span>
             <span class="media-placeholder-label">Image/video placeholder<br>${item.placeholderSrc}</span>
-          </div>`
-          }
+          </div>`;
+
+      const body = `
           <div class="experience-card-body">
             <span class="experience-tag">${item.tag}</span>
             <h3>${item.title}</h3>
             <p>${item.description}</p>
-          </div>
-        </article>`
-    )
+          </div>`;
+
+      if (item.hasDetailPage) {
+        return `
+        <a class="experience-card" data-category="${item.category}" href="experience.html?id=${item.id}">
+          ${media}${body}
+        </a>`;
+      }
+
+      return `
+        <article class="experience-card" data-category="${item.category}">
+          ${media}${body}
+        </article>`;
+    })
     .join("");
 }
 

@@ -74,13 +74,56 @@ const SITE_CONTENT = {
     },
     {
       id: "spontaneous-attachment",
-      title: "Spontaneous Attachment... Between Things",
+      title: "Spontaneous Attachment",
       category: "performance",
       tag: "Performance",
-      description: "TODO: replace with real copy — Original Production, Jan 2026.",
+      description: "Spontaneous Attachment explores intimacy and human connection through ritual, movement, and sound. Two dance works—a duet and a quartet, set to live original music—anchor the evening.",
       placeholderSrc: "assets/experiences/spontaneous-attachment.jpg",
       gradient: "grad-purple",
       hasImage: true,
+      hasDetailPage: true,
+
+      // ---- Detail page content (source: Spontaneous Attachment Bio doc) ----
+      basics: {
+        dateRun: "January 31, 2026",
+        venue: "The Brooklyn Peace Center",
+        format: "Interdisciplinary Performance",
+        runtime: "1 hour 30 minutes",
+      },
+      credits: {
+        "Directors/Creators": "Ishaan Goel, Sarah Yasmine Marazzi-Sassoon",
+        "Dancers": "Nadia Benes, Lucia Betelu, Alekzeta Cantu, Magali Johnston-Viens, Chloe Sonnet Brown",
+        "Musicians": "Samuel Mutter (trumpet), Suzuna Ikeda (soprano), Sydney Scarlett (violin), Ealaph Tabbaa (viola)",
+        "Photographers": "Sophia Loo, Sophia Marcontell Reyes",
+        "Videographers": "Jeff Fan, Makenna Finch",
+      },
+      fullSynopsis: "The experience examines how attachments develop in overlooked moments and spaces. Through immersive performances combining gathering, contemporary dance, and live music, audiences explore indirect ways connections form between people, within ourselves, and with our surroundings. The work emphasizes how small frictions and shared contexts facilitate genuine attachment, contrasting with digitally-mediated experiences that may diminish such opportunities.",
+      heroVideo: "assets/experiences/spontaneous-attachment-recap.mp4",
+      gallery: Array.from({ length: 15 }, (_, i) =>
+        `assets/experiences/spontaneous-attachment-gallery/photo-${String(i + 1).padStart(2, "0")}.jpg`
+      ),
+      experienceDesign: [
+        {
+          title: "Gathering",
+          text: "Doors open and the audience enters a transformed Brooklyn Peace Center. Activations woven through the space invite people to engage with the night's theme of surprise intimacy before a single dancer takes the floor — priming the room to feel like a ritual from the moment you walk in.",
+        },
+        {
+          title: "1st Dance — The Duet",
+          text: "Two figures in pointe shoes, faces covered, move through a transformation: from being perceived as shapes — dance in its most abstract form — to being almost disturbingly human — dance in its most intimate form.",
+        },
+        {
+          title: "Intermission",
+          text: "The audience returns to the activations scattered through the venue, carrying the duet's imagery with them as they mingle, explore, and continue building their own small moments of connection before the second piece begins.",
+        },
+        {
+          title: "2nd Dance — The Quartet",
+          text: "Created in collaboration with composer Samuel Mutter, the quartet explores ritual, intimacy, and repetition — themes at the core of both music and dance — built from a shared desire to understand the relationship between the two art forms.",
+        },
+        {
+          title: "Ending",
+          text: "As the evening closes, the goal isn't for the audience to simply think 'that was cool' — it's for them to leave carrying something: a texture of intimacy they found by being spontaneously, physically present with strangers for one night.",
+        },
+      ],
     },
     {
       id: "eclectic-pathetic",
