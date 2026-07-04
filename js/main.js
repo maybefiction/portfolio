@@ -45,7 +45,10 @@ function renderFounderMiniRow() {
               ? `<img class="founder-mini-photo" src="${founder.photo}" alt="${founder.name}">`
               : `<div class="founder-mini-photo founder-photo-placeholder" aria-hidden="true"></div>`
           }
-          <span class="founder-mini-name">${founder.name}</span>
+          <div>
+            <span class="founder-mini-name">${founder.name}</span>
+            <p class="founder-mini-bio">${founder.shortBio}</p>
+          </div>
         </div>`
     )
     .join("");

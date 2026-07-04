@@ -48,6 +48,8 @@ const SITE_CONTENT = {
       {
         name: "Ishaan",
         photo: "/assets/about/ishaan.jpg",
+        // Short version for the homepage teaser; full bio (below) lives on about.html.
+        shortBio: "Interdisciplinary artist and experience designer based in Brooklyn, exploring how art can reshape the ways people gather, create, and relate.",
         bio: [
           "Ishaan Goel is an interdisciplinary artist and experience designer based in Brooklyn. His practice explores how art can reshape the ways people gather, create, and relate. Working across performance, installation, storytelling, participatory experiences, and social practice, he creates works that invite people to become active participants rather than passive spectators.",
           "His projects often transform familiar spaces and social conventions into sites for collective imagination. When a Friend Knocks unfolded as a summer-long series of participatory experiences in parks, cafés, cemeteries, and other everyday places, where participants collectively created drawings, writings, sculptures, photographs, recordings, and other artifacts that later formed the exhibition What Clings. Rather than treating the exhibition as the artwork, the process of gathering, making, and relating became inseparable from what was ultimately displayed. Spontaneous Attachment similarly combined contemporary dance, live music, communal making, and ritual into an immersive performance exploring how attachment forms between people.",
@@ -59,6 +61,7 @@ const SITE_CONTENT = {
       {
         name: "Super Alex",
         photo: null,
+        shortBio: "TODO: replace with real bio — Alex.gdoc is currently empty.",
         bio: ["TODO: replace with real bio — Alex.gdoc is currently empty."],
       },
     ],

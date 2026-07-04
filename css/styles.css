@@ -515,17 +515,24 @@ ul { list-style: none; margin: 0; padding: 0; }
 .founder-mini-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 28px;
+  gap: 32px;
 }
-.founder-mini { display: flex; align-items: center; gap: 12px; }
+.founder-mini {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  max-width: 340px;
+}
 .founder-mini-photo {
-  width: 48px;
-  height: 48px;
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
   border-radius: 50%;
   object-fit: cover;
   box-shadow: var(--shadow-soft);
 }
 .founder-mini-name { font-weight: 700; color: var(--ink); }
+.founder-mini-bio { margin: 4px 0 0; font-size: 0.88rem; line-height: 1.5; color: var(--ink-soft); }
 
 /* Stacked founder profiles — photo beside a full bio, spanning the full
    section width (no capped reading column, matching .about-body above). */
