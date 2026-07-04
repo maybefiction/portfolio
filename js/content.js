@@ -60,11 +60,15 @@ const SITE_CONTENT = {
       },
       {
         name: "Super Alex",
-        // 1st photo is the main circular photo; any additional ones show as
-        // small thumbnails below the bio, but only on the full about.html
-        // page — pending real files, see 0_Entity/About.
-        photo: null,
-        extraPhotos: [],
+        // 1st photo is the main circular photo; the rest show as small
+        // thumbnails below the bio, only on the full about.html page.
+        photo: "/assets/about/alex-main.jpg",
+        extraPhotos: [
+          "/assets/about/alex-extra-1.jpg",
+          "/assets/about/alex-extra-2.jpg",
+          "/assets/about/alex-extra-3.jpg",
+          "/assets/about/alex-extra-4.jpg",
+        ],
         shortBio: "Interdisciplinary artist and cultural producer based between Madrid and New York, working across performance, installation, and participatory ritual.",
         bio: [
           "Super Alex (they/them) is an interdisciplinary artist, cultural producer and co-founder of maybe:fiction, based between Madrid and New York. Working across performance, installation, visual arts, writing, sound, and participatory rituals, they move fluidly between disciplines, allowing form to emerge from the concept rather than the other way around.",
