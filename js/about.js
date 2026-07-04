@@ -25,9 +25,10 @@ function renderAbout() {
               ? `<img class="founder-photo" src="${founder.photo}" alt="${founder.name}">`
               : `<div class="founder-photo founder-photo-placeholder" aria-hidden="true"></div>`
           }
-          <h3 class="founder-name">${founder.name}</h3>
-          <p class="founder-bio">${founder.bio}</p>
-          ${founder.extra ? `<p class="founder-extra">${founder.extra}</p>` : ""}
+          <div class="founder-text">
+            <h3 class="founder-name">${founder.name}</h3>
+            ${founder.bio.map((para) => `<p class="founder-bio">${para}</p>`).join("")}
+          </div>
         </div>`
     )
     .join("");

@@ -26,8 +26,7 @@ function injectStaticText() {
   document.getElementById("hero-tagline").textContent = hero.tagline;
 
   document.getElementById("about-heading").textContent = about.heading;
-  const aboutBody = document.getElementById("about-body");
-  aboutBody.innerHTML = about.body.map((para) => `<p>${para}</p>`).join("");
+  document.getElementById("about-body").innerHTML = `<p>${about.shortBody}</p>`;
 
   document.getElementById("footer-tagline").textContent = brand.tagline;
 }

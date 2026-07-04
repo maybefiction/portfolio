@@ -502,29 +502,36 @@ ul { list-style: none; margin: 0; padding: 0; }
 .about-body { max-width: none; }
 .about-body p { font-size: 1.05rem; }
 
+/* Stacked founder profiles — photo beside a full bio (can run to several
+   paragraphs), not the short-caption card the old homepage teaser used. */
 .founders-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 40px;
-  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+  max-width: 720px;
   margin-top: 56px;
 }
 
-.founder-card { text-align: center; }
+.founder-card {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 32px;
+  align-items: start;
+  text-align: left;
+}
 
 .founder-photo {
   width: 140px;
   height: 140px;
   border-radius: 50%;
   object-fit: cover;
-  margin: 0 auto 20px;
   box-shadow: var(--shadow-soft);
 }
 .founder-photo-placeholder { background: var(--white); }
 
-.founder-name { font-size: 1.15rem; margin-bottom: 6px; }
-.founder-bio { margin: 0 0 10px; font-size: 0.95rem; }
-.founder-extra { margin: 0; font-size: 0.9rem; opacity: 0.8; }
+.founder-name { font-size: 1.3rem; margin: 0 0 12px; }
+.founder-bio { margin: 0 0 14px; font-size: 1rem; line-height: 1.65; }
+.founder-bio:last-child { margin-bottom: 0; }
 
 /* ---------- 7. EXPERIENCES ---------- */
 .experiences { background: var(--bg-tint); }
@@ -853,7 +860,7 @@ ul { list-style: none; margin: 0; padding: 0; }
   .nav-menu .nav-link:hover,
   .nav-menu .nav-link.is-active { color: var(--brand-purple); background: var(--bg-tint); }
 
-  .founders-grid { grid-template-columns: 1fr; max-width: 320px; }
+  .founder-card { grid-template-columns: 1fr; text-align: center; justify-items: center; }
 }
 
 /* Small mobile: <= 480px */

@@ -28,23 +28,32 @@ const SITE_CONTENT = {
   },
 
   // ---------- About ----------
+  // shortBody is the condensed homepage teaser; body is the full copy on
+  // about.html — source: 0_Entity/About/maybe:fiction.gdoc.
   about: {
     heading: "About",
+    shortBody: "An interdisciplinary studio that designs experiences for people to gather, create, and relate through communal making, play, and ritual.",
     body: [
-      "maybe:fiction is a production studio for experience design — the art of turning an idea into something you can touch, wander through, and remember. We work across live performance, immersive exhibitions, hands-on workshops, and one-night-only events.",
+      "maybe:fiction is an interdisciplinary studio that designs experiences for people to gather, create, and relate through communal making, play, and ritual. Our work spans performance, installation, pop-up galleries, festivals, celebrations, and workshops.",
+      "We believe art is something to practice together, not consume alone. We work in the spaces between things: artist and audience, public and private, celebratory and mundane — designing the conditions where intimacy, wonder, and participation can emerge from ordinary places.",
+      "Performance, movement, music, visual art, writing, games, and food are not separate disciplines to us — they are materials. We combine them to create experiences no single medium or sense could produce alone.",
     ],
     founders: [
       {
         name: "Ishaan",
         photo: null,
-        bio: "TODO: replace with real bio.",
-        extra: "TODO: replace with real copy.",
+        bio: [
+          "Ishaan Goel is an interdisciplinary artist and experience designer based in Brooklyn. His practice explores how art can reshape the ways people gather, create, and relate. Working across performance, installation, storytelling, participatory experiences, and social practice, he creates works that invite people to become active participants rather than passive spectators.",
+          "His projects often transform familiar spaces and social conventions into sites for collective imagination. When a Friend Knocks unfolded as a summer-long series of participatory experiences in parks, cafés, cemeteries, and other everyday places, where participants collectively created drawings, writings, sculptures, photographs, recordings, and other artifacts that later formed the exhibition What Clings. Rather than treating the exhibition as the artwork, the process of gathering, making, and relating became inseparable from what was ultimately displayed. Spontaneous Attachment similarly combined contemporary dance, live music, communal making, and ritual into an immersive performance exploring how attachment forms between people.",
+          "Alongside these public works, Ishaan writes fiction, keeps an ongoing journal, and creates drawings of pastel-colored blob-like characters. These quieter practices serve as a laboratory for the stories, rituals, visual language, and imagined worlds that later find their way into his performances, installations, and participatory experiences.",
+          "Across his practice, Ishaan treats experience itself as an artistic medium, exploring how thoughtful design can transform ordinary spaces into places where people play, create, and imagine together.",
+          "Before becoming a full-time artist, Ishaan spent seven years working in product strategy and operations. That experience shaped an enduring interest in how systems, environments, and thoughtful design influence human behavior. Today, he approaches experiences as something that can be intentionally designed, prototyped, and refined while remaining grounded in play, hospitality, and collective imagination.",
+        ],
       },
       {
         name: "Super Alex",
         photo: null,
-        bio: "TODO: replace with real bio.",
-        extra: "TODO: replace with real copy.",
+        bio: ["TODO: replace with real bio — Alex.gdoc is currently empty."],
       },
     ],
   },
