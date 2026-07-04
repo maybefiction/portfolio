@@ -216,6 +216,18 @@ ul { list-style: none; margin: 0; padding: 0; }
 
 .btn-block { width: 100%; }
 
+.section-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 32px;
+  font-weight: 700;
+  font-size: 0.98rem;
+  color: var(--brand-purple);
+}
+.section-link .arrow { display: inline-block; transition: transform 0.3s var(--ease-bounce); }
+.section-link:hover .arrow { transform: translateX(5px); }
+
 /* Scroll-reveal (Intersection Observer toggles .in-view) */
 .reveal {
   opacity: 0;
@@ -482,6 +494,9 @@ ul { list-style: none; margin: 0; padding: 0; }
    them, so tighten the join instead of leaving a big same-color gap. */
 .about .section-inner { padding-bottom: 48px; }
 .experiences .section-inner { padding-top: 0; padding-bottom: 56px; }
+/* On the standalone page there's no About section above to join with —
+   restore normal top breathing room under the fixed nav. */
+.experiences-page .section-inner { padding-top: 56px; }
 .workshops .section-inner { padding-top: 56px; }
 
 .about-body { max-width: none; }
@@ -643,6 +658,14 @@ ul { list-style: none; margin: 0; padding: 0; }
 .experience-carousel-arrow-prev { left: -20px; }
 .experience-carousel-arrow-next { right: -20px; }
 
+/* Full, non-carousel grid — used on the standalone Experiences/Workshops
+   pages, where there's room to show everything instead of a 3-up teaser. */
+.experience-full-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 24px;
+}
+
 /* ---------- 8. WORKSHOPS ---------- */
 .workshops { background: var(--white); position: relative; }
 
@@ -653,7 +676,12 @@ ul { list-style: none; margin: 0; padding: 0; }
   overflow: hidden;
 }
 
-.contact-page { padding-top: var(--nav-height); }
+.contact-page,
+.about-page,
+.experiences-page,
+.workshops-page {
+  padding-top: var(--nav-height);
+}
 
 .contact-inner {
   position: relative;

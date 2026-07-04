@@ -1,19 +1,18 @@
 /* ============================================================
    MAIN.JS — rendering + interactivity for maybe:fiction homepage.
    Reads all copy/data from js/content.js (SITE_CONTENT).
-   Sections: nav, hero/about/footer text injection, experiences
-   render + filter, workshops render, scroll-reveal.
+   The homepage only shows teasers for About/Experiences/Workshops —
+   each links out to its own full page (about.html, experiences.html,
+   workshops.html), which have their own JS files with the full render.
    Contact lives on its own page — see contact.html + js/contact.js.
    ============================================================ */
 
 document.addEventListener("DOMContentLoaded", () => {
   injectStaticText();
   renderHeroBackground();
-  renderFounders();
-  renderExperiences();
-  renderWorkshops();
+  renderFeaturedExperiences();
+  renderWorkshopsTeaser();
   setupNav();
-  setupFilterBar();
   setupExperiencesCarousel();
   setupScrollReveal();
   document.getElementById("footer-year").textContent = new Date().getFullYear();
@@ -46,34 +45,14 @@ function renderHeroBackground() {
     .join("");
 }
 
-/* ---------- About founders ---------- */
-function renderFounders() {
-  const container = document.getElementById("founders-grid");
-  container.classList.add("reveal-stagger", "reveal");
-
-  container.innerHTML = SITE_CONTENT.about.founders
-    .map(
-      (founder) => `
-        <div class="founder-card">
-          ${
-            founder.photo
-              ? `<img class="founder-photo" src="${founder.photo}" alt="${founder.name}">`
-              : `<div class="founder-photo founder-photo-placeholder" aria-hidden="true"></div>`
-          }
-          <h3 class="founder-name">${founder.name}</h3>
-          <p class="founder-bio">${founder.bio}</p>
-          ${founder.extra ? `<p class="founder-extra">${founder.extra}</p>` : ""}
-        </div>`
-    )
-    .join("");
-}
-
-/* ---------- Experiences gallery (image-forward horizontal carousel) ---------- */
-function renderExperiences() {
+/* ---------- Experiences teaser (3 featured, image-forward carousel) ---------- */
+function renderFeaturedExperiences() {
   const grid = document.getElementById("experience-grid");
   grid.classList.add("reveal-stagger", "reveal");
 
-  grid.innerHTML = SITE_CONTENT.experiences
+  const featured = SITE_CONTENT.experiences.filter((item) => item.hasDetailPage).slice(0, 3);
+
+  grid.innerHTML = featured
     .map((item) => {
       const media = item.hasImage
         ? `<img class="experience-card-media" src="${item.placeholderSrc}" alt="${item.title}" loading="lazy">`
@@ -117,8 +96,8 @@ function setupExperiencesCarousel() {
   nextBtn.addEventListener("click", () => scrollByCard(1));
 }
 
-/* ---------- Workshops ---------- */
-function renderWorkshops() {
+/* ---------- Workshops teaser ---------- */
+function renderWorkshopsTeaser() {
   const grid = document.getElementById("workshop-grid");
   grid.classList.add("reveal-stagger", "reveal");
 
@@ -138,7 +117,7 @@ function renderWorkshops() {
     .join("");
 }
 
-/* ---------- Nav: mobile toggle, active link, sticky shadow ---------- */
+/* ---------- Nav: mobile toggle, hero transparency ---------- */
 function setupNav() {
   const toggle = document.getElementById("nav-toggle");
   const menu = document.getElementById("nav-menu");
@@ -156,26 +135,6 @@ function setupNav() {
     });
   });
 
-  // Highlight the nav link for the section currently in view
-  const sections = ["hero", "about", "experiences", "workshops"]
-    .map((id) => document.getElementById(id))
-    .filter(Boolean);
-  const navLinks = Array.from(document.querySelectorAll(".nav-link"));
-
-  const sectionObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        const id = entry.target.id;
-        navLinks.forEach((link) => {
-          link.classList.toggle("is-active", link.getAttribute("href") === `#${id}`);
-        });
-      });
-    },
-    { rootMargin: "-50% 0px -45% 0px" }
-  );
-  sections.forEach((section) => sectionObserver.observe(section));
-
   // Nav is transparent over the hero, solid once the hero's text content
   // scrolls up to meet it (observing a sentinel at the top of the text block,
   // not the whole hero section, so the nav goes solid before the heading/
@@ -190,26 +149,6 @@ function setupNav() {
     );
     heroObserver.observe(heroSentinel);
   }
-}
-
-/* ---------- Experiences filter bar ---------- */
-function setupFilterBar() {
-  const bar = document.getElementById("filter-bar");
-  const buttons = Array.from(bar.querySelectorAll(".filter-tag"));
-  const cards = () => Array.from(document.querySelectorAll(".experience-card"));
-
-  buttons.forEach((button) => {
-    button.addEventListener("click", () => {
-      buttons.forEach((b) => b.classList.remove("is-active"));
-      button.classList.add("is-active");
-
-      const filter = button.dataset.filter;
-      cards().forEach((card) => {
-        const matches = filter === "all" || card.dataset.category === filter;
-        card.classList.toggle("is-hidden", !matches);
-      });
-    });
-  });
 }
 
 /* ---------- Scroll-triggered reveal animations ---------- */

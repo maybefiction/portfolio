@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contact — maybe:fiction</title>
-  <meta name="description" content="Get in touch with maybe:fiction, an experience design studio." />
+  <title>About — maybe:fiction</title>
+  <meta name="description" content="Meet the people behind maybe:fiction, an experience design studio." />
 
   <!-- Google Fonts: Lora (brand display serif) + Poppins (brand body sans) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -32,54 +32,22 @@
       </button>
 
       <ul class="nav-menu" id="nav-menu">
-        <li><a href="/about.html" class="nav-link">About</a></li>
+        <li><a href="/about.html" class="nav-link is-active">About</a></li>
         <li><a href="/experiences.html" class="nav-link">Experiences</a></li>
         <li><a href="/workshops.html" class="nav-link">Workshops</a></li>
-        <li><a href="/contact.html" class="nav-link nav-link-cta is-active">Contact</a></li>
+        <li><a href="/contact.html" class="nav-link nav-link-cta">Contact</a></li>
       </ul>
     </nav>
   </header>
 
   <main id="main">
-    <section class="contact contact-page">
-      <div class="section-inner contact-inner">
-        <div class="contact-intro">
-          <h1 class="section-heading">Contact</h1>
+    <section class="about about-page" id="about">
+      <div class="section-inner">
+        <h1 class="section-heading" id="about-heading"></h1>
 
-          <ul class="contact-details" id="contact-details"><!-- injected by JS --></ul>
-        </div>
+        <div class="about-body" id="about-body"><!-- paragraph injected by JS --></div>
 
-        <form class="contact-form" id="contact-form" novalidate>
-          <!--
-            Placeholder form: client-side only, no backend wired up.
-            To make this live, add an action/fetch call in js/contact.js
-            inside the 'contact-form' submit handler (e.g. Formspree,
-            Netlify Forms, or your own API endpoint).
-          -->
-          <div class="form-field">
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name" placeholder="Your name" required />
-            <span class="form-error" id="name-error"></span>
-          </div>
-
-          <div class="form-field">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="you@example.com" required />
-            <span class="form-error" id="email-error"></span>
-          </div>
-
-          <div class="form-field">
-            <label for="message">Message</label>
-            <textarea id="message" name="message" rows="5" placeholder="Tell us about your idea..." required></textarea>
-            <span class="form-error" id="message-error"></span>
-          </div>
-
-          <button type="submit" class="btn btn-primary btn-block" id="contact-submit">
-            <span class="btn-label">Send it off</span>
-          </button>
-
-          <p class="form-success" id="form-success" role="status" aria-live="polite"></p>
-        </form>
+        <div class="founders-grid" id="founders-grid"><!-- founder cards injected by JS --></div>
       </div>
     </section>
   </main>
@@ -103,6 +71,6 @@
   </footer>
 
   <script src="/js/content.js"></script>
-  <script src="/js/contact.js"></script>
+  <script src="/js/about.js"></script>
 </body>
 </html>

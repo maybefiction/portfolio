@@ -45,7 +45,7 @@ function renderNotFound() {
       <p class="eyebrow">Hmm</p>
       <h1 class="section-heading">We couldn't find that experience.</h1>
       <p class="section-subheading">It may have moved, or the link is out of date.</p>
-      <a class="btn btn-primary" href="index.html#experiences">← Back to Experiences</a>
+      <a class="btn btn-primary" href="/experiences.html">← Back to Experiences</a>
     </div>
   `;
 }
