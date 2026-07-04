@@ -7,9 +7,12 @@
 const SITE_CONTENT = {
 
   // ---------- Global / brand ----------
+  // tagline source: 0_Entity/About/maybe:fiction.gdoc, field "Main Page,
+  // Under Title" — this is a living field the studio iterates on; re-pull
+  // it from that doc whenever it changes (keep hero.tagline in sync too).
   brand: {
     name: "maybe:fiction",
-    tagline: "We turn imagination into IRL experiences.",
+    tagline: "Designing new ways for people to gather, create, and relate",
     email: "hello@maybefiction.com",
     phone: "+1 (555) 010-2026",
     location: "Based in your city — traveling everywhere",
@@ -18,7 +21,8 @@ const SITE_CONTENT = {
   // ---------- Hero ----------
   hero: {
     heading: "maybe:fiction",
-    tagline: "We turn imagination into IRL experiences.",
+    // See brand.tagline above — same field, same doc source.
+    tagline: "Designing new ways for people to gather, create, and relate",
     backgroundImages: [
       "/assets/experiences/spontaneous-attachment.jpg",
       "/assets/experiences/jornada-de-puertas-abiertas.jpg",

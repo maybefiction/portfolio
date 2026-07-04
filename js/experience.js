@@ -25,6 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   document.getElementById("footer-year").textContent = new Date().getFullYear();
+  document.getElementById("footer-tagline").textContent = SITE_CONTENT.brand.tagline;
   document.title = `${item.title} — maybe:fiction`;
   document.getElementById("page-description").setAttribute("content", item.description || "");
 
