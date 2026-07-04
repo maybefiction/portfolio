@@ -502,13 +502,30 @@ ul { list-style: none; margin: 0; padding: 0; }
 .about-body { max-width: none; }
 .about-body p { font-size: 1.05rem; }
 
-/* Stacked founder profiles — photo beside a full bio (can run to several
-   paragraphs), not the short-caption card the old homepage teaser used. */
+/* Homepage teaser only — small photo + name per founder, full bios live
+   on about.html. */
+.founder-mini-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 28px;
+  margin-top: 28px;
+}
+.founder-mini { display: flex; align-items: center; gap: 12px; }
+.founder-mini-photo {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: var(--shadow-soft);
+}
+.founder-mini-name { font-weight: 700; color: var(--ink); }
+
+/* Stacked founder profiles — photo beside a full bio, spanning the full
+   section width (no capped reading column, matching .about-body above). */
 .founders-grid {
   display: flex;
   flex-direction: column;
   gap: 56px;
-  max-width: 720px;
   margin-top: 56px;
 }
 
@@ -532,6 +549,19 @@ ul { list-style: none; margin: 0; padding: 0; }
 .founder-name { font-size: 1.3rem; margin: 0 0 12px; }
 .founder-bio { margin: 0 0 14px; font-size: 1rem; line-height: 1.65; }
 .founder-bio:last-child { margin-bottom: 0; }
+
+/* Bio is collapsed to its first paragraph by default; "Read more" reveals
+   the rest instead of dumping the whole thing on the page at once. */
+.founder-bio-more { display: none; }
+.founder-bio-more.is-open { display: block; }
+button.founder-toggle.section-link {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
+  margin-top: 4px;
+}
 
 /* ---------- 7. EXPERIENCES ---------- */
 .experiences { background: var(--bg-tint); }

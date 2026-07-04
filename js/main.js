@@ -10,6 +10,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   injectStaticText();
   renderHeroBackground();
+  renderFounderMiniRow();
   renderFeaturedExperiences();
   renderWorkshopsTeaser();
   setupNav();
@@ -29,6 +30,25 @@ function injectStaticText() {
   document.getElementById("about-body").innerHTML = `<p>${about.shortBody}</p>`;
 
   document.getElementById("footer-tagline").textContent = brand.tagline;
+}
+
+/* ---------- About teaser: founder photo + name row ---------- */
+function renderFounderMiniRow() {
+  const row = document.getElementById("founder-mini-row");
+
+  row.innerHTML = SITE_CONTENT.about.founders
+    .map(
+      (founder) => `
+        <div class="founder-mini">
+          ${
+            founder.photo
+              ? `<img class="founder-mini-photo" src="${founder.photo}" alt="${founder.name}">`
+              : `<div class="founder-mini-photo founder-photo-placeholder" aria-hidden="true"></div>`
+          }
+          <span class="founder-mini-name">${founder.name}</span>
+        </div>`
+    )
+    .join("");
 }
 
 /* ---------- Hero background photos (crossfade) ---------- */
