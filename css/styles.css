@@ -504,11 +504,18 @@ ul { list-style: none; margin: 0; padding: 0; }
 
 /* Homepage teaser only — small photo + name per founder, full bios live
    on about.html. */
+.founder-mini-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin: 28px 0 12px;
+}
 .founder-mini-row {
   display: flex;
   flex-wrap: wrap;
   gap: 28px;
-  margin-top: 28px;
 }
 .founder-mini { display: flex; align-items: center; gap: 12px; }
 .founder-mini-photo {
