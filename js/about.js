@@ -22,12 +22,21 @@ function renderAbout() {
       const [first, ...rest] = founder.bio;
       const hasMore = rest.length > 0;
 
+      const photo = founder.photo
+        ? `<img class="founder-photo" src="${founder.photo}" alt="${founder.name}">`
+        : `<div class="founder-photo founder-photo-placeholder" aria-hidden="true"></div>`;
+      const hasExtras = founder.extraPhotos && founder.extraPhotos.length > 0;
+
       return `
         <div class="founder-card">
           ${
-            founder.photo
-              ? `<img class="founder-photo" src="${founder.photo}" alt="${founder.name}">`
-              : `<div class="founder-photo founder-photo-placeholder" aria-hidden="true"></div>`
+            hasExtras
+              ? `
+            <div class="founder-photo-cluster">
+              ${photo}
+              ${founder.extraPhotos.map((src) => `<img class="founder-extra-photo" src="${src}" alt="">`).join("")}
+            </div>`
+              : photo
           }
           <div class="founder-text">
             <h3 class="founder-name">${founder.name}</h3>
@@ -41,16 +50,6 @@ function renderAbout() {
               <button class="section-link founder-toggle" data-target="founder-more-${i}" aria-expanded="false">
                 <span class="label">Read more</span> <span class="arrow">→</span>
               </button>`
-                : ""
-            }
-            ${
-              founder.extraPhotos && founder.extraPhotos.length
-                ? `
-              <div class="founder-extra-photos">
-                ${founder.extraPhotos
-                  .map((src) => `<img class="founder-extra-photo" src="${src}" alt="">`)
-                  .join("")}
-              </div>`
                 : ""
             }
           </div>

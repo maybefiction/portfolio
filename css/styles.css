@@ -550,7 +550,7 @@ ul { list-style: none; margin: 0; padding: 0; }
 
 .founder-card {
   display: grid;
-  grid-template-columns: 140px 1fr;
+  grid-template-columns: auto 1fr;
   gap: 32px;
   align-items: start;
   text-align: left;
@@ -582,21 +582,33 @@ button.founder-toggle.section-link {
   margin-top: 4px;
 }
 
-/* Extra candid photos — about.html only, shown as small thumbnails below
-   the bio (never on the homepage teaser). */
-.founder-extra-photos {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 20px;
+/* Extra candid photos — about.html only, orbiting the main photo as a
+   small satellite cluster (never on the homepage teaser). */
+.founder-photo-cluster {
+  position: relative;
+  width: 192px;
+  height: 192px;
+  flex-shrink: 0;
+}
+.founder-photo-cluster .founder-photo,
+.founder-photo-cluster .founder-photo-placeholder {
+  position: absolute;
+  top: 26px;
+  left: 26px;
 }
 .founder-extra-photo {
-  width: 56px;
-  height: 56px;
+  position: absolute;
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
   object-fit: cover;
   box-shadow: var(--shadow-soft);
+  border: 3px solid var(--bg-tint);
 }
+.founder-extra-photo:nth-child(2) { top: 0; left: 0; }
+.founder-extra-photo:nth-child(3) { top: 0; right: 0; }
+.founder-extra-photo:nth-child(4) { bottom: 0; right: 0; }
+.founder-extra-photo:nth-child(5) { bottom: 0; left: 0; }
 
 /* ---------- 7. EXPERIENCES ---------- */
 .experiences { background: var(--bg-tint); }
