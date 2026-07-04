@@ -582,6 +582,22 @@ button.founder-toggle.section-link {
   margin-top: 4px;
 }
 
+/* Extra candid photos — about.html only, shown as small thumbnails below
+   the bio (never on the homepage teaser). */
+.founder-extra-photos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+.founder-extra-photo {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: var(--shadow-soft);
+}
+
 /* ---------- 7. EXPERIENCES ---------- */
 .experiences { background: var(--bg-tint); }
 

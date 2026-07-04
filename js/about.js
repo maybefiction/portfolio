@@ -43,6 +43,16 @@ function renderAbout() {
               </button>`
                 : ""
             }
+            ${
+              founder.extraPhotos && founder.extraPhotos.length
+                ? `
+              <div class="founder-extra-photos">
+                ${founder.extraPhotos
+                  .map((src) => `<img class="founder-extra-photo" src="${src}" alt="">`)
+                  .join("")}
+              </div>`
+                : ""
+            }
           </div>
         </div>`;
     })

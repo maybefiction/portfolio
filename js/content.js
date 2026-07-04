@@ -48,21 +48,30 @@ const SITE_CONTENT = {
       {
         name: "Ishaan",
         photo: "/assets/about/ishaan.jpg",
+        extraPhotos: [],
         // Short version for the homepage teaser; full bio (below) lives on about.html.
-        shortBio: "Interdisciplinary artist and experience designer based in Brooklyn, exploring how art can reshape the ways people gather, create, and relate.",
+        shortBio: "Interdisciplinary artist, experience designer, and arts facilitator based in New York City, exploring how art can reshape the ways people gather, create, and relate.",
         bio: [
-          "Ishaan Goel is an interdisciplinary artist and experience designer based in Brooklyn. His practice explores how art can reshape the ways people gather, create, and relate. Working across performance, installation, storytelling, participatory experiences, and social practice, he creates works that invite people to become active participants rather than passive spectators.",
-          "His projects often transform familiar spaces and social conventions into sites for collective imagination. When a Friend Knocks unfolded as a summer-long series of participatory experiences in parks, cafés, cemeteries, and other everyday places, where participants collectively created drawings, writings, sculptures, photographs, recordings, and other artifacts that later formed the exhibition What Clings. Rather than treating the exhibition as the artwork, the process of gathering, making, and relating became inseparable from what was ultimately displayed. Spontaneous Attachment similarly combined contemporary dance, live music, communal making, and ritual into an immersive performance exploring how attachment forms between people.",
-          "Alongside these public works, Ishaan writes fiction, keeps an ongoing journal, and creates drawings of pastel-colored blob-like characters. These quieter practices serve as a laboratory for the stories, rituals, visual language, and imagined worlds that later find their way into his performances, installations, and participatory experiences.",
-          "Across his practice, Ishaan treats experience itself as an artistic medium, exploring how thoughtful design can transform ordinary spaces into places where people play, create, and imagine together.",
-          "Before becoming a full-time artist, Ishaan spent seven years working in product strategy and operations. That experience shaped an enduring interest in how systems, environments, and thoughtful design influence human behavior. Today, he approaches experiences as something that can be intentionally designed, prototyped, and refined while remaining grounded in play, hospitality, and collective imagination.",
+          "Ishaan Goel (He/Him) is an interdisciplinary artist, experience designer, arts facilitator, and co-founder of maybe:fiction, based in New York City.",
+          "Working across social practice, performance, installation, and storytelling, he explores how art can reshape the ways people gather, create, and relate. His projects often begin with familiar stories, social rituals, or everyday conventions, reimagining them through participatory experiences in which people collectively shape both the work itself and the traces it leaves behind. Rather than producing objects alone, he designs experiences that generate artifacts, relationships, and moments of shared imagination.",
+          "Alongside these public works, Ishaan writes fiction, keeps an ongoing journal, and creates drawings of pastel-colored blobs. These quieter practices serve as a workshop for the stories, rituals, visual language, and imagined worlds that later find their way into his performances, installations, and participatory experiences.",
+          "Before becoming a full-time artist, Ishaan spent seven years working in product strategy and operations for consumer digital products. That experience shaped an enduring interest in how systems, environments, and thoughtful design influence human behavior. Today, he treats experience itself as an artistic medium — something that can be intentionally designed, prototyped, and refined while remaining grounded in play, hospitality, and collective imagination.",
         ],
       },
       {
         name: "Super Alex",
+        // 1st photo is the main circular photo; any additional ones show as
+        // small thumbnails below the bio, but only on the full about.html
+        // page — pending real files, see 0_Entity/About.
         photo: null,
-        shortBio: "TODO: replace with real bio — Alex.gdoc is currently empty.",
-        bio: ["TODO: replace with real bio — Alex.gdoc is currently empty."],
+        extraPhotos: [],
+        shortBio: "Interdisciplinary artist and cultural producer based between Madrid and New York, working across performance, installation, and participatory ritual.",
+        bio: [
+          "Super Alex (they/them) is an interdisciplinary artist, cultural producer and co-founder of maybe:fiction, based between Madrid and New York. Working across performance, installation, visual arts, writing, sound, and participatory rituals, they move fluidly between disciplines, allowing form to emerge from the concept rather than the other way around.",
+          "Their work treats autobiography not as an end in itself, but as a way of speaking about shared human experience. Through acts of intimacy, vulnerability, and play, Super Alex explores identity, memory, and belonging, creating spaces where strangers discover unexpected connections through stories that, while deeply individual, resonate far beyond the self.",
+          "Their practice is driven by the belief that sharing what is most personal can become a gesture of collective recognition — proposing play, care, and collective imagination as ways of re-enchanting everyday life while resisting hyperproductivity and individualism.",
+          "In parallel to their career as an artist and producer, Super Alex has spent ten years working as an education manager and instructor in the photography industry, having designed and spoken at in-person and online workshops, courses, seminars, and community events including Pratt University, RIT, and FIT in the US, and IED, HELB, Efti, and TAI in the EU.",
+        ],
       },
     ],
   },
