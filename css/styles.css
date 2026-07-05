@@ -1,6 +1,7 @@
 /* ============================================================
    STYLES.CSS — maybe:fiction
    Table of contents:
+     0. Self-hosted fonts (@font-face)
      1. Design tokens (colors, spacing, shadows)
      2. Reset & base
      3. Utilities (layout, buttons, tags, reveal animation)
@@ -15,6 +16,71 @@
      12. Responsive breakpoints
      13. Reduced motion
    ============================================================ */
+
+/* ---------- 0. SELF-HOSTED FONTS ---------- */
+@font-face {
+  font-family: "Lora";
+  src: url("../assets/fonts/Lora-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Lora";
+  src: url("../assets/fonts/Lora-500.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Lora";
+  src: url("../assets/fonts/Lora-600.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Lora";
+  src: url("../assets/fonts/Lora-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Lora";
+  src: url("../assets/fonts/Lora-Italic-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("../assets/fonts/Poppins-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("../assets/fonts/Poppins-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("../assets/fonts/Poppins-SemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("../assets/fonts/Poppins-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
 
 /* ---------- 1. DESIGN TOKENS ---------- */
 :root {
