@@ -21,11 +21,14 @@ const SITE_CONTENT = {
     heading: "maybe:fiction",
     // See brand.tagline above — same field, same doc source.
     tagline: "Designing new ways for people to gather, create, and relate",
+    // One real photo per fully-realized experience (each links to its own
+    // detail page) — swapped out the old 4th slot (eclectic-pathetic.jpg),
+    // which has no real copy or detail page yet, for a spread across the
+    // three complete case studies instead of duplicating one of them twice.
     backgroundImages: [
-      "/assets/experiences/spontaneous-attachment.jpg",
-      "/assets/experiences/jornada-de-puertas-abiertas.jpg",
-      "/assets/experiences/spontaneous-attachment-gallery/photo-04.jpg",
-      "/assets/experiences/eclectic-pathetic.jpg",
+      { src: "/assets/experiences/spontaneous-attachment.jpg", caption: "In Between Things", href: "/experiences/spontaneous-attachment" },
+      { src: "/assets/experiences/jornada-gallery/nyc-2024/photo-04.jpg", caption: "Jornada de Puertas Abiertas", href: "/experiences/jornada-de-puertas-abiertas" },
+      { src: "/assets/experiences/what-clings-gallery/photo-24.jpg", caption: "What Clings", href: "/experiences/what-clings" },
     ],
   },
 

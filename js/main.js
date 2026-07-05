@@ -35,12 +35,27 @@ function injectStaticText() {
 /* ---------- Hero background photos (crossfade) ---------- */
 function renderHeroBackground() {
   const container = document.getElementById("hero-bg-images");
+  const captionsContainer = document.getElementById("hero-bg-captions");
   const images = SITE_CONTENT.hero.backgroundImages || [];
+  // A little pan variety per slide so the slow zoom doesn't look identical
+  // three times in a row — rotates through a fixed set, not randomized.
+  const kenBurnsOrigins = ["50% 35%", "30% 65%", "70% 50%"];
+  const delay = (i) => i * 6;
 
   container.innerHTML = images
     .map(
-      (src, i) =>
-        `<img class="hero-bg-image" src="${src}" alt="" style="animation-delay: ${i * 6}s;">`
+      (image, i) => `
+        <div class="hero-bg-slide" style="animation-delay: ${delay(i)}s;">
+          <img class="hero-bg-image" src="${image.src}" alt=""
+               style="animation-delay: ${delay(i)}s; transform-origin: ${kenBurnsOrigins[i % kenBurnsOrigins.length]};">
+        </div>`
+    )
+    .join("");
+
+  captionsContainer.innerHTML = images
+    .map(
+      (image, i) =>
+        `<a class="hero-bg-caption" href="${image.href}" style="animation-delay: ${delay(i)}s;">${image.caption} <span class="arrow">→</span></a>`
     )
     .join("");
 }
