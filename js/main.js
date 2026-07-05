@@ -126,16 +126,22 @@ function renderWorkshopsTeaser() {
   // Reuses the same .experience-card component (image-forward, tag + title
   // overlay) so workshops read as one visual family with Experiences.
   grid.innerHTML = SITE_CONTENT.workshops
-    .map(
-      (w) => `
-        <a class="experience-card" href="/contact.html?workshop=${encodeURIComponent(w.title)}">
-          <div class="media-placeholder ${w.gradient}"></div>
+    .map((w) => {
+      const media = w.hasImage
+        ? `<img class="experience-card-media" src="${w.placeholderSrc}" alt="${w.title}" loading="lazy">`
+        : `<div class="media-placeholder ${w.gradient}"></div>`;
+      const href = w.hasDetailPage
+        ? `/workshops/${w.id}`
+        : `/contact.html?workshop=${encodeURIComponent(w.title)}`;
+      return `
+        <a class="experience-card" href="${href}">
+          ${media}
           <div class="experience-card-overlay">
             <span class="experience-tag tag-workshop">${w.tag}</span>
             <h3>${w.title}</h3>
           </div>
-        </a>`
-    )
+        </a>`;
+    })
     .join("");
 }
 

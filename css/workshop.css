@@ -1,0 +1,119 @@
+/* ============================================================
+   WORKSHOP.CSS — individual workshop detail page.
+   Extends styles.css (design tokens) and experience.css (hero, meta
+   grid, impact stats, gallery + lightbox — all generic enough to
+   share as-is). This file only adds what's unique to workshops:
+   Table of contents:
+     1. How it works (3-step flow)
+     2. Themes tag cloud
+     3. Field notes
+     4. Join CTA
+     5. Responsive
+   ============================================================ */
+
+/* ---------- 1. HOW IT WORKS ---------- */
+.bme-flow-section { padding: 72px 0; background: var(--bg-tint); }
+.bme-flow-section .section-heading { margin-bottom: 40px; }
+
+.bme-flow {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+.bme-flow-step {
+  position: relative;
+  background: var(--white);
+  border-radius: var(--radius-md);
+  padding: 32px 28px;
+  box-shadow: var(--shadow-soft);
+}
+.bme-flow-step::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  width: 32px;
+  height: 2px;
+  background: var(--brand-purple);
+  transform: translateY(-50%);
+}
+.bme-flow-step:last-child::after { display: none; }
+
+.bme-flow-index {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--brand-purple);
+  letter-spacing: 0.06em;
+  margin-bottom: 14px;
+}
+.bme-flow-title { margin: 0 0 4px; font-size: 1.3rem; }
+.bme-flow-time {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+  margin-bottom: 14px;
+}
+.bme-flow-text { margin: 0; font-size: 0.98rem; line-height: 1.55; }
+
+/* ---------- 2. THEMES TAG CLOUD ---------- */
+.bme-themes-section { padding-top: 72px; padding-bottom: 56px; }
+.bme-theme-cloud { display: flex; flex-wrap: wrap; gap: 12px; }
+
+.bme-theme-pill {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 10px 20px;
+  border-radius: var(--radius-pill);
+  color: var(--ink);
+  transition: transform 0.3s var(--ease-bounce), box-shadow 0.3s ease;
+}
+.bme-theme-pill:hover { transform: translateY(-3px); box-shadow: var(--shadow-soft); }
+/* Rotate through the brand palette so the cloud reads as playful and varied,
+   the same way the 17-and-counting themes have been in practice. */
+.bme-theme-pill:nth-child(6n + 1) { background: var(--brand-purple-light); }
+.bme-theme-pill:nth-child(6n + 2) { background: var(--brand-pink-light); }
+.bme-theme-pill:nth-child(6n + 3) { background: var(--brand-teal-light); }
+.bme-theme-pill:nth-child(6n + 4) { background: var(--brand-pink-light); }
+.bme-theme-pill:nth-child(6n + 5) { background: var(--brand-teal-light); }
+.bme-theme-pill:nth-child(6n + 6) { background: var(--brand-purple-light); }
+
+/* ---------- 3. FIELD NOTES ---------- */
+.bme-notes-section { padding: 56px 0 72px; background: var(--bg-tint); }
+.bme-notes { display: flex; flex-direction: column; gap: 28px; max-width: 780px; }
+.bme-note {
+  margin: 0;
+  padding-left: 28px;
+  border-left: 3px solid var(--brand-purple);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.15rem;
+  line-height: 1.55;
+  color: var(--ink);
+}
+
+/* ---------- 4. JOIN CTA ---------- */
+.bme-cta-section { background: var(--brand-purple); padding: 80px 0; }
+.bme-cta-inner { text-align: center; padding-top: 0; padding-bottom: 0; }
+.bme-cta-heading {
+  color: var(--white);
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  margin: 0 0 16px;
+}
+.bme-cta-sub {
+  color: var(--brand-purple-light);
+  max-width: 50ch;
+  margin: 0 auto 32px;
+  font-size: 1.05rem;
+}
+
+/* ---------- 5. RESPONSIVE ---------- */
+@media (max-width: 900px) {
+  .bme-flow { grid-template-columns: 1fr; gap: 24px; }
+  .bme-flow-step::after { display: none; }
+}

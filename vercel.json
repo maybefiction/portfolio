@@ -1,5 +1,6 @@
 {
   "rewrites": [
-    { "source": "/experiences/:id", "destination": "/experience.html?id=:id" }
+    { "source": "/experiences/:id", "destination": "/experience.html?id=:id" },
+    { "source": "/workshops/:id", "destination": "/workshop.html?id=:id" }
   ]
 }

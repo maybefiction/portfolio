@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="page-title">maybe:fiction — Workshop</title>
+  <meta name="description" id="page-description" content="A workshop from maybe:fiction, an experience design studio." />
+
+  <!-- Fonts: Lora (brand display serif) + Poppins (brand body sans) — self-hosted, see css/styles.css -->
+
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="stylesheet" href="/css/experience.css" />
+  <link rel="stylesheet" href="/css/workshop.css" />
+
+  <link rel="icon" type="image/png" href="/assets/icons/logo.png" />
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- =================== NAV =================== -->
+  <header class="site-header" id="site-header">
+    <nav class="nav" aria-label="Primary">
+      <a href="/index.html#hero" class="nav-logo">
+        <img src="/assets/icons/logo.png" alt="" class="nav-logo-icon" />
+        maybe<span class="nav-logo-colon">:</span>fiction
+      </a>
+
+      <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="/about.html" class="nav-link">About</a></li>
+        <li><a href="/experiences.html" class="nav-link">Experiences</a></li>
+        <li><a href="/workshops.html" class="nav-link is-active">Workshops</a></li>
+        <li><a href="/contact.html" class="nav-link nav-link-cta">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <!-- =================== SECTION 1: HERO =================== -->
+    <section class="xp-hero" id="xp-hero">
+      <img class="xp-hero-image" id="xp-hero-image" src="" alt="" />
+      <div class="xp-hero-scrim" aria-hidden="true"></div>
+      <a class="xp-back" href="/workshops.html">← All Workshops</a>
+      <div class="xp-hero-content">
+        <div class="hero-scroll-sentinel" id="hero-scroll-sentinel" aria-hidden="true"></div>
+        <span class="experience-tag tag-workshop" id="xp-hero-tag"></span>
+        <h1 class="xp-hero-title" id="xp-hero-title"></h1>
+      </div>
+    </section>
+
+    <!-- =================== SECTION 2: BASICS + DESCRIPTION + IMPACT =================== -->
+    <section class="xp-meta section-inner">
+      <div class="xp-meta-grid">
+        <aside class="xp-meta-side" id="xp-meta-side"><!-- Basics + Credits injected by JS --></aside>
+        <div class="xp-meta-main">
+          <h2 class="xp-short-description" id="xp-short-description"></h2>
+          <div class="xp-impact-stats" id="xp-impact-stats"></div>
+          <div class="xp-description" id="xp-description"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================== SECTION 3: HOW IT WORKS =================== -->
+    <section class="bme-flow-section" id="flow-section">
+      <div class="section-inner">
+        <h2 class="section-heading">How it works</h2>
+        <div class="bme-flow" id="bme-flow"><!-- steps injected by JS --></div>
+      </div>
+    </section>
+
+    <!-- =================== SECTION 4: THEMES =================== -->
+    <section class="bme-themes-section section-inner" id="themes-section">
+      <h2 class="section-heading">A new lens every month</h2>
+      <p class="section-subheading" id="themes-intro"></p>
+      <div class="bme-theme-cloud" id="bme-theme-cloud"><!-- pills injected by JS --></div>
+    </section>
+
+    <!-- =================== SECTION 5: FIELD NOTES =================== -->
+    <section class="bme-notes-section" id="notes-section">
+      <div class="section-inner">
+        <h2 class="section-heading">From the sessions</h2>
+        <div class="bme-notes" id="bme-notes"><!-- field notes injected by JS --></div>
+      </div>
+    </section>
+
+    <!-- =================== SECTION 6: GALLERY =================== -->
+    <section class="xp-gallery section-inner" id="xp-gallery-section">
+      <h2 class="section-heading">Gallery</h2>
+      <div class="xp-gallery-grid" id="xp-gallery-grid"><!-- thumbnails injected by JS --></div>
+    </section>
+
+    <!-- =================== SECTION 7: JOIN CTA =================== -->
+    <section class="bme-cta-section" id="cta-section">
+      <div class="section-inner bme-cta-inner">
+        <h2 class="bme-cta-heading">Want in on the next one?</h2>
+        <p class="bme-cta-sub" id="bme-cta-sub"></p>
+        <a class="btn btn-primary" id="bme-cta-link" href="/contact.html">Get in touch →</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Lightbox for gallery -->
+  <div class="xp-lightbox" id="xp-lightbox" aria-hidden="true">
+    <button class="xp-lightbox-close" id="xp-lightbox-close" aria-label="Close gallery">✕</button>
+    <button class="xp-lightbox-prev" id="xp-lightbox-prev" aria-label="Previous photo">‹</button>
+    <img class="xp-lightbox-image" id="xp-lightbox-image" src="" alt="" />
+    <button class="xp-lightbox-next" id="xp-lightbox-next" aria-label="Next photo">›</button>
+  </div>
+
+  <!-- =================== FOOTER =================== -->
+  <footer class="site-footer">
+    <div class="section-inner footer-inner">
+      <a href="/index.html#hero" class="nav-logo footer-logo">
+        <img src="/assets/icons/logo.png" alt="" class="nav-logo-icon" />
+        <span class="footer-logo-word">maybe<span class="nav-logo-colon">:</span>fiction</span>
+      </a>
+      <p class="footer-tagline" id="footer-tagline"></p>
+      <ul class="footer-nav">
+        <li><a href="/about.html">About</a></li>
+        <li><a href="/experiences.html">Experiences</a></li>
+        <li><a href="/workshops.html">Workshops</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+      </ul>
+      <p class="footer-copyright">© <span id="footer-year"></span> maybe:fiction. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="/js/content.js"></script>
+  <script src="/js/workshop.js"></script>
+</body>
+</html>

@@ -302,13 +302,72 @@ const SITE_CONTENT = {
   // ---------- Workshops ----------
   workshops: [
     {
+      // ---- source: 04_Production/Briefs Brief doc, Workshop Designs folder
+      // (17 dated session docs, June 2024 - July 2026), and the post-workshop
+      // thank-you email template ----
       id: "beginning-middle-end",
       title: "Beginning | Middle | End",
       tag: "Workshop",
       gradient: "grad-purple",
-      duration: "TODO: replace with real copy.",
-      audience: "TODO: replace with real copy.",
-      description: "TODO: replace with real copy.",
+      hasImage: true,
+      hasDetailPage: true,
+      placeholderSrc: "/assets/workshops/beginning-middle-end/card.jpg",
+      heroPhoto: "/assets/workshops/beginning-middle-end/hero.jpg",
+      tagline: "A monthly creative-writing workshop where strangers write a complete story — start to finish — in one sitting.",
+      shortDescription: "A monthly creative-writing workshop and social hour where beginners and lifelong writers alike leave with a complete story — a beginning, a middle, and an end — written in a single sitting.",
+      description: "A monthly creative-writing workshop and social hour where beginners and lifelong writers alike leave with a complete story — a beginning, a middle, and an end — written in a single sitting.",
+      basics: {
+        cadence: "Monthly, ongoing since June 2024",
+        groupSize: "Up to 15 writers",
+        length: "2 hours",
+        homeBase: "Brooklyn Peace Center, plus rotating NYC spaces",
+      },
+      impactStats: [
+        { value: "17", label: "Themed sessions run since June 2024" },
+        { value: "15", label: "Writers max per session, by design" },
+        { value: "2", label: "Hours from cold open to finished story" },
+      ],
+      flow: [
+        {
+          title: "Warm Up",
+          time: "10–15 min",
+          text: "Improv games and movement — passing invisible objects, mirroring a stranger's face — to make a room of near-strangers comfortable taking creative risks together.",
+        },
+        {
+          title: "Build",
+          time: "40–45 min",
+          text: "A set of short, playful writing exercises builds up the tools of storytelling one at a time: an object, a setting, a character, a line of dialogue.",
+        },
+        {
+          title: "Write & Share",
+          time: "40 min",
+          text: "Twenty minutes to draft a complete story — a beginning, a middle, and an end — followed by twenty minutes reading it aloud to a partner.",
+        },
+      ],
+      fullSynopsis: [
+        "Beginning | Middle | End takes the most solitary act in writing — sitting down and starting — and turns it into a room full of strangers working alongside each other. No writing experience required, no blank-page anxiety: just two hours that build, one small exercise at a time, toward a single complete story, drafted in one sitting.",
+        "Each session opens with a few minutes of improv and movement — passing an invisible object, mirroring a stranger's expression — just enough to make a room of near-strangers comfortable taking creative risks together. From there, a set of short, playful prompts builds up the tools of storytelling one at a time: a setting, a character, a line of dialogue. Everything points toward the same close: twenty minutes to write a complete story, then twenty more to read it aloud to a partner.",
+        "The workshop has run monthly since June 2024, taking on a new creative lens each time — the Uncanny, Whimsy, Desire, Fairytales, In Transit — and reshaping the same three-act structure into something different every month. Every session is capped at fifteen writers and co-hosted with a different guest writer, so the workshop keeps discovering new voices, prompts, and reasons to write.",
+        "Every participant leaves with something physical: a page with a beginning, a middle, and an end already on it, ready to keep folded in a pocket, taped to a wall, or built on later. The point isn't to finish a masterpiece — it's to prove, in one sitting, that you already can.",
+      ],
+      themes: [
+        "Being Seen", "Uncanny", "Intimacy", "Whimsy", "World Building", "Dialogue",
+        "Rituals", "Desire", "In Transit", "Inner Worlds", "Fairytales", "Perspective",
+        "Characters", "Pretend Worlds",
+      ],
+      fieldNotes: [
+        "One \"Misdirection\"-themed session sent three writers into a single 20-minute sprint that came back as a complete, deadpan-funny flash fiction about a reluctant, classical-music-loving bat-person who trips through a hole in the ground mid-strut — proof that twenty minutes and three strangers is enough to land a real cliffhanger.",
+        "In an \"Uncanny\"-themed session, a group poem assembled line-by-line by writers who'd never seen each other's lines came back genuinely unsettling — eyes multiplying, a supermarket where \"no one looks at me,\" a whispered \"join us.\"",
+      ],
+      credits: {
+        "Hosted By": "Ishaan Goel, maybe:fiction",
+        "Co-Hosts": "A different guest writer joins each month",
+        "Home Venue": "Brooklyn Peace Center (Bed-Stuy, Brooklyn), plus pop-up sessions across NYC",
+        "Part Of": "The same rotating community as Art Luck, Ishaan's monthly art potluck also at Brooklyn Peace Center",
+      },
+      gallery: Array.from({ length: 8 }, (_, i) =>
+        `/assets/workshops/beginning-middle-end/gallery-${String(i + 1).padStart(2, "0")}.jpg`
+      ),
     },
     {
       id: "corporate-creative",
