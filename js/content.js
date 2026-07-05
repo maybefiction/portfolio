@@ -19,6 +19,9 @@ const SITE_CONTENT = {
   // ---------- Hero ----------
   hero: {
     heading: "maybe:fiction",
+    // Studio's own bio doc refers to itself as "maybe:fiction studios" —
+    // surfaced here as a small kicker under the wordmark.
+    kicker: "Studios",
     // See brand.tagline above — same field, same doc source.
     tagline: "Designing new ways for people to gather, create, and relate",
     // One real photo per fully-realized experience (each links to its own
