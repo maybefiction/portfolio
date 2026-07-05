@@ -132,7 +132,7 @@
   margin: 0 0 20px;
 }
 
-/* ---------- 3. VIDEO (nested under description, same column) ---------- */
+/* ---------- 3. HERO MEDIA: gallery carousel, or fallback photo (nested under description, same column) ---------- */
 .xp-video-wrap {
   border-radius: var(--radius-lg);
   overflow: hidden;
@@ -140,12 +140,54 @@
   background: var(--ink);
   margin-bottom: 32px;
 }
-.xp-video { width: 100%; display: block; aspect-ratio: 16 / 9; background: var(--ink); }
 .xp-video-fallback-image {
   width: 100%;
   display: block;
   aspect-ratio: 16 / 9;
   object-fit: cover;
+}
+
+.xp-carousel { position: relative; }
+.xp-carousel-track {
+  display: flex;
+  aspect-ratio: 16 / 9;
+  transition: transform 0.5s var(--ease-smooth);
+}
+.xp-carousel-slide { flex: 0 0 100%; height: 100%; }
+.xp-carousel-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.xp-carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.15);
+  color: var(--white);
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.25s ease, transform 0.25s var(--ease-bounce);
+}
+.xp-carousel-arrow:hover { background: rgba(255, 255, 255, 0.3); }
+.xp-carousel-prev { left: 16px; }
+.xp-carousel-prev:hover { transform: translateY(-50%) scale(1.1); }
+.xp-carousel-next { right: 16px; }
+.xp-carousel-next:hover { transform: translateY(-50%) scale(1.1); }
+
+.xp-carousel-counter {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  background: rgba(38, 37, 34, 0.55);
+  color: rgba(255, 255, 255, 0.9);
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
 }
 
 /* ---------- 4. EXPERIENCE DESIGN FLOW ---------- */
@@ -394,4 +436,8 @@
 @media (max-width: 480px) {
   .xp-gallery-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
   .xp-lightbox-prev, .xp-lightbox-next { width: 40px; height: 40px; font-size: 1.1rem; }
+  .xp-carousel-arrow { width: 36px; height: 36px; font-size: 1.1rem; }
+  .xp-carousel-prev { left: 10px; }
+  .xp-carousel-next { right: 10px; }
+  .xp-carousel-counter { bottom: 10px; right: 10px; font-size: 0.7rem; }
 }
