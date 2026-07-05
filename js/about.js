@@ -14,6 +14,12 @@ document.addEventListener("DOMContentLoaded", () => {
 function renderAbout() {
   const { about } = SITE_CONTENT;
 
+  if (about.heroPhoto) {
+    document.getElementById("about-hero-image").src = about.heroPhoto;
+  } else {
+    document.getElementById("about-hero").remove();
+  }
+
   document.getElementById("about-heading").textContent = about.heading;
   document.getElementById("about-body").innerHTML = about.body.map((para) => `<p>${para}</p>`).join("");
 

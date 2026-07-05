@@ -597,6 +597,17 @@ ul { list-style: none; margin: 0; padding: 0; }
 }
 
 /* ---------- 6. ABOUT ---------- */
+/* Plain full-bleed photo opening the standalone About page — just the
+   photo, no scrim/gradient, nothing overlaid on top of it. Clears the
+   fixed nav itself, so .about-page's own top padding is zeroed below. */
+.about-hero {
+  height: 46vh;
+  min-height: 320px;
+  margin-top: var(--nav-height);
+  overflow: hidden;
+}
+.about-hero-image { width: 100%; height: 100%; object-fit: cover; }
+
 .about { background: var(--bg-tint); position: relative; }
 /* About and Experiences share the same background — no divider between
    them, so tighten the join instead of leaving a big same-color gap. */
@@ -842,6 +853,9 @@ button.founder-toggle.section-link {
 .workshops-page {
   padding-top: var(--nav-height);
 }
+/* About now opens with .about-hero instead, which clears the nav itself —
+   this would otherwise double up into a big gap before the heading. */
+.about-page { padding-top: 0; }
 
 .contact-inner {
   position: relative;

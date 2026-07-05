@@ -39,6 +39,9 @@ const SITE_CONTENT = {
   about: {
     heading: "About",
     shortBody: "maybe:fiction is an interdisciplinary studio that designs experiences for people to gather, create, and relate through communal making, play, and ritual. Our work spans performance, installation, pop-up galleries, festivals, celebrations, and workshops.",
+    // Ishaan and Alex at the end of Jornada de Puertas Abiertas (NYC, 2024) —
+    // just the two of them, no staging.
+    heroPhoto: "/assets/about/ishaan-alex-jornada.jpg",
     body: [
       "maybe:fiction is an interdisciplinary studio that designs experiences for people to gather, create, and relate through communal making, play, and ritual. Our work spans performance, installation, pop-up galleries, festivals, celebrations, and workshops.",
       "We believe art is something to practice together, not consume alone. We work in the spaces between things: artist and audience, public and private, celebratory and mundane — designing the conditions where intimacy, wonder, and participation can emerge from ordinary places.",
