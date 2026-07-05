@@ -53,7 +53,7 @@ const SITE_CONTENT = {
       {
         name: "Ishaan",
         photo: "/assets/about/ishaan.jpg",
-        extraPhotos: [],
+        extraPhotos: ["/assets/about/ishaan-extra-1.jpg"],
         // Short version for the homepage teaser; full bio (below) lives on about.html.
         shortBio: "Interdisciplinary artist, experience designer, and arts facilitator based in New York City, exploring how art can reshape the ways people gather, create, and relate.",
         bio: [
