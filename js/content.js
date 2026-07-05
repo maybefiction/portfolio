@@ -204,7 +204,7 @@ const SITE_CONTENT = {
         },
         {
           title: "Ending",
-          image: "/assets/experiences/spontaneous-attachment-gallery/photo-06.jpg",
+          image: "/assets/experiences/spontaneous-attachment-gallery/photo-10.jpg",
           text: "Audience members receive dark chocolate on their exit.",
         },
       ],
