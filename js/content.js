@@ -313,6 +313,9 @@ const SITE_CONTENT = {
       hasDetailPage: true,
       placeholderSrc: "/assets/workshops/beginning-middle-end/card.jpg",
       heroPhoto: "/assets/workshops/beginning-middle-end/hero.jpg",
+      // Muted b-roll from an actual warm-up game, shot on Ray-Ban Meta smart
+      // glasses at a session — real footage, not stock.
+      recapVideo: "/assets/workshops/beginning-middle-end/recap.mp4",
       tagline: "A monthly creative-writing workshop where strangers write a complete story — start to finish — in one sitting.",
       shortDescription: "A monthly creative-writing workshop and social hour where beginners and lifelong writers alike leave with a complete story — a beginning, a middle, and an end — written in a single sitting.",
       description: "A monthly creative-writing workshop and social hour where beginners and lifelong writers alike leave with a complete story — a beginning, a middle, and an end — written in a single sitting.",
