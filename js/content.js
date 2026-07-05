@@ -39,9 +39,17 @@ const SITE_CONTENT = {
   about: {
     heading: "About",
     shortBody: "maybe:fiction is an interdisciplinary studio that designs experiences for people to gather, create, and relate through communal making, play, and ritual. Our work spans performance, installation, pop-up galleries, festivals, celebrations, and workshops.",
+    // Candid photo from Jornada de Puertas Abiertas (NYC, 2024) — two people
+    // blowing up balloons together, a small real moment of doing-something-
+    // together rather than a staged/posed shot.
+    heroPhoto: "/assets/experiences/jornada-gallery/nyc-2024/photo-12.jpg",
+    // Pulled from the top of the 2nd body paragraph and set as a standalone
+    // pull-quote below the hero; that paragraph's opening sentence is
+    // trimmed out below so it isn't repeated verbatim on the page.
+    pullQuote: "We believe art is something to practice together, not consume alone.",
     body: [
       "maybe:fiction is an interdisciplinary studio that designs experiences for people to gather, create, and relate through communal making, play, and ritual. Our work spans performance, installation, pop-up galleries, festivals, celebrations, and workshops.",
-      "We believe art is something to practice together, not consume alone. We work in the spaces between things: artist and audience, public and private, celebratory and mundane — designing the conditions where intimacy, wonder, and participation can emerge from ordinary places.",
+      "We work in the spaces between things: artist and audience, public and private, celebratory and mundane — designing the conditions where intimacy, wonder, and participation can emerge from ordinary places.",
       "Performance, movement, music, visual art, writing, games, and food are not separate disciplines to us — they are materials. We combine them to create experiences no single medium or sense could produce alone.",
       "Play can be profound, rituals can be secular, creativity belongs to everyone, and ordinary places can become sites of wonder when approached with curiosity, care, and participation.",
       "How we make things matters as much as what we make. We work collaboratively, embrace improvisation, and treat process as inseparable from outcome.",

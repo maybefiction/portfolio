@@ -14,8 +14,24 @@ document.addEventListener("DOMContentLoaded", () => {
 function renderAbout() {
   const { about } = SITE_CONTENT;
 
+  if (about.heroPhoto) {
+    const heroImg = document.getElementById("about-hero-image");
+    heroImg.src = about.heroPhoto;
+    heroImg.alt = "";
+  } else {
+    document.getElementById("about-hero").remove();
+  }
+
   document.getElementById("about-heading").textContent = about.heading;
-  document.getElementById("about-body").innerHTML = about.body.map((para) => `<p>${para}</p>`).join("");
+
+  const paragraphs = about.body.map((para) => `<p>${para}</p>`);
+  const pullQuoteHTML = about.pullQuote
+    ? `<blockquote class="about-pull-quote">${about.pullQuote}</blockquote>`
+    : "";
+  // Pull quote sits right after the first paragraph, ahead of the rest of
+  // the body copy.
+  document.getElementById("about-body").innerHTML =
+    paragraphs.slice(0, 1).join("") + pullQuoteHTML + paragraphs.slice(1).join("");
 
   document.getElementById("founders-grid").innerHTML = about.founders
     .map((founder, i) => {
