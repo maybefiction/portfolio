@@ -400,6 +400,25 @@ ul { list-style: none; margin: 0; padding: 0; }
 }
 .nav-link-cta:hover { transform: translateY(-2px) scale(1.05); }
 
+/* Same oval-pill idea as Contact, one pastel brand hue per section instead
+   of only showing a background on hover/active. !important on background
+   and color guards against .site-header.is-scrolled's hover/active rules
+   (higher selector specificity) silently overriding the pill's own color
+   when the nav is both scrolled and hovered. */
+.nav-link-about { background: var(--brand-purple-light) !important; color: var(--ink) !important; }
+.nav-link-experiences { background: var(--brand-teal-light) !important; color: var(--ink) !important; }
+.nav-link-workshops { background: var(--brand-pink-light) !important; color: var(--ink) !important; }
+
+.nav-link-about:hover,
+.nav-link-experiences:hover,
+.nav-link-workshops:hover {
+  transform: translateY(-2px) scale(1.05);
+}
+
+.nav-link-about.is-active { background: var(--brand-purple) !important; color: var(--white) !important; }
+.nav-link-experiences.is-active { background: var(--brand-teal) !important; color: var(--white) !important; }
+.nav-link-workshops.is-active { background: var(--brand-pink) !important; color: var(--white) !important; }
+
 .nav-toggle {
   display: none;
   flex-direction: column;
