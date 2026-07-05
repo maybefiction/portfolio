@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setupNav();
   setupExperiencesCarousel();
   setupScrollReveal();
+  setupHeroLogoBurst();
   document.getElementById("footer-year").textContent = new Date().getFullYear();
 });
 
@@ -42,6 +43,49 @@ function renderHeroBackground() {
         `<img class="hero-bg-image" src="${src}" alt="" style="animation-delay: ${i * 6}s;">`
     )
     .join("");
+}
+
+/* ---------- Hero logo click-to-burst easter egg ---------- */
+// The hero logo is 5 independently-swaying masked layers (see .hero-logo-layer
+// in styles.css); clicking one sends it flying off in a random direction,
+// then it flies back in and resumes its normal sway. Skipped entirely under
+// prefers-reduced-motion rather than left to silently no-op mid-animation.
+function setupHeroLogoBurst() {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  document.querySelectorAll(".hero-logo-layer").forEach((layer) => {
+    layer.addEventListener("click", () => burstLogoLayer(layer));
+  });
+}
+
+function burstLogoLayer(layer) {
+  if (layer.classList.contains("is-bursting-out") || layer.classList.contains("is-bursting-in")) return;
+
+  const angle = Math.random() * Math.PI * 2;
+  const distance = 180 + Math.random() * 220;
+  layer.style.setProperty("--burst-tx", `${Math.cos(angle) * distance}px`);
+  layer.style.setProperty("--burst-ty", `${Math.sin(angle) * distance}px`);
+  layer.style.setProperty("--burst-rot", `${Math.random() * 140 - 70}deg`);
+
+  layer.classList.add("is-bursting-out");
+
+  layer.addEventListener("animationend", function onOut(event) {
+    if (event.animationName !== "logoBurstOut") return;
+    layer.removeEventListener("animationend", onOut);
+
+    setTimeout(() => {
+      layer.classList.replace("is-bursting-out", "is-bursting-in");
+
+      layer.addEventListener("animationend", function onIn(event2) {
+        if (event2.animationName !== "logoBurstIn") return;
+        layer.removeEventListener("animationend", onIn);
+        layer.classList.remove("is-bursting-in");
+        layer.style.removeProperty("--burst-tx");
+        layer.style.removeProperty("--burst-ty");
+        layer.style.removeProperty("--burst-rot");
+      });
+    }, 350);
+  });
 }
 
 /* ---------- Experiences teaser (3 featured, image-forward carousel) ---------- */

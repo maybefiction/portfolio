@@ -475,10 +475,23 @@ ul { list-style: none; margin: 0; padding: 0; }
   inset: 0;
   width: 100%;
   height: 100%;
+  cursor: pointer;
   transform-origin: 50% 82%;
   animation-name: logoSway;
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
+}
+/* Click-to-burst easter egg: JS sets --burst-tx/ty/rot to a random vector,
+   then toggles these two classes in sequence — flies off (out), a beat of
+   nothing, flies back in (in) — before handing back off to the normal sway.
+   These override .hero-logo-layer's animation via the two-class selector's
+   higher specificity, and animation-fill-mode: forwards holds each end
+   state until JS swaps/removes the class. */
+.hero-logo-layer.is-bursting-out {
+  animation: logoBurstOut 0.55s cubic-bezier(0.55, 0, 0.85, 0.35) forwards;
+}
+.hero-logo-layer.is-bursting-in {
+  animation: logoBurstIn 0.5s cubic-bezier(0.2, 0.9, 0.3, 1.2) forwards;
 }
 /* Each layer is soft-masked to roughly one flame, then swayed on its own
    timing so the cluster reads as several flames flickering independently
@@ -877,6 +890,17 @@ button.founder-toggle.section-link {
 @keyframes logoSway {
   0%, 100% { transform: rotate(-2.2deg) scale(1); }
   50% { transform: rotate(2deg) scale(1.015); }
+}
+
+@keyframes logoBurstOut {
+  0% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 1; }
+  25% { transform: translate(calc(var(--burst-tx) * 0.2), calc(var(--burst-ty) * 0.2)) scale(1.35) rotate(calc(var(--burst-rot) * 0.3)); opacity: 1; }
+  100% { transform: translate(var(--burst-tx), var(--burst-ty)) scale(0.35) rotate(var(--burst-rot)); opacity: 0; }
+}
+@keyframes logoBurstIn {
+  0% { transform: translate(var(--burst-tx), var(--burst-ty)) scale(0.35) rotate(var(--burst-rot)); opacity: 0; }
+  60% { transform: translate(0, 0) scale(1.15) rotate(0deg); opacity: 1; }
+  100% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 1; }
 }
 
 @keyframes scrollDot {
