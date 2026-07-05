@@ -24,7 +24,6 @@ function injectStaticText() {
   const { hero, about, brand } = SITE_CONTENT;
 
   document.getElementById("hero-heading").textContent = hero.heading;
-  document.getElementById("hero-kicker").textContent = hero.kicker;
   document.getElementById("hero-tagline").textContent = hero.tagline;
 
   document.getElementById("about-heading").textContent = about.heading;
