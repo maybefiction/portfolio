@@ -355,10 +355,6 @@ const SITE_CONTENT = {
         "Rituals", "Desire", "In Transit", "Inner Worlds", "Fairytales", "Perspective",
         "Characters", "Pretend Worlds",
       ],
-      fieldNotes: [
-        "One \"Misdirection\"-themed session sent three writers into a single 20-minute sprint that came back as a complete, deadpan-funny flash fiction about a reluctant, classical-music-loving bat-person who trips through a hole in the ground mid-strut — proof that twenty minutes and three strangers is enough to land a real cliffhanger.",
-        "In an \"Uncanny\"-themed session, a group poem assembled line-by-line by writers who'd never seen each other's lines came back genuinely unsettling — eyes multiplying, a supermarket where \"no one looks at me,\" a whispered \"join us.\"",
-      ],
       credits: {
         "Hosted By": "Ishaan Goel, maybe:fiction",
         "Co-Hosts": "A different guest writer joins each month",
@@ -368,15 +364,6 @@ const SITE_CONTENT = {
       gallery: Array.from({ length: 8 }, (_, i) =>
         `/assets/workshops/beginning-middle-end/gallery-${String(i + 1).padStart(2, "0")}.jpg`
       ),
-    },
-    {
-      id: "corporate-creative",
-      title: "Corporate Creative",
-      tag: "Workshop",
-      gradient: "grad-blue",
-      duration: "TODO: replace with real copy.",
-      audience: "TODO: replace with real copy.",
-      description: "TODO: replace with real copy.",
     },
   ],
 };

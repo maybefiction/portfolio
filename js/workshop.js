@@ -33,7 +33,6 @@ document.addEventListener("DOMContentLoaded", () => {
   renderImpactStats(item);
   renderFlow(item);
   renderThemes(item);
-  renderFieldNotes(item);
   renderGallery(item);
   renderCTA(item);
   setupNav();
@@ -177,18 +176,6 @@ function renderThemes(item) {
     `${statCount} themes and counting — a sampling of the creative lenses each session has taken on.`;
   document.getElementById("bme-theme-cloud").innerHTML = item.themes
     .map((theme) => `<span class="bme-theme-pill">${theme}</span>`)
-    .join("");
-}
-
-/* ---------- Section 5: Field notes ---------- */
-function renderFieldNotes(item) {
-  const section = document.getElementById("notes-section");
-  if (!item.fieldNotes || !item.fieldNotes.length) {
-    section.remove();
-    return;
-  }
-  document.getElementById("bme-notes").innerHTML = item.fieldNotes
-    .map((note) => `<blockquote class="bme-note">${note}</blockquote>`)
     .join("");
 }
 

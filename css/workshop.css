@@ -7,9 +7,8 @@
      0. Shared component overrides (tighter than the experience.css default)
      1. How it works (3-step flow)
      2. Themes tag cloud
-     3. Field notes
-     4. Join CTA
-     5. Responsive
+     3. Join CTA
+     4. Responsive
    ============================================================ */
 
 /* ---------- 0. SHARED COMPONENT OVERRIDES ---------- */
@@ -74,7 +73,7 @@
 .bme-flow-text { margin: 0; font-size: 0.98rem; line-height: 1.55; }
 
 /* ---------- 2. THEMES TAG CLOUD ---------- */
-.bme-themes-section { padding-top: 56px; padding-bottom: 40px; }
+.bme-themes-section { padding-top: 56px; padding-bottom: 56px; }
 .bme-theme-cloud { display: flex; flex-wrap: wrap; gap: 12px; }
 
 .bme-theme-pill {
@@ -96,22 +95,7 @@
 .bme-theme-pill:nth-child(6n + 5) { background: var(--brand-teal-light); }
 .bme-theme-pill:nth-child(6n + 6) { background: var(--brand-purple-light); }
 
-/* ---------- 3. FIELD NOTES ---------- */
-.bme-notes-section { padding: 40px 0 56px; background: var(--bg-tint); }
-.bme-notes-section > .section-inner { padding-top: 0; padding-bottom: 0; }
-.bme-notes { display: flex; flex-direction: column; gap: 28px; max-width: 780px; }
-.bme-note {
-  margin: 0;
-  padding-left: 28px;
-  border-left: 3px solid var(--brand-purple);
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 1.15rem;
-  line-height: 1.55;
-  color: var(--ink);
-}
-
-/* ---------- 4. JOIN CTA ---------- */
+/* ---------- 3. JOIN CTA ---------- */
 .bme-cta-section { background: var(--brand-purple); padding: 64px 0; }
 .bme-cta-inner { text-align: center; padding-top: 0; padding-bottom: 0; }
 .bme-cta-heading {
@@ -126,7 +110,7 @@
   font-size: 1.05rem;
 }
 
-/* ---------- 5. RESPONSIVE ---------- */
+/* ---------- 4. RESPONSIVE ---------- */
 @media (max-width: 900px) {
   .bme-flow { grid-template-columns: 1fr; gap: 24px; }
   .bme-flow-step::after { display: none; }
