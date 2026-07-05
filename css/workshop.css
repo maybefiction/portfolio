@@ -4,6 +4,7 @@
    grid, impact stats, gallery + lightbox — all generic enough to
    share as-is). This file only adds what's unique to workshops:
    Table of contents:
+     0. Shared component overrides (tighter than the experience.css default)
      1. How it works (3-step flow)
      2. Themes tag cloud
      3. Field notes
@@ -11,9 +12,21 @@
      5. Responsive
    ============================================================ */
 
+/* ---------- 0. SHARED COMPONENT OVERRIDES ---------- */
+/* .xp-meta/.xp-gallery are reused as-is from experience.css, but this page
+   has more sections stacked below them, so the same 72px/100px padding that
+   works for a 3-section experience page reads as too much empty space here.
+   Scoped to workshop.html only — experience.html never loads this file. */
+.xp-meta { padding-bottom: 56px; }
+.xp-gallery { padding-bottom: 72px; }
+
 /* ---------- 1. HOW IT WORKS ---------- */
-.bme-flow-section { padding: 72px 0; background: var(--bg-tint); }
-.bme-flow-section .section-heading { margin-bottom: 40px; }
+/* The outer section owns the vertical padding; the inner .section-inner
+   would otherwise stack its own 100px default on top (was causing ~170px
+   gaps between sections), so it's zeroed here and in Field Notes below. */
+.bme-flow-section { padding: 56px 0; background: var(--bg-tint); }
+.bme-flow-section > .section-inner { padding-top: 0; padding-bottom: 0; }
+.bme-flow-section .section-heading { margin-bottom: 32px; }
 
 .bme-flow {
   display: grid;
@@ -61,7 +74,7 @@
 .bme-flow-text { margin: 0; font-size: 0.98rem; line-height: 1.55; }
 
 /* ---------- 2. THEMES TAG CLOUD ---------- */
-.bme-themes-section { padding-top: 72px; padding-bottom: 56px; }
+.bme-themes-section { padding-top: 56px; padding-bottom: 40px; }
 .bme-theme-cloud { display: flex; flex-wrap: wrap; gap: 12px; }
 
 .bme-theme-pill {
@@ -84,7 +97,8 @@
 .bme-theme-pill:nth-child(6n + 6) { background: var(--brand-purple-light); }
 
 /* ---------- 3. FIELD NOTES ---------- */
-.bme-notes-section { padding: 56px 0 72px; background: var(--bg-tint); }
+.bme-notes-section { padding: 40px 0 56px; background: var(--bg-tint); }
+.bme-notes-section > .section-inner { padding-top: 0; padding-bottom: 0; }
 .bme-notes { display: flex; flex-direction: column; gap: 28px; max-width: 780px; }
 .bme-note {
   margin: 0;
@@ -98,7 +112,7 @@
 }
 
 /* ---------- 4. JOIN CTA ---------- */
-.bme-cta-section { background: var(--brand-purple); padding: 80px 0; }
+.bme-cta-section { background: var(--brand-purple); padding: 64px 0; }
 .bme-cta-inner { text-align: center; padding-top: 0; padding-bottom: 0; }
 .bme-cta-heading {
   color: var(--white);
