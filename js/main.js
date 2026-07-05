@@ -56,7 +56,7 @@ function renderHeroBackground() {
   captionsContainer.innerHTML = images
     .map(
       (image, i) =>
-        `<a class="hero-bg-caption" href="${image.href}" style="animation-delay: ${delay(i)}s;">${image.caption} <span class="arrow">→</span></a>`
+        `<span class="hero-bg-caption" style="animation-delay: ${delay(i)}s;">${image.caption}</span>`
     )
     .join("");
 }

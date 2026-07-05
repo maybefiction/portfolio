@@ -474,20 +474,12 @@ ul { list-style: none; margin: 0; padding: 0; }
   left: 28px;
   bottom: 28px;
   opacity: 0;
-  pointer-events: auto;
   animation: heroCrossfade 18s ease-in-out infinite;
   font-family: var(--font-display);
   font-style: italic;
   font-size: 0.98rem;
   color: rgba(255, 255, 255, 0.8);
-  transition: color 0.3s ease, transform 0.3s var(--ease-bounce);
 }
-.hero-bg-caption .arrow { transition: transform 0.3s var(--ease-bounce); display: inline-block; }
-.hero-bg-caption:hover {
-  color: var(--white);
-  transform: translateX(2px);
-}
-.hero-bg-caption:hover .arrow { transform: translateX(3px); }
 
 .hero-content {
   position: relative;
