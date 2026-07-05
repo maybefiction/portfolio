@@ -419,6 +419,14 @@ ul { list-style: none; margin: 0; padding: 0; }
 .nav-link-experiences.is-active { background: var(--brand-teal) !important; color: var(--white) !important; }
 .nav-link-workshops.is-active { background: var(--brand-pink) !important; color: var(--white) !important; }
 
+/* Events sits one shade bolder than Experiences' light-teal pill (same
+   light/medium pairing already used between Workshops and Contact), since
+   every other hue+shade slot in the palette is already spoken for. It reads
+   closer to a second CTA on purpose — this page is pitched at people
+   considering hiring the studio. */
+.nav-link-events { background: var(--brand-teal) !important; color: var(--white) !important; }
+.nav-link-events:hover { transform: translateY(-2px) scale(1.05); }
+
 .nav-toggle {
   display: none;
   flex-direction: column;
@@ -869,7 +877,8 @@ button.founder-toggle.section-link {
 .contact-page,
 .about-page,
 .experiences-page,
-.workshops-page {
+.workshops-page,
+.events-page {
   padding-top: var(--nav-height);
 }
 /* About now opens with .about-hero instead, which clears the nav itself —

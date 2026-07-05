@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
   renderHeroBackground();
   renderFeaturedExperiences();
   renderWorkshopsTeaser();
+  renderEventsTeaser();
   setupNav();
   setupExperiencesCarousel();
   setupScrollReveal();
@@ -175,6 +176,33 @@ function renderWorkshopsTeaser() {
           <div class="experience-card-overlay">
             <span class="experience-tag tag-workshop">${w.tag}</span>
             <h3>${w.title}</h3>
+          </div>
+        </a>`;
+    })
+    .join("");
+}
+
+/* ---------- Events teaser ---------- */
+function renderEventsTeaser() {
+  const grid = document.getElementById("event-grid");
+  grid.classList.add("reveal-stagger", "reveal");
+
+  // Reuses the same .experience-card component (image-forward, tag + title
+  // overlay) so events read as one visual family with Experiences/Workshops.
+  grid.innerHTML = SITE_CONTENT.events
+    .map((e) => {
+      const media = e.hasImage
+        ? `<img class="experience-card-media" src="${e.placeholderSrc}" alt="${e.title}" loading="lazy">`
+        : `<div class="media-placeholder ${e.gradient}"></div>`;
+      const href = e.hasDetailPage
+        ? `/events/${e.id}`
+        : `/contact.html?event=${encodeURIComponent(e.title)}`;
+      return `
+        <a class="experience-card" href="${href}">
+          ${media}
+          <div class="experience-card-overlay">
+            <span class="experience-tag tag-event">${e.tag}</span>
+            <h3>${e.title}</h3>
           </div>
         </a>`;
     })

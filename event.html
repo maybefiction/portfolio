@@ -3,13 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title id="page-title">maybe:fiction — Experience</title>
-  <meta name="description" id="page-description" content="An experience by maybe:fiction, an experience design studio." />
+  <title id="page-title">maybe:fiction — Event</title>
+  <meta name="description" id="page-description" content="An event format from maybe:fiction, an experience design studio." />
 
   <!-- Fonts: Lora (brand display serif) + Poppins (brand body sans) — self-hosted, see css/styles.css -->
 
   <link rel="stylesheet" href="/css/styles.css" />
   <link rel="stylesheet" href="/css/experience.css" />
+  <!-- Reuses workshop.css's .bme-flow/.bme-theme-cloud/.bme-cta-section components
+       as-is — purely structural/visual, no textual coupling to workshops. -->
+  <link rel="stylesheet" href="/css/workshop.css" />
 
   <link rel="icon" type="image/png" href="/assets/icons/logo.png" />
 </head>
@@ -33,8 +36,7 @@
         <li><a href="/about.html" class="nav-link nav-link-about">About</a></li>
         <li><a href="/experiences.html" class="nav-link nav-link-experiences">Experiences</a></li>
         <li><a href="/workshops.html" class="nav-link nav-link-workshops">Workshops</a></li>
-        <li><a href="/events.html" class="nav-link nav-link-events">Events</a></li>
-
+        <li><a href="/events.html" class="nav-link nav-link-events is-active">Events</a></li>
         <li><a href="/contact.html" class="nav-link nav-link-cta">Contact</a></li>
       </ul>
     </nav>
@@ -46,33 +48,39 @@
     <section class="xp-hero" id="xp-hero">
       <img class="xp-hero-image" id="xp-hero-image" src="" alt="" />
       <div class="xp-hero-scrim" aria-hidden="true"></div>
-      <a class="xp-back" href="/experiences.html">← All Experiences</a>
+      <a class="xp-back" href="/events.html">← All Events</a>
       <div class="xp-hero-content">
         <div class="hero-scroll-sentinel" id="hero-scroll-sentinel" aria-hidden="true"></div>
-        <span class="experience-tag" id="xp-hero-tag"></span>
+        <span class="experience-tag tag-event" id="xp-hero-tag"></span>
         <h1 class="xp-hero-title" id="xp-hero-title"></h1>
       </div>
     </section>
 
-    <!-- =================== SECTION 2+3: BASICS/CREDITS + DESCRIPTION + HERO MEDIA =================== -->
+    <!-- =================== SECTION 2: BASICS + DESCRIPTION + IMPACT =================== -->
     <section class="xp-meta section-inner">
       <div class="xp-meta-grid">
         <aside class="xp-meta-side" id="xp-meta-side"><!-- Basics + Credits injected by JS --></aside>
         <div class="xp-meta-main">
           <h2 class="xp-short-description" id="xp-short-description"></h2>
-          <div class="xp-impact-stats" id="xp-impact-stats"><!-- Impact stats injected by JS, only for items with impactStats data --></div>
-          <div class="xp-video-wrap" id="xp-video-wrap"><!-- Gallery carousel or fallback photo injected by JS --></div>
+          <div class="xp-impact-stats" id="xp-impact-stats"></div>
           <div class="xp-description" id="xp-description"></div>
         </div>
       </div>
     </section>
 
-    <!-- =================== SECTION 4: EXPERIENCE DESIGN FLOW =================== -->
-    <section class="xp-design" id="xp-design-section">
+    <!-- =================== SECTION 3: HOW IT WORKS =================== -->
+    <section class="bme-flow-section" id="flow-section">
       <div class="section-inner">
-        <h2 class="section-heading">Experience Design</h2>
-        <div class="xp-flow" id="xp-flow"><!-- stage nodes + accordion injected by JS --></div>
+        <h2 class="section-heading">How it works</h2>
+        <div class="bme-flow" id="bme-flow"><!-- steps injected by JS --></div>
       </div>
+    </section>
+
+    <!-- =================== SECTION 4: WHAT WE BRING =================== -->
+    <section class="bme-themes-section section-inner" id="themes-section">
+      <h2 class="section-heading">What we bring</h2>
+      <p class="section-subheading" id="themes-intro"></p>
+      <div class="bme-theme-cloud" id="bme-theme-cloud"><!-- pills injected by JS --></div>
     </section>
 
     <!-- =================== SECTION 5: GALLERY =================== -->
@@ -81,15 +89,14 @@
       <div class="xp-gallery-grid" id="xp-gallery-grid"><!-- thumbnails injected by JS --></div>
     </section>
 
-    <!-- Next Experience — only rendered by JS when 2+ detail pages exist -->
-    <a class="xp-next" id="xp-next" href="">
-      <img class="xp-next-image" id="xp-next-image" src="" alt="" />
-      <div class="xp-next-scrim" aria-hidden="true"></div>
-      <div class="xp-next-content">
-        <span class="xp-next-label">Next Experience</span>
-        <h2 class="xp-next-title" id="xp-next-title"></h2>
+    <!-- =================== SECTION 6: HIRE US CTA =================== -->
+    <section class="bme-cta-section" id="cta-section">
+      <div class="section-inner bme-cta-inner">
+        <h2 class="bme-cta-heading">Want us to design yours?</h2>
+        <p class="bme-cta-sub" id="bme-cta-sub"></p>
+        <a class="btn btn-primary" id="bme-cta-link" href="/contact.html">Get in touch →</a>
       </div>
-    </a>
+    </section>
 
   </main>
 
@@ -114,7 +121,6 @@
         <li><a href="/experiences.html">Experiences</a></li>
         <li><a href="/workshops.html">Workshops</a></li>
         <li><a href="/events.html">Events</a></li>
-
         <li><a href="/contact.html">Contact</a></li>
       </ul>
       <p class="footer-copyright">© <span id="footer-year"></span> maybe:fiction. All rights reserved.</p>
@@ -122,6 +128,6 @@
   </footer>
 
   <script src="/js/content.js"></script>
-  <script src="/js/experience.js"></script>
+  <script src="/js/event.js"></script>
 </body>
 </html>

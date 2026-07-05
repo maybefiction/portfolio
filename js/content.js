@@ -371,4 +371,71 @@ const SITE_CONTENT = {
       ),
     },
   ],
+
+  // ---------- Events ----------
+  // Bookable event formats — written to speak to people considering hiring
+  // maybe:fiction to design their own celebration, not as a personal recap.
+  // source: 3_Celebrations/Ishaan 30th Birthday folder (photos) + the real
+  // Partiful event page for "[Pilot] S1E1: Celebrating Three Decades"
+  // (partiful.com/e/V2THNMMJROF1gXfI9yO5).
+  events: [
+    {
+      id: "birthdays",
+      title: "Birthdays",
+      tag: "Event",
+      hasImage: true,
+      hasDetailPage: true,
+      placeholderSrc: "/assets/events/birthdays/card.jpg",
+      heroPhoto: "/assets/events/birthdays/hero.jpg",
+      tagline: "Our format for milestone birthdays — a structure we design once, then adapt to whoever it's for.",
+      shortDescription: "A milestone birthday celebration built around one afternoon in three parts: making, playing, and performing. Debuted for our own co-founder's 30th — now a format we design for other people's celebrations too.",
+      description: "A milestone birthday celebration built around one afternoon in three parts: making, playing, and performing.",
+      basics: {
+        format: "Custom milestone celebration",
+        groupSize: "Debuted for 60 guests — scales up or down",
+        length: "6-hour arc, split into three 2-hour phases",
+        homeBase: "Venue scouted per celebration — NYC and beyond",
+      },
+      impactStats: [
+        { value: "60", label: "Guests hosted for the debut celebration" },
+        { value: "3", label: "Distinct phases woven into one afternoon" },
+        { value: "6", label: "Hours from doors open to the last slice of cake" },
+      ],
+      flow: [
+        {
+          title: "Make",
+          time: "2 hours",
+          text: "Craft stations tailored to the guest of honor — bracelet-making, collage, comics, playdough sculpting — paired with a spread built for grazing, not sitting down.",
+        },
+        {
+          title: "Play",
+          time: "2 hours",
+          text: "Games with just enough stakes to get strangers competitive together: spikeball, arcade basketball, nerf battles, and whatever else the room needs to loosen up.",
+        },
+        {
+          title: "Perform",
+          time: "2 hours",
+          text: "An MC'd run of live performances — music, comedy, spoken word, whatever the guest list brings — closing with cake, and a standing offer for any performer brave enough to take one to the face.",
+        },
+      ],
+      fullSynopsis: [
+        "Birthdays is maybe:fiction's format for milestone celebrations — a structure we design once and then adapt to whoever it's for. Instead of one long party, the day unfolds in three distinct two-hour phases: making, playing, and performing, so a room of very different people all find their own way in.",
+        "The debut ran as \"[Pilot] S1E1: Celebrating Three Decades,\" our first full production of the format, built for co-founder Ishaan Goel's 30th birthday. Sixty guests moved through craft stations, group games, and a run of live performances MC'd through the afternoon — closing, as tradition now has it, with cake and the option for any performer brave enough to take one to the face.",
+        "Small details carried the whole thing: a mini gallery built from guests' own early-stage and experimental artwork, a menu with vegan options built into every phase, and a schedule loose enough that people could drop into the part that spoke to them and stay as long as they liked.",
+        "It was framed as a pilot on purpose. Birthdays is a format we're still building out, and we design each edition around whoever it's for — if you're planning a milestone worth building a whole afternoon around, this is the starting blueprint.",
+      ],
+      themes: [
+        "Bracelet-Making", "Collage & Zine-Making", "Comics", "Playdough Sculpting",
+        "Spikeball", "Arcade Basketball", "Nerf Battles", "Live Performances",
+        "MC'd Program", "Custom Menu", "Vegan Options", "Cake Tradition", "Mini Art Gallery",
+      ],
+      credits: {
+        "Designed & Hosted By": "maybe:fiction",
+        "Debut Edition": "Ishaan Goel's 30th birthday, March 2025 — built as the pilot for the format",
+      },
+      gallery: Array.from({ length: 8 }, (_, i) =>
+        `/assets/events/birthdays/gallery-${String(i + 1).padStart(2, "0")}.jpg`
+      ),
+    },
+  ],
 };
