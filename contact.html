@@ -40,43 +40,9 @@
   <main id="main">
     <section class="contact contact-page">
       <div class="section-inner contact-inner">
-        <div class="contact-intro">
-          <h1 class="section-heading">Contact</h1>
-
-          <ul class="contact-details" id="contact-details"><!-- injected by JS --></ul>
-        </div>
-
-        <form class="contact-form" id="contact-form" novalidate>
-          <!--
-            Placeholder form: client-side only, no backend wired up.
-            To make this live, add an action/fetch call in js/contact.js
-            inside the 'contact-form' submit handler (e.g. Formspree,
-            Netlify Forms, or your own API endpoint).
-          -->
-          <div class="form-field">
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name" placeholder="Your name" required />
-            <span class="form-error" id="name-error"></span>
-          </div>
-
-          <div class="form-field">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="you@example.com" required />
-            <span class="form-error" id="email-error"></span>
-          </div>
-
-          <div class="form-field">
-            <label for="message">Message</label>
-            <textarea id="message" name="message" rows="5" placeholder="Tell us about your idea..." required></textarea>
-            <span class="form-error" id="message-error"></span>
-          </div>
-
-          <button type="submit" class="btn btn-primary btn-block" id="contact-submit">
-            <span class="btn-label">Send it off</span>
-          </button>
-
-          <p class="form-success" id="form-success" role="status" aria-live="polite"></p>
-        </form>
+        <h1 class="section-heading">Contact</h1>
+        <p>Say hello, pitch a collaboration, or ask about booking a workshop.</p>
+        <a class="contact-email" id="contact-email" href="mailto:"></a>
       </div>
     </section>
   </main>

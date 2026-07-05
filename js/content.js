@@ -13,9 +13,7 @@ const SITE_CONTENT = {
   brand: {
     name: "maybe:fiction",
     tagline: "Designing new ways for people to gather, create, and relate",
-    email: "hello@maybefiction.com",
-    phone: "+1 (555) 010-2026",
-    location: "Based in your city — traveling everywhere",
+    email: "ishaan@maybefiction.com",
   },
 
   // ---------- Hero ----------
