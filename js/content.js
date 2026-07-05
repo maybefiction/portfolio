@@ -156,13 +156,19 @@ const SITE_CONTENT = {
       hasImage: true,
       hasDetailPage: true,
 
-      // ---- Detail page content (source: Spontaneous Attachment / In Between Things Bio doc) ----
+      // ---- Detail page content (source: Spontaneous Attachment / In Between Things Bio doc,
+      // official show Program, and the [External] Summer 2026 proposal doc) ----
       basics: {
         dateRun: "January 31, 2026 — Ongoing",
         venue: "The Brooklyn Peace Center (January 31, 2026)",
         format: "Interdisciplinary Performance",
         runtime: "1 hour 30 minutes",
       },
+      impactStats: [
+        { value: "120", label: "Audience members across two January 2026 showings" },
+        { value: "22", label: "Collaborating artists, designers, and crew" },
+        { value: "3", label: "Floors of a single building turned into one continuous stage" },
+      ],
       credits: {
         "Directors/Creators": "Ishaan Goel (Co-Director, Producer, Experience Designer), Sarah Yasmine Marazzi-Sassoon (Co-Director, Choreographer), Samuel Mutter (Composer)",
         "Dancers": "Nadia Benes, Lucia Betelu, Chloe Sonnet Brown, Alekzeta Cantu, Magali Johnston-Viens",
@@ -172,38 +178,56 @@ const SITE_CONTENT = {
         "Operations": "Jude Icarus (Sound), Peter Smith (Lighting)",
         "Photographers": "Chris Cabrera, Sophia Loo, Sophia Marcontell Reyes",
         "Videographers": "Jeff Fan, Makenna Finch",
+        "Venue Partner": "Brooklyn Peace Center — a 501(c)(3) peacebuilding and arts organization in Bed-Stuy, Brooklyn",
+        "Choreographic Fiscal Sponsor": "The Field",
       },
       fullSynopsis: [
-        "Through a series of immersive performances integrating gathering, contemporary dance, and live music, audiences will explore and practice the often indirect ways attachments form between people, within ourselves, and with the places we inhabit.",
+        "Through a series of immersive performances integrating gathering, contemporary dance, and live music, audiences explore and practice the often indirect ways attachments form between people, within ourselves, and with the places we inhabit.",
         "Attachments don't happen when you're looking for them. They form in the cracks and crevices of daily life: building rapport with a neighbor through repeated hallway run-ins, understanding yourself by processing lingering thoughts on a walk to work, or feeling connected to a place by noticing the trees that line a familiar route. As more of our needs are met digitally, remotely, and on demand, we accidentally curate away many of the small frictions and shared contexts through which attachment emerges and deepens.",
         "Each show centers around contemporary dance works exploring ritual, repetition, intimacy, and attachment. Surrounding them is a participatory environment where audiences gather, create, move through shared spaces, and celebrate together. Rather than isolating the performance from the social moments surrounding it, the entire experience is the work.",
+        "In Between Things reflects a core belief of maybe:fiction's practice: that art is relational, and that the spectacle is never separate from the spectator. Its January 2026 debut at the Brooklyn Peace Center drew roughly 120 audience members across two showings, staged with a cast and crew of 22 artists and collaborators moving together across three floors of a single building. That response is what's driving the work's expansion into a multi-show run across New York City in summer 2026.",
       ],
       gallery: Array.from({ length: 15 }, (_, i) =>
         `/assets/experiences/spontaneous-attachment-gallery/photo-${String(i + 1).padStart(2, "0")}.jpg`
       ),
       experienceDesign: [
         {
-          title: "Gathering",
+          act: "I",
+          title: "Mark",
+          subtitle: "Gathering",
+          location: "Ground Floor",
           image: "/assets/experiences/spontaneous-attachment.jpg",
           text: "Attendees arrived at a central fire installation where they could craft jewelry using beads and twine. Nearby, a curated display of paintings and jewelry by local creators reflected the project's core motifs, complemented by a station for refreshments. This open atmosphere encouraged guests to acknowledge those sharing the space and engage in conversation before the formal program began.",
         },
         {
-          title: "Dance Piece #1",
+          act: "II",
+          title: "Notice",
+          subtitle: "Duet No. 1",
+          location: "Mainstage",
           image: "/assets/experiences/spontaneous-attachment-gallery/photo-02.jpg",
           text: "Following the initial half-hour, guests were led to the upper level for the premiere performance. Seated along both sides of a runway-style arrangement, the lack of a traditional front forced a perspective that shifted based on one's physical position in the room. This movement work involves two dancers in pointe shoes, their identities obscured at first. Their choreography transitions from structured, abstract geometry toward a startlingly vulnerable humanity, developed through a creative constraint to \"never break eye contact with each other.\"",
         },
         {
-          title: "Interlude",
+          act: "III",
+          title: "Pluck",
+          subtitle: "Interlude",
+          location: "Balcony",
           image: "/assets/experiences/spontaneous-attachment-gallery/photo-01.jpg",
           text: "Following the initial performance, guests ascended to the third level to engage with a central pond installation. Here, they were invited to participate in a symbolic \"offering\" by casting small mirror circles into the water. After selecting a light refreshment, the group returned to the main hall. This transitional movement naturally disrupted original seating patterns, prompting most attendees to seek out a fresh vantage point for the subsequent work.",
         },
         {
-          title: "Dance Piece #2",
+          act: "IV",
+          title: "Bind",
+          subtitle: "Duet No. 2",
+          location: "Mainstage",
           image: "/assets/experiences/spontaneous-attachment-gallery/photo-04.jpg",
           text: "Developed alongside composer Samuel Mutter, this second work examines the intersection of ritual and closeness. By utilizing rhythmic repetition, the choreography highlights the profound reliance between sound and motion as fundamental mirrors of our collective conduct.",
         },
         {
-          title: "Ending",
+          act: "V",
+          title: "Hold",
+          subtitle: "Exit",
+          location: "Mainstage Exit",
           image: "/assets/experiences/spontaneous-attachment-gallery/photo-10.jpg",
           text: "Audience members receive dark chocolate on their exit.",
         },

@@ -31,6 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   renderHero(item);
   renderMeta(item);
+  renderImpactStats(item);
   renderHeroMedia(item);
   renderDesignFlow(item);
   // Items with editions render their gallery from renderMeta's edition
@@ -165,6 +166,24 @@ function formatLabel(key) {
   return labels[key] || key;
 }
 
+/* ---------- Impact stats (optional — lives between the short description and hero media) ---------- */
+function renderImpactStats(item) {
+  const el = document.getElementById("xp-impact-stats");
+  if (!item.impactStats || !item.impactStats.length) {
+    el.remove();
+    return;
+  }
+  el.innerHTML = item.impactStats
+    .map(
+      (stat) => `
+    <div class="xp-impact-stat">
+      <span class="xp-impact-value">${stat.value}</span>
+      <span class="xp-impact-label">${stat.label}</span>
+    </div>`
+    )
+    .join("");
+}
+
 /* ---------- Section 3: Hero media (lives under the description in xp-meta-main) ---------- */
 // A gallery carousel is preferred (gives a fuller sense of the work than one
 // static frame); items without a gallery fall back to a single photo, so this
@@ -270,9 +289,12 @@ function renderDesignFlow(item) {
         <button class="xp-flow-node ${i === 0 ? "is-active" : ""}" data-stage="${i}" role="tab" aria-selected="${i === 0}">
           <div class="xp-flow-node-thumb-wrap">
             ${stage.image ? `<img class="xp-flow-node-thumb" src="${stage.image}" alt="${stage.title}" loading="lazy">` : ""}
-            <span class="xp-flow-node-index">${String(i + 1).padStart(2, "0")}</span>
+            <span class="xp-flow-node-index">${stage.act || String(i + 1).padStart(2, "0")}</span>
           </div>
-          <span class="xp-flow-node-label">${stage.title}</span>
+          <span class="xp-flow-node-label">
+            ${stage.title}
+            ${stage.subtitle ? `<span class="xp-flow-node-subtitle">${stage.subtitle}</span>` : ""}
+          </span>
         </button>`
         )
         .join("")}
@@ -282,7 +304,11 @@ function renderDesignFlow(item) {
         .map(
           (stage, i) => `
         <div class="xp-flow-panel ${i === 0 ? "is-open" : ""}" data-panel="${i}" role="tabpanel">
-          <h3>${stage.title}</h3>
+          <div class="xp-flow-panel-heading">
+            ${stage.act ? `<span class="xp-flow-panel-act">Act ${stage.act}</span>` : ""}
+            <h3>${stage.title}${stage.subtitle ? ` <span class="xp-flow-panel-subtitle">— ${stage.subtitle}</span>` : ""}</h3>
+            ${stage.location ? `<span class="xp-flow-panel-location">${stage.location}</span>` : ""}
+          </div>
           <p>${stage.text}</p>
         </div>`
         )
