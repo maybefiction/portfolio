@@ -32,7 +32,6 @@ document.addEventListener("DOMContentLoaded", () => {
   renderMeta(item);
   renderImpactStats(item);
   renderFlow(item);
-  renderRecapVideo(item);
   renderThemes(item);
   renderFieldNotes(item);
   renderGallery(item);
@@ -164,18 +163,6 @@ function renderFlow(item) {
     </div>`
     )
     .join("");
-}
-
-/* ---------- Section 3b: Recap video (optional) ---------- */
-function renderRecapVideo(item) {
-  const section = document.getElementById("video-section");
-  if (!item.recapVideo) {
-    section.remove();
-    return;
-  }
-  document.getElementById("bme-video-wrap").innerHTML = `
-    <video class="bme-video" src="${item.recapVideo}" poster="${item.heroPhoto || item.placeholderSrc}"
-      controls playsinline preload="metadata"></video>`;
 }
 
 /* ---------- Section 4: Themes tag cloud ---------- */

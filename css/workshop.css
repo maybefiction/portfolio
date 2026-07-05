@@ -60,22 +60,6 @@
 }
 .bme-flow-text { margin: 0; font-size: 0.98rem; line-height: 1.55; }
 
-/* ---------- 1b. RECAP VIDEO ---------- */
-/* Source footage is shot portrait (phone/smart-glasses), so the frame is
-   sized to the video's own aspect ratio and centered, rather than forcing
-   a landscape crop that doesn't exist in the source. */
-.bme-video-section { padding-top: 8px; padding-bottom: 64px; text-align: center; }
-.bme-video-wrap { display: flex; justify-content: center; }
-.bme-video {
-  width: 100%;
-  max-width: 380px;
-  max-height: 70vh;
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  box-shadow: var(--shadow-lift);
-  background: var(--ink);
-}
-
 /* ---------- 2. THEMES TAG CLOUD ---------- */
 .bme-themes-section { padding-top: 72px; padding-bottom: 56px; }
 .bme-theme-cloud { display: flex; flex-wrap: wrap; gap: 12px; }
