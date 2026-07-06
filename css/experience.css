@@ -255,6 +255,14 @@
 .xp-design .section-inner { padding-top: 0; padding-bottom: 0; }
 .xp-design .section-heading { margin-bottom: 40px; }
 
+/* Applied via JS (experience.js: mergeDesignAndGallerySections) only for
+   items whose Gallery filters in sync with the element tabs here (currently
+   just What Clings, via experienceDesignStyle: "card") — removes the gap
+   and heading break so Experience Design and Gallery read as one
+   continuous section instead of two, matching their linked behavior. */
+.xp-design.is-merged { margin-bottom: 0; padding-bottom: 40px; }
+.xp-gallery.is-merged { background: #E4DAE3; padding-top: 0; }
+
 .xp-flow-nodes {
   display: flex;
   justify-content: space-between;
