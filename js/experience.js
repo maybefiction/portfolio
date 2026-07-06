@@ -145,7 +145,7 @@ function renderMetaBlockHTML(basics, credits) {
               ([role, names]) => `
             <div class="xp-meta-row">
               <dt>${role}</dt>
-              <dd>${names}</dd>
+              <dd>${renderCreditNames(names)}</dd>
             </div>`
             )
             .join("")}
@@ -154,6 +154,33 @@ function renderMetaBlockHTML(basics, credits) {
   }
 
   return html;
+}
+
+/* Turns "Name (Role), Name (Role), ..." into one line per person instead of
+   one run-on string. Falls back to the plain string untouched when a field
+   isn't actually a list of people (e.g. a one-sentence venue blurb) — only
+   applies the list treatment when every comma-separated piece plausibly
+   reads as a name, either ending in a "(role)" annotation or made up
+   entirely of capitalized words. */
+function renderCreditNames(value) {
+  const parts = value.split(/,\s*(?![^(]*\))/).map((s) => s.trim());
+  if (parts.length < 2 || !parts.every(looksLikePersonEntry)) return value;
+
+  return `<ul class="xp-credit-list">
+    ${parts
+      .map((part) => {
+        const match = part.match(/^(.+?)\s*\(([^)]+)\)$/);
+        return match
+          ? `<li><span class="xp-credit-name">${match[1]}</span> <span class="xp-credit-role">${match[2]}</span></li>`
+          : `<li><span class="xp-credit-name">${part}</span></li>`;
+      })
+      .join("")}
+  </ul>`;
+}
+
+function looksLikePersonEntry(part) {
+  if (/\([^)]+\)\s*$/.test(part)) return true;
+  return part.split(/\s+/).every((word) => /^[A-Z][A-Za-z0-9'.-]*$/.test(word));
 }
 
 function formatLabel(key) {
@@ -310,6 +337,20 @@ function renderDesignFlow(item) {
             ${stage.location ? `<span class="xp-flow-panel-location">${stage.location}</span>` : ""}
           </div>
           <p>${stage.text}</p>
+          ${
+            stage.photos && stage.photos.length
+              ? `<div class="xp-flow-panel-photos">
+                  ${stage.photos
+                    .map(
+                      (src, p) => `
+                    <button class="xp-flow-panel-photo" data-stage-photo="${i}:${p}" aria-label="Open photo from ${stage.title}">
+                      <img src="${src}" alt="${item.title} — ${stage.title}" loading="lazy" />
+                    </button>`
+                    )
+                    .join("")}
+                </div>`
+              : ""
+          }
         </div>`
         )
         .join("")}
@@ -327,6 +368,16 @@ function renderDesignFlow(item) {
         n.setAttribute("aria-selected", String(n === node));
       });
       panels.forEach((p) => p.classList.toggle("is-open", p.dataset.panel === index));
+    });
+  });
+
+  // Stage photos open in the same lightbox as the main gallery, scoped to
+  // just that stage's photo set — kept separate from item.gallery so this
+  // never disturbs the lightbox state the full Gallery section relies on.
+  flow.querySelectorAll(".xp-flow-panel-photo").forEach((thumb) => {
+    thumb.addEventListener("click", () => {
+      const [stageIndex, photoIndex] = thumb.dataset.stagePhoto.split(":").map(Number);
+      openScopedLightbox(item.experienceDesign[stageIndex].photos, photoIndex, item.title);
     });
   });
 }
@@ -353,20 +404,29 @@ function renderGallery(item, gallery) {
     )
     .join("");
 
+  grid.querySelectorAll(".xp-gallery-thumb").forEach((thumb) => {
+    thumb.addEventListener("click", () => openScopedLightbox(gallery, Number(thumb.dataset.index), item.title));
+  });
+}
+
+/* ---------- Shared lightbox (used by both the full Gallery grid and the
+   per-stage photo strips in the Experience Design flow) ---------- */
+// Re-targets the same #xp-lightbox DOM element to whichever photo set was
+// just clicked, rather than keeping separate lightbox instances — editions
+// and stage panels all call this, so a single set of module-level handlers
+// always dispatches to whichever gallery is currently open.
+function openScopedLightbox(gallery, startIndex, title) {
   const lightbox = document.getElementById("xp-lightbox");
   const lightboxImage = document.getElementById("xp-lightbox-image");
   const closeBtn = document.getElementById("xp-lightbox-close");
   const prevBtn = document.getElementById("xp-lightbox-prev");
   const nextBtn = document.getElementById("xp-lightbox-next");
-  let currentIndex = 0;
+  let currentIndex = startIndex;
 
-  function openLightbox(index) {
-    currentIndex = index;
+  function show(index) {
+    currentIndex = (index + gallery.length) % gallery.length;
     lightboxImage.src = gallery[currentIndex];
-    lightboxImage.alt = `${item.title} — photo ${currentIndex + 1}`;
-    lightbox.classList.add("is-open");
-    lightbox.setAttribute("aria-hidden", "false");
-    document.body.style.overflow = "hidden";
+    lightboxImage.alt = `${title} — photo ${currentIndex + 1}`;
   }
 
   function closeLightbox() {
@@ -375,27 +435,22 @@ function renderGallery(item, gallery) {
     document.body.style.overflow = "";
   }
 
-  function showDelta(delta) {
-    currentIndex = (currentIndex + delta + gallery.length) % gallery.length;
-    lightboxImage.src = gallery[currentIndex];
-    lightboxImage.alt = `${item.title} — photo ${currentIndex + 1}`;
-  }
-
-  grid.querySelectorAll(".xp-gallery-thumb").forEach((thumb) => {
-    thumb.addEventListener("click", () => openLightbox(Number(thumb.dataset.index)));
-  });
+  show(currentIndex);
+  lightbox.classList.add("is-open");
+  lightbox.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
 
   closeBtn.onclick = closeLightbox;
-  prevBtn.onclick = () => showDelta(-1);
-  nextBtn.onclick = () => showDelta(1);
+  prevBtn.onclick = () => show(currentIndex - 1);
+  nextBtn.onclick = () => show(currentIndex + 1);
   lightbox.onclick = (e) => {
     if (e.target === lightbox) closeLightbox();
   };
-  // Editions re-call renderGallery on every tab switch, which would otherwise
-  // stack a new document-level listener each time (and old ones would keep
-  // firing against a stale gallery). Route through module-level state instead
-  // so a single listener always dispatches to the current closures.
-  activeLightboxHandlers = { closeLightbox, showDelta };
+  // Re-opening (e.g. switching editions, or clicking a different stage's
+  // photos) would otherwise stack a new document-level listener each time.
+  // Route through module-level state instead so a single listener always
+  // dispatches to whichever gallery is currently active.
+  activeLightboxHandlers = { closeLightbox, showDelta: (delta) => show(currentIndex + delta) };
   if (!documentKeydownBound) {
     documentKeydownBound = true;
     document.addEventListener("keydown", (e) => {

@@ -117,12 +117,20 @@
   line-height: 1.5;
 }
 
+/* Credits lists (multiple names in one field) — each person on their own
+   line instead of one run-on comma-separated string, with the parenthetical
+   role muted and separated from the name. */
+.xp-credit-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 5px; }
+.xp-credit-name { color: var(--ink); }
+.xp-credit-role { color: var(--ink-soft); font-size: 0.88em; }
+
 .xp-short-description {
   font-family: var(--font-display);
   font-size: clamp(1.4rem, 2.4vw, 1.9rem);
   line-height: 1.4;
   color: var(--ink);
   margin: 0 0 32px;
+  text-wrap: balance;
 }
 
 .xp-description-body {
@@ -251,13 +259,16 @@
   transition: transform 0.3s var(--ease-bounce);
 }
 /* Connecting line linking each thumbnail to the next, so the sequence —
-   and that each step is clickable — reads at a glance. */
+   and that each step is clickable — reads at a glance. Overlaps a few px
+   into the gap on both sides (rather than trying to land exactly on the
+   flex `gap` value) so it always visually reaches both thumbnails with no
+   sliver of a gap, regardless of rounding at odd container widths. */
 .xp-flow-node-thumb-wrap::after {
   content: "";
   position: absolute;
   top: 50%;
-  left: 100%;
-  width: 16px;
+  left: calc(100% - 4px);
+  width: 24px;
   height: 2px;
   background: var(--brand-purple);
   transform: translateY(-50%);
@@ -364,6 +375,24 @@
   margin-top: 6px;
 }
 .xp-flow-panel p { margin: 0; font-size: 1.05rem; }
+
+/* Photos specific to this stage — separate from the main Gallery section,
+   so browsing a single act's photos doesn't touch the full-show gallery. */
+.xp-flow-panel-photos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 10px;
+  margin-top: 24px;
+}
+.xp-flow-panel-photo {
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.25s var(--ease-bounce), box-shadow 0.25s ease;
+}
+.xp-flow-panel-photo:hover { transform: translateY(-3px); box-shadow: var(--shadow-soft); }
+.xp-flow-panel-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
 @keyframes xpFadeIn {
   from { opacity: 0; transform: translateY(8px); }
@@ -494,7 +523,11 @@
 @media (max-width: 768px) {
   .xp-hero { height: 56vh; }
   .xp-flow-nodes { flex-wrap: wrap; gap: 16px 0; }
-  .xp-flow-nodes::before { display: none; }
+  /* Wrapped rows mean "next" isn't reliably to the right anymore (every 3rd
+     item wraps down-left instead) — the connecting line only makes sense in
+     the single-row desktop layout, so hide it here rather than have it point
+     at the wrong thumbnail or overshoot with no gap to fill. */
+  .xp-flow-node-thumb-wrap::after { display: none; }
   .xp-flow-node { flex: 0 0 33.33%; }
   .xp-flow-panels { padding: 28px 22px; }
   .xp-gallery-grid { grid-template-columns: repeat(2, 1fr); }
