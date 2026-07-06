@@ -924,6 +924,11 @@ button.founder-toggle.section-link {
 .newsletter-embed .formkit-input,
 .newsletter-embed .formkit-submit,
 .newsletter-embed .formkit-disclaimer { font-family: var(--font-body); }
+/* The embed's own fill (rgb(242,242,242)) already matches --bg-base exactly —
+   the only thing making it read as a separate block is a drop shadow baked
+   into its inline <style>. !important beats that block's own specificity,
+   which otherwise wins ties by appearing later in the document. */
+.newsletter-embed .formkit-form[data-uid="fb69aacdb0"] { box-shadow: none !important; }
 
 /* ---------- 10. FOOTER ---------- */
 .site-footer { background: var(--ink); color: var(--white); }
