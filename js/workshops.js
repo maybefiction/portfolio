@@ -23,12 +23,14 @@ function renderWorkshops() {
       const href = w.hasDetailPage
         ? `/workshops/${w.id}`
         : `/contact.html?workshop=${encodeURIComponent(w.title)}`;
+      const desc = w.tagline || w.shortDescription || "";
       return `
         <a class="experience-card" href="${href}">
           ${media}
           <div class="experience-card-overlay">
             <span class="experience-tag tag-workshop">${w.tag}</span>
             <h3>${w.title}</h3>
+            ${desc ? `<p class="experience-card-desc">${desc}</p>` : ""}
           </div>
         </a>`;
     })

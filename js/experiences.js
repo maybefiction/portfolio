@@ -16,15 +16,18 @@ function renderExperiences() {
   const grid = document.getElementById("experience-grid");
 
   grid.innerHTML = SITE_CONTENT.experiences
+    .filter((item) => !item.draft)
     .map((item) => {
       const media = item.hasImage
         ? `<img class="experience-card-media" src="${item.placeholderSrc}" alt="${item.title}" loading="lazy">`
         : `<div class="media-placeholder ${item.gradient}"></div>`;
 
+      const desc = item.shortDescription || item.description || "";
       const overlay = `
           <div class="experience-card-overlay">
             <span class="experience-tag tag-${item.category}">${item.tag}</span>
             <h3>${item.title}</h3>
+            ${desc ? `<p class="experience-card-desc">${desc}</p>` : ""}
           </div>`;
 
       if (item.hasDetailPage) {

@@ -655,6 +655,24 @@ ul { list-style: none; margin: 0; padding: 0; }
    leaving a much bigger gap than every other section transition. */
 .newsletter-inner { padding-top: 56px; }
 
+/* ---------- 9c. HOMEPAGE CONTACT CTA (between Events and Newsletter) ---------- */
+/* Same purple-band treatment as the "Want us to design yours?" CTA on
+   workshop/event detail pages, so it reads as one consistent CTA language
+   across the site rather than a one-off homepage component. */
+.home-cta { background: var(--brand-purple); }
+.home-cta-inner { text-align: center; padding: 64px 24px; }
+.home-cta-heading {
+  color: var(--white);
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  margin: 0 0 16px;
+}
+.home-cta-sub {
+  color: var(--brand-purple-light);
+  max-width: 50ch;
+  margin: 0 auto 32px;
+  font-size: 1.05rem;
+}
+
 .about-body { max-width: none; }
 .about-body p { font-size: 1.05rem; }
 
@@ -821,6 +839,38 @@ button.founder-toggle.section-link {
   bottom: 0;
   padding: 24px;
   background: linear-gradient(180deg, rgba(38,37,34,0) 45%, rgba(38,37,34,0.85) 100%);
+  transition: background 0.35s ease;
+}
+/* Darken further up the card on hover so the extra description has enough
+   contrast to read against the photo — same idea as the reference site's
+   hover-card treatment. */
+.experience-card:hover .experience-card-overlay,
+.experience-card:focus-within .experience-card-overlay {
+  background: linear-gradient(180deg, rgba(38,37,34,0) 28%, rgba(38,37,34,0.9) 100%);
+}
+
+/* Extra copy revealed on hover — fades and slides up under the title.
+   Hidden (not just invisible) by default so it can't be tab-focused or
+   read by assistive tech until it's actually shown. */
+.experience-card-desc {
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  margin: 10px 0 0;
+  max-height: 0;
+  opacity: 0;
+  transform: translateY(6px);
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  transition: opacity 0.3s ease, transform 0.3s ease, max-height 0.3s ease;
+}
+.experience-card:hover .experience-card-desc,
+.experience-card:focus-within .experience-card-desc {
+  opacity: 1;
+  transform: translateY(0);
+  max-height: 4.6em;
 }
 
 .experience-tag {
@@ -950,7 +1000,12 @@ button.founder-toggle.section-link {
   margin-bottom: 12px;
 }
 .footer-logo .nav-logo-icon { width: 44px; height: 44px; }
-.footer-tagline { color: rgba(255,255,255,0.7); margin-bottom: 24px; }
+.footer-tagline {
+  color: rgba(255,255,255,0.7);
+  font-size: 0.92rem;
+  max-width: 46ch;
+  margin: 0 auto 24px;
+}
 .footer-nav { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; margin-bottom: 24px; }
 .footer-nav a {
   color: rgba(255,255,255,0.8);

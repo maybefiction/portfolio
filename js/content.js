@@ -247,6 +247,10 @@ const SITE_CONTENT = {
       placeholderSrc: "/assets/experiences/eclectic-pathetic.jpg",
       gradient: "grad-pink",
       hasImage: true,
+      // Was rendering live on /experiences.html as a real, non-clickable
+      // card with placeholder "TODO" copy — hide it from grids until it has
+      // real content and a detail page. Remove this flag then.
+      draft: true,
     },
     {
       id: "what-clings",

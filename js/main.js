@@ -115,10 +115,12 @@ function renderFeaturedExperiences() {
         ? `<img class="experience-card-media" src="${item.placeholderSrc}" alt="${item.title}" loading="lazy">`
         : `<div class="media-placeholder ${item.gradient}"></div>`;
 
+      const desc = item.shortDescription || item.description || "";
       const overlay = `
           <div class="experience-card-overlay">
             <span class="experience-tag tag-${item.category}">${item.tag}</span>
             <h3>${item.title}</h3>
+            ${desc ? `<p class="experience-card-desc">${desc}</p>` : ""}
           </div>`;
 
       if (item.hasDetailPage) {
@@ -168,12 +170,14 @@ function renderWorkshopsTeaser() {
       const href = w.hasDetailPage
         ? `/workshops/${w.id}`
         : `/contact.html?workshop=${encodeURIComponent(w.title)}`;
+      const desc = w.tagline || w.shortDescription || "";
       return `
         <a class="experience-card" href="${href}">
           ${media}
           <div class="experience-card-overlay">
             <span class="experience-tag tag-workshop">${w.tag}</span>
             <h3>${w.title}</h3>
+            ${desc ? `<p class="experience-card-desc">${desc}</p>` : ""}
           </div>
         </a>`;
     })
@@ -195,12 +199,14 @@ function renderEventsTeaser() {
       const href = e.hasDetailPage
         ? `/events/${e.id}`
         : `/contact.html?event=${encodeURIComponent(e.title)}`;
+      const desc = e.tagline || e.shortDescription || "";
       return `
         <a class="experience-card" href="${href}">
           ${media}
           <div class="experience-card-overlay">
             <span class="experience-tag tag-event">${e.tag}</span>
             <h3>${e.title}</h3>
+            ${desc ? `<p class="experience-card-desc">${desc}</p>` : ""}
           </div>
         </a>`;
     })

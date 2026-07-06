@@ -23,12 +23,14 @@ function renderEvents() {
       const href = e.hasDetailPage
         ? `/events/${e.id}`
         : `/contact.html?event=${encodeURIComponent(e.title)}`;
+      const desc = e.tagline || e.shortDescription || "";
       return `
         <a class="experience-card" href="${href}">
           ${media}
           <div class="experience-card-overlay">
             <span class="experience-tag tag-event">${e.tag}</span>
             <h3>${e.title}</h3>
+            ${desc ? `<p class="experience-card-desc">${desc}</p>` : ""}
           </div>
         </a>`;
     })
