@@ -202,11 +202,6 @@ const SITE_CONTENT = {
           subtitle: "Fire Installation & Communal Making",
           location: "Ground Floor",
           image: "/assets/experiences/spontaneous-attachment.jpg",
-          photos: [
-            "/assets/experiences/spontaneous-attachment-gallery/photo-11.jpg",
-            "/assets/experiences/spontaneous-attachment-gallery/photo-13.jpg",
-            "/assets/experiences/spontaneous-attachment-gallery/photo-14.jpg",
-          ],
           text: "Guests arrived at a central fire installation — we keep returning to fire because it's one of humanity's oldest technologies for gathering, connection, and storytelling. Around it, people strung beads and twine into jewelry, browsed a curated display of paintings and sculpture by local artists, and grabbed a plate from the refreshments table. Nothing was scheduled yet; the point was simply to notice who else was in the room before the formal program began.",
         },
         {
@@ -215,10 +210,6 @@ const SITE_CONTENT = {
           subtitle: "Duet No. 1",
           location: "Mainstage",
           image: "/assets/experiences/spontaneous-attachment-gallery/photo-02.jpg",
-          photos: [
-            "/assets/experiences/spontaneous-attachment-gallery/photo-03.jpg",
-            "/assets/experiences/spontaneous-attachment-gallery/photo-08.jpg",
-          ],
           text: "Guests were led upstairs for the premiere performance, seated along both sides of a runway-style stage — with no single front, where you sat shaped what you saw. Two dancers in pointe shoes, identities hidden at first, worked under one rule: never break eye contact with each other. Their movement travels from cold, structured geometry into something startlingly human, tracing how closeness actually happens between two people.",
         },
         {
@@ -227,10 +218,6 @@ const SITE_CONTENT = {
           subtitle: "Pond Installation",
           location: "Balcony",
           image: "/assets/experiences/spontaneous-attachment-gallery/photo-01.jpg",
-          photos: [
-            "/assets/experiences/spontaneous-attachment-gallery/photo-05.jpg",
-            "/assets/experiences/spontaneous-attachment-gallery/photo-12.jpg",
-          ],
           text: "Between performances, guests climbed to the top floor to find a still pond installation. Each person was invited to cast a small mirror circle into the water — a quiet offering, a way of leaving something of yourself behind before heading back downstairs. Crossing the room also broke up where people had been sitting, so nobody watched the next piece from the same seat twice.",
         },
         {
@@ -239,12 +226,6 @@ const SITE_CONTENT = {
           subtitle: "Quartet accompanied by orchestra",
           location: "Mainstage",
           image: "/assets/experiences/spontaneous-attachment-gallery/photo-04.jpg",
-          photos: [
-            "/assets/experiences/spontaneous-attachment-gallery/photo-06.jpg",
-            "/assets/experiences/spontaneous-attachment-gallery/photo-07.jpg",
-            "/assets/experiences/spontaneous-attachment-gallery/photo-09.jpg",
-            "/assets/experiences/spontaneous-attachment-gallery/photo-15.jpg",
-          ],
           text: "Composer Samuel Mutter scored this second piece for a quartet of dancers moving alongside a small live ensemble — soprano, trumpet, violin, and viola. Rhythmic repetition ties the two together until sound and motion start to mirror each other, the same way small repeated gestures build real closeness between people over time.",
         },
         {

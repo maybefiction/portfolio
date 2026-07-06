@@ -376,24 +376,6 @@
 }
 .xp-flow-panel p { margin: 0; font-size: 1.05rem; }
 
-/* Photos specific to this stage — separate from the main Gallery section,
-   so browsing a single act's photos doesn't touch the full-show gallery. */
-.xp-flow-panel-photos {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-  gap: 10px;
-  margin-top: 24px;
-}
-.xp-flow-panel-photo {
-  aspect-ratio: 1 / 1;
-  border-radius: var(--radius-sm);
-  overflow: hidden;
-  cursor: pointer;
-  transition: transform 0.25s var(--ease-bounce), box-shadow 0.25s ease;
-}
-.xp-flow-panel-photo:hover { transform: translateY(-3px); box-shadow: var(--shadow-soft); }
-.xp-flow-panel-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
 @keyframes xpFadeIn {
   from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: translateY(0); }

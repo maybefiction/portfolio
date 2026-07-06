@@ -337,20 +337,6 @@ function renderDesignFlow(item) {
             ${stage.location ? `<span class="xp-flow-panel-location">${stage.location}</span>` : ""}
           </div>
           <p>${stage.text}</p>
-          ${
-            stage.photos && stage.photos.length
-              ? `<div class="xp-flow-panel-photos">
-                  ${stage.photos
-                    .map(
-                      (src, p) => `
-                    <button class="xp-flow-panel-photo" data-stage-photo="${i}:${p}" aria-label="Open photo from ${stage.title}">
-                      <img src="${src}" alt="${item.title} — ${stage.title}" loading="lazy" />
-                    </button>`
-                    )
-                    .join("")}
-                </div>`
-              : ""
-          }
         </div>`
         )
         .join("")}
@@ -368,16 +354,6 @@ function renderDesignFlow(item) {
         n.setAttribute("aria-selected", String(n === node));
       });
       panels.forEach((p) => p.classList.toggle("is-open", p.dataset.panel === index));
-    });
-  });
-
-  // Stage photos open in the same lightbox as the main gallery, scoped to
-  // just that stage's photo set — kept separate from item.gallery so this
-  // never disturbs the lightbox state the full Gallery section relies on.
-  flow.querySelectorAll(".xp-flow-panel-photo").forEach((thumb) => {
-    thumb.addEventListener("click", () => {
-      const [stageIndex, photoIndex] = thumb.dataset.stagePhoto.split(":").map(Number);
-      openScopedLightbox(item.experienceDesign[stageIndex].photos, photoIndex, item.title);
     });
   });
 }
