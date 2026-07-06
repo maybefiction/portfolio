@@ -211,6 +211,7 @@ function formatLabel(key) {
     visitors: "Visitors",
     collaborators: "Collaborators",
     communityPartners: "Community Partners",
+    audienceSize: "Audience Size",
   };
   return labels[key] || key;
 }
@@ -474,7 +475,20 @@ function renderEditionCards(item) {
       <div class="jpa-tabs" role="tablist">${tabsHTML}</div>
       <div class="jpa-edition-content">
         <div class="jpa-edition-fields">
-          ${edition.theme ? `<div class="jpa-field"><h4 class="xp-meta-label">Theme</h4><p>${edition.theme}</p></div>` : ""}
+          ${
+            edition.theme
+              ? `<div class="jpa-field jpa-field-theme">
+                  <h4 class="xp-meta-label">Theme</h4>
+                  <p class="jpa-theme-name">${edition.theme}</p>
+                  ${edition.themeSubtitle ? `<p class="jpa-theme-subtitle">${edition.themeSubtitle}</p>` : ""}
+                  ${
+                    edition.themeDescription
+                      ? edition.themeDescription.map((p) => `<p class="jpa-theme-desc">${p}</p>`).join("")
+                      : ""
+                  }
+                </div>`
+              : ""
+          }
           ${
             edition.basics && edition.basics.venue
               ? `<div class="jpa-field"><h4 class="xp-meta-label">Location</h4><p>${edition.basics.venue}</p></div>`

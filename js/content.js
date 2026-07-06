@@ -97,8 +97,8 @@ const SITE_CONTENT = {
       tag: "Festival",
       shortDescription: "A performance arts festival transforming homes into stages for encounter, collective creation, play and ritual",
       description: "A performance arts festival transforming homes into stages for encounter, collective creation, play and ritual",
-      placeholderSrc: "/assets/experiences/jornada-de-puertas-abiertas.jpg",
-      heroPhoto: "/assets/experiences/jornada-gallery/nyc-2024/photo-04.jpg",
+      placeholderSrc: "/assets/experiences/jornada-gallery/madrid-2023-hero.jpg",
+      heroPhoto: "/assets/experiences/jornada-gallery/madrid-2023-hero.jpg",
       gradient: "grad-blue",
       hasImage: true,
       hasDetailPage: true,
@@ -108,16 +108,17 @@ const SITE_CONTENT = {
       // is expanded below (that's what the per-edition fields are for).
       basics: {
         createdBy: "Super Alex",
-        dateRun: "Ongoing since June 2023",
+        dateRun: "June 2023 - Ongoing",
         venue: "Private homes in Madrid & Brooklyn, NYC",
         format: "Home-based performance art festival",
         runtime: "3 hours",
+        audienceSize: "Limited to 40 people per event",
       },
 
       fullSynopsis: [
-        "Jornada de Puertas Abiertas (Open Doors Day) is a performance art festival that takes place inside a private home, temporarily transforming a domestic environment into a public space for live participatory art. Each room hosts a different performance or installation, responding to the architecture, atmosphere, and particularities of the space.",
-        "By opening an intimate domestic space to strangers, the festival uses the tension between the private and the public to create interactions that could not exist in a conventional theatre or gallery. The home becomes more than a venue: it is an active collaborator, shaping the unfolding of each work and opening space for ritual, whimsy, and unexpected encounters.",
-        "Visitors are invited to participate rather than simply observe, discovering moments of wonder, play, and connection that reveal the extraordinary potential of everyday spaces.",
+        "<strong>Jornada de Puertas Abiertas</strong> (Open Doors Day) is a performance art festival that <strong>takes place inside a private home</strong>, temporarily transforming a domestic environment into a public space for live participatory art. <strong>Each room hosts a different performance</strong> or installation, responding to the architecture, atmosphere, and particularities of the space.",
+        "By opening an intimate domestic space to strangers, the festival uses the <strong>tension between the private and the public</strong> to create interactions that could not exist in a conventional theatre or gallery. <strong>The home becomes</strong> more than a venue: it is <strong>an active collaborator</strong>, shaping the unfolding of each work and opening space for ritual, whimsy, and unexpected encounters.",
+        "<strong>Visitors are invited to participate</strong> rather than simply observe, discovering moments of wonder, play, and connection that reveal the extraordinary potential of everyday spaces.",
       ],
 
       // General carousel (top of page) — pulls from the flagship, most
@@ -136,10 +137,15 @@ const SITE_CONTENT = {
         {
           id: "nyc-2024",
           label: "NYC 2024",
-          theme: "Roots",
+          theme: "Shared Intimacies",
+          themeSubtitle: "How do strangers become close?",
+          themeDescription: [
+            "For its second edition, Jornada de Puertas Abiertas turned its attention to the many meanings of roots. Some roots anchor us; others entangle us. Some are inherited, while others are formed slowly through the relationships, rituals, and places that shape our lives.",
+            "Presented across two homes, the festival invited audiences to move between these different understandings. Performances explored the body, childhood, migration, grief, celebration, memory, and belonging through shared rituals, participatory installations, music, dance, and live painting. Together, they suggested that home is not simply where we come from, but something we create with others, again and again.",
+          ],
           basics: {
             dateRun: "June 2024",
-            venue: "Two private homes in Brooklyn, NYC",
+            venue: "Two private homes in Brooklyn, NYC. Exact address disclosed only to confirmed attendants.",
             format: "Performance Art Festival",
             runtime: "4h",
           },
@@ -178,10 +184,15 @@ const SITE_CONTENT = {
         {
           id: "madrid-2023",
           label: "Madrid 2023",
-          theme: "Intimacy",
+          theme: "Roots",
+          themeSubtitle: "What allows us to feel at home, and what must we let go of in order to grow?",
+          themeDescription: [
+            "The inaugural edition of Jornada de Puertas Abiertas explored the home as a site where intimacy could be constructed collectively, rather than hidden. The different performances revolved around how trust, vulnerability, and play might emerge between people who had only just met.",
+            "The featured works transformed familiar rituals — playing games, doing the laundry, lying in bed, watching home-made videos, or gathering everyday objects — into opportunities for collective participation. Rather than presenting intimacy as something fixed or personal, the festival approached it as something created through shared experience: a fleeting condition that arises when people choose to spend time, attention, and imagination together.",
+          ],
           basics: {
             dateRun: "June 2023",
-            venue: "Private home in Madrid, Spain",
+            venue: "Private homes in Madrid, Spain. Exact address disclosed only to confirmed attendants.",
             format: "Performance art festival",
             runtime: "3 hours",
           },
