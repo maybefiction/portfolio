@@ -403,9 +403,10 @@ function renderEditionCards(item) {
                  ${artistNames
                    .map((name) => {
                      const photo = edition.artistPhotos && edition.artistPhotos[name];
-                     return photo
-                       ? `<img class="jpa-avatar jpa-avatar-photo" src="${photo}" alt="${name}" title="${name}" loading="lazy" />`
-                       : `<span class="jpa-avatar" title="${name}" aria-label="${name}">${initials(name)}</span>`;
+                     const avatar = photo
+                       ? `<img class="jpa-avatar jpa-avatar-photo" src="${photo}" alt="" loading="lazy" />`
+                       : `<span class="jpa-avatar" aria-hidden="true">${initials(name)}</span>`;
+                     return `<div class="jpa-artist">${avatar}<span class="jpa-artist-name">${name}</span></div>`;
                    })
                    .join("")}
                </div>`

@@ -429,7 +429,21 @@
 }
 .jpa-subheading:not(:first-child) { margin-top: 32px; }
 
-.jpa-artist-avatars { display: flex; flex-wrap: wrap; gap: 14px; }
+.jpa-artist-avatars { display: flex; flex-wrap: wrap; gap: 20px 16px; }
+.jpa-artist {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 84px;
+  text-align: center;
+}
+.jpa-artist-name {
+  font-size: 0.78rem;
+  line-height: 1.3;
+  color: var(--ink-soft);
+}
+
 .jpa-avatar {
   width: 64px;
   height: 64px;
@@ -445,8 +459,8 @@
   cursor: default;
   box-shadow: var(--shadow-soft);
 }
-.jpa-avatar:nth-child(3n+2) { background: var(--brand-teal-light); }
-.jpa-avatar:nth-child(3n+3) { background: var(--brand-pink-light); }
+.jpa-artist:nth-child(3n+2) .jpa-avatar { background: var(--brand-teal-light); }
+.jpa-artist:nth-child(3n+3) .jpa-avatar { background: var(--brand-pink-light); }
 
 /* Real headshots (as opposed to the initials fallback) — same circle size,
    just an actual photo instead of a flat color + letters. */
