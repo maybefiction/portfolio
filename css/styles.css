@@ -598,14 +598,6 @@ ul { list-style: none; margin: 0; padding: 0; }
   margin-bottom: 0;
 }
 
-.hero-cta-group {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 16px;
-  margin-top: 32px;
-}
-
 .scroll-cue {
   position: absolute;
   bottom: 32px;
@@ -644,12 +636,9 @@ ul { list-style: none; margin: 0; padding: 0; }
 .about-hero-image { width: 100%; height: 100%; object-fit: cover; }
 
 .about { background: var(--bg-tint); position: relative; }
-/* About, Featured Work, Credibility, and Work all share the same tint
-   background with no divider between them — tighten every join instead of
-   leaving a big same-color gap. */
+/* About and Experiences share the same background — no divider between
+   them, so tighten the join instead of leaving a big same-color gap. */
 .about .section-inner { padding-bottom: 48px; }
-.featured-work .section-inner { padding-top: 56px; padding-bottom: 56px; }
-.credibility .section-inner { padding-top: 0; padding-bottom: 56px; }
 .experiences .section-inner { padding-top: 0; padding-bottom: 56px; }
 /* On the standalone page there's no About section above to join with —
    restore normal top breathing room under the fixed nav. */
@@ -734,61 +723,6 @@ button.founder-toggle.section-link {
 .founder-extra-photo:nth-child(3) { top: 0; right: 0; }
 .founder-extra-photo:nth-child(4) { bottom: 0; right: 0; }
 .founder-extra-photo:nth-child(5) { bottom: 0; left: 0; }
-
-/* ---------- 6b. FEATURED WORK (homepage spotlight, single project) ---------- */
-.featured-work { background: var(--bg-tint); }
-.featured-work-inner {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 48px;
-  align-items: center;
-  margin-top: 40px;
-}
-.featured-work-image {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-lift);
-}
-.featured-work-title { margin: 0 0 16px; font-size: clamp(1.6rem, 3vw, 2.2rem); }
-.featured-work-description { font-size: 1.05rem; line-height: 1.6; color: var(--ink-soft); margin: 0 0 20px; }
-.featured-work-note {
-  margin: 28px 0 0;
-  font-family: var(--font-display);
-  font-style: italic;
-  color: var(--ink-soft);
-}
-
-/* ---------- 6c. CREDIBILITY (subtle stat row — same plain rule-and-divider
-   treatment as project detail pages' impact stats, not a boxed stat grid) ---------- */
-.credibility { background: var(--bg-tint); }
-.credibility-stats {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 26px 0;
-  border-top: 2px solid var(--ink);
-  border-bottom: 2px solid var(--ink);
-}
-.credibility-stat {
-  flex: 1;
-  min-width: 200px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  padding: 0 24px;
-}
-.credibility-stat:first-child { padding-left: 0; }
-.credibility-stat:last-child { padding-right: 0; }
-.credibility-stat + .credibility-stat { border-left: 1px solid rgba(38, 37, 34, 0.15); }
-.credibility-value {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(1.6rem, 3vw, 2.4rem);
-  line-height: 1.1;
-  color: var(--brand-purple);
-}
-.credibility-label { font-size: 0.9rem; line-height: 1.4; color: var(--ink-soft); }
 
 /* ---------- 7. EXPERIENCES ---------- */
 .experiences { background: var(--bg-tint); }
@@ -1102,17 +1036,6 @@ button.founder-toggle.section-link {
   .nav-menu .nav-link.is-active { color: var(--brand-purple); background: var(--bg-tint); }
 
   .founder-card { grid-template-columns: 1fr; text-align: center; justify-items: center; }
-
-  .featured-work-inner { grid-template-columns: 1fr; text-align: center; }
-  .credibility-stats { flex-direction: column; gap: 18px; }
-  .credibility-stat,
-  .credibility-stat:first-child,
-  .credibility-stat:last-child,
-  .credibility-stat + .credibility-stat {
-    padding: 0;
-    border: none;
-    text-align: center;
-  }
 }
 
 /* Small mobile: <= 480px */
