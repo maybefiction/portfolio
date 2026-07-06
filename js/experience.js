@@ -346,18 +346,22 @@ function renderDesignFlow(item) {
 // Renders one expandable card per edition into the same #xp-design-section /
 // #xp-flow containers renderDesignFlow uses — only one item type needs this
 // (editions), so it's a separate function rather than a branch inside
-// renderDesignFlow. Exactly one card is open at a time; each open card shows
-// its own Theme/Location/Credits (minus Artists, shown separately as avatar
-// circles) and a full photo grid wired into the shared lightbox.
+// renderDesignFlow. Exactly one card is open at a time; the card itself only
+// holds Theme/Location/Credits — Artists and Gallery live below it as plain
+// (un-boxed) sections that still track whichever edition is open, so the
+// card boundary doesn't stretch to wrap a full photo grid.
 function renderEditionCards(item) {
   const section = document.getElementById("xp-design-section");
   const flow = document.getElementById("xp-flow");
-  flow.className = "jpa-editions";
 
   let openIndex = 0;
 
   function render() {
-    flow.innerHTML = item.editions
+    const openEdition = item.editions[openIndex];
+    const creditsEntries = Object.entries(openEdition.credits || {}).filter(([role]) => role !== "Artists");
+    const artistNames = openEdition.credits && openEdition.credits.Artists ? splitNames(openEdition.credits.Artists) : [];
+
+    const cardsHTML = item.editions
       .map((edition, i) => {
         if (i !== openIndex) {
           return `
@@ -365,9 +369,6 @@ function renderEditionCards(item) {
           <span class="jpa-edition-label">${edition.label}</span>
         </button>`;
         }
-
-        const creditsEntries = Object.entries(edition.credits || {}).filter(([role]) => role !== "Artists");
-        const artistNames = edition.credits && edition.credits.Artists ? splitNames(edition.credits.Artists) : [];
 
         return `
         <div class="jpa-edition-card is-open">
@@ -401,38 +402,43 @@ function renderEditionCards(item) {
                   : ""
               }
             </div>
-            ${
-              artistNames.length
-                ? `<h4 class="jpa-subheading">Artists</h4>
-                   <div class="jpa-artist-avatars">
-                     ${artistNames
-                       .map(
-                         (name, p) =>
-                           `<span class="jpa-avatar" title="${name}" aria-label="${name}">${initials(name)}</span>`
-                       )
-                       .join("")}
-                   </div>`
-                : ""
-            }
-            ${
-              edition.gallery && edition.gallery.length
-                ? `<h4 class="jpa-subheading">Gallery</h4>
-                   <div class="xp-gallery-grid jpa-gallery-grid">
-                     ${edition.gallery
-                       .map(
-                         (src, p) => `
-                     <button class="xp-gallery-thumb" data-edition-photo="${i}:${p}" aria-label="Open photo ${p + 1} of ${edition.gallery.length}">
-                       <img src="${src}" alt="${edition.label} — photo ${p + 1}" loading="lazy" />
-                     </button>`
-                       )
-                       .join("")}
-                   </div>`
-                : ""
-            }
           </div>
         </div>`;
       })
       .join("");
+
+    const extraHTML = `
+      ${
+        artistNames.length
+          ? `<h4 class="jpa-subheading">Artists</h4>
+             <div class="jpa-artist-avatars">
+               ${artistNames
+                 .map((name) => `<span class="jpa-avatar" title="${name}" aria-label="${name}">${initials(name)}</span>`)
+                 .join("")}
+             </div>`
+          : ""
+      }
+      ${
+        openEdition.gallery && openEdition.gallery.length
+          ? `<h4 class="jpa-subheading">Gallery</h4>
+             <div class="xp-gallery-grid jpa-gallery-grid">
+               ${openEdition.gallery
+                 .map(
+                   (src, p) => `
+               <button class="xp-gallery-thumb" data-photo="${p}" aria-label="Open photo ${p + 1} of ${openEdition.gallery.length}">
+                 <img src="${src}" alt="${openEdition.label} — photo ${p + 1}" loading="lazy" />
+               </button>`
+                 )
+                 .join("")}
+             </div>`
+          : ""
+      }
+    `;
+
+    flow.innerHTML = `
+      <div class="jpa-editions">${cardsHTML}</div>
+      <div class="jpa-edition-extra">${extraHTML}</div>
+    `;
 
     flow.querySelectorAll(".jpa-edition-card.is-collapsed, .jpa-edition-header").forEach((el) => {
       el.addEventListener("click", () => {
@@ -443,11 +449,9 @@ function renderEditionCards(item) {
       });
     });
 
-    flow.querySelectorAll("[data-edition-photo]").forEach((thumb) => {
+    flow.querySelectorAll("[data-photo]").forEach((thumb) => {
       thumb.addEventListener("click", () => {
-        const [editionIndex, photoIndex] = thumb.dataset.editionPhoto.split(":").map(Number);
-        const edition = item.editions[editionIndex];
-        openScopedLightbox(edition.gallery, photoIndex, edition.label);
+        openScopedLightbox(openEdition.gallery, Number(thumb.dataset.photo), openEdition.label);
       });
     });
   }

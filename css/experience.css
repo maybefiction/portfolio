@@ -411,13 +411,15 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 32px;
-  padding-bottom: 28px;
-  margin-bottom: 28px;
-  border-bottom: 1px solid rgba(38, 37, 34, 0.12);
 }
 .jpa-field h4 { margin: 0 0 10px; }
 .jpa-field p { margin: 0; font-size: 0.98rem; line-height: 1.5; color: var(--ink); }
 .jpa-field .xp-meta-list { margin: 0; }
+
+/* Artists + Gallery sit below the card row, plain (no box), rather than
+   inside the open card — they still track whichever edition is open, but
+   the card boundary itself only wraps Theme/Location/Credits. */
+.jpa-edition-extra { margin-top: 40px; }
 
 .jpa-subheading {
   font-family: var(--font-display);
