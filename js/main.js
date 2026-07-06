@@ -1,10 +1,11 @@
 /* ============================================================
    MAIN.JS — rendering + interactivity for maybe:fiction homepage.
    Reads all copy/data from js/content.js (SITE_CONTENT).
-   The homepage only shows teasers for About/Experiences/Workshops —
-   each links out to its own full page (about.html, experiences.html,
-   workshops.html), which have their own JS files with the full render.
-   Contact lives on its own page — see contact.html + js/contact.js.
+   The homepage shows teasers for Experiences/Workshops/Events — each
+   links out to its own full page (experiences.html, workshops.html,
+   events.html), which have their own JS files with the full render.
+   About and Contact live on their own pages only — the homepage About
+   teaser was removed as redundant with the hero tagline.
    ============================================================ */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -20,15 +21,12 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("footer-year").textContent = new Date().getFullYear();
 });
 
-/* ---------- Text injection (hero / about / footer) ---------- */
+/* ---------- Text injection (hero / footer) ---------- */
 function injectStaticText() {
-  const { hero, about, brand } = SITE_CONTENT;
+  const { hero, brand } = SITE_CONTENT;
 
   document.getElementById("hero-heading").textContent = hero.heading;
   document.getElementById("hero-tagline").textContent = hero.tagline;
-
-  document.getElementById("about-heading").textContent = about.heading;
-  document.getElementById("about-body").innerHTML = `<p>${about.shortBody}</p>`;
 
   document.getElementById("footer-tagline").textContent = brand.tagline;
 }

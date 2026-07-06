@@ -638,12 +638,17 @@ ul { list-style: none; margin: 0; padding: 0; }
 .about-hero-image { width: 100%; height: 100%; object-fit: cover; }
 
 .about { background: var(--bg-tint); position: relative; }
-/* About and Experiences share the same background — no divider between
-   them, so tighten the join instead of leaving a big same-color gap. */
+/* About's own bottom join spacing (used on about.html, which stacks a
+   founders grid right below in the same background). */
 .about .section-inner { padding-bottom: 48px; }
+/* Homepage: Experiences now follows the Hero directly (About's homepage
+   teaser was removed as redundant with the hero tagline), so it needs its
+   own top breathing room under the fixed nav — same as the standalone page.
+   The ID beats the plain .experiences/.experiences-page class rules below,
+   which still apply their padding-top:0 to the Events section that follows
+   (same tint background, no divider needed there). */
+#experiences .section-inner { padding-top: 56px; }
 .experiences .section-inner { padding-top: 0; padding-bottom: 56px; }
-/* On the standalone page there's no About section above to join with —
-   restore normal top breathing room under the fixed nav. */
 .experiences-page .section-inner { padding-top: 56px; }
 .workshops .section-inner { padding-top: 56px; padding-bottom: 56px; }
 /* Workshops -> Newsletter was left at the default 100px/100px join,
