@@ -401,7 +401,12 @@ function renderEditionCards(item) {
             ? `<h4 class="jpa-subheading">Artists</h4>
                <div class="jpa-artist-avatars">
                  ${artistNames
-                   .map((name) => `<span class="jpa-avatar" title="${name}" aria-label="${name}">${initials(name)}</span>`)
+                   .map((name) => {
+                     const photo = edition.artistPhotos && edition.artistPhotos[name];
+                     return photo
+                       ? `<img class="jpa-avatar jpa-avatar-photo" src="${photo}" alt="${name}" title="${name}" loading="lazy" />`
+                       : `<span class="jpa-avatar" title="${name}" aria-label="${name}">${initials(name)}</span>`;
+                   })
                    .join("")}
                </div>`
             : ""

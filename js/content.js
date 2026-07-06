@@ -149,6 +149,25 @@ const SITE_CONTENT = {
             "Artists": "Benedicto Figueroa, Brooke Leialoha, Gigi Tamayo, Guerilla Phart, Ishaan Goel, John Bowen, Justin Harmon, Mk7, Púyaloahí, Steinbock19, Super Alex, Taliyah Starr, V Tineo, Zaraith Hernández",
             "Guests": "70 people",
           },
+          // Real headshots, keyed by exact name as it appears in
+          // credits.Artists above — falls back to initials for any name
+          // without an entry here.
+          artistPhotos: {
+            "Benedicto Figueroa": "/assets/experiences/jornada-gallery/artists/benedicto-figueroa.jpg",
+            "Brooke Leialoha": "/assets/experiences/jornada-gallery/artists/brooke-leialoha.jpg",
+            "Gigi Tamayo": "/assets/experiences/jornada-gallery/artists/gigi-tamayo.jpg",
+            "Guerilla Phart": "/assets/experiences/jornada-gallery/artists/guerilla-phart.jpg",
+            "Ishaan Goel": "/assets/experiences/jornada-gallery/artists/ishaan-goel.jpg",
+            "John Bowen": "/assets/experiences/jornada-gallery/artists/john-bowen.jpg",
+            "Justin Harmon": "/assets/experiences/jornada-gallery/artists/justin-harmon.jpg",
+            "Mk7": "/assets/experiences/jornada-gallery/artists/mk7.jpg",
+            "Púyaloahí": "/assets/experiences/jornada-gallery/artists/puyaloahi.jpg",
+            "Steinbock19": "/assets/experiences/jornada-gallery/artists/steinbock19.jpg",
+            "Super Alex": "/assets/experiences/jornada-gallery/artists/super-alex-nyc.jpg",
+            "Taliyah Starr": "/assets/experiences/jornada-gallery/artists/taliyah-starr.jpg",
+            "V Tineo": "/assets/experiences/jornada-gallery/artists/v-tineo.jpg",
+            "Zaraith Hernández": "/assets/experiences/jornada-gallery/artists/zaraith-hernandez.jpg",
+          },
           gallery: [
             "/assets/experiences/jornada-gallery/nyc-2024/photo-00-hero.jpg",
             ...Array.from({ length: 23 }, (_, i) =>
@@ -170,6 +189,16 @@ const SITE_CONTENT = {
             "Host / Founder / Producer": "Super Alex",
             "Artists": "Ana García López, Beatriz Bonduel, Chico Trópico, Laura Nadeszhda, Pantalla Fantasma, Sally Hernández, Super Alex, Track ID",
             "Guests": "30 people",
+          },
+          artistPhotos: {
+            "Ana García López": "/assets/experiences/jornada-gallery/artists/ana-garcia-lopez.jpg",
+            "Beatriz Bonduel": "/assets/experiences/jornada-gallery/artists/beatriz-bonduel.jpg",
+            "Chico Trópico": "/assets/experiences/jornada-gallery/artists/chico-tropico.jpg",
+            "Laura Nadeszhda": "/assets/experiences/jornada-gallery/artists/laura-nadeszhda.jpg",
+            "Pantalla Fantasma": "/assets/experiences/jornada-gallery/artists/pantalla-fantasma.jpg",
+            "Sally Hernández": "/assets/experiences/jornada-gallery/artists/sally-hernandez.jpg",
+            "Super Alex": "/assets/experiences/jornada-gallery/artists/super-alex-madrid.jpg",
+            "Track ID": "/assets/experiences/jornada-gallery/artists/track-id.jpg",
           },
           gallery: Array.from({ length: 18 }, (_, i) =>
             `/assets/experiences/jornada-gallery/madrid-2023/photo-${String(i + 1).padStart(2, "0")}.jpg`
