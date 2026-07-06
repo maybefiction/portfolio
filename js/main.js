@@ -27,8 +27,6 @@ function injectStaticText() {
 
   document.getElementById("hero-heading").textContent = hero.heading;
   document.getElementById("hero-tagline").textContent = hero.tagline;
-
-  document.getElementById("footer-tagline").textContent = brand.tagline;
 }
 
 /* ---------- Hero background photos (crossfade) ---------- */

@@ -5,7 +5,6 @@
 
 document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("footer-year").textContent = new Date().getFullYear();
-  document.getElementById("footer-tagline").textContent = SITE_CONTENT.brand.tagline;
   renderAbout();
   setupFounderToggles();
   setupNav();
