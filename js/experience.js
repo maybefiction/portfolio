@@ -378,12 +378,18 @@ function renderDesignFlowCards(item) {
           .join("")}
       </div>
       <div class="xp-design-card">
-        <h3 class="xp-design-card-title">${stage.title}</h3>
-        <div class="xp-design-card-body">
-          <p class="xp-design-card-text">${stage.text}</p>
-          ${stage.image ? `<img class="xp-design-card-photo" src="${stage.image}" alt="${stage.title}" loading="lazy" />` : ""}
+        <div class="xp-design-card-main">
+          <h3 class="xp-design-card-title">${stage.title}</h3>
+          <div class="xp-design-card-body">
+            <p class="xp-design-card-text">${stage.text}</p>
+            ${stage.image ? `<img class="xp-design-card-photo" src="${stage.image}" alt="${stage.title}" loading="lazy" />` : ""}
+          </div>
         </div>
-        ${stage.credit ? `<p class="xp-design-card-credit">${stage.credit}</p>` : ""}
+        ${stage.credit ? `
+        <div class="xp-design-card-credits">
+          <h4 class="xp-meta-label">Credits</h4>
+          <p class="xp-design-card-credit">${stage.credit}</p>
+        </div>` : ""}
       </div>
     `;
 

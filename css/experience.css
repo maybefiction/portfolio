@@ -383,36 +383,39 @@
 
 /* ---------- 4a. EXPERIENCE DESIGN CARD (parallel-spaces items, e.g. What Clings) ---------- */
 .xp-design-card {
+  display: flex;
+  gap: 40px;
   background: var(--white);
   border-radius: var(--radius-md);
   padding: 40px;
   box-shadow: var(--shadow-soft);
   animation: xpFadeIn 0.4s var(--ease-smooth);
 }
+.xp-design-card-main { flex: 1; min-width: 0; }
 .xp-design-card-title { margin: 0 0 16px; }
 .xp-design-card-body {
   display: flex;
   align-items: flex-start;
-  gap: 32px;
+  gap: 24px;
 }
 .xp-design-card-text { flex: 1; margin: 0; font-size: 1.05rem; }
 .xp-design-card-photo {
   flex-shrink: 0;
-  width: 140px;
-  height: 140px;
+  width: 120px;
+  height: 120px;
   border-radius: var(--radius-md);
   object-fit: cover;
   box-shadow: var(--shadow-soft);
 }
-.xp-design-card-credit {
-  margin: 24px 0 0;
-  padding-top: 20px;
-  border-top: 1px solid rgba(38, 37, 34, 0.12);
-  font-size: 0.78rem;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  color: var(--ink-soft);
+/* Right-hand Credits column, separated by a vertical divider — same
+   language as .xp-meta-side's divider further up the page. */
+.xp-design-card-credits {
+  flex: 0 0 200px;
+  padding-left: 32px;
+  border-left: 1px solid rgba(38, 37, 34, 0.12);
 }
+.xp-design-card-credits .xp-meta-label { margin: 0 0 10px; }
+.xp-design-card-credit { margin: 0; font-size: 0.92rem; color: var(--ink); }
 
 /* ---------- 4b. EDITION TABS (items with multiple runs, e.g. Jornada) ---------- */
 /* Tabs are plain labels, not content-holding cards — clicking one swaps the
@@ -667,9 +670,18 @@
   .jpa-edition-content { padding: 24px; }
   .jpa-edition-fields { grid-template-columns: 1fr; gap: 20px; }
 
-  .xp-design-card { padding: 24px; }
+  .xp-design-card { flex-direction: column; padding: 24px; }
   .xp-design-card-body { flex-direction: column-reverse; gap: 20px; }
   .xp-design-card-photo { width: 100%; height: auto; aspect-ratio: 16 / 9; }
+  /* Divider only makes sense splitting side-by-side columns — stacked,
+     it becomes a border above the credits block instead. */
+  .xp-design-card-credits {
+    flex: none;
+    padding-left: 0;
+    padding-top: 24px;
+    border-left: none;
+    border-top: 1px solid rgba(38, 37, 34, 0.12);
+  }
 }
 
 @media (max-width: 480px) {
