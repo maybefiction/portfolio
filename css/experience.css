@@ -60,17 +60,6 @@
 
 /* ---------- 2. META: BASICS/CREDITS + DESCRIPTION ---------- */
 .xp-meta { padding-top: 72px; padding-bottom: 40px; }
-
-/* Short, non-salesy line naming what this format is — sits above the
-   Details/Credits grid rather than as a subtitle under the hero title. */
-.xp-format-note {
-  font-style: italic;
-  font-size: 0.92rem;
-  color: var(--ink-soft);
-  max-width: 62ch;
-  margin: 0 0 40px;
-}
-
 .xp-meta-grid {
   display: grid;
   grid-template-columns: 1fr 3fr;
