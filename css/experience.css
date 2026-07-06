@@ -381,6 +381,39 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* ---------- 4a. EXPERIENCE DESIGN CARD (parallel-spaces items, e.g. What Clings) ---------- */
+.xp-design-card {
+  background: var(--white);
+  border-radius: var(--radius-md);
+  padding: 40px;
+  box-shadow: var(--shadow-soft);
+  animation: xpFadeIn 0.4s var(--ease-smooth);
+}
+.xp-design-card-title { margin: 0 0 16px; }
+.xp-design-card-body {
+  display: flex;
+  align-items: flex-start;
+  gap: 32px;
+}
+.xp-design-card-text { flex: 1; margin: 0; font-size: 1.05rem; }
+.xp-design-card-photo {
+  flex-shrink: 0;
+  width: 140px;
+  height: 140px;
+  border-radius: var(--radius-md);
+  object-fit: cover;
+  box-shadow: var(--shadow-soft);
+}
+.xp-design-card-credit {
+  margin: 24px 0 0;
+  padding-top: 20px;
+  border-top: 1px solid rgba(38, 37, 34, 0.12);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+}
+
 /* ---------- 4b. EDITION TABS (items with multiple runs, e.g. Jornada) ---------- */
 /* Tabs are plain labels, not content-holding cards — clicking one swaps the
    content below instantly. Nothing expands or collapses, so this never
@@ -633,6 +666,10 @@
 
   .jpa-edition-content { padding: 24px; }
   .jpa-edition-fields { grid-template-columns: 1fr; gap: 20px; }
+
+  .xp-design-card { padding: 24px; }
+  .xp-design-card-body { flex-direction: column-reverse; gap: 20px; }
+  .xp-design-card-photo { width: 100%; height: auto; aspect-ratio: 16 / 9; }
 }
 
 @media (max-width: 480px) {

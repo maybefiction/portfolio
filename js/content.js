@@ -345,21 +345,28 @@ const SITE_CONTENT = {
       gallery: Array.from({ length: 26 }, (_, i) =>
         `/assets/experiences/what-clings-gallery/photo-${String(i + 1).padStart(2, "0")}.jpg`
       ),
+      // Card-style Experience Design section (see renderDesignFlowCards in
+      // experience.js) — distinct from the act-based accordion used by
+      // items like In Between Things.
+      experienceDesignStyle: "card",
       experienceDesign: [
         {
           title: "The Cave",
           image: "/assets/experiences/what-clings-gallery/photo-01.jpg",
           text: "The things we think are extraordinary today — silence, darkness, shooting stars — were once just day-to-day life for humans before. I often wonder if we can ever know what was lost. Inside, you are welcome to explore, nap, and draw on the walls with special markers.",
+          credit: "Directed by Ishaan Goel",
         },
         {
           title: "The Anti-Gallery",
           image: "/assets/experiences/what-clings-gallery/photo-15.jpg",
           text: "Everything inside of here was made between March and September 2025 across 14 gatherings and with more than 150+ contributors. We only started this work. It is your turn to finish it. Collage, paint, draw, write, and anything else you can think of.",
+          credit: "Directed by Ishaan Goel",
         },
         {
           title: "Your Birthday Party",
           image: "/assets/experiences/what-clings-gallery/photo-26.jpg",
           text: "Make your childhood self a gift, write a card, and add it to our altar.",
+          credit: "Directed by Ishaan Goel",
         },
       ],
     },

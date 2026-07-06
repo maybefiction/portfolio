@@ -38,6 +38,9 @@ document.addEventListener("DOMContentLoaded", () => {
   if (item.editions && item.editions.length) {
     renderEditionCards(item);
     document.getElementById("xp-gallery-section").remove();
+  } else if (item.experienceDesignStyle === "card") {
+    renderDesignFlowCards(item);
+    renderGallery(item);
   } else {
     renderDesignFlow(item);
     renderGallery(item);
@@ -339,6 +342,62 @@ function renderDesignFlow(item) {
       panels.forEach((p) => p.classList.toggle("is-open", p.dataset.panel === index));
     });
   });
+}
+
+/* ---------- Section 4a: Experience Design cards (items whose elements are
+   parallel spaces rather than a sequence of acts, e.g. What Clings) ---------- */
+// Same photo-tag selector row as renderDesignFlow, but the content below is
+// a single description card (title + text + photo + a one-line credit)
+// instead of a plain text panel — set via item.experienceDesignStyle === "card".
+function renderDesignFlowCards(item) {
+  const section = document.getElementById("xp-design-section");
+  if (!item.experienceDesign || !item.experienceDesign.length) {
+    section.remove();
+    return;
+  }
+
+  const flow = document.getElementById("xp-flow");
+  let activeIndex = 0;
+
+  function render() {
+    const stage = item.experienceDesign[activeIndex];
+
+    flow.innerHTML = `
+      <div class="xp-flow-nodes" role="tablist" aria-label="Experience design elements">
+        ${item.experienceDesign
+          .map(
+            (s, i) => `
+          <button class="xp-flow-node ${i === activeIndex ? "is-active" : ""}" data-stage="${i}" role="tab" aria-selected="${i === activeIndex}">
+            <div class="xp-flow-node-thumb-wrap">
+              ${s.image ? `<img class="xp-flow-node-thumb" src="${s.image}" alt="${s.title}" loading="lazy">` : ""}
+              <span class="xp-flow-node-index">${s.act || String(i + 1).padStart(2, "0")}</span>
+            </div>
+            <span class="xp-flow-node-label">${s.title}</span>
+          </button>`
+          )
+          .join("")}
+      </div>
+      <div class="xp-design-card">
+        <h3 class="xp-design-card-title">${stage.title}</h3>
+        <div class="xp-design-card-body">
+          <p class="xp-design-card-text">${stage.text}</p>
+          ${stage.image ? `<img class="xp-design-card-photo" src="${stage.image}" alt="${stage.title}" loading="lazy" />` : ""}
+        </div>
+        ${stage.credit ? `<p class="xp-design-card-credit">${stage.credit}</p>` : ""}
+      </div>
+    `;
+
+    flow.querySelectorAll(".xp-flow-node").forEach((node) => {
+      node.addEventListener("click", () => {
+        const index = Number(node.dataset.stage);
+        if (index === activeIndex) return;
+        activeIndex = index;
+        render();
+      });
+    });
+  }
+
+  render();
 }
 
 /* ---------- Section 4b: Edition tabs (items with multiple runs, e.g. Jornada) ---------- */
