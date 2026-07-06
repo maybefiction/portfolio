@@ -108,7 +108,7 @@ function renderHighlights() {
   grid.classList.add("reveal-stagger", "reveal");
 
   const lanes = [
-    { type: "experience", items: SITE_CONTENT.experiences.filter((item) => item.hasDetailPage) },
+    { type: "experience", items: SITE_CONTENT.experiences.filter((item) => item.hasDetailPage && !item.excludeFromHighlights) },
   ];
 
   const mixed = [];

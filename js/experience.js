@@ -51,6 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
     renderDesignFlow(item);
     renderGallery(item);
   }
+  renderStoryCollection(item);
   renderNextExperience(item);
   setupNav();
 });
@@ -698,6 +699,32 @@ function openScopedLightbox(gallery, startIndex, title) {
 }
 let activeLightboxHandlers = null;
 let documentKeydownBound = false;
+
+/* ---------- Section 6: Story Collection (native accordion, e.g. When A Friend Knocks) ---------- */
+function renderStoryCollection(item) {
+  const section = document.getElementById("xp-stories-section");
+  if (!item.storyCollection || !item.storyCollection.length) {
+    section.remove();
+    return;
+  }
+
+  const list = document.getElementById("xp-stories-list");
+  list.innerHTML = item.storyCollection
+    .map(
+      (story, i) => `
+    <details class="xp-story" ${i === 0 ? "open" : ""}>
+      <summary class="xp-story-summary">
+        <span class="xp-story-index">${String(i + 1).padStart(2, "0")}</span>
+        <span class="xp-story-title">${story.title}</span>
+        <span class="xp-story-toggle" aria-hidden="true"></span>
+      </summary>
+      <div class="xp-story-body">
+        ${story.paragraphs.map((p) => `<p>${p}</p>`).join("")}
+      </div>
+    </details>`
+    )
+    .join("");
+}
 
 /* ---------- Next Experience — only shown once 2+ detail pages exist ---------- */
 function renderNextExperience(item) {
