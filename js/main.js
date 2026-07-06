@@ -97,20 +97,18 @@ function burstLogoLayer(layer) {
   });
 }
 
-/* ---------- Highlights (Experiences + Workshops + Gatherings, interleaved) ----------
-   Only items with a real detail page are eligible — stubs would need to link
-   somewhere, and a mixed "some cards go to a page, some go to a contact form"
-   section reads as broken rather than intentional. Interleaved by type
-   (experience, workshop, event, ...) round-robin so the mix reads as one
-   deliberate set rather than three lists concatenated. */
+/* ---------- Highlights (Experiences only — Workshops/Gatherings excluded
+   by request; see "See all workshops/gatherings" links below the grid
+   instead) ----------
+   Only items with a real detail page are eligible — a stub card would need
+   to link somewhere, and one that goes to a contact form instead of a real
+   page would read as broken sitting next to ones that go somewhere real. */
 function renderHighlights() {
   const grid = document.getElementById("highlights-grid");
   grid.classList.add("reveal-stagger", "reveal");
 
   const lanes = [
     { type: "experience", items: SITE_CONTENT.experiences.filter((item) => item.hasDetailPage) },
-    { type: "workshop", items: SITE_CONTENT.workshops.filter((item) => item.hasDetailPage) },
-    { type: "event", items: SITE_CONTENT.events.filter((item) => item.hasDetailPage) },
   ];
 
   const mixed = [];
