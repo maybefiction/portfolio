@@ -87,6 +87,22 @@
   border-right: 1px solid rgba(38, 37, 34, 0.12);
 }
 
+/* Applied via JS (experience.js: syncMetaHeights) only when the side
+   column's natural content is taller than the description+carousel next to
+   it — e.g. What Clings' long Credits list. Caps the side column at that
+   height instead of stretching the row, and lets just the last block (in
+   practice, Credits) scroll internally so Details stays fully visible. */
+.xp-meta-side.is-height-capped {
+  max-height: var(--meta-cap-height);
+  overflow: hidden;
+}
+.xp-meta-side.is-height-capped .xp-meta-block:last-child {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
 .xp-meta-block + .xp-meta-block {
   padding-top: 32px;
   border-top: 1px solid rgba(38, 37, 34, 0.12);

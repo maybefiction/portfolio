@@ -342,9 +342,40 @@ const SITE_CONTENT = {
         "What Clings serves as a proof of concept that wonder, play, and shared creation are still possible, not buried in the past. It brings together artifacts from a summer of community gatherings — water balloon fights, pop-up cafés, and field trips — to create an experience that resists digital commodification. It invites participants to move through three discrete, interactive spaces, encouraging real-time creation and shared intimacy.",
         "The project explores the textures that remain across time — from prehistory to history, childhood to adulthood — as a form of playful resistance against a culture obsessed with functionality, fossilization under convenience, and the commodification of experience. Between March and September 2025, 150+ people gathered across 14 offline events — water balloon fights, zine-making, printmaking, a cemetery tour — to make the raw material that became the exhibition.",
       ],
-      gallery: Array.from({ length: 26 }, (_, i) =>
-        `/assets/experiences/what-clings-gallery/photo-${String(i + 1).padStart(2, "0")}.jpg`
-      ),
+      // Each photo is tagged with the Experience Design element it belongs
+      // to (must match an experienceDesign[].title below exactly) so the
+      // Gallery section can filter in sync with the element tabs above it.
+      // element: null means "whole-exhibition" photos (signage, a live
+      // performance night) that don't belong to one of the three spaces —
+      // these only show under the Gallery's "All" filter.
+      gallery: [
+        { src: "photo-01.jpg", element: "The Cave" },
+        { src: "photo-02.jpg", element: "Your Birthday Party" },
+        { src: "photo-03.jpg", element: "Your Birthday Party" },
+        { src: "photo-04.jpg", element: "Your Birthday Party" },
+        { src: "photo-05.jpg", element: "Your Birthday Party" },
+        { src: "photo-06.jpg", element: "Your Birthday Party" },
+        { src: "photo-07.jpg", element: "The Anti-Gallery" },
+        { src: "photo-08.jpg", element: "The Cave" },
+        { src: "photo-09.jpg", element: "The Cave" },
+        { src: "photo-10.jpg", element: "The Anti-Gallery" },
+        { src: "photo-11.jpg", element: "The Cave" },
+        { src: "photo-12.jpg", element: null },
+        { src: "photo-13.jpg", element: "The Anti-Gallery" },
+        { src: "photo-14.jpg", element: "The Anti-Gallery" },
+        { src: "photo-15.jpg", element: "The Anti-Gallery" },
+        { src: "photo-16.jpg", element: "The Anti-Gallery" },
+        { src: "photo-17.jpg", element: "The Anti-Gallery" },
+        { src: "photo-18.jpg", element: "Your Birthday Party" },
+        { src: "photo-19.jpg", element: "The Anti-Gallery" },
+        { src: "photo-20.jpg", element: "The Anti-Gallery" },
+        { src: "photo-21.jpg", element: "Your Birthday Party" },
+        { src: "photo-22.jpg", element: "The Anti-Gallery" },
+        { src: "photo-23.jpg", element: null },
+        { src: "photo-24.jpg", element: null },
+        { src: "photo-25.jpg", element: null },
+        { src: "photo-26.jpg", element: "Your Birthday Party" },
+      ].map((p) => ({ ...p, src: `/assets/experiences/what-clings-gallery/${p.src}` })),
       // Card-style Experience Design section (see renderDesignFlowCards in
       // experience.js) — distinct from the act-based accordion used by
       // items like In Between Things.

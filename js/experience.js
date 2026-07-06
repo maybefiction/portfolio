@@ -32,6 +32,11 @@ document.addEventListener("DOMContentLoaded", () => {
   renderMeta(item);
   renderImpactStats(item);
   renderHeroMedia(item);
+  syncMetaHeights();
+  window.addEventListener("resize", () => {
+    clearTimeout(metaResizeTimer);
+    metaResizeTimer = setTimeout(syncMetaHeights, 150);
+  });
   // Items with editions (currently just Jornada) get an expandable card per
   // edition instead of the classic act-based flow + a flat Gallery section —
   // each card carries its own Theme/Location/Credits/Artists/Gallery.
@@ -94,6 +99,32 @@ function renderMeta(item) {
   document.getElementById("xp-description").innerHTML = detailedParagraphs
     .map((para) => `<p class="xp-description-body">${para}</p>`)
     .join("");
+}
+
+let metaResizeTimer = null;
+
+// Caps .xp-meta-side (Details + Credits) to the height of .xp-meta-main
+// (description + carousel) beside it when Credits is long enough to make
+// the side column naturally taller — see the .is-height-capped CSS for why
+// plain align-self:stretch can't express this on its own.
+function syncMetaHeights() {
+  const side = document.getElementById("xp-meta-side");
+  const main = document.querySelector(".xp-meta-main");
+  if (!side || !main) return;
+
+  side.classList.remove("is-height-capped");
+  side.style.removeProperty("--meta-cap-height");
+
+  // Only the desktop layout puts these two columns side by side (see the
+  // max-width: 1024px breakpoint) — stacked single-column has no height to match.
+  if (window.innerWidth <= 1024) return;
+
+  const mainHeight = main.getBoundingClientRect().height;
+  const sideHeight = side.getBoundingClientRect().height;
+  if (sideHeight > mainHeight) {
+    side.style.setProperty("--meta-cap-height", `${mainHeight}px`);
+    side.classList.add("is-height-capped");
+  }
 }
 
 function renderMetaBlockHTML(basics, credits) {
@@ -199,10 +230,16 @@ function renderImpactStats(item) {
 // static frame); items without a gallery fall back to a single photo, so this
 // slot always carries a visual instead of leaving a gap between the short and
 // detailed description.
+// Gallery entries are either a plain src string, or (for items with
+// per-element photo tagging, e.g. What Clings) an { src, element } object.
+function photoSrc(photo) {
+  return typeof photo === "string" ? photo : photo.src;
+}
+
 function renderHeroMedia(item) {
   const wrap = document.getElementById("xp-video-wrap");
   if (item.gallery && item.gallery.length) {
-    renderHeroCarousel(wrap, item, item.gallery);
+    renderHeroCarousel(wrap, item, item.gallery.map(photoSrc));
     return;
   }
   if (item.heroPhoto) {
@@ -399,6 +436,9 @@ function renderDesignFlowCards(item) {
         if (index === activeIndex) return;
         activeIndex = index;
         render();
+        // Keep the Gallery section (further down the page) filtered to
+        // whichever element is now selected up here.
+        if (galleryFilterApi) galleryFilterApi.setFilter(item.experienceDesign[index].title);
       });
     });
   }
@@ -536,27 +576,75 @@ function initials(name) {
 // Used by single-run items only — edition-based items (Jornada) remove this
 // section entirely and show each edition's photos inside its own expandable
 // card instead (see renderEditionCards()).
+// Exposed so renderDesignFlowCards can keep the Gallery in sync when an
+// Experience Design element tab is clicked — set once renderGallery has run
+// for an item with per-photo element tags, null otherwise.
+let galleryFilterApi = null;
+
 function renderGallery(item) {
-  const gallery = item.gallery;
   const section = document.getElementById("xp-gallery-section");
-  if (!gallery || !gallery.length) {
+  if (!item.gallery || !item.gallery.length) {
     section.remove();
     return;
   }
 
-  const grid = document.getElementById("xp-gallery-grid");
-  grid.innerHTML = gallery
-    .map(
-      (src, i) => `
-      <button class="xp-gallery-thumb" data-index="${i}" aria-label="Open photo ${i + 1} of ${gallery.length}">
-        <img src="${src}" alt="${item.title} — photo ${i + 1}" loading="lazy" />
-      </button>`
-    )
-    .join("");
+  const gallery = item.gallery.map((p) => (typeof p === "string" ? { src: p, element: null } : p));
+  const hasElementTags = gallery.some((p) => p.element);
+  // Tab order follows the Experience Design elements above, so both rows
+  // read in the same order — falls back to first-seen order if absent.
+  const elements = hasElementTags
+    ? (item.experienceDesign || []).map((s) => s.title).filter((title) => gallery.some((p) => p.element === title))
+    : [];
 
-  grid.querySelectorAll(".xp-gallery-thumb").forEach((thumb) => {
-    thumb.addEventListener("click", () => openScopedLightbox(gallery, Number(thumb.dataset.index), item.title));
-  });
+  const grid = document.getElementById("xp-gallery-grid");
+  const filterBar = document.getElementById("xp-gallery-filter");
+  let activeFilter = "All";
+
+  function visiblePhotos() {
+    return activeFilter === "All" ? gallery : gallery.filter((p) => p.element === activeFilter);
+  }
+
+  function renderGrid() {
+    const photos = visiblePhotos();
+    grid.innerHTML = photos
+      .map(
+        (p, i) => `
+        <button class="xp-gallery-thumb" data-index="${i}" aria-label="Open photo ${i + 1} of ${photos.length}">
+          <img src="${p.src}" alt="${item.title} — photo ${i + 1}" loading="lazy" />
+        </button>`
+      )
+      .join("");
+
+    grid.querySelectorAll(".xp-gallery-thumb").forEach((thumb) => {
+      const srcList = photos.map(photoSrc);
+      thumb.addEventListener("click", () => openScopedLightbox(srcList, Number(thumb.dataset.index), item.title));
+    });
+  }
+
+  function setFilter(filter) {
+    activeFilter = filter;
+    if (filterBar) {
+      filterBar.querySelectorAll(".filter-tag").forEach((tag) => {
+        tag.classList.toggle("is-active", tag.dataset.filter === filter);
+      });
+    }
+    renderGrid();
+  }
+
+  if (hasElementTags && filterBar) {
+    filterBar.hidden = false;
+    filterBar.innerHTML = ["All", ...elements]
+      .map((name) => `<button class="filter-tag ${name === "All" ? "is-active" : ""}" data-filter="${name}">${name}</button>`)
+      .join("");
+    filterBar.querySelectorAll(".filter-tag").forEach((tag) => {
+      tag.addEventListener("click", () => setFilter(tag.dataset.filter));
+    });
+    galleryFilterApi = { setFilter };
+  } else {
+    galleryFilterApi = null;
+  }
+
+  renderGrid();
 }
 
 /* ---------- Shared lightbox (used by both the full Gallery grid and the
