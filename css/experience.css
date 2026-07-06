@@ -257,11 +257,42 @@
 
 /* Applied via JS (experience.js: mergeDesignAndGallerySections) only for
    items whose Gallery filters in sync with the element tabs here (currently
-   just What Clings, via experienceDesignStyle: "card") — removes the gap
-   and heading break so Experience Design and Gallery read as one
-   continuous section instead of two, matching their linked behavior. */
+   just What Clings, via experienceDesignStyle: "card"). Goes further than
+   just removing the section gap: the card and gallery are styled as one
+   continuous white card (flat seam between them, one shadow) instead of a
+   floating card followed by a separately-tinted section, so the photos
+   read as physically part of the room's card rather than a related-but-
+   separate block underneath it. */
 .xp-design.is-merged { margin-bottom: 0; padding-bottom: 40px; }
+.xp-design.is-merged .xp-design-card { border-radius: var(--radius-md) var(--radius-md) 0 0; }
+/* Lavender continues from .xp-design above so the two sections read as one
+   tinted region, with the white card (split across both) floating inside it. */
 .xp-gallery.is-merged { background: #E4DAE3; padding-top: 0; }
+/* This inner wrapper (not the <section>, which is also .section-inner and
+   therefore already at the page's own max-width/padding) gets the white
+   card treatment, at the same 40px-padding inset .xp-design-card uses —
+   see the HTML comment on #xp-gallery-inner for why this needs its own div. */
+.xp-gallery.is-merged .xp-gallery-inner {
+  background: var(--white);
+  padding: 28px 40px 48px;
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+  border-top: 1px solid rgba(38, 37, 34, 0.1);
+}
+/* A small label + compact pills instead of the full-size filter used
+   elsewhere (e.g. the Experiences page) — this is a lightweight in-card
+   control, not a standalone nav, so it shouldn't compete visually with the
+   room tabs above it. */
+.xp-gallery.is-merged .filter-bar { align-items: center; gap: 8px; margin-bottom: 20px; }
+.xp-gallery-filter-label {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft);
+  margin-right: 8px;
+}
+.xp-gallery.is-merged .filter-tag { padding: 6px 14px; font-size: 0.78rem; }
 
 .xp-flow-nodes {
   display: flex;
@@ -424,16 +455,26 @@
   color: var(--brand-purple);
   margin: 0 0 16px;
 }
-.xp-design-card-materials {
-  font-size: 0.92rem;
+.xp-design-card-materials { margin: 0 0 28px; }
+.xp-design-card-materials .xp-meta-label { font-size: 0.8rem; margin: 0 0 10px; }
+.xp-design-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.xp-design-card-tags li {
+  background: var(--bg-tint);
   color: var(--ink-soft);
-  margin: 0 0 24px;
+  font-size: 0.85rem;
+  padding: 5px 14px;
+  border-radius: var(--radius-pill);
 }
-.xp-design-card-materials .xp-meta-label {
-  display: inline;
-  margin: 0 8px 0 0;
-}
-.xp-design-card-text { margin: 0; font-size: 1.05rem; }
+.xp-design-card-text { margin: 0 0 28px; font-size: 1.05rem; }
+.xp-design-card-gatherings .xp-meta-label { font-size: 0.8rem; }
+.xp-design-card-gatherings .xp-design-card-tags li { background: var(--brand-teal-light); color: var(--ink); }
 /* Right-hand Credits column, separated by a vertical divider — same
    language as .xp-meta-side's divider further up the page. */
 .xp-design-card-credits {

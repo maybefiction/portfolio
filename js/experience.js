@@ -385,6 +385,13 @@ function renderDesignFlow(item) {
   });
 }
 
+// Turns a comma-separated string (e.g. a materials or community-events
+// field) into a <ul> of small tag pills instead of a run-on sentence.
+function renderTagPillsHTML(csv) {
+  const items = csv.split(",").map((s) => s.trim()).filter(Boolean);
+  return `<ul class="xp-design-card-tags">${items.map((i) => `<li>${i}</li>`).join("")}</ul>`;
+}
+
 /* ---------- Section 4a: Experience Design cards (items whose elements are
    parallel spaces rather than a sequence of acts, e.g. What Clings) ---------- */
 // Same photo-tag selector row as renderDesignFlow, but the content below is
@@ -422,11 +429,19 @@ function renderDesignFlowCards(item) {
         <div class="xp-design-card-main">
           <h3 class="xp-design-card-title">${stage.title}</h3>
           ${stage.tagline ? `<p class="xp-design-card-tagline">${stage.tagline}</p>` : ""}
-          ${stage.materials ? `<p class="xp-design-card-materials"><span class="xp-meta-label">Materials</span>${stage.materials}</p>` : ""}
+          ${stage.materials ? `
+          <div class="xp-design-card-materials">
+            <h4 class="xp-meta-label">Materials</h4>
+            ${renderTagPillsHTML(stage.materials)}
+          </div>` : ""}
           <div class="xp-design-card-body">
             <p class="xp-design-card-text">${stage.text}</p>
           </div>
-          ${stage.communityEvents ? `<p class="xp-design-card-materials"><span class="xp-meta-label">From these gatherings</span>${stage.communityEvents}</p>` : ""}
+          ${stage.communityEvents ? `
+          <div class="xp-design-card-materials xp-design-card-gatherings">
+            <h4 class="xp-meta-label">From these gatherings</h4>
+            ${renderTagPillsHTML(stage.communityEvents)}
+          </div>` : ""}
         </div>
         ${stage.credit ? `
         <div class="xp-design-card-credits">
@@ -652,9 +667,11 @@ function renderGallery(item) {
 
   if (hasElementTags && filterBar) {
     filterBar.hidden = false;
-    filterBar.innerHTML = ["All", ...elements]
-      .map((name) => `<button class="filter-tag ${name === "All" ? "is-active" : ""}" data-filter="${name}">${name}</button>`)
-      .join("");
+    filterBar.innerHTML =
+      `<span class="xp-gallery-filter-label">Photos</span>` +
+      ["All", ...elements]
+        .map((name) => `<button class="filter-tag ${name === "All" ? "is-active" : ""}" data-filter="${name}">${name}</button>`)
+        .join("");
     filterBar.querySelectorAll(".filter-tag").forEach((tag) => {
       tag.addEventListener("click", () => setFilter(tag.dataset.filter));
     });

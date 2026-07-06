@@ -80,10 +80,16 @@
     <!-- =================== SECTION 5: GALLERY =================== -->
     <section class="xp-gallery section-inner" id="xp-gallery-section">
       <h2 class="section-heading">Gallery</h2>
-      <!-- Only shown for items whose gallery photos are tagged per Experience
-           Design element (e.g. What Clings) — hidden otherwise. -->
-      <div class="filter-bar" id="xp-gallery-filter" hidden></div>
-      <div class="xp-gallery-grid" id="xp-gallery-grid"><!-- thumbnails injected by JS --></div>
+      <!-- Wraps the filter + grid so the "merged" (card-style) layout can
+           give this its own white-card background/padding at the same
+           inset width as .xp-design-card, without fighting .section-inner's
+           own padding (which sizes the whole <section>, not this div). -->
+      <div class="xp-gallery-inner" id="xp-gallery-inner">
+        <!-- Only shown for items whose gallery photos are tagged per Experience
+             Design element (e.g. What Clings) — hidden otherwise. -->
+        <div class="filter-bar" id="xp-gallery-filter" hidden></div>
+        <div class="xp-gallery-grid" id="xp-gallery-grid"><!-- thumbnails injected by JS --></div>
+      </div>
     </section>
 
     <!-- Next Experience — only rendered by JS when 2+ detail pages exist -->
