@@ -67,6 +67,10 @@
   align-items: start;
 }
 
+/* Full description sits below the grid, spanning the combined width of
+   both columns above it rather than being confined to the main column. */
+.xp-meta > .xp-description { margin-top: 48px; }
+
 .xp-meta-side { display: flex; flex-direction: column; gap: 32px; }
 
 .xp-meta-block + .xp-meta-block {
@@ -154,6 +158,7 @@
 
 /* ---------- 3. HERO MEDIA: gallery carousel, or fallback photo (nested under description, same column) ---------- */
 .xp-video-wrap {
+  max-width: 88%;
   border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow-lift);

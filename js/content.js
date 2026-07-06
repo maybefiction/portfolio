@@ -107,11 +107,11 @@ const SITE_CONTENT = {
       // stays static rather than switching when a different edition's card
       // is expanded below (that's what the per-edition fields are for).
       basics: {
+        createdBy: "Super Alex",
         dateRun: "Ongoing since June 2023",
         venue: "Private homes in Madrid & Brooklyn, NYC",
         format: "Home-based performance art festival",
-        runtime: "2–4 hours",
-        createdBy: "Ishaan Goel & Super Alex",
+        runtime: "3 hours",
       },
 
       fullSynopsis: [
