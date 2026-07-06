@@ -93,10 +93,10 @@ const SITE_CONTENT = {
     {
       id: "jornada-de-puertas-abiertas",
       title: "Jornada de Puertas Abiertas",
-      category: "event",
-      tag: "Event",
-      shortDescription: "A performance art festival that transforms private homes into a stage for collective encounter, creation, and play.",
-      description: "A performance art festival that transforms private homes into a stage for collective encounter, creation, and play.",
+      category: "festival",
+      tag: "Festival",
+      shortDescription: "A performance arts festival transforming homes into stages for encounter, collective creation, play and ritual",
+      description: "A performance arts festival transforming homes into stages for encounter, collective creation, play and ritual",
       placeholderSrc: "/assets/experiences/jornada-de-puertas-abiertas.jpg",
       heroPhoto: "/assets/experiences/jornada-gallery/nyc-2024/photo-04.jpg",
       gradient: "grad-blue",
@@ -104,47 +104,83 @@ const SITE_CONTENT = {
       hasDetailPage: true,
 
       fullSynopsis: [
-        "Jornada de Puertas Abiertas (Open Doors Day) transforms the private, intimate space of a home into a space for collective encounter, creation, and play. A host opens their house to strangers, in an exercise of mutual trust, and each room becomes a potential stage — the domestic box becomes a magic box.",
-        "The festival is also a political stance: in the absence of free, open, spontaneous spaces where we can create for the joy of it, we wanted to recover spaces and times to explore playfully and whimsically, blurring the line between performer and audience, where everyone can feel safe to be and to become.",
-        "The first edition took place in a one-bedroom apartment in Madrid in June 2023, where 26 guests moved through simultaneous performances in the living room, bedroom, and bathroom. The second edition brought the format to a private home in Brooklyn in June 2024, through an open call for New York-based artists working in performance, theater, music, dance, installation, and visual art.",
+        "Jornada de Puertas Abiertas (Open Doors Day) is a performance art festival that takes place inside a private home, temporarily transforming a domestic environment into a public space for live participatory art. Each room hosts a different performance or installation, responding to the architecture, atmosphere, and particularities of the space.",
+        "By opening an intimate domestic space to strangers, the festival uses the tension between the private and the public to create interactions that could not exist in a conventional theatre or gallery. The home becomes more than a venue: it is an active collaborator, shaping the unfolding of each work and opening space for ritual, whimsy, and unexpected encounters.",
+        "Visitors are invited to participate rather than simply observe, discovering moments of wonder, play, and connection that reveal the extraordinary potential of everyday spaces.",
       ],
 
+      // Default edition is the 2024 Brooklyn run — order here drives which
+      // tab is selected on load (selectEdition(0) in experience.js).
       editions: [
-        {
-          id: "madrid-2023",
-          label: "2023 · Madrid",
-          basics: {
-            dateRun: "June 2023",
-            venue: "A one-bedroom apartment, Madrid, Spain",
-            format: "Home-based performance art festival",
-            runtime: "~2 hours",
-          },
-          credits: {
-            "Host / Founder": "Super Alex",
-            "Guests": "26 attendees, moving through the living room, bedroom, and bathroom",
-          },
-          gallery: Array.from({ length: 18 }, (_, i) =>
-            `/assets/experiences/jornada-gallery/madrid-2023/photo-${String(i + 1).padStart(2, "0")}.jpg`
-          ),
-        },
         {
           id: "nyc-2024",
           label: "2024 · Brooklyn, NYC",
+          detailPhoto: "/assets/experiences/jornada-gallery/nyc-2024/photo-04.jpg",
           basics: {
             dateRun: "June 2024",
-            venue: "A private home in Brooklyn, NYC (address released to confirmed guests only)",
-            format: "Home-based performance art festival",
-            runtime: "2–3 hours",
+            venue: "Two private homes in Brooklyn, NYC",
+            format: "Performance Art Festival",
+            runtime: "4h",
           },
           credits: {
-            "Organizers": "Ishaan Goel, Super Alex",
-            "Artists": "Mk7, Brooke Leialoha Dabalos, Taliyah Shepard, Justin Harmon, Zaraith Hernandez (PAZAJEROS), V Tineo, Natalia Durango (Puyaloahi), Gigi Tamayo Boado, Benedicto Figueroa",
+            "Hosts": "Ishaan Goel, John Bowen",
+            "Producers": "Super Alex, Ishaan Goel",
+            "Artists": "Benedicto Figueroa, Brooke Leialoha, Gigi Tamayo, Guerilla Phart, Ishaan Goel, John Bowen, Justin Harmon, Mk7, Púyaloahí, Steinbock19, Super Alex, Taliyah Starr, V Tineo, Zaraith Hernández",
+            "Guests": "70 people",
           },
           gallery: [
             "/assets/experiences/jornada-gallery/nyc-2024/photo-00-hero.jpg",
             ...Array.from({ length: 23 }, (_, i) =>
               `/assets/experiences/jornada-gallery/nyc-2024/photo-${String(i + 1).padStart(2, "0")}.jpg`
             ),
+          ],
+          // Two homes, each run as its own flow — reuses the same Experience
+          // Design accordion component as In Between Things.
+          experienceDesign: [
+            {
+              act: "I",
+              title: "Ishaan's Home",
+              subtitle: "Ritual: The Things That Ground Us",
+              image: "/assets/experiences/jornada-gallery/jpa-poster-ny.jpg",
+              text: "Six performances and a DJ set moved through Ishaan's home, built around a ritual for the things that ground us.",
+            },
+            {
+              act: "II",
+              title: "John's Home",
+              subtitle: "Ritual: The Things To Let Go Of — Summer Solstice Ritual",
+              image: "/assets/experiences/jornada-gallery/jpa-poster-ny.jpg",
+              text: "Six performances and a DJ set moved through John's home, built around a summer solstice ritual for the things to let go of.",
+            },
+          ],
+        },
+        {
+          id: "madrid-2023",
+          label: "2023 · Madrid",
+          detailPhoto: "/assets/experiences/jornada-gallery/madrid-2023/detail-photo.jpg",
+          basics: {
+            dateRun: "June 2023",
+            venue: "Private home in Madrid, Spain",
+            format: "Performance art festival",
+            runtime: "3 hours",
+          },
+          credits: {
+            "Host / Founder / Producer": "Super Alex",
+            "Artists": "Ana García López, Beatriz Bonduel, Chico Trópico, Laura Nadeszhda, Pantalla Fantasma, Sally Hernández, Super Alex, Track ID",
+            "Guests": "30 people",
+          },
+          gallery: Array.from({ length: 18 }, (_, i) =>
+            `/assets/experiences/jornada-gallery/madrid-2023/photo-${String(i + 1).padStart(2, "0")}.jpg`
+          ),
+          // Poster not ready yet — omitting `image` renders a blank
+          // placeholder thumbnail (same graceful fallback the flow
+          // component already uses when a stage has no image).
+          experienceDesign: [
+            {
+              act: "I",
+              title: "One Home",
+              subtitle: "Theme: Intimacy",
+              text: "One apartment held six performances and a single DJ set, all built around the theme of intimacy.",
+            },
           ],
         },
       ],

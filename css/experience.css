@@ -69,6 +69,20 @@
 
 .xp-meta-side { display: flex; flex-direction: column; gap: 32px; }
 
+/* Edition switcher bar — sits between the hero and the header text (not
+   inside the sidebar), so it reads as "which run of the show" rather than
+   a Details field. Empty (and thus invisible) on items with a single run. */
+.xp-edition-switcher-bar:empty { display: none; }
+.xp-edition-switcher-bar { padding: 40px 24px 0; }
+
+.xp-edition-photo {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-soft);
+}
+
 .xp-edition-switcher { display: flex; flex-wrap: wrap; gap: 8px; }
 .xp-edition-tab {
   padding: 8px 14px;

@@ -33,10 +33,13 @@ document.addEventListener("DOMContentLoaded", () => {
   renderMeta(item);
   renderImpactStats(item);
   renderHeroMedia(item);
-  renderDesignFlow(item);
-  // Items with editions render their gallery from renderMeta's edition
-  // switcher instead (each tab has its own gallery), so skip the flat one.
-  if (!item.editions) renderGallery(item);
+  // Items with editions render their gallery and design flow from
+  // renderMeta's edition switcher instead (each tab has its own), so skip
+  // the flat calls here — renderMeta's selectEdition(0) already ran them.
+  if (!item.editions) {
+    renderDesignFlow(item);
+    renderGallery(item);
+  }
   renderNextExperience(item);
   setupNav();
 });
@@ -68,6 +71,7 @@ function renderHero(item) {
 /* ---------- Section 2: Basics/Credits (1/4) + Description (3/4) ---------- */
 function renderMeta(item) {
   const side = document.getElementById("xp-meta-side");
+  const switcherBar = document.getElementById("xp-edition-switcher-bar");
 
   if (item.editions && item.editions.length) {
     const switcher = document.createElement("div");
@@ -77,17 +81,23 @@ function renderMeta(item) {
         (ed, i) => `<button class="xp-edition-tab ${i === 0 ? "is-active" : ""}" data-edition="${i}">${ed.label}</button>`
       )
       .join("");
+    // Lives between the hero and the header text, not inside the sidebar —
+    // it's a top-level choice (which run of the show), not a Details field.
+    switcherBar.innerHTML = "";
+    switcherBar.append(switcher);
+
     const metaBlock = document.createElement("div");
     side.innerHTML = "";
-    side.append(switcher, metaBlock);
+    side.append(metaBlock);
 
     const selectEdition = (index) => {
       const edition = item.editions[index];
       switcher.querySelectorAll(".xp-edition-tab").forEach((tab, i) => {
         tab.classList.toggle("is-active", i === index);
       });
-      metaBlock.innerHTML = renderMetaBlockHTML(edition.basics, edition.credits);
+      metaBlock.innerHTML = renderMetaBlockHTML(edition.basics, edition.credits, edition.detailPhoto, item.title);
       renderGallery(item, edition.gallery);
+      renderDesignFlow(item, edition.experienceDesign);
     };
 
     switcher.querySelectorAll(".xp-edition-tab").forEach((tab) => {
@@ -96,6 +106,7 @@ function renderMeta(item) {
 
     selectEdition(0);
   } else {
+    switcherBar.remove();
     side.innerHTML = renderMetaBlockHTML(item.basics, item.credits);
   }
 
@@ -114,8 +125,12 @@ function renderMeta(item) {
     .join("");
 }
 
-function renderMetaBlockHTML(basics, credits) {
+function renderMetaBlockHTML(basics, credits, photo, title) {
   let html = "";
+
+  if (photo) {
+    html += `<img class="xp-edition-photo" src="${photo}" alt="${title || ""}" loading="lazy" />`;
+  }
 
   if (basics) {
     html += `
@@ -299,18 +314,26 @@ function renderHeroCarousel(wrap, item, gallery) {
 }
 
 /* ---------- Section 4: Experience Design flow (interactive accordion) ---------- */
-function renderDesignFlow(item) {
+// Accepts an explicit `experienceDesign` array for edition-aware items (each
+// edition/home/run gets its own flow); defaults to item.experienceDesign for
+// everything else. Hides (rather than removes) the section when there's
+// nothing to show, since edition items call this again on every tab switch —
+// removing the element would break subsequent re-renders.
+function renderDesignFlow(item, experienceDesign) {
+  const design = experienceDesign !== undefined ? experienceDesign : item.experienceDesign;
   const section = document.getElementById("xp-design-section");
-  if (!item.experienceDesign || !item.experienceDesign.length) {
-    section.remove();
+  if (!section) return;
+  if (!design || !design.length) {
+    section.style.display = "none";
     return;
   }
+  section.style.display = "";
 
   const flow = document.getElementById("xp-flow");
 
   flow.innerHTML = `
     <div class="xp-flow-nodes" role="tablist" aria-label="Experience design stages">
-      ${item.experienceDesign
+      ${design
         .map(
           (stage, i) => `
         <button class="xp-flow-node ${i === 0 ? "is-active" : ""}" data-stage="${i}" role="tab" aria-selected="${i === 0}">
@@ -327,7 +350,7 @@ function renderDesignFlow(item) {
         .join("")}
     </div>
     <div class="xp-flow-panels">
-      ${item.experienceDesign
+      ${design
         .map(
           (stage, i) => `
         <div class="xp-flow-panel ${i === 0 ? "is-open" : ""}" data-panel="${i}" role="tabpanel">
