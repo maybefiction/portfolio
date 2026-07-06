@@ -149,8 +149,8 @@
 }
 
 .xp-description-body {
-  font-size: 1rem;
-  line-height: 1.6;
+  font-size: 1.05rem;
+  line-height: 1.7;
   color: var(--ink-soft);
   margin: 0 0 20px;
 }
@@ -435,7 +435,15 @@
   animation: xpFadeIn 0.4s var(--ease-smooth);
 }
 .xp-design-card-main { flex: 1; min-width: 0; }
-.xp-design-card-title { margin: 0 0 12px; }
+.xp-design-card-title { margin: 0 0 8px; }
+/* Orients the visitor before the longer tagline/body — what the room asks
+   you to do, in one short sentence, ahead of why it exists. */
+.xp-design-card-dek {
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--ink);
+  margin: 0 0 12px;
+}
 .xp-design-card-tagline {
   font-family: var(--font-display);
   font-style: italic;
@@ -460,7 +468,7 @@
   padding: 5px 14px;
   border-radius: var(--radius-pill);
 }
-.xp-design-card-text { margin: 0 0 28px; font-size: 1.05rem; }
+.xp-design-card-text { margin: 0 0 28px; font-size: 1.08rem; line-height: 1.65; }
 .xp-design-card-gatherings .xp-meta-label { font-size: 0.8rem; }
 .xp-design-card-gatherings .xp-design-card-tags li { background: var(--brand-teal-light); color: var(--ink); }
 /* Right-hand Credits column, separated by a vertical divider — same

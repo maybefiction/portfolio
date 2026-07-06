@@ -208,6 +208,9 @@ function formatLabel(key) {
     createdBy: "Created By",
     admission: "Admission",
     ageAdvisory: "Age Advisory",
+    visitors: "Visitors",
+    collaborators: "Collaborators",
+    communityPartners: "Community Partners",
   };
   return labels[key] || key;
 }
@@ -389,6 +392,7 @@ function renderDesignFlowCards(item) {
       <div class="xp-design-card">
         <div class="xp-design-card-main">
           <h3 class="xp-design-card-title">${stage.title}</h3>
+          ${stage.dek ? `<p class="xp-design-card-dek">${stage.dek}</p>` : ""}
           ${stage.tagline ? `<p class="xp-design-card-tagline">${stage.tagline}</p>` : ""}
           ${stage.materials ? `
           <div class="xp-design-card-materials">

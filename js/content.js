@@ -340,14 +340,22 @@ const SITE_CONTENT = {
       hasImage: true,
       hasDetailPage: true,
 
-      // source: What Clings Bio doc, 02_Communications
+      // source: What Clings Bio doc, 02_Communications. "At a Glance" fields
+      // (visitors/collaborators/communityPartners) added below the original
+      // set: collaborators/communityPartners are counted directly from the
+      // credits object beneath (20 unique names across Director through
+      // Photo/Video; 13 in Community Co-Hosts). visitors has no source
+      // number yet — TK until a real attendance figure is confirmed.
       basics: {
         dateRun: "October 3–5, 2025",
         venue: "Prospect Heights, Brooklyn",
-        format: "Installation, Mixed Media & Performance",
+        format: "Three-room immersive exhibition",
         runtime: "1 hour 30 minutes",
         admission: "Free",
         ageAdvisory: "Family-friendly",
+        visitors: "TK — attendance count pending",
+        collaborators: "20",
+        communityPartners: "13",
       },
       credits: {
         "Director / Producer": "Ishaan Goel",
@@ -359,10 +367,16 @@ const SITE_CONTENT = {
         "Community Co-Hosts": "Brian Helfman, Ellen High, Kelly Chang, Alice Wang, Annie Worford, Jasmina Prabhakara, Sanchana, Zet De Castro, Sean Glatch, Becka Olson, Betta Malagon, Genia Blaser, Sara Yasmine",
         "Contributors": "150+ community members across 14 gatherings, March–September 2025",
       },
+      // Rewritten per project direction into a strict 3-paragraph structure
+      // (what it was / why / what visitors experienced) so the opening copy
+      // reads as one idea at a time instead of several at once — reusing
+      // the original doc's own language throughout rather than introducing
+      // new claims. The closing thesis line (paragraph 4, also used verbatim
+      // as shortDescription above) is unchanged.
       fullSynopsis: [
-        "What Clings grew out of a summer of community gatherings across Brooklyn. Walks through Greenwood Cemetery and Williamsburg, collaborative drawing sessions, clay workshops, dance improvisations, water balloon fights, zine making, and birthday celebrations became the foundation for a three-room exhibition. Rather than documenting these events, the exhibition transforms them into new environments that visitors are invited to continue through discovery, participation, and celebration.",
-        "At the heart of the project is an interest in experiences that once felt ordinary but have become increasingly uncommon. Looking up and seeing a sky full of stars. Making something with strangers. Celebrating one another through shared rituals. These possibilities have not disappeared—they have simply become less common as the ways we gather, create, and spend time together have changed.",
-        "Instead of preserving the past, What Clings becomes a temporary world where these ways of relating are practiced again. Each room creates a different set of conditions for visitors to discover, contribute, and celebrate together, inviting the exhibition to remain unfinished until someone new enters the space.",
+        "What Clings grew out of a summer of community gatherings across Brooklyn — walks through Greenwood Cemetery and Williamsburg, collaborative drawing sessions, clay workshops, dance improvisations, water balloon fights, zine making, and birthday celebrations. Those gatherings became the foundation for a three-room exhibition, each room transforming a different piece of that summer into an environment visitors could enter and continue.",
+        "At the heart of the project is an interest in experiences that once felt ordinary but have become increasingly uncommon: looking up and seeing a sky full of stars, making something with strangers, celebrating one another through shared rituals. These possibilities haven't disappeared — they've simply become less common as the ways we gather, create, and spend time together have changed.",
+        "Each room created a different set of conditions for visitors to discover, contribute, and celebrate together — reading hidden messages by UV light, touching and rearranging unfinished artworks, adding their own card to a communal birthday cake. Nothing stayed fixed: the exhibition remained unfinished until someone new walked in, and every visitor left having shaped it a little further for the next.",
         "What Clings asks what ways of relating still exist beneath the surface of everyday life, waiting to be noticed, practiced, and shared again.",
       ],
       // Each photo is tagged with the Experience Design element it belongs
@@ -410,6 +424,7 @@ const SITE_CONTENT = {
       experienceDesign: [
         {
           title: "The Cave",
+          dek: "Discover hidden traces using ultraviolet light.",
           tagline: "Create a sense of wonder by revealing the extraordinary hidden within the ordinary.",
           materials: "10×10 pop-up canopy, butcher paper, UV flashlights, UV markers, ripped field notebooks, handwritten grief letters, ethnographic notes, drawings, improvised live DJ",
           image: "/assets/experiences/what-clings-gallery/photo-01.jpg",
@@ -419,6 +434,7 @@ const SITE_CONTENT = {
         },
         {
           title: "The Anti-Gallery",
+          dek: "Touch, rearrange, and complete unfinished artworks.",
           tagline: "Challenge the conventions of the traditional gallery by transforming spectators into participants and treating art as a living, relational process.",
           materials: "CRT televisions, headphones, reusable water balloons, drawings, collages, clay sculptures, zines, chapbooks, pigeon drawings, paint, markers, collage materials, blank canvases",
           image: "/assets/experiences/what-clings-gallery/photo-15.jpg",
@@ -428,6 +444,7 @@ const SITE_CONTENT = {
         },
         {
           title: "Your Birthday Party",
+          dek: "Celebrate childhood rituals with strangers.",
           tagline: "Use the birthday as a shared ritual for remembering, honoring, and celebrating the child within each of us.",
           materials: "Birthday cake installation, handmade cards, gifts, photographs, childhood objects, everyday objects from the early 2000s",
           image: "/assets/experiences/what-clings-gallery/photo-26.jpg",
