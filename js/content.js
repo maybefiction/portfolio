@@ -13,7 +13,7 @@ const SITE_CONTENT = {
   brand: {
     name: "maybe:fiction",
     tagline: "We are an interdisciplinary art studio that designs experiences for people to gather, create, and relate through communal making, play, and ritual. Our work spans performance, installation, pop-up galleries, festivals, celebrations, and workshops.",
-    email: "ishaan@maybefiction.com",
+    email: "hello@maybefiction.com",
   },
 
   // ---------- Hero ----------
