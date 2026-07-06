@@ -68,10 +68,24 @@
 }
 
 /* Full description sits below the grid, spanning the combined width of
-   both columns above it rather than being confined to the main column. */
+   both columns above it rather than being confined to the main column.
+   Single top margin here is the only gap between the grid and it — the
+   carousel's own margin-bottom is zeroed out below so the two don't stack
+   into a double gap. */
 .xp-meta > .xp-description { margin-top: 48px; }
 
-.xp-meta-side { display: flex; flex-direction: column; gap: 32px; }
+/* Stretched (not just top-aligned) so the divider reaches the full row
+   height even when Details is much shorter than the carousel beside it —
+   without this, the empty space below a short Details list reads as an
+   accidental gap rather than a deliberate column split. */
+.xp-meta-side {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  align-self: stretch;
+  padding-right: 32px;
+  border-right: 1px solid rgba(38, 37, 34, 0.12);
+}
 
 .xp-meta-block + .xp-meta-block {
   padding-top: 32px;
@@ -159,11 +173,11 @@
 /* ---------- 3. HERO MEDIA: gallery carousel, or fallback photo (nested under description, same column) ---------- */
 .xp-video-wrap {
   max-width: 88%;
+  margin: 0 auto;
   border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow-lift);
   background: var(--ink);
-  margin-bottom: 32px;
 }
 .xp-video-fallback-image {
   width: 100%;
@@ -566,6 +580,10 @@
 /* ---------- 7. RESPONSIVE ---------- */
 @media (max-width: 1024px) {
   .xp-meta-grid { grid-template-columns: 1fr; gap: 32px; }
+  /* The divider only makes sense splitting two side-by-side columns —
+     stacked single-column, it would just be a stray line trailing off
+     the right edge with nothing beside it. */
+  .xp-meta-side { padding-right: 0; border-right: none; padding-bottom: 32px; border-bottom: 1px solid rgba(38, 37, 34, 0.12); }
   .xp-gallery-grid { grid-template-columns: repeat(3, 1fr); }
 }
 
