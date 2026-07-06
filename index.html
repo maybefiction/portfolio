@@ -31,10 +31,9 @@
 
       <ul class="nav-menu" id="nav-menu">
         <li><a href="/about.html" class="nav-link nav-link-about">About</a></li>
-        <li><a href="/experiences.html" class="nav-link nav-link-experiences">Experiences</a></li>
-        <li><a href="/workshops.html" class="nav-link nav-link-workshops">Workshops</a></li>
+        <li><a href="/experiences.html" class="nav-link nav-link-experiences">Work</a></li>
         <li><a href="/events.html" class="nav-link nav-link-events">Events</a></li>
-
+        <li><a href="/workshops.html" class="nav-link nav-link-workshops">Workshops</a></li>
         <li><a href="/contact.html" class="nav-link nav-link-cta">Contact</a></li>
       </ul>
     </nav>
@@ -59,6 +58,7 @@
         </div>
         <h1 class="hero-heading reveal" id="hero-heading"></h1>
         <p class="hero-tagline reveal" id="hero-tagline"></p>
+        <div class="hero-cta-group reveal" id="hero-cta-group"><!-- CTAs injected by JS --></div>
       </div>
 
       <a href="#about" class="scroll-cue" aria-label="Scroll to About section">
@@ -77,18 +77,53 @@
       </div>
     </section>
 
-    <!-- =================== EXPERIENCES (teaser — full page: experiences.html) =================== -->
+    <!-- =================== FEATURED WORK (spotlight — links to full project page) =================== -->
+    <section class="featured-work" id="featured-work">
+      <div class="section-inner">
+        <h2 class="section-heading reveal">Featured Work</h2>
+        <div class="featured-work-inner">
+          <img class="featured-work-image reveal" id="featured-work-image" src="" alt="" />
+          <div class="featured-work-content reveal">
+            <h3 class="featured-work-title" id="featured-work-title"></h3>
+            <p class="featured-work-description" id="featured-work-description"></p>
+            <a class="section-link" id="featured-work-link" href="">Explore the project <span class="arrow">→</span></a>
+            <p class="featured-work-note" id="featured-work-note"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================== CREDIBILITY (subtle stat row, not a stat-card grid) =================== -->
+    <section class="credibility" id="credibility">
+      <div class="section-inner">
+        <div class="credibility-stats" id="credibility-stats"><!-- stats injected by JS --></div>
+      </div>
+    </section>
+
+    <!-- =================== WORK (teaser — full page: experiences.html) =================== -->
     <section class="experiences" id="experiences">
       <div class="section-inner">
-        <h2 class="section-heading reveal">Experiences</h2>
+        <h2 class="section-heading reveal">Work</h2>
 
         <div class="experience-carousel">
-          <button class="experience-carousel-arrow experience-carousel-arrow-prev" id="experience-prev" aria-label="Previous experiences">‹</button>
+          <button class="experience-carousel-arrow experience-carousel-arrow-prev" id="experience-prev" aria-label="Previous work">‹</button>
           <div class="experience-grid" id="experience-grid"><!-- cards injected by JS --></div>
-          <button class="experience-carousel-arrow experience-carousel-arrow-next" id="experience-next" aria-label="Next experiences">›</button>
+          <button class="experience-carousel-arrow experience-carousel-arrow-next" id="experience-next" aria-label="Next work">›</button>
         </div>
 
-        <a href="/experiences.html" class="section-link reveal">See all experiences <span class="arrow">→</span></a>
+        <a href="/experiences.html" class="section-link reveal">See all work <span class="arrow">→</span></a>
+      </div>
+    </section>
+
+    <!-- =================== EVENTS (teaser — full page: events.html) =================== -->
+    <section class="experiences" id="events">
+      <div class="section-inner">
+        <h2 class="section-heading reveal">Events</h2>
+        <p class="section-subheading reveal">Hire us to design your next celebration — built around the people it's for.</p>
+
+        <div class="experience-grid" id="event-grid"><!-- cards injected by JS --></div>
+
+        <a href="/events.html" class="section-link reveal">See all events <span class="arrow">→</span></a>
       </div>
     </section>
 
@@ -104,18 +139,6 @@
         <div class="experience-grid" id="workshop-grid"><!-- cards injected by JS --></div>
 
         <a href="/workshops.html" class="section-link reveal">See all workshops <span class="arrow">→</span></a>
-      </div>
-    </section>
-
-    <!-- =================== EVENTS (teaser — full page: events.html) =================== -->
-    <section class="experiences" id="events">
-      <div class="section-inner">
-        <h2 class="section-heading reveal">Events</h2>
-        <p class="section-subheading reveal">Hire us to design your next celebration — built around the people it's for.</p>
-
-        <div class="experience-grid" id="event-grid"><!-- cards injected by JS --></div>
-
-        <a href="/events.html" class="section-link reveal">See all events <span class="arrow">→</span></a>
       </div>
     </section>
 
@@ -140,12 +163,11 @@
       </a>
       <p class="footer-tagline" id="footer-tagline"></p>
       <ul class="footer-nav">
-        <li><a href="/about.html">About</a></li>
-        <li><a href="/experiences.html">Experiences</a></li>
-        <li><a href="/workshops.html">Workshops</a></li>
-        <li><a href="/events.html">Events</a></li>
-
-        <li><a href="/contact.html">Contact</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/experiences.html">Work</a></li>
+      <li><a href="/events.html">Events</a></li>
+      <li><a href="/workshops.html">Workshops</a></li>
+      <li><a href="/contact.html">Contact</a></li>
       </ul>
       <p class="footer-copyright">© <span id="footer-year"></span> maybe:fiction. All rights reserved.</p>
     </div>

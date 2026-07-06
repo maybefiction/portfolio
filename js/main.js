@@ -10,6 +10,8 @@
 document.addEventListener("DOMContentLoaded", () => {
   injectStaticText();
   renderHeroBackground();
+  renderFeaturedWork();
+  renderCredibility();
   renderFeaturedExperiences();
   renderWorkshopsTeaser();
   renderEventsTeaser();
@@ -27,10 +29,65 @@ function injectStaticText() {
   document.getElementById("hero-heading").textContent = hero.heading;
   document.getElementById("hero-tagline").textContent = hero.tagline;
 
+  const ctaGroup = document.getElementById("hero-cta-group");
+  if (hero.ctaPrimary || hero.ctaSecondary) {
+    ctaGroup.innerHTML = `
+      ${hero.ctaPrimary ? `<a class="btn btn-primary" href="${hero.ctaPrimary.href}">${hero.ctaPrimary.label}</a>` : ""}
+      ${hero.ctaSecondary ? `<a class="btn btn-secondary" href="${hero.ctaSecondary.href}">${hero.ctaSecondary.label}</a>` : ""}
+    `;
+  }
+
   document.getElementById("about-heading").textContent = about.heading;
   document.getElementById("about-body").innerHTML = `<p>${about.shortBody}</p>`;
 
   document.getElementById("footer-tagline").textContent = brand.tagline;
+}
+
+/* ---------- Featured Work spotlight ---------- */
+function renderFeaturedWork() {
+  const section = document.getElementById("featured-work");
+  const featured = SITE_CONTENT.featuredWork;
+  const item = featured && SITE_CONTENT.experiences.find((e) => e.id === featured.experienceId);
+  if (!featured || !item) {
+    section.remove();
+    return;
+  }
+
+  const href = item.hasDetailPage ? `/experiences/${item.id}` : "/experiences.html";
+  document.getElementById("featured-work-image").src = item.heroPhoto || item.placeholderSrc;
+  document.getElementById("featured-work-image").alt = item.title;
+  document.getElementById("featured-work-title").textContent = item.title;
+  document.getElementById("featured-work-description").textContent = featured.description;
+  const link = document.getElementById("featured-work-link");
+  link.href = href;
+  link.innerHTML = `${featured.cta} <span class="arrow">→</span>`;
+
+  const note = document.getElementById("featured-work-note");
+  if (featured.note) {
+    note.textContent = featured.note;
+  } else {
+    note.remove();
+  }
+}
+
+/* ---------- Credibility stats (subtle, not a stat-card grid) ---------- */
+function renderCredibility() {
+  const section = document.getElementById("credibility");
+  const credibility = SITE_CONTENT.credibility;
+  if (!credibility || !credibility.stats || !credibility.stats.length) {
+    section.remove();
+    return;
+  }
+
+  document.getElementById("credibility-stats").innerHTML = credibility.stats
+    .map(
+      (stat) => `
+    <div class="credibility-stat">
+      <span class="credibility-value">${stat.value}</span>
+      <span class="credibility-label">${stat.label}</span>
+    </div>`
+    )
+    .join("");
 }
 
 /* ---------- Hero background photos (crossfade) ---------- */

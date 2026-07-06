@@ -18,9 +18,10 @@ const SITE_CONTENT = {
 
   // ---------- Hero ----------
   hero: {
-    heading: "maybe:fiction",
-    // See brand.tagline above — same field, same doc source.
-    tagline: "Designing new ways for people to gather, create, and relate",
+    heading: "Interdisciplinary experiences that bring people closer.",
+    tagline: "maybe:fiction creates performances, workshops, gatherings, and site-specific experiences that invite people into art through play, participation, and shared attention.",
+    ctaPrimary: { label: "View our work", href: "/experiences.html" },
+    ctaSecondary: { label: "Work with us", href: "/contact.html" },
     // One real photo per fully-realized experience — swapped out the old 4th
     // slot (eclectic-pathetic.jpg), which has no real copy or detail page
     // yet, for a spread across the three complete case studies instead of
@@ -38,7 +39,7 @@ const SITE_CONTENT = {
   // about.html — source: 0_Entity/About/maybe:fiction.gdoc.
   about: {
     heading: "About",
-    shortBody: "maybe:fiction is an interdisciplinary studio that designs experiences for people to gather, create, and relate through communal making, play, and ritual. Our work spans performance, installation, pop-up galleries, festivals, celebrations, and workshops.",
+    shortBody: "maybe:fiction is an experience design studio creating participatory performances, gatherings, and workshops. Our work invites people to become part of the experience rather than simply observe it — in theaters, homes, public spaces, community organizations, and anywhere people are willing to gather. We make work for people who want to participate, not just watch.",
     // Ishaan and Alex at the end of Jornada de Puertas Abiertas (NYC, 2024) —
     // just the two of them, no staging.
     heroPhoto: "/assets/about/ishaan-alex-jornada.jpg",
@@ -82,6 +83,29 @@ const SITE_CONTENT = {
           "In parallel to their career as an artist and producer, Super Alex has spent ten years working as an education manager and instructor in the photography industry, having designed and spoken at in-person and online workshops, courses, seminars, and community events including Pratt University, RIT, and FIT in the US, and IED, HELB, Efti, and TAI in the EU.",
         ],
       },
+    ],
+  },
+
+  // ---------- Homepage: Featured Work spotlight ----------
+  // Points at one entry in `experiences` below by id, rather than duplicating
+  // its copy — pulls placeholderSrc/title/href from there automatically.
+  featuredWork: {
+    experienceId: "spontaneous-attachment",
+    label: "Featured Work",
+    description: "A participatory performance blending contemporary dance, live music, and installation, exploring how attachment forms between strangers, friends, and the spaces we share.",
+    cta: "Explore the project",
+    note: "We are interested in the thing around the thing.",
+  },
+
+  // ---------- Homepage: Credibility stats ----------
+  // Numbers as provided directly by the studio (not derived from what's
+  // documented on-site) — reuses the same plain rule-and-divider stat
+  // treatment as project detail pages, not a boxed/card layout.
+  credibility: {
+    stats: [
+      { value: "70+", label: "Gatherings and events" },
+      { value: "1,000+", label: "Participants" },
+      { value: "Brooklyn-based", label: "With work across homes, arts spaces, and community organizations" },
     ],
   },
 

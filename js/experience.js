@@ -45,9 +45,9 @@ function renderNotFound() {
   document.getElementById("main").innerHTML = `
     <div class="section-inner xp-not-found">
       <p class="eyebrow">Hmm</p>
-      <h1 class="section-heading">We couldn't find that experience.</h1>
+      <h1 class="section-heading">We couldn't find that work.</h1>
       <p class="section-subheading">It may have moved, or the link is out of date.</p>
-      <a class="btn btn-primary" href="/experiences.html">← Back to Experiences</a>
+      <a class="btn btn-primary" href="/experiences.html">← Back to Work</a>
     </div>
   `;
 }
