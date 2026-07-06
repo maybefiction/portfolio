@@ -243,7 +243,7 @@ function photoSrc(photo) {
 function renderHeroMedia(item) {
   const wrap = document.getElementById("xp-video-wrap");
   if (item.gallery && item.gallery.length) {
-    renderHeroCarousel(wrap, item, item.gallery.map(photoSrc));
+    renderHeroGrid(wrap, item, item.gallery.map(photoSrc));
     return;
   }
   if (item.heroPhoto) {
@@ -253,73 +253,33 @@ function renderHeroMedia(item) {
   wrap.remove();
 }
 
-function renderHeroCarousel(wrap, item, gallery) {
-  const arrows =
-    gallery.length > 1
-      ? `
-    <button class="xp-carousel-arrow xp-carousel-prev" aria-label="Previous photo">‹</button>
-    <button class="xp-carousel-arrow xp-carousel-next" aria-label="Next photo">›</button>
-    <div class="xp-carousel-counter"><span id="xp-carousel-current">1</span> / ${gallery.length}</div>`
-      : "";
+// A small curated mosaic (up to 5 photos) instead of a single-photo
+// carousel — see the CSS comment on .xp-hero-grid for why. item.heroGridPhotos
+// lets an item hand-pick which photos represent it here (see What Clings);
+// anything else just takes the first few from its gallery in existing order.
+function renderHeroGrid(wrap, item, gallery) {
+  const featured = (item.heroGridPhotos || gallery.slice(0, 5)).slice(0, 5);
+
+  if (featured.length < 2) {
+    wrap.innerHTML = `<img class="xp-video-fallback-image" src="${featured[0] || gallery[0]}" alt="${item.title}" />`;
+    return;
+  }
 
   wrap.innerHTML = `
-    <div class="xp-carousel">
-      <div class="xp-carousel-track" id="xp-carousel-track">
-        ${gallery
-          .map(
-            (src, i) => `
-          <div class="xp-carousel-slide">
-            <img src="${src}" alt="${item.title} — photo ${i + 1}" loading="${i === 0 ? "eager" : "lazy"}" />
-          </div>`
-          )
-          .join("")}
-      </div>
-      ${arrows}
+    <div class="xp-hero-grid">
+      ${featured
+        .map(
+          (src, i) => `
+        <button class="xp-hero-grid-item" data-index="${gallery.indexOf(src)}" aria-label="Open photo ${i + 1}">
+          <img src="${src}" alt="${item.title} — photo ${i + 1}" loading="${i === 0 ? "eager" : "lazy"}" />
+        </button>`
+        )
+        .join("")}
     </div>`;
 
-  if (gallery.length <= 1) return;
-
-  const track = document.getElementById("xp-carousel-track");
-  const counter = document.getElementById("xp-carousel-current");
-  const prevBtn = wrap.querySelector(".xp-carousel-prev");
-  const nextBtn = wrap.querySelector(".xp-carousel-next");
-  let index = 0;
-  let timer = null;
-
-  function show(i) {
-    index = (i + gallery.length) % gallery.length;
-    track.style.transform = `translateX(-${index * 100}%)`;
-    counter.textContent = index + 1;
-  }
-  function next() { show(index + 1); }
-  function prev() { show(index - 1); }
-  function startAutoplay() {
-    clearInterval(timer);
-    timer = setInterval(next, 5000);
-  }
-
-  nextBtn.addEventListener("click", () => { next(); startAutoplay(); });
-  prevBtn.addEventListener("click", () => { prev(); startAutoplay(); });
-  wrap.addEventListener("mouseenter", () => clearInterval(timer));
-  wrap.addEventListener("mouseleave", startAutoplay);
-
-  let touchStartX = null;
-  track.addEventListener("touchstart", (e) => { touchStartX = e.touches[0].clientX; }, { passive: true });
-  track.addEventListener(
-    "touchend",
-    (e) => {
-      if (touchStartX === null) return;
-      const delta = e.changedTouches[0].clientX - touchStartX;
-      if (Math.abs(delta) > 40) {
-        delta < 0 ? next() : prev();
-        startAutoplay();
-      }
-      touchStartX = null;
-    },
-    { passive: true }
-  );
-
-  startAutoplay();
+  wrap.querySelectorAll(".xp-hero-grid-item").forEach((btn) => {
+    btn.addEventListener("click", () => openScopedLightbox(gallery, Number(btn.dataset.index), item.title));
+  });
 }
 
 /* ---------- Section 4: Experience Design flow (interactive accordion) ---------- */

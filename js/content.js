@@ -324,6 +324,18 @@ const SITE_CONTENT = {
       description: "What Clings asks what ways of relating still exist beneath the surface of everyday life, waiting to be noticed, practiced, and shared again.",
       placeholderSrc: "/assets/experiences/what-clings-gallery/photo-01.jpg",
       heroPhoto: "/assets/experiences/what-clings-gallery/photo-01.jpg",
+      // Curated for the small photo-grid preview (see renderHeroGrid) —
+      // one striking anchor shot (the dot wall) plus one from each of the
+      // three rooms, plus a live-performance shot for human energy against
+      // the otherwise-empty installation photos. Deliberately avoids
+      // reusing photo-01 (already the hero banner above this).
+      heroGridPhotos: [
+        "/assets/experiences/what-clings-gallery/photo-19.jpg",
+        "/assets/experiences/what-clings-gallery/photo-09.jpg",
+        "/assets/experiences/what-clings-gallery/photo-15.jpg",
+        "/assets/experiences/what-clings-gallery/photo-18.jpg",
+        "/assets/experiences/what-clings-gallery/photo-25.jpg",
+      ],
       gradient: "grad-blue",
       hasImage: true,
       hasDetailPage: true,

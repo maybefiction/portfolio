@@ -186,7 +186,13 @@
   color: var(--ink-soft);
 }
 
-/* ---------- 3. HERO MEDIA: gallery carousel, or fallback photo (nested under description, same column) ---------- */
+/* ---------- 3. HERO MEDIA: curated photo grid, or fallback photo (nested under description, same column) ----------
+   Was a single-photo carousel cycling through the entire gallery — with a
+   full Gallery grid + lightbox further down the page already, that read as
+   a second, slower hero image rather than a preview into the work. A small
+   mosaic surfaces more at a glance, and clicking any tile still opens the
+   real lightbox (see openScopedLightbox), scoped to the complete gallery —
+   this is an entry point into browsing everything, not a competing view. */
 .xp-video-wrap {
   max-width: 88%;
   margin: 0 auto;
@@ -202,48 +208,23 @@
   object-fit: cover;
 }
 
-.xp-carousel { position: relative; }
-.xp-carousel-track {
-  display: flex;
+.xp-hero-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-rows: repeat(2, 1fr);
+  gap: 4px;
   aspect-ratio: 16 / 9;
+}
+.xp-hero-grid-item { display: block; overflow: hidden; position: relative; }
+.xp-hero-grid-item:first-child { grid-row: 1 / 3; }
+.xp-hero-grid-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
   transition: transform 0.5s var(--ease-smooth);
 }
-.xp-carousel-slide { flex: 0 0 100%; height: 100%; }
-.xp-carousel-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-.xp-carousel-arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(255, 255, 255, 0.15);
-  color: var(--white);
-  border-radius: 50%;
-  width: 44px;
-  height: 44px;
-  font-size: 1.3rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.25s ease, transform 0.25s var(--ease-bounce);
-}
-.xp-carousel-arrow:hover { background: rgba(255, 255, 255, 0.3); }
-.xp-carousel-prev { left: 16px; }
-.xp-carousel-prev:hover { transform: translateY(-50%) scale(1.1); }
-.xp-carousel-next { right: 16px; }
-.xp-carousel-next:hover { transform: translateY(-50%) scale(1.1); }
-
-.xp-carousel-counter {
-  position: absolute;
-  bottom: 16px;
-  right: 16px;
-  padding: 4px 10px;
-  border-radius: var(--radius-pill);
-  background: rgba(38, 37, 34, 0.55);
-  color: rgba(255, 255, 255, 0.9);
-  font-family: var(--font-display);
-  font-size: 0.78rem;
-  letter-spacing: 0.02em;
-}
+.xp-hero-grid-item:hover img { transform: scale(1.05); }
 
 /* ---------- 4. EXPERIENCE DESIGN FLOW ---------- */
 .xp-design {
@@ -753,8 +734,12 @@
 @media (max-width: 480px) {
   .xp-gallery-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
   .xp-lightbox-prev, .xp-lightbox-next { width: 40px; height: 40px; font-size: 1.1rem; }
-  .xp-carousel-arrow { width: 36px; height: 36px; font-size: 1.1rem; }
-  .xp-carousel-prev { left: 10px; }
-  .xp-carousel-next { right: 10px; }
-  .xp-carousel-counter { bottom: 10px; right: 10px; font-size: 0.7rem; }
+  /* The 2fr/1fr/1fr mosaic gets cramped at phone widths — simplify to a
+     big photo on top of a 2-across strip instead. */
+  .xp-hero-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(3, 1fr);
+    aspect-ratio: 3 / 4;
+  }
+  .xp-hero-grid-item:first-child { grid-row: 1 / 2; grid-column: 1 / 3; }
 }
