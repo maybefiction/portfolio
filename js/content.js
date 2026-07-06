@@ -29,7 +29,7 @@ const SITE_CONTENT = {
     backgroundImages: [
       { src: "/assets/experiences/spontaneous-attachment.jpg", caption: "In Between Things" },
       { src: "/assets/experiences/jornada-gallery/nyc-2024/photo-04.jpg", caption: "Jornada de Puertas Abiertas" },
-      { src: "/assets/experiences/what-clings-gallery/photo-24.jpg", caption: "What Clings" },
+      { src: "/assets/experiences/what-clings-gallery/photo-01.jpg", caption: "What Clings" },
     ],
   },
 
@@ -322,8 +322,8 @@ const SITE_CONTENT = {
       // word-for-word right above it on the detail page.
       shortDescription: "What Clings asks what ways of relating still exist beneath the surface of everyday life, waiting to be noticed, practiced, and shared again.",
       description: "What Clings asks what ways of relating still exist beneath the surface of everyday life, waiting to be noticed, practiced, and shared again.",
-      placeholderSrc: "/assets/experiences/what-clings.jpg",
-      heroPhoto: "/assets/experiences/what-clings-gallery/photo-24.jpg",
+      placeholderSrc: "/assets/experiences/what-clings-gallery/photo-01.jpg",
+      heroPhoto: "/assets/experiences/what-clings-gallery/photo-01.jpg",
       gradient: "grad-blue",
       hasImage: true,
       hasDetailPage: true,
