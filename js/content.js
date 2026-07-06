@@ -932,14 +932,14 @@ const SITE_CONTENT = {
       hasDetailPage: true,
       placeholderSrc: "/assets/events/birthdays/card.jpg",
       heroPhoto: "/assets/events/birthdays/hero.jpg",
-      tagline: "Our format for milestone birthdays — a structure we design once, then adapt to whoever it's for.",
-      shortDescription: "A milestone birthday celebration built around one afternoon in three parts: making, playing, and performing. Debuted for our own co-founder's 30th — now a format we design for other people's celebrations too.",
-      description: "A milestone birthday celebration built around one afternoon in three parts: making, playing, and performing.",
+      tagline: "Ishaan's 30th birthday, staged as a full production in three parts: making, playing, and performing.",
+      shortDescription: "For co-founder Ishaan Goel's 30th birthday, maybe:fiction built an entire afternoon in three parts — sixty guests moving through craft stations, group games, and a run of live performances that closed with cake.",
+      description: "For co-founder Ishaan Goel's 30th birthday, maybe:fiction built an entire afternoon in three parts — sixty guests moving through craft stations, group games, and a run of live performances that closed with cake.",
       basics: {
-        format: "Custom milestone celebration",
-        groupSize: "Debuted for 60 guests — scales up or down",
-        length: "6-hour arc, split into three 2-hour phases",
-        homeBase: "Venue scouted per celebration — NYC and beyond",
+        format: "Milestone birthday celebration",
+        groupSize: "60 guests",
+        length: "6 hours, in three 2-hour phases",
+        homeBase: "Brooklyn Peace Center, Bed-Stuy, Brooklyn",
       },
       impactStats: [
         { value: "60", label: "Guests hosted for the debut celebration" },
@@ -966,15 +966,19 @@ const SITE_CONTENT = {
           text: "An MC'd run of live performances — music, comedy, spoken word, whatever the guest list brings — closing with cake, and a standing offer for any performer brave enough to take one to the face.",
         },
       ],
+      // Reframed per project direction to read as a portfolio piece about a
+      // real celebration rather than a productized service pitch — leads
+      // with what was actually staged for Ishaan's 30th, and only closes
+      // with the fact that the structure repeated into a format.
       fullSynopsis: [
-        "Adult Birthdays is maybe:fiction's format for milestone celebrations — a structure we design once and then adapt to whoever it's for. Instead of one long party, the day unfolds in three distinct two-hour phases: making, playing, and performing, so a room of very different people all find their own way in.",
-        "The debut ran as \"[Pilot] S1E1: Celebrating Three Decades,\" our first full production of the format, built for co-founder Ishaan Goel's 30th birthday. Sixty guests moved through craft stations, group games, and a run of live performances MC'd through the afternoon — closing, as tradition now has it, with cake and the option for any performer brave enough to take one to the face.",
+        "For co-founder Ishaan Goel's 30th birthday, maybe:fiction staged the milestone as a full production rather than a single party: one afternoon built in three distinct two-hour phases — making, playing, and performing — so a room of very different people, from family to college friends, all found their own way in.",
+        "Sixty guests moved through craft stations, group games, and a run of live performances MC'd through the afternoon at the Brooklyn Peace Center — closing, as tradition now has it, with cake and the option for any performer brave enough to take one to the face.",
         "Small details carried the whole thing: a mini gallery built from guests' own early-stage and experimental artwork, a menu with vegan options built into every phase, and a schedule loose enough that people could drop into the part that spoke to them and stay as long as they liked.",
-        "It was framed as a pilot on purpose. Adult Birthdays is a format we're still building out, adapting the make/play/perform structure to a different milestone and guest list each time it runs.",
+        "It was billed as a pilot on purpose. The three-phase structure worked well enough that it's now maybe:fiction's format for milestone celebrations, adapted to a different guest of honor each time it runs.",
       ],
       credits: {
+        "Celebration": "Ishaan Goel's 30th birthday — March 2025, Brooklyn Peace Center",
         "Designed & Hosted By": "maybe:fiction",
-        "Debut Edition": "Ishaan Goel's 30th birthday, March 2025 — built as the pilot for the format",
       },
       gallery: Array.from({ length: 8 }, (_, i) =>
         `/assets/events/birthdays/gallery-${String(i + 1).padStart(2, "0")}.jpg`
