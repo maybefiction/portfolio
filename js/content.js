@@ -442,7 +442,7 @@ const SITE_CONTENT = {
   events: [
     {
       id: "birthdays",
-      title: "Birthdays",
+      title: "Adult Birthdays",
       tag: "Gathering",
       hasImage: true,
       hasDetailPage: true,
@@ -462,33 +462,31 @@ const SITE_CONTENT = {
         { value: "3", label: "Distinct phases woven into one afternoon" },
         { value: "6", label: "Hours from doors open to the last slice of cake" },
       ],
-      flow: [
+      experienceDesign: [
         {
           title: "Make",
-          time: "2 hours",
+          subtitle: "2 hours",
+          image: "/assets/events/birthdays/gallery-03.jpg",
           text: "Craft stations tailored to the guest of honor — bracelet-making, collage, comics, playdough sculpting — paired with a spread built for grazing, not sitting down.",
         },
         {
           title: "Play",
-          time: "2 hours",
+          subtitle: "2 hours",
+          image: "/assets/events/birthdays/gallery-01.jpg",
           text: "Games with just enough stakes to get strangers competitive together: spikeball, arcade basketball, nerf battles, and whatever else the room needs to loosen up.",
         },
         {
           title: "Perform",
-          time: "2 hours",
+          subtitle: "2 hours",
+          image: "/assets/events/birthdays/gallery-07.jpg",
           text: "An MC'd run of live performances — music, comedy, spoken word, whatever the guest list brings — closing with cake, and a standing offer for any performer brave enough to take one to the face.",
         },
       ],
       fullSynopsis: [
-        "Birthdays is maybe:fiction's format for milestone celebrations — a structure we design once and then adapt to whoever it's for. Instead of one long party, the day unfolds in three distinct two-hour phases: making, playing, and performing, so a room of very different people all find their own way in.",
+        "Adult Birthdays is maybe:fiction's format for milestone celebrations — a structure we design once and then adapt to whoever it's for. Instead of one long party, the day unfolds in three distinct two-hour phases: making, playing, and performing, so a room of very different people all find their own way in.",
         "The debut ran as \"[Pilot] S1E1: Celebrating Three Decades,\" our first full production of the format, built for co-founder Ishaan Goel's 30th birthday. Sixty guests moved through craft stations, group games, and a run of live performances MC'd through the afternoon — closing, as tradition now has it, with cake and the option for any performer brave enough to take one to the face.",
         "Small details carried the whole thing: a mini gallery built from guests' own early-stage and experimental artwork, a menu with vegan options built into every phase, and a schedule loose enough that people could drop into the part that spoke to them and stay as long as they liked.",
-        "It was framed as a pilot on purpose. Birthdays is a format we're still building out, and we design each edition around whoever it's for — if you're planning a milestone worth building a whole afternoon around, this is the starting blueprint.",
-      ],
-      themes: [
-        "Bracelet-Making", "Collage & Zine-Making", "Comics", "Playdough Sculpting",
-        "Spikeball", "Arcade Basketball", "Nerf Battles", "Live Performances",
-        "MC'd Program", "Custom Menu", "Vegan Options", "Cake Tradition", "Mini Art Gallery",
+        "It was framed as a pilot on purpose. Adult Birthdays is a format we're still building out, adapting the make/play/perform structure to a different milestone and guest list each time it runs.",
       ],
       credits: {
         "Designed & Hosted By": "maybe:fiction",

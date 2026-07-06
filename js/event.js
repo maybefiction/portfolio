@@ -1,9 +1,9 @@
 /* ============================================================
-   EVENT.JS — renders an individual event detail page.
+   EVENT.JS — renders an individual gathering detail page.
    Reads the event id from the URL, looks it up in
    SITE_CONTENT.events (js/content.js), and renders whichever
-   sections that item has data for — same partial-data philosophy
-   as experience.js / workshop.js.
+   sections that item has data for — same partial-data philosophy,
+   and now the same section structure, as experience.js.
 
    ID is read from the URL path (e.g. /events/some-id), since the
    Vercel rewrite that maps /events/:id -> /event.html does NOT
@@ -30,10 +30,9 @@ document.addEventListener("DOMContentLoaded", () => {
   renderHero(item);
   renderMeta(item);
   renderImpactStats(item);
-  renderFlow(item);
-  renderWhatWeBring(item);
+  renderHeroMedia(item);
+  renderDesignFlow(item);
   renderGallery(item);
-  renderCTA(item);
   setupNav();
 });
 
@@ -63,11 +62,17 @@ function renderMeta(item) {
   const side = document.getElementById("xp-meta-side");
   side.innerHTML = renderMetaBlockHTML(item.basics, item.credits);
 
-  document.getElementById("xp-short-description").textContent =
-    item.tagline || item.shortDescription || item.description || "";
+  const shortDescription = item.tagline || item.shortDescription || item.description || "";
+  document.getElementById("xp-short-description").textContent = shortDescription;
 
-  const paragraphs = Array.isArray(item.fullSynopsis) ? item.fullSynopsis : [];
-  document.getElementById("xp-description").innerHTML = paragraphs
+  const allParagraphs = Array.isArray(item.fullSynopsis)
+    ? item.fullSynopsis
+    : [item.fullSynopsis].filter(Boolean);
+  // Skip the lead paragraph if it duplicates the short description already
+  // shown as the header above, so the detailed description doesn't repeat itself.
+  const detailedParagraphs =
+    allParagraphs[0] === shortDescription ? allParagraphs.slice(1) : allParagraphs;
+  document.getElementById("xp-description").innerHTML = detailedParagraphs
     .map((para) => `<p class="xp-description-body">${para}</p>`)
     .join("");
 }
@@ -96,14 +101,14 @@ function renderMetaBlockHTML(basics, credits) {
   if (credits) {
     html += `
       <div class="xp-meta-block">
-        <h3 class="xp-meta-label">Who's Involved</h3>
+        <h3 class="xp-meta-label">Credits</h3>
         <dl class="xp-meta-list">
           ${Object.entries(credits)
             .map(
               ([role, names]) => `
             <div class="xp-meta-row">
               <dt>${role}</dt>
-              <dd>${names}</dd>
+              <dd>${renderCreditNames(names)}</dd>
             </div>`
             )
             .join("")}
@@ -112,6 +117,30 @@ function renderMetaBlockHTML(basics, credits) {
   }
 
   return html;
+}
+
+/* Turns "Name (Role), Name (Role), ..." into one line per person instead of
+   one run-on string. Falls back to the plain string untouched when a field
+   isn't actually a list of people (e.g. a one-sentence venue blurb). */
+function renderCreditNames(value) {
+  const parts = value.split(/,\s*(?![^(]*\))/).map((s) => s.trim());
+  if (parts.length < 2 || !parts.every(looksLikePersonEntry)) return value;
+
+  return `<ul class="xp-credit-list">
+    ${parts
+      .map((part) => {
+        const match = part.match(/^(.+?)\s*\(([^)]+)\)$/);
+        return match
+          ? `<li><span class="xp-credit-name">${match[1]}</span> <span class="xp-credit-role">${match[2]}</span></li>`
+          : `<li><span class="xp-credit-name">${part}</span></li>`;
+      })
+      .join("")}
+  </ul>`;
+}
+
+function looksLikePersonEntry(part) {
+  if (/\([^)]+\)\s*$/.test(part)) return true;
+  return part.split(/\s+/).every((word) => /^[A-Z][A-Za-z0-9'.-]*$/.test(word));
 }
 
 function formatLabel(key) {
@@ -124,7 +153,7 @@ function formatLabel(key) {
   return labels[key] || key;
 }
 
-/* ---------- Impact stats (optional) ---------- */
+/* ---------- Impact stats (optional — lives between the short description and hero media) ---------- */
 function renderImpactStats(item) {
   const el = document.getElementById("xp-impact-stats");
   if (!item.impactStats || !item.impactStats.length) {
@@ -142,39 +171,151 @@ function renderImpactStats(item) {
     .join("");
 }
 
-/* ---------- Section 3: How it works (phase flow) ---------- */
-function renderFlow(item) {
-  const section = document.getElementById("flow-section");
-  if (!item.flow || !item.flow.length) {
-    section.remove();
+/* ---------- Section 3: Hero media (lives under the description in xp-meta-main) ---------- */
+// A gallery carousel is preferred (gives a fuller sense of the work than one
+// static frame); items without a gallery fall back to a single photo, so this
+// slot always carries a visual instead of leaving a gap between the short and
+// detailed description.
+function renderHeroMedia(item) {
+  const wrap = document.getElementById("xp-video-wrap");
+  if (item.gallery && item.gallery.length) {
+    renderHeroCarousel(wrap, item, item.gallery);
     return;
   }
-  const flow = document.getElementById("bme-flow");
-  flow.innerHTML = item.flow
-    .map(
-      (step, i) => `
-    <div class="bme-flow-step">
-      <span class="bme-flow-index">${String(i + 1).padStart(2, "0")}</span>
-      <h3 class="bme-flow-title">${step.title}</h3>
-      <span class="bme-flow-time">${step.time}</span>
-      <p class="bme-flow-text">${step.text}</p>
-    </div>`
-    )
-    .join("");
+  if (item.heroPhoto) {
+    wrap.innerHTML = `<img class="xp-video-fallback-image" src="${item.heroPhoto}" alt="${item.title}" />`;
+    return;
+  }
+  wrap.remove();
 }
 
-/* ---------- Section 4: What We Bring tag cloud ---------- */
-function renderWhatWeBring(item) {
-  const section = document.getElementById("themes-section");
-  if (!item.themes || !item.themes.length) {
+function renderHeroCarousel(wrap, item, gallery) {
+  const arrows =
+    gallery.length > 1
+      ? `
+    <button class="xp-carousel-arrow xp-carousel-prev" aria-label="Previous photo">‹</button>
+    <button class="xp-carousel-arrow xp-carousel-next" aria-label="Next photo">›</button>
+    <div class="xp-carousel-counter"><span id="xp-carousel-current">1</span> / ${gallery.length}</div>`
+      : "";
+
+  wrap.innerHTML = `
+    <div class="xp-carousel">
+      <div class="xp-carousel-track" id="xp-carousel-track">
+        ${gallery
+          .map(
+            (src, i) => `
+          <div class="xp-carousel-slide">
+            <img src="${src}" alt="${item.title} — photo ${i + 1}" loading="${i === 0 ? "eager" : "lazy"}" />
+          </div>`
+          )
+          .join("")}
+      </div>
+      ${arrows}
+    </div>`;
+
+  if (gallery.length <= 1) return;
+
+  const track = document.getElementById("xp-carousel-track");
+  const counter = document.getElementById("xp-carousel-current");
+  const prevBtn = wrap.querySelector(".xp-carousel-prev");
+  const nextBtn = wrap.querySelector(".xp-carousel-next");
+  let index = 0;
+  let timer = null;
+
+  function show(i) {
+    index = (i + gallery.length) % gallery.length;
+    track.style.transform = `translateX(-${index * 100}%)`;
+    counter.textContent = index + 1;
+  }
+  function next() { show(index + 1); }
+  function prev() { show(index - 1); }
+  function startAutoplay() {
+    clearInterval(timer);
+    timer = setInterval(next, 5000);
+  }
+
+  nextBtn.addEventListener("click", () => { next(); startAutoplay(); });
+  prevBtn.addEventListener("click", () => { prev(); startAutoplay(); });
+  wrap.addEventListener("mouseenter", () => clearInterval(timer));
+  wrap.addEventListener("mouseleave", startAutoplay);
+
+  let touchStartX = null;
+  track.addEventListener("touchstart", (e) => { touchStartX = e.touches[0].clientX; }, { passive: true });
+  track.addEventListener(
+    "touchend",
+    (e) => {
+      if (touchStartX === null) return;
+      const delta = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(delta) > 40) {
+        delta < 0 ? next() : prev();
+        startAutoplay();
+      }
+      touchStartX = null;
+    },
+    { passive: true }
+  );
+
+  startAutoplay();
+}
+
+/* ---------- Section 4: Experience Design flow (interactive stage nodes) ---------- */
+function renderDesignFlow(item) {
+  const section = document.getElementById("xp-design-section");
+  if (!item.experienceDesign || !item.experienceDesign.length) {
     section.remove();
     return;
   }
-  document.getElementById("themes-intro").textContent =
-    "A sampling of the stations, games, and performance formats we fold into a celebration — mixed and matched differently for yours.";
-  document.getElementById("bme-theme-cloud").innerHTML = item.themes
-    .map((theme) => `<span class="bme-theme-pill">${theme}</span>`)
-    .join("");
+
+  const flow = document.getElementById("xp-flow");
+
+  flow.innerHTML = `
+    <div class="xp-flow-nodes" role="tablist" aria-label="Experience design stages">
+      ${item.experienceDesign
+        .map(
+          (stage, i) => `
+        <button class="xp-flow-node ${i === 0 ? "is-active" : ""}" data-stage="${i}" role="tab" aria-selected="${i === 0}">
+          <div class="xp-flow-node-thumb-wrap">
+            ${stage.image ? `<img class="xp-flow-node-thumb" src="${stage.image}" alt="${stage.title}" loading="lazy">` : ""}
+            <span class="xp-flow-node-index">${stage.act || String(i + 1).padStart(2, "0")}</span>
+          </div>
+          <span class="xp-flow-node-label">
+            ${stage.title}
+            ${stage.subtitle ? `<span class="xp-flow-node-subtitle">${stage.subtitle}</span>` : ""}
+          </span>
+        </button>`
+        )
+        .join("")}
+    </div>
+    <div class="xp-flow-panels">
+      ${item.experienceDesign
+        .map(
+          (stage, i) => `
+        <div class="xp-flow-panel ${i === 0 ? "is-open" : ""}" data-panel="${i}" role="tabpanel">
+          <div class="xp-flow-panel-heading">
+            ${stage.act ? `<span class="xp-flow-panel-act">Act ${stage.act}</span>` : ""}
+            <h3>${stage.title}${stage.subtitle ? ` <span class="xp-flow-panel-subtitle">— ${stage.subtitle}</span>` : ""}</h3>
+            ${stage.location ? `<span class="xp-flow-panel-location">${stage.location}</span>` : ""}
+          </div>
+          <p>${stage.text}</p>
+        </div>`
+        )
+        .join("")}
+    </div>
+  `;
+
+  const nodes = Array.from(flow.querySelectorAll(".xp-flow-node"));
+  const panels = Array.from(flow.querySelectorAll(".xp-flow-panel"));
+
+  nodes.forEach((node) => {
+    node.addEventListener("click", () => {
+      const index = node.dataset.stage;
+      nodes.forEach((n) => {
+        n.classList.toggle("is-active", n === node);
+        n.setAttribute("aria-selected", String(n === node));
+      });
+      panels.forEach((p) => p.classList.toggle("is-open", p.dataset.panel === index));
+    });
+  });
 }
 
 /* ---------- Section 5: Gallery + lightbox ---------- */
@@ -240,13 +381,6 @@ function renderGallery(item) {
     if (e.key === "ArrowLeft") showDelta(-1);
     if (e.key === "ArrowRight") showDelta(1);
   });
-}
-
-/* ---------- Section 6: Hire us CTA ---------- */
-function renderCTA(item) {
-  document.getElementById("bme-cta-sub").textContent =
-    `${item.basics && item.basics.format ? item.basics.format + "." : ""} We'll build a custom arc of making, playing, and performing around your people.`;
-  document.getElementById("bme-cta-link").href = `/contact.html?event=${encodeURIComponent(item.title)}`;
 }
 
 /* ---------- Nav mobile toggle (shared behavior with main.js) ---------- */

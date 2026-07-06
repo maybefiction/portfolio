@@ -10,9 +10,6 @@
 
   <link rel="stylesheet" href="/css/styles.css" />
   <link rel="stylesheet" href="/css/experience.css" />
-  <!-- Reuses workshop.css's .bme-flow/.bme-theme-cloud/.bme-cta-section components
-       as-is — purely structural/visual, no textual coupling to workshops. -->
-  <link rel="stylesheet" href="/css/workshop.css" />
 
   <link rel="icon" type="image/png" href="/assets/icons/logo.png" />
 </head>
@@ -56,46 +53,33 @@
       </div>
     </section>
 
-    <!-- =================== SECTION 2: BASICS + DESCRIPTION + IMPACT =================== -->
+    <!-- =================== SECTION 2+3: BASICS/CREDITS + DESCRIPTION + HERO MEDIA =================== -->
     <section class="xp-meta section-inner">
       <div class="xp-meta-grid">
         <aside class="xp-meta-side" id="xp-meta-side"><!-- Basics + Credits injected by JS --></aside>
         <div class="xp-meta-main">
           <h2 class="xp-short-description" id="xp-short-description"></h2>
-          <div class="xp-impact-stats" id="xp-impact-stats"></div>
-          <div class="xp-description" id="xp-description"></div>
+          <div class="xp-impact-stats" id="xp-impact-stats"><!-- Impact stats injected by JS, only for items with impactStats data --></div>
+          <div class="xp-video-wrap" id="xp-video-wrap"><!-- Gallery carousel or fallback photo injected by JS --></div>
         </div>
       </div>
+      <!-- Full description spans the whole section width (both columns
+           above), instead of being confined to the main column. -->
+      <div class="xp-description" id="xp-description"></div>
     </section>
 
-    <!-- =================== SECTION 3: HOW IT WORKS =================== -->
-    <section class="bme-flow-section" id="flow-section">
+    <!-- =================== SECTION 4: EXPERIENCE DESIGN FLOW =================== -->
+    <section class="xp-design" id="xp-design-section">
       <div class="section-inner">
-        <h2 class="section-heading">How it works</h2>
-        <div class="bme-flow" id="bme-flow"><!-- steps injected by JS --></div>
+        <h2 class="section-heading">Experience Design</h2>
+        <div class="xp-flow" id="xp-flow"><!-- stage nodes injected by JS --></div>
       </div>
-    </section>
-
-    <!-- =================== SECTION 4: WHAT WE BRING =================== -->
-    <section class="bme-themes-section section-inner" id="themes-section">
-      <h2 class="section-heading">What we bring</h2>
-      <p class="section-subheading" id="themes-intro"></p>
-      <div class="bme-theme-cloud" id="bme-theme-cloud"><!-- pills injected by JS --></div>
     </section>
 
     <!-- =================== SECTION 5: GALLERY =================== -->
     <section class="xp-gallery section-inner" id="xp-gallery-section">
       <h2 class="section-heading">Gallery</h2>
       <div class="xp-gallery-grid" id="xp-gallery-grid"><!-- thumbnails injected by JS --></div>
-    </section>
-
-    <!-- =================== SECTION 6: HIRE US CTA =================== -->
-    <section class="bme-cta-section" id="cta-section">
-      <div class="section-inner bme-cta-inner">
-        <h2 class="bme-cta-heading">Want us to design yours?</h2>
-        <p class="bme-cta-sub" id="bme-cta-sub"></p>
-        <a class="btn btn-primary" id="bme-cta-link" href="/contact.html">Get in touch →</a>
-      </div>
     </section>
 
   </main>
