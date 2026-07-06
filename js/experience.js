@@ -33,10 +33,13 @@ document.addEventListener("DOMContentLoaded", () => {
   renderMeta(item);
   renderImpactStats(item);
   renderHeroMedia(item);
-  // Items with editions render their gallery and design flow from
-  // renderMeta's edition switcher instead (each tab has its own), so skip
-  // the flat calls here — renderMeta's selectEdition(0) already ran them.
-  if (!item.editions) {
+  // Items with editions (currently just Jornada) get an expandable card per
+  // edition instead of the classic act-based flow + a flat Gallery section —
+  // each card carries its own Theme/Location/Credits/Artists/Gallery.
+  if (item.editions && item.editions.length) {
+    renderEditionCards(item);
+    document.getElementById("xp-gallery-section").remove();
+  } else {
     renderDesignFlow(item);
     renderGallery(item);
   }
@@ -69,46 +72,12 @@ function renderHero(item) {
 }
 
 /* ---------- Section 2: Basics/Credits (1/4) + Description (3/4) ---------- */
+// Static regardless of edition — items with multiple editions (Jornada) show
+// their per-edition specifics (Theme/Location/Credits/Artists/Gallery) in
+// the expandable cards from renderEditionCards() instead.
 function renderMeta(item) {
   const side = document.getElementById("xp-meta-side");
-  const switcherBar = document.getElementById("xp-edition-switcher-bar");
-
-  if (item.editions && item.editions.length) {
-    const switcher = document.createElement("div");
-    switcher.className = "xp-edition-switcher";
-    switcher.innerHTML = item.editions
-      .map(
-        (ed, i) => `<button class="xp-edition-tab ${i === 0 ? "is-active" : ""}" data-edition="${i}">${ed.label}</button>`
-      )
-      .join("");
-    // Lives between the hero and the header text, not inside the sidebar —
-    // it's a top-level choice (which run of the show), not a Details field.
-    switcherBar.innerHTML = "";
-    switcherBar.append(switcher);
-
-    const metaBlock = document.createElement("div");
-    side.innerHTML = "";
-    side.append(metaBlock);
-
-    const selectEdition = (index) => {
-      const edition = item.editions[index];
-      switcher.querySelectorAll(".xp-edition-tab").forEach((tab, i) => {
-        tab.classList.toggle("is-active", i === index);
-      });
-      metaBlock.innerHTML = renderMetaBlockHTML(edition.basics, edition.credits, edition.detailPhoto, item.title);
-      renderGallery(item, edition.gallery);
-      renderDesignFlow(item, edition.experienceDesign);
-    };
-
-    switcher.querySelectorAll(".xp-edition-tab").forEach((tab) => {
-      tab.addEventListener("click", () => selectEdition(Number(tab.dataset.edition)));
-    });
-
-    selectEdition(0);
-  } else {
-    switcherBar.remove();
-    side.innerHTML = renderMetaBlockHTML(item.basics, item.credits);
-  }
+  side.innerHTML = renderMetaBlockHTML(item.basics, item.credits);
 
   const shortDescription = item.shortDescription || item.description || "";
   document.getElementById("xp-short-description").textContent = shortDescription;
@@ -125,12 +94,8 @@ function renderMeta(item) {
     .join("");
 }
 
-function renderMetaBlockHTML(basics, credits, photo, title) {
+function renderMetaBlockHTML(basics, credits) {
   let html = "";
-
-  if (photo) {
-    html += `<img class="xp-edition-photo" src="${photo}" alt="${title || ""}" loading="lazy" />`;
-  }
 
   if (basics) {
     html += `
@@ -204,6 +169,7 @@ function formatLabel(key) {
     venue: "Venue",
     format: "Format",
     runtime: "Runtime",
+    createdBy: "Created By",
   };
   return labels[key] || key;
 }
@@ -314,26 +280,21 @@ function renderHeroCarousel(wrap, item, gallery) {
 }
 
 /* ---------- Section 4: Experience Design flow (interactive accordion) ---------- */
-// Accepts an explicit `experienceDesign` array for edition-aware items (each
-// edition/home/run gets its own flow); defaults to item.experienceDesign for
-// everything else. Hides (rather than removes) the section when there's
-// nothing to show, since edition items call this again on every tab switch —
-// removing the element would break subsequent re-renders.
-function renderDesignFlow(item, experienceDesign) {
-  const design = experienceDesign !== undefined ? experienceDesign : item.experienceDesign;
+// Used by items with a single act-based narrative (e.g. In Between Things).
+// Edition-based items (Jornada) use renderEditionCards() instead, in the
+// same #xp-design-section/#xp-flow containers.
+function renderDesignFlow(item) {
   const section = document.getElementById("xp-design-section");
-  if (!section) return;
-  if (!design || !design.length) {
-    section.style.display = "none";
+  if (!item.experienceDesign || !item.experienceDesign.length) {
+    section.remove();
     return;
   }
-  section.style.display = "";
 
   const flow = document.getElementById("xp-flow");
 
   flow.innerHTML = `
     <div class="xp-flow-nodes" role="tablist" aria-label="Experience design stages">
-      ${design
+      ${item.experienceDesign
         .map(
           (stage, i) => `
         <button class="xp-flow-node ${i === 0 ? "is-active" : ""}" data-stage="${i}" role="tab" aria-selected="${i === 0}">
@@ -350,7 +311,7 @@ function renderDesignFlow(item, experienceDesign) {
         .join("")}
     </div>
     <div class="xp-flow-panels">
-      ${design
+      ${item.experienceDesign
         .map(
           (stage, i) => `
         <div class="xp-flow-panel ${i === 0 ? "is-open" : ""}" data-panel="${i}" role="tabpanel">
@@ -381,12 +342,144 @@ function renderDesignFlow(item, experienceDesign) {
   });
 }
 
+/* ---------- Section 4b: Edition cards (items with multiple runs, e.g. Jornada) ---------- */
+// Renders one expandable card per edition into the same #xp-design-section /
+// #xp-flow containers renderDesignFlow uses — only one item type needs this
+// (editions), so it's a separate function rather than a branch inside
+// renderDesignFlow. Exactly one card is open at a time; each open card shows
+// its own Theme/Location/Credits (minus Artists, shown separately as avatar
+// circles) and a full photo grid wired into the shared lightbox.
+function renderEditionCards(item) {
+  const section = document.getElementById("xp-design-section");
+  const flow = document.getElementById("xp-flow");
+  flow.className = "jpa-editions";
+
+  let openIndex = 0;
+
+  function render() {
+    flow.innerHTML = item.editions
+      .map((edition, i) => {
+        if (i !== openIndex) {
+          return `
+        <button class="jpa-edition-card is-collapsed" data-edition="${i}" aria-expanded="false">
+          <span class="jpa-edition-label">${edition.label}</span>
+        </button>`;
+        }
+
+        const creditsEntries = Object.entries(edition.credits || {}).filter(([role]) => role !== "Artists");
+        const artistNames = edition.credits && edition.credits.Artists ? splitNames(edition.credits.Artists) : [];
+
+        return `
+        <div class="jpa-edition-card is-open">
+          <button class="jpa-edition-header" data-edition="${i}" aria-expanded="true">
+            <span class="jpa-edition-label">${edition.label}</span>
+          </button>
+          <div class="jpa-edition-body">
+            <div class="jpa-edition-fields">
+              ${edition.theme ? `<div class="jpa-field"><h4 class="xp-meta-label">Theme</h4><p>${edition.theme}</p></div>` : ""}
+              ${
+                edition.basics && edition.basics.venue
+                  ? `<div class="jpa-field"><h4 class="xp-meta-label">Location</h4><p>${edition.basics.venue}</p></div>`
+                  : ""
+              }
+              ${
+                creditsEntries.length
+                  ? `<div class="jpa-field">
+                      <h4 class="xp-meta-label">Credits</h4>
+                      <dl class="xp-meta-list">
+                        ${creditsEntries
+                          .map(
+                            ([role, names]) => `
+                        <div class="xp-meta-row">
+                          <dt>${role}</dt>
+                          <dd>${renderCreditNames(names)}</dd>
+                        </div>`
+                          )
+                          .join("")}
+                      </dl>
+                    </div>`
+                  : ""
+              }
+            </div>
+            ${
+              artistNames.length
+                ? `<h4 class="jpa-subheading">Artists</h4>
+                   <div class="jpa-artist-avatars">
+                     ${artistNames
+                       .map(
+                         (name, p) =>
+                           `<span class="jpa-avatar" title="${name}" aria-label="${name}">${initials(name)}</span>`
+                       )
+                       .join("")}
+                   </div>`
+                : ""
+            }
+            ${
+              edition.gallery && edition.gallery.length
+                ? `<h4 class="jpa-subheading">Gallery</h4>
+                   <div class="xp-gallery-grid jpa-gallery-grid">
+                     ${edition.gallery
+                       .map(
+                         (src, p) => `
+                     <button class="xp-gallery-thumb" data-edition-photo="${i}:${p}" aria-label="Open photo ${p + 1} of ${edition.gallery.length}">
+                       <img src="${src}" alt="${edition.label} — photo ${p + 1}" loading="lazy" />
+                     </button>`
+                       )
+                       .join("")}
+                   </div>`
+                : ""
+            }
+          </div>
+        </div>`;
+      })
+      .join("");
+
+    flow.querySelectorAll(".jpa-edition-card.is-collapsed, .jpa-edition-header").forEach((el) => {
+      el.addEventListener("click", () => {
+        const index = Number(el.dataset.edition);
+        if (index === openIndex) return;
+        openIndex = index;
+        render();
+      });
+    });
+
+    flow.querySelectorAll("[data-edition-photo]").forEach((thumb) => {
+      thumb.addEventListener("click", () => {
+        const [editionIndex, photoIndex] = thumb.dataset.editionPhoto.split(":").map(Number);
+        const edition = item.editions[editionIndex];
+        openScopedLightbox(edition.gallery, photoIndex, edition.label);
+      });
+    });
+  }
+
+  section.style.display = "";
+  render();
+}
+
+// Same paren-aware comma split renderCreditNames uses, exposed separately
+// since the Artists avatar row needs the individual names, not the HTML.
+function splitNames(value) {
+  return value.split(/,\s*(?![^(]*\))/).map((s) => s.trim());
+}
+
+// "Brooke Leialoha" -> "BL", "Mk7" -> "MK", single words fall back to their
+// first two characters so every avatar gets exactly two letters.
+function initials(name) {
+  const words = name
+    .replace(/\([^)]*\)/g, "")
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean);
+  if (words.length > 1) return (words[0][0] + words[words.length - 1][0]).toUpperCase();
+  return (words[0] || "").slice(0, 2).toUpperCase();
+}
+
 /* ---------- Section 5: Gallery + lightbox ---------- */
-// gallery defaults to item.gallery, but experiences with multiple editions
-// (see renderMeta) pass the active edition's gallery instead, and re-call
-// this on every tab switch to swap the grid + lightbox source in place.
-function renderGallery(item, gallery) {
-  gallery = gallery || item.gallery;
+// Used by single-run items only — edition-based items (Jornada) remove this
+// section entirely and show each edition's photos inside its own expandable
+// card instead (see renderEditionCards()).
+function renderGallery(item) {
+  const gallery = item.gallery;
   const section = document.getElementById("xp-gallery-section");
   if (!gallery || !gallery.length) {
     section.remove();

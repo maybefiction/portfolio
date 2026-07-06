@@ -103,19 +103,40 @@ const SITE_CONTENT = {
       hasImage: true,
       hasDetailPage: true,
 
+      // Top-level overview — true of the format across every edition, so it
+      // stays static rather than switching when a different edition's card
+      // is expanded below (that's what the per-edition fields are for).
+      basics: {
+        dateRun: "Ongoing since June 2023",
+        venue: "Private homes in Madrid & Brooklyn, NYC",
+        format: "Home-based performance art festival",
+        runtime: "2–4 hours",
+        createdBy: "Ishaan Goel & Super Alex",
+      },
+
       fullSynopsis: [
         "Jornada de Puertas Abiertas (Open Doors Day) is a performance art festival that takes place inside a private home, temporarily transforming a domestic environment into a public space for live participatory art. Each room hosts a different performance or installation, responding to the architecture, atmosphere, and particularities of the space.",
         "By opening an intimate domestic space to strangers, the festival uses the tension between the private and the public to create interactions that could not exist in a conventional theatre or gallery. The home becomes more than a venue: it is an active collaborator, shaping the unfolding of each work and opening space for ritual, whimsy, and unexpected encounters.",
         "Visitors are invited to participate rather than simply observe, discovering moments of wonder, play, and connection that reveal the extraordinary potential of everyday spaces.",
       ],
 
-      // Default edition is the 2024 Brooklyn run — order here drives which
-      // tab is selected on load (selectEdition(0) in experience.js).
+      // General carousel (top of page) — pulls from the flagship, most
+      // recent edition rather than switching per edition.
+      gallery: [
+        "/assets/experiences/jornada-gallery/nyc-2024/photo-00-hero.jpg",
+        ...Array.from({ length: 23 }, (_, i) =>
+          `/assets/experiences/jornada-gallery/nyc-2024/photo-${String(i + 1).padStart(2, "0")}.jpg`
+        ),
+      ],
+
+      // Experience Design: one expandable card per edition, rendered by
+      // renderEditionCards() instead of the classic act-based flow. NYC 2024
+      // opens by default; Madrid 2023 starts collapsed until clicked.
       editions: [
         {
           id: "nyc-2024",
-          label: "2024 · Brooklyn, NYC",
-          detailPhoto: "/assets/experiences/jornada-gallery/nyc-2024/photo-04.jpg",
+          label: "NYC 2024",
+          theme: "Roots",
           basics: {
             dateRun: "June 2024",
             venue: "Two private homes in Brooklyn, NYC",
@@ -134,29 +155,11 @@ const SITE_CONTENT = {
               `/assets/experiences/jornada-gallery/nyc-2024/photo-${String(i + 1).padStart(2, "0")}.jpg`
             ),
           ],
-          // Two homes, each run as its own flow — reuses the same Experience
-          // Design accordion component as In Between Things.
-          experienceDesign: [
-            {
-              act: "I",
-              title: "Ishaan's Home",
-              subtitle: "Ritual: The Things That Ground Us",
-              image: "/assets/experiences/jornada-gallery/jpa-poster-ny.jpg",
-              text: "Six performances and a DJ set moved through Ishaan's home, built around a ritual for the things that ground us.",
-            },
-            {
-              act: "II",
-              title: "John's Home",
-              subtitle: "Ritual: The Things To Let Go Of — Summer Solstice Ritual",
-              image: "/assets/experiences/jornada-gallery/jpa-poster-ny.jpg",
-              text: "Six performances and a DJ set moved through John's home, built around a summer solstice ritual for the things to let go of.",
-            },
-          ],
         },
         {
           id: "madrid-2023",
-          label: "2023 · Madrid",
-          detailPhoto: "/assets/experiences/jornada-gallery/madrid-2023/detail-photo.jpg",
+          label: "Madrid 2023",
+          theme: "Intimacy",
           basics: {
             dateRun: "June 2023",
             venue: "Private home in Madrid, Spain",
@@ -171,17 +174,6 @@ const SITE_CONTENT = {
           gallery: Array.from({ length: 18 }, (_, i) =>
             `/assets/experiences/jornada-gallery/madrid-2023/photo-${String(i + 1).padStart(2, "0")}.jpg`
           ),
-          // Poster not ready yet — omitting `image` renders a blank
-          // placeholder thumbnail (same graceful fallback the flow
-          // component already uses when a stage has no image).
-          experienceDesign: [
-            {
-              act: "I",
-              title: "One Home",
-              subtitle: "Theme: Intimacy",
-              text: "One apartment held six performances and a single DJ set, all built around the theme of intimacy.",
-            },
-          ],
         },
       ],
     },
