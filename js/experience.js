@@ -424,7 +424,6 @@ function renderDesignFlowCards(item) {
           ${stage.materials ? `<p class="xp-design-card-materials"><span class="xp-meta-label">Materials</span>${stage.materials}</p>` : ""}
           <div class="xp-design-card-body">
             <p class="xp-design-card-text">${stage.text}</p>
-            ${stage.image ? `<img class="xp-design-card-photo" src="${stage.image}" alt="${stage.title}" loading="lazy" />` : ""}
           </div>
         </div>
         ${stage.credit ? `

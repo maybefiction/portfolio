@@ -433,20 +433,7 @@
   display: inline;
   margin: 0 8px 0 0;
 }
-.xp-design-card-body {
-  display: flex;
-  align-items: flex-start;
-  gap: 24px;
-}
-.xp-design-card-text { flex: 1; margin: 0; font-size: 1.05rem; }
-.xp-design-card-photo {
-  flex-shrink: 0;
-  width: 120px;
-  height: 120px;
-  border-radius: var(--radius-md);
-  object-fit: cover;
-  box-shadow: var(--shadow-soft);
-}
+.xp-design-card-text { margin: 0; font-size: 1.05rem; }
 /* Right-hand Credits column, separated by a vertical divider — same
    language as .xp-meta-side's divider further up the page. */
 .xp-design-card-credits {
@@ -711,8 +698,6 @@
   .jpa-edition-fields { grid-template-columns: 1fr; gap: 20px; }
 
   .xp-design-card { flex-direction: column; padding: 24px; }
-  .xp-design-card-body { flex-direction: column-reverse; gap: 20px; }
-  .xp-design-card-photo { width: 100%; height: auto; aspect-ratio: 16 / 9; }
   /* Divider only makes sense splitting side-by-side columns — stacked,
      it becomes a border above the credits block instead. */
   .xp-design-card-credits {
