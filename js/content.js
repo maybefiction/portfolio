@@ -443,7 +443,7 @@ const SITE_CONTENT = {
     {
       id: "birthdays",
       title: "Birthdays",
-      tag: "Event",
+      tag: "Gathering",
       hasImage: true,
       hasDetailPage: true,
       placeholderSrc: "/assets/events/birthdays/card.jpg",
