@@ -747,30 +747,19 @@ button.founder-toggle.section-link {
 .founder-extra-photo:nth-child(4) { bottom: 0; right: 0; }
 .founder-extra-photo:nth-child(5) { bottom: 0; left: 0; }
 
-/* ---------- 6b. HOMEPAGE HIGHLIGHTS (Experiences + Workshops + Gatherings
-   interleaved into one section — replaces three separate teaser sections) ---------- */
+/* ---------- 6b. HOMEPAGE HIGHLIGHTS (Experiences teaser — replaces the old
+   three separate Experiences/Workshops/Gatherings sections) ---------- */
 .highlights { background: var(--bg-tint); }
 
 /* .experience-card (below) already sets its own aspect-ratio and sizing;
    this just wraps them in a wrapping grid instead of .experience-grid's
-   horizontal scroll-snap row — with only ~5 cards total, showing them all
-   at once reads better than a carousel built for a longer list. */
+   horizontal scroll-snap row — with only 3 cards, showing them all at once
+   reads better than a carousel built for a longer list. */
 .highlights-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 24px;
-  margin-bottom: 40px;
 }
-
-.highlights-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px 32px;
-}
-/* .section-link's own margin-top is meant for a single link standing alone
-   under a grid — reset it here since this container's gap already handles
-   spacing for three links sitting side by side. */
-.highlights-links .section-link { margin-top: 0; }
 
 /* ---------- 7. EXPERIENCES ---------- */
 .experiences { background: var(--bg-tint); }
