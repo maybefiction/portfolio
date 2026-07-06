@@ -11,11 +11,8 @@
 document.addEventListener("DOMContentLoaded", () => {
   injectStaticText();
   renderHeroBackground();
-  renderFeaturedExperiences();
-  renderWorkshopsTeaser();
-  renderEventsTeaser();
+  renderHighlights();
   setupNav();
-  setupExperiencesCarousel();
   setupScrollReveal();
   setupHeroLogoBurst();
   document.getElementById("footer-year").textContent = new Date().getFullYear();
@@ -100,115 +97,53 @@ function burstLogoLayer(layer) {
   });
 }
 
-/* ---------- Experiences teaser (3 featured, image-forward carousel) ---------- */
-function renderFeaturedExperiences() {
-  const grid = document.getElementById("experience-grid");
+/* ---------- Highlights (Experiences + Workshops + Gatherings, interleaved) ----------
+   Only items with a real detail page are eligible — stubs would need to link
+   somewhere, and a mixed "some cards go to a page, some go to a contact form"
+   section reads as broken rather than intentional. Interleaved by type
+   (experience, workshop, event, ...) round-robin so the mix reads as one
+   deliberate set rather than three lists concatenated. */
+function renderHighlights() {
+  const grid = document.getElementById("highlights-grid");
   grid.classList.add("reveal-stagger", "reveal");
 
-  const featured = SITE_CONTENT.experiences.filter((item) => item.hasDetailPage).slice(0, 3);
+  const lanes = [
+    { type: "experience", items: SITE_CONTENT.experiences.filter((item) => item.hasDetailPage) },
+    { type: "workshop", items: SITE_CONTENT.workshops.filter((item) => item.hasDetailPage) },
+    { type: "event", items: SITE_CONTENT.events.filter((item) => item.hasDetailPage) },
+  ];
 
-  grid.innerHTML = featured
-    .map((item) => {
-      const media = item.hasImage
-        ? `<img class="experience-card-media" src="${item.placeholderSrc}" alt="${item.title}" loading="lazy">`
-        : `<div class="media-placeholder ${item.gradient}"></div>`;
+  const mixed = [];
+  for (let i = 0; lanes.some((lane) => i < lane.items.length); i++) {
+    lanes.forEach((lane) => {
+      if (lane.items[i]) mixed.push({ type: lane.type, item: lane.items[i] });
+    });
+  }
 
-      const desc = item.shortDescription || item.description || "";
-      const overlay = `
-          <div class="experience-card-overlay">
-            <span class="experience-tag tag-${item.category}">${item.tag}</span>
-            <h3>${item.title}</h3>
-            ${desc ? `<p class="experience-card-desc">${desc}</p>` : ""}
-          </div>`;
-
-      if (item.hasDetailPage) {
-        return `
-        <a class="experience-card" data-category="${item.category}" href="/experiences/${item.id}">
-          ${media}${overlay}
-        </a>`;
-      }
-
-      return `
-        <article class="experience-card" data-category="${item.category}">
-          ${media}${overlay}
-        </article>`;
-    })
-    .join("");
+  grid.innerHTML = mixed.map(({ type, item }) => renderHighlightCard(type, item)).join("");
 }
 
-/* ---------- Experiences carousel arrows ---------- */
-function setupExperiencesCarousel() {
-  const grid = document.getElementById("experience-grid");
-  const prevBtn = document.getElementById("experience-prev");
-  const nextBtn = document.getElementById("experience-next");
-  if (!prevBtn || !nextBtn) return;
+function renderHighlightCard(type, item) {
+  const media = item.hasImage
+    ? `<img class="experience-card-media" src="${item.placeholderSrc}" alt="${item.title}" loading="lazy">`
+    : `<div class="media-placeholder ${item.gradient}"></div>`;
 
-  const scrollByCard = (direction) => {
-    const card = grid.querySelector(".experience-card");
-    const distance = card ? card.getBoundingClientRect().width + 24 : 320;
-    grid.scrollBy({ left: direction * distance, behavior: "smooth" });
-  };
+  const tagClass = type === "experience" ? `tag-${item.category}` : `tag-${type}`;
+  const href =
+    type === "experience" ? `/experiences/${item.id}`
+    : type === "workshop" ? `/workshops/${item.id}`
+    : `/events/${item.id}`;
+  const desc = item.tagline || item.shortDescription || item.description || "";
 
-  prevBtn.addEventListener("click", () => scrollByCard(-1));
-  nextBtn.addEventListener("click", () => scrollByCard(1));
-}
-
-/* ---------- Workshops teaser ---------- */
-function renderWorkshopsTeaser() {
-  const grid = document.getElementById("workshop-grid");
-  grid.classList.add("reveal-stagger", "reveal");
-
-  // Reuses the same .experience-card component (image-forward, tag + title
-  // overlay) so workshops read as one visual family with Experiences.
-  grid.innerHTML = SITE_CONTENT.workshops
-    .map((w) => {
-      const media = w.hasImage
-        ? `<img class="experience-card-media" src="${w.placeholderSrc}" alt="${w.title}" loading="lazy">`
-        : `<div class="media-placeholder ${w.gradient}"></div>`;
-      const href = w.hasDetailPage
-        ? `/workshops/${w.id}`
-        : `/contact.html?workshop=${encodeURIComponent(w.title)}`;
-      const desc = w.tagline || w.shortDescription || "";
-      return `
-        <a class="experience-card" href="${href}">
-          ${media}
-          <div class="experience-card-overlay">
-            <span class="experience-tag tag-workshop">${w.tag}</span>
-            <h3>${w.title}</h3>
-            ${desc ? `<p class="experience-card-desc">${desc}</p>` : ""}
-          </div>
-        </a>`;
-    })
-    .join("");
-}
-
-/* ---------- Events teaser ---------- */
-function renderEventsTeaser() {
-  const grid = document.getElementById("event-grid");
-  grid.classList.add("reveal-stagger", "reveal");
-
-  // Reuses the same .experience-card component (image-forward, tag + title
-  // overlay) so events read as one visual family with Experiences/Workshops.
-  grid.innerHTML = SITE_CONTENT.events
-    .map((e) => {
-      const media = e.hasImage
-        ? `<img class="experience-card-media" src="${e.placeholderSrc}" alt="${e.title}" loading="lazy">`
-        : `<div class="media-placeholder ${e.gradient}"></div>`;
-      const href = e.hasDetailPage
-        ? `/events/${e.id}`
-        : `/contact.html?event=${encodeURIComponent(e.title)}`;
-      const desc = e.tagline || e.shortDescription || "";
-      return `
-        <a class="experience-card" href="${href}">
-          ${media}
-          <div class="experience-card-overlay">
-            <span class="experience-tag tag-event">${e.tag}</span>
-            <h3>${e.title}</h3>
-            ${desc ? `<p class="experience-card-desc">${desc}</p>` : ""}
-          </div>
-        </a>`;
-    })
-    .join("");
+  return `
+    <a class="experience-card" href="${href}">
+      ${media}
+      <div class="experience-card-overlay">
+        <span class="experience-tag ${tagClass}">${item.tag}</span>
+        <h3>${item.title}</h3>
+        ${desc ? `<p class="experience-card-desc">${desc}</p>` : ""}
+      </div>
+    </a>`;
 }
 
 /* ---------- Nav: mobile toggle, hero transparency ---------- */

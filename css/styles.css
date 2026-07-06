@@ -641,21 +641,19 @@ ul { list-style: none; margin: 0; padding: 0; }
 /* About's own bottom join spacing (used on about.html, which stacks a
    founders grid right below in the same background). */
 .about .section-inner { padding-bottom: 48px; }
-/* Homepage: Experiences now follows the Hero directly (About's homepage
+/* Homepage: Highlights now follows the Hero directly (About's homepage
    teaser was removed as redundant with the hero tagline), so it needs its
-   own top breathing room under the fixed nav — same as the standalone page.
-   The ID beats the plain .experiences/.experiences-page class rules below,
-   which still apply their padding-top:0 to the Events section that follows
-   (same tint background, no divider needed there). */
-#experiences .section-inner { padding-top: 56px; }
+   own top breathing room under the fixed nav — same as the standalone
+   listing pages below. */
+#highlights .section-inner { padding-top: 56px; padding-bottom: 56px; }
 .experiences .section-inner { padding-top: 0; padding-bottom: 56px; }
 .experiences-page .section-inner { padding-top: 56px; }
 .workshops .section-inner { padding-top: 56px; padding-bottom: 56px; }
-/* Workshops -> Newsletter was left at the default 100px/100px join,
-   leaving a much bigger gap than every other section transition. */
+/* CTA -> Newsletter was left at the default 100px/100px join, leaving a much
+   bigger gap than every other section transition. */
 .newsletter-inner { padding-top: 56px; }
 
-/* ---------- 9c. HOMEPAGE CONTACT CTA (between Events and Newsletter) ---------- */
+/* ---------- 9c. HOMEPAGE CONTACT CTA (between Highlights and Newsletter) ---------- */
 /* Same purple-band treatment as the "Want us to design yours?" CTA on
    workshop/event detail pages, so it reads as one consistent CTA language
    across the site rather than a one-off homepage component. */
@@ -748,6 +746,31 @@ button.founder-toggle.section-link {
 .founder-extra-photo:nth-child(3) { top: 0; right: 0; }
 .founder-extra-photo:nth-child(4) { bottom: 0; right: 0; }
 .founder-extra-photo:nth-child(5) { bottom: 0; left: 0; }
+
+/* ---------- 6b. HOMEPAGE HIGHLIGHTS (Experiences + Workshops + Gatherings
+   interleaved into one section — replaces three separate teaser sections) ---------- */
+.highlights { background: var(--bg-tint); }
+
+/* .experience-card (below) already sets its own aspect-ratio and sizing;
+   this just wraps them in a wrapping grid instead of .experience-grid's
+   horizontal scroll-snap row — with only ~5 cards total, showing them all
+   at once reads better than a carousel built for a longer list. */
+.highlights-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.highlights-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 32px;
+}
+/* .section-link's own margin-top is meant for a single link standing alone
+   under a grid — reset it here since this container's gap already handles
+   spacing for three links sitting side by side. */
+.highlights-links .section-link { margin-top: 0; }
 
 /* ---------- 7. EXPERIENCES ---------- */
 .experiences { background: var(--bg-tint); }
