@@ -362,51 +362,35 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* ---------- 4b. EDITION CARDS (items with multiple runs, e.g. Jornada) ---------- */
-.jpa-editions { display: flex; align-items: flex-start; gap: 24px; }
-
-.jpa-edition-card {
-  border-radius: var(--radius-md);
+/* ---------- 4b. EDITION TABS (items with multiple runs, e.g. Jornada) ---------- */
+/* Tabs are plain labels, not content-holding cards — clicking one swaps the
+   content below instantly. Nothing expands or collapses, so this never
+   reads as "a box opening/closing" the way an accordion card would. */
+.jpa-tabs { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 32px; }
+.jpa-tab {
+  padding: 10px 20px;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(38, 37, 34, 0.15);
   background: var(--white);
-  box-shadow: var(--shadow-soft);
-  overflow: hidden;
-}
-.jpa-edition-card.is-open { flex: 1; min-width: 0; }
-.jpa-edition-card.is-collapsed {
-  flex: 0 0 140px;
-  align-self: stretch;
-  cursor: pointer;
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 32px 16px;
-  transition: background 0.25s ease, transform 0.25s var(--ease-bounce);
-}
-.jpa-edition-card.is-collapsed:hover { background: var(--bg-tint); transform: translateY(-3px); }
-
-.jpa-edition-header {
-  display: block;
-  width: 100%;
-  text-align: left;
-  padding: 28px 40px;
-  background: var(--brand-purple-light);
-  cursor: default;
-}
-.jpa-edition-label {
+  color: var(--ink-soft);
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: 1.15rem;
-  color: var(--ink);
+  font-size: 0.95rem;
+  transition: color 0.25s ease, background 0.25s ease, border-color 0.25s ease;
 }
-.jpa-edition-card.is-collapsed .jpa-edition-label {
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);
-  font-size: 1rem;
-  color: var(--ink-soft);
+.jpa-tab:hover { border-color: var(--brand-purple); color: var(--brand-purple); }
+.jpa-tab.is-active {
+  background: var(--brand-purple);
+  border-color: var(--brand-purple);
+  color: var(--white);
 }
 
-.jpa-edition-body { padding: 32px 40px 40px; }
+.jpa-edition-content {
+  background: var(--white);
+  border-radius: var(--radius-md);
+  padding: 40px;
+  box-shadow: var(--shadow-soft);
+}
 .jpa-edition-fields {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -415,11 +399,6 @@
 .jpa-field h4 { margin: 0 0 10px; }
 .jpa-field p { margin: 0; font-size: 0.98rem; line-height: 1.5; color: var(--ink); }
 .jpa-field .xp-meta-list { margin: 0; }
-
-/* Artists + Gallery sit below the card row, plain (no box), rather than
-   inside the open card — they still track whichever edition is open, but
-   the card boundary itself only wraps Theme/Location/Credits. */
-.jpa-edition-extra { margin-top: 40px; }
 
 .jpa-subheading {
   font-family: var(--font-display);
@@ -605,20 +584,7 @@
     border-left: 3px solid var(--brand-purple);
   }
 
-  /* Vertical strips only make sense side-by-side — stack instead, with
-     collapsed cards as short horizontal bars rather than tall ribbons. */
-  .jpa-editions { flex-direction: column; }
-  .jpa-edition-card.is-collapsed {
-    flex-basis: auto;
-    width: 100%;
-    padding: 16px;
-  }
-  .jpa-edition-card.is-collapsed .jpa-edition-label {
-    writing-mode: horizontal-tb;
-    transform: none;
-  }
-  .jpa-edition-header { padding: 22px 24px; }
-  .jpa-edition-body { padding: 24px; }
+  .jpa-edition-content { padding: 24px; }
   .jpa-edition-fields { grid-template-columns: 1fr; gap: 20px; }
 }
 

@@ -342,116 +342,100 @@ function renderDesignFlow(item) {
   });
 }
 
-/* ---------- Section 4b: Edition cards (items with multiple runs, e.g. Jornada) ---------- */
-// Renders one expandable card per edition into the same #xp-design-section /
+/* ---------- Section 4b: Edition tabs (items with multiple runs, e.g. Jornada) ---------- */
+// Renders a small tab per edition into the same #xp-design-section /
 // #xp-flow containers renderDesignFlow uses — only one item type needs this
 // (editions), so it's a separate function rather than a branch inside
-// renderDesignFlow. Exactly one card is open at a time; the card itself only
-// holds Theme/Location/Credits — Artists and Gallery live below it as plain
-// (un-boxed) sections that still track whichever edition is open, so the
-// card boundary doesn't stretch to wrap a full photo grid.
+// renderDesignFlow. Tabs are just labels, not content-holding cards, so
+// switching is an instant content swap below — nothing expands or
+// collapses, avoiding the "a whole box is opening" feel of an accordion.
 function renderEditionCards(item) {
   const section = document.getElementById("xp-design-section");
   const flow = document.getElementById("xp-flow");
 
-  let openIndex = 0;
+  let activeIndex = 0;
 
   function render() {
-    const openEdition = item.editions[openIndex];
-    const creditsEntries = Object.entries(openEdition.credits || {}).filter(([role]) => role !== "Artists");
-    const artistNames = openEdition.credits && openEdition.credits.Artists ? splitNames(openEdition.credits.Artists) : [];
+    const edition = item.editions[activeIndex];
+    const creditsEntries = Object.entries(edition.credits || {}).filter(([role]) => role !== "Artists");
+    const artistNames = edition.credits && edition.credits.Artists ? splitNames(edition.credits.Artists) : [];
 
-    const cardsHTML = item.editions
-      .map((edition, i) => {
-        if (i !== openIndex) {
-          return `
-        <button class="jpa-edition-card is-collapsed" data-edition="${i}" aria-expanded="false">
-          <span class="jpa-edition-label">${edition.label}</span>
-        </button>`;
-        }
-
-        return `
-        <div class="jpa-edition-card is-open">
-          <button class="jpa-edition-header" data-edition="${i}" aria-expanded="true">
-            <span class="jpa-edition-label">${edition.label}</span>
-          </button>
-          <div class="jpa-edition-body">
-            <div class="jpa-edition-fields">
-              ${edition.theme ? `<div class="jpa-field"><h4 class="xp-meta-label">Theme</h4><p>${edition.theme}</p></div>` : ""}
-              ${
-                edition.basics && edition.basics.venue
-                  ? `<div class="jpa-field"><h4 class="xp-meta-label">Location</h4><p>${edition.basics.venue}</p></div>`
-                  : ""
-              }
-              ${
-                creditsEntries.length
-                  ? `<div class="jpa-field">
-                      <h4 class="xp-meta-label">Credits</h4>
-                      <dl class="xp-meta-list">
-                        ${creditsEntries
-                          .map(
-                            ([role, names]) => `
-                        <div class="xp-meta-row">
-                          <dt>${role}</dt>
-                          <dd>${renderCreditNames(names)}</dd>
-                        </div>`
-                          )
-                          .join("")}
-                      </dl>
-                    </div>`
-                  : ""
-              }
-            </div>
-          </div>
-        </div>`;
-      })
+    const tabsHTML = item.editions
+      .map(
+        (ed, i) => `
+      <button class="jpa-tab ${i === activeIndex ? "is-active" : ""}" data-edition="${i}">${ed.label}</button>`
+      )
       .join("");
 
-    const extraHTML = `
-      ${
-        artistNames.length
-          ? `<h4 class="jpa-subheading">Artists</h4>
-             <div class="jpa-artist-avatars">
-               ${artistNames
-                 .map((name) => `<span class="jpa-avatar" title="${name}" aria-label="${name}">${initials(name)}</span>`)
-                 .join("")}
-             </div>`
-          : ""
-      }
-      ${
-        openEdition.gallery && openEdition.gallery.length
-          ? `<h4 class="jpa-subheading">Gallery</h4>
-             <div class="xp-gallery-grid jpa-gallery-grid">
-               ${openEdition.gallery
-                 .map(
-                   (src, p) => `
-               <button class="xp-gallery-thumb" data-photo="${p}" aria-label="Open photo ${p + 1} of ${openEdition.gallery.length}">
-                 <img src="${src}" alt="${openEdition.label} — photo ${p + 1}" loading="lazy" />
-               </button>`
-                 )
-                 .join("")}
-             </div>`
-          : ""
-      }
-    `;
-
     flow.innerHTML = `
-      <div class="jpa-editions">${cardsHTML}</div>
-      <div class="jpa-edition-extra">${extraHTML}</div>
+      <div class="jpa-tabs" role="tablist">${tabsHTML}</div>
+      <div class="jpa-edition-content">
+        <div class="jpa-edition-fields">
+          ${edition.theme ? `<div class="jpa-field"><h4 class="xp-meta-label">Theme</h4><p>${edition.theme}</p></div>` : ""}
+          ${
+            edition.basics && edition.basics.venue
+              ? `<div class="jpa-field"><h4 class="xp-meta-label">Location</h4><p>${edition.basics.venue}</p></div>`
+              : ""
+          }
+          ${
+            creditsEntries.length
+              ? `<div class="jpa-field">
+                  <h4 class="xp-meta-label">Credits</h4>
+                  <dl class="xp-meta-list">
+                    ${creditsEntries
+                      .map(
+                        ([role, names]) => `
+                    <div class="xp-meta-row">
+                      <dt>${role}</dt>
+                      <dd>${renderCreditNames(names)}</dd>
+                    </div>`
+                      )
+                      .join("")}
+                  </dl>
+                </div>`
+              : ""
+          }
+        </div>
+        ${
+          artistNames.length
+            ? `<h4 class="jpa-subheading">Artists</h4>
+               <div class="jpa-artist-avatars">
+                 ${artistNames
+                   .map((name) => `<span class="jpa-avatar" title="${name}" aria-label="${name}">${initials(name)}</span>`)
+                   .join("")}
+               </div>`
+            : ""
+        }
+        ${
+          edition.gallery && edition.gallery.length
+            ? `<h4 class="jpa-subheading">Gallery</h4>
+               <div class="xp-gallery-grid jpa-gallery-grid">
+                 ${edition.gallery
+                   .map(
+                     (src, p) => `
+               <button class="xp-gallery-thumb" data-photo="${p}" aria-label="Open photo ${p + 1} of ${edition.gallery.length}">
+                 <img src="${src}" alt="${edition.label} — photo ${p + 1}" loading="lazy" />
+               </button>`
+                   )
+                   .join("")}
+               </div>`
+            : ""
+        }
+      </div>
     `;
 
-    flow.querySelectorAll(".jpa-edition-card.is-collapsed, .jpa-edition-header").forEach((el) => {
-      el.addEventListener("click", () => {
-        const index = Number(el.dataset.edition);
-        if (index === openIndex) return;
-        openIndex = index;
+    flow.querySelectorAll(".jpa-tab").forEach((tab) => {
+      tab.addEventListener("click", () => {
+        const index = Number(tab.dataset.edition);
+        if (index === activeIndex) return;
+        activeIndex = index;
         render();
       });
     });
 
     flow.querySelectorAll("[data-photo]").forEach((thumb) => {
       thumb.addEventListener("click", () => {
-        openScopedLightbox(openEdition.gallery, Number(thumb.dataset.photo), openEdition.label);
+        openScopedLightbox(edition.gallery, Number(thumb.dataset.photo), edition.label);
       });
     });
   }
