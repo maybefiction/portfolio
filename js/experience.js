@@ -426,6 +426,7 @@ function renderDesignFlowCards(item) {
           <div class="xp-design-card-body">
             <p class="xp-design-card-text">${stage.text}</p>
           </div>
+          ${stage.communityEvents ? `<p class="xp-design-card-materials"><span class="xp-meta-label">From these gatherings</span>${stage.communityEvents}</p>` : ""}
         </div>
         ${stage.credit ? `
         <div class="xp-design-card-credits">

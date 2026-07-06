@@ -391,29 +391,36 @@ const SITE_CONTENT = {
       // experience.js) — distinct from the act-based accordion used by
       // items like In Between Things.
       experienceDesignStyle: "card",
+      // Copy sourced verbatim from the "Experience Design" table in the
+      // What Clings Bio doc — tagline: Purpose row, materials: Materials
+      // row, text: What Happened row. Do not paraphrase; refresh from that
+      // doc if it changes.
       experienceDesign: [
         {
           title: "The Cave",
-          tagline: "Find what's hidden in the dark, then leave your own mark.",
-          materials: "UV flashlights, invisible-ink markers, paper-lined walls",
+          tagline: "Create a sense of wonder by revealing the extraordinary hidden within the ordinary.",
+          materials: "10×10 pop-up canopy, butcher paper, UV flashlights, UV markers, ripped field notebooks, handwritten grief letters, ethnographic notes, drawings, improvised live DJ",
           image: "/assets/experiences/what-clings-gallery/photo-01.jpg",
-          text: "The things we think are extraordinary today — silence, darkness, shooting stars — were once just day-to-day life for humans before. I often wonder if we can ever know what was lost. Inside, you are welcome to explore, nap, and draw on the walls with special markers.",
+          text: "Visitors entered what appeared to be an empty paper cave carrying only a small UV flashlight. As they wandered, hidden drawings, symbols, and handwritten markings gradually emerged across the paper walls. Scattered throughout the space were ripped pages from field notebooks containing ethnographic observations, sketches, and grief letters created during community walks through Greenwood Cemetery and Williamsburg. Before leaving, visitors were invited to add their own invisible drawings and writing with UV markers, allowing the cave to continue growing with each new participant.",
+          communityEvents: "Greenwood Cemetery, Williamsburg Art Walk",
           credit: "Directed by Ishaan Goel",
         },
         {
           title: "The Anti-Gallery",
-          tagline: "No rules — just paint, collage, and remix what's already here.",
-          materials: "Paint, collage supplies, zine-making materials, in-progress sculptures",
+          tagline: "Challenge the conventions of the traditional gallery by transforming spectators into participants and treating art as a living, relational process.",
+          materials: "CRT televisions, headphones, reusable water balloons, drawings, collages, clay sculptures, zines, chapbooks, pigeon drawings, paint, markers, collage materials, blank canvases",
           image: "/assets/experiences/what-clings-gallery/photo-15.jpg",
-          text: "Everything inside of here was made between March and September 2025 across 14 gatherings and with more than 150+ contributors. We only started this work. It is your turn to finish it. Collage, paint, draw, write, and anything else you can think of.",
+          text: "Every station originated from a previous maybe:fiction gathering. Visitors watched footage of a water balloon fight and a collaborative dance event on CRT televisions while interacting with the objects those events produced. They painted clay sculptures, expanded an evolving collage wall, designed zine covers, created pigeon drawings, altered chapbooks through cross-outs, and explored photographs from the summer series. Nothing was behind glass or off limits. The exhibition remained unfinished until visitors touched, altered, and contributed to it themselves.",
+          communityEvents: "Water Balloon Fight, Dance & Draw, Clay Creatures, Collage, Zines, Chapbooks, Pigeons of New York, Ishaan's Birthday",
           credit: "Directed by Ishaan Goel",
         },
         {
           title: "Your Birthday Party",
-          tagline: "A birthday party for the child within each of us.",
-          materials: "Birthday cake, childhood keepsakes & photographs, card- and gift-making supplies",
+          tagline: "Use the birthday as a shared ritual for remembering, honoring, and celebrating the child within each of us.",
+          materials: "Birthday cake installation, handmade cards, gifts, photographs, childhood objects, everyday objects from the early 2000s",
           image: "/assets/experiences/what-clings-gallery/photo-26.jpg",
-          text: "Make your childhood self a gift, write a card, and add it to our altar.",
+          text: "Visitors were invited to create themselves a birthday card or small gift and place it around a communal birthday cake installation. Surrounding the space were photographs from the summer series alongside cubes containing familiar childhood objects from the early 2000s. Together, these small acts of making transformed an individual birthday into a shared celebration of the child within each of us.",
+          communityEvents: "Printmaking Workshop, Summer Series, Childhood Objects",
           credit: "Directed by Ishaan Goel",
         },
       ],
