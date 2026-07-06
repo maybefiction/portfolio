@@ -93,10 +93,11 @@ function renderMeta(item) {
   const allParagraphs = Array.isArray(item.fullSynopsis)
     ? item.fullSynopsis
     : [item.fullSynopsis].filter(Boolean);
-  // Skip the lead paragraph if it duplicates the short description already
-  // shown as the header above, so the detailed description doesn't repeat itself.
-  const detailedParagraphs =
-    allParagraphs[0] === shortDescription ? allParagraphs.slice(1) : allParagraphs;
+  // Skip whichever paragraph duplicates the short description already shown
+  // as the header above (usually the lead paragraph, but some items pull
+  // their teaser from elsewhere in the synopsis, e.g. a punchy closing
+  // line) — so the detailed description doesn't repeat itself.
+  const detailedParagraphs = allParagraphs.filter((para) => para !== shortDescription);
   document.getElementById("xp-description").innerHTML = detailedParagraphs
     .map((para) => `<p class="xp-description-body">${para}</p>`)
     .join("");

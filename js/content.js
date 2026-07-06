@@ -314,8 +314,14 @@ const SITE_CONTENT = {
       title: "What Clings",
       category: "exhibition",
       tag: "Exhibition",
-      shortDescription: "An immersive solo exhibition exploring the textures of our past — from childhood play to community ritual — and how we might reclaim them in a world increasingly dominated by digital commodification.",
-      description: "An immersive solo exhibition exploring the textures of our past — from childhood play to community ritual — and how we might reclaim them in a world increasingly dominated by digital commodification.",
+      // Verbatim from fullSynopsis[3] below (its closing line), not
+      // independently written — see project feedback: this item's copy
+      // should always track the synopsis doc as its single source of truth.
+      // Picked this line over an excerpt of fullSynopsis[0] because it
+      // stands alone as a teaser without repeating the opening paragraph
+      // word-for-word right above it on the detail page.
+      shortDescription: "What Clings asks what ways of relating still exist beneath the surface of everyday life, waiting to be noticed, practiced, and shared again.",
+      description: "What Clings asks what ways of relating still exist beneath the surface of everyday life, waiting to be noticed, practiced, and shared again.",
       placeholderSrc: "/assets/experiences/what-clings.jpg",
       heroPhoto: "/assets/experiences/what-clings-gallery/photo-24.jpg",
       gradient: "grad-blue",
