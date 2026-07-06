@@ -458,6 +458,11 @@ const SITE_CONTENT = {
       gradient: "grad-blue-purple",
       hasImage: true,
       hasDetailPage: true,
+      // Hidden for now per project direction: excluded from the Experiences
+      // grid/filter bar and the Next Experience carousel, but the page
+      // itself stays live at /experiences/when-a-friend-knocks for direct
+      // links. Remove this flag to bring it back into normal navigation.
+      draft: true,
       // Homepage Highlights is a deliberately curated 3 (Jornada, In Between
       // Things, What Clings) per project direction — keep this one on
       // /experiences.html only, not auto-added as a 4th highlight.

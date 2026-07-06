@@ -729,7 +729,9 @@ function renderStoryCollection(item) {
 /* ---------- Next Experience — only shown once 2+ detail pages exist ---------- */
 function renderNextExperience(item) {
   const el = document.getElementById("xp-next");
-  const detailPages = SITE_CONTENT.experiences.filter((e) => e.hasDetailPage);
+  // Draft items (hidden from nav — see content.js) are never suggested as
+  // the "next" experience, even when viewing one of them directly.
+  const detailPages = SITE_CONTENT.experiences.filter((e) => e.hasDetailPage && !e.draft);
 
   if (detailPages.length < 2) {
     el.remove();
