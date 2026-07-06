@@ -322,11 +322,14 @@ const SITE_CONTENT = {
       hasImage: true,
       hasDetailPage: true,
 
+      // source: What Clings Bio doc, 02_Communications
       basics: {
         dateRun: "October 3–5, 2025",
         venue: "Prospect Heights, Brooklyn",
-        format: "Installation",
+        format: "Installation, Mixed Media & Performance",
         runtime: "1 hour 30 minutes",
+        admission: "Free",
+        ageAdvisory: "Family-friendly",
       },
       credits: {
         "Director / Producer": "Ishaan Goel",
@@ -383,18 +386,24 @@ const SITE_CONTENT = {
       experienceDesign: [
         {
           title: "The Cave",
+          tagline: "Find what's hidden in the dark, then leave your own mark.",
+          materials: "UV flashlights, invisible-ink markers, paper-lined walls",
           image: "/assets/experiences/what-clings-gallery/photo-01.jpg",
           text: "The things we think are extraordinary today — silence, darkness, shooting stars — were once just day-to-day life for humans before. I often wonder if we can ever know what was lost. Inside, you are welcome to explore, nap, and draw on the walls with special markers.",
           credit: "Directed by Ishaan Goel",
         },
         {
           title: "The Anti-Gallery",
+          tagline: "No rules — just paint, collage, and remix what's already here.",
+          materials: "Paint, collage supplies, zine-making materials, in-progress sculptures",
           image: "/assets/experiences/what-clings-gallery/photo-15.jpg",
           text: "Everything inside of here was made between March and September 2025 across 14 gatherings and with more than 150+ contributors. We only started this work. It is your turn to finish it. Collage, paint, draw, write, and anything else you can think of.",
           credit: "Directed by Ishaan Goel",
         },
         {
           title: "Your Birthday Party",
+          tagline: "A birthday party for the child within each of us.",
+          materials: "Birthday cake, childhood keepsakes & photographs, card- and gift-making supplies",
           image: "/assets/experiences/what-clings-gallery/photo-26.jpg",
           text: "Make your childhood self a gift, write a card, and add it to our altar.",
           credit: "Directed by Ishaan Goel",

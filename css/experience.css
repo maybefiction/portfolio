@@ -416,7 +416,23 @@
   animation: xpFadeIn 0.4s var(--ease-smooth);
 }
 .xp-design-card-main { flex: 1; min-width: 0; }
-.xp-design-card-title { margin: 0 0 16px; }
+.xp-design-card-title { margin: 0 0 12px; }
+.xp-design-card-tagline {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.15rem;
+  color: var(--brand-purple);
+  margin: 0 0 16px;
+}
+.xp-design-card-materials {
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+  margin: 0 0 24px;
+}
+.xp-design-card-materials .xp-meta-label {
+  display: inline;
+  margin: 0 8px 0 0;
+}
 .xp-design-card-body {
   display: flex;
   align-items: flex-start;
