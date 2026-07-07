@@ -30,7 +30,6 @@ document.addEventListener("DOMContentLoaded", () => {
   renderHero(item);
   renderMeta(item);
   renderImpactStats(item);
-  renderHeroMedia(item);
   renderDesignFlow(item);
   renderGallery(item);
   setupNav();
@@ -172,92 +171,6 @@ function renderImpactStats(item) {
 }
 
 /* ---------- Section 3: Hero media (lives under the description in xp-meta-main) ---------- */
-// A gallery carousel is preferred (gives a fuller sense of the work than one
-// static frame); items without a gallery fall back to a single photo, so this
-// slot always carries a visual instead of leaving a gap between the short and
-// detailed description.
-function renderHeroMedia(item) {
-  const wrap = document.getElementById("xp-video-wrap");
-  if (item.gallery && item.gallery.length) {
-    renderHeroCarousel(wrap, item, item.gallery);
-    return;
-  }
-  if (item.heroPhoto) {
-    wrap.innerHTML = `<img class="xp-video-fallback-image" src="${item.heroPhoto}" alt="${item.title}" />`;
-    return;
-  }
-  wrap.remove();
-}
-
-function renderHeroCarousel(wrap, item, gallery) {
-  const arrows =
-    gallery.length > 1
-      ? `
-    <button class="xp-carousel-arrow xp-carousel-prev" aria-label="Previous photo">‹</button>
-    <button class="xp-carousel-arrow xp-carousel-next" aria-label="Next photo">›</button>
-    <div class="xp-carousel-counter"><span id="xp-carousel-current">1</span> / ${gallery.length}</div>`
-      : "";
-
-  wrap.innerHTML = `
-    <div class="xp-carousel">
-      <div class="xp-carousel-track" id="xp-carousel-track">
-        ${gallery
-          .map(
-            (src, i) => `
-          <div class="xp-carousel-slide">
-            <img src="${src}" alt="${item.title} — photo ${i + 1}" loading="${i === 0 ? "eager" : "lazy"}" />
-          </div>`
-          )
-          .join("")}
-      </div>
-      ${arrows}
-    </div>`;
-
-  if (gallery.length <= 1) return;
-
-  const track = document.getElementById("xp-carousel-track");
-  const counter = document.getElementById("xp-carousel-current");
-  const prevBtn = wrap.querySelector(".xp-carousel-prev");
-  const nextBtn = wrap.querySelector(".xp-carousel-next");
-  let index = 0;
-  let timer = null;
-
-  function show(i) {
-    index = (i + gallery.length) % gallery.length;
-    track.style.transform = `translateX(-${index * 100}%)`;
-    counter.textContent = index + 1;
-  }
-  function next() { show(index + 1); }
-  function prev() { show(index - 1); }
-  function startAutoplay() {
-    clearInterval(timer);
-    timer = setInterval(next, 5000);
-  }
-
-  nextBtn.addEventListener("click", () => { next(); startAutoplay(); });
-  prevBtn.addEventListener("click", () => { prev(); startAutoplay(); });
-  wrap.addEventListener("mouseenter", () => clearInterval(timer));
-  wrap.addEventListener("mouseleave", startAutoplay);
-
-  let touchStartX = null;
-  track.addEventListener("touchstart", (e) => { touchStartX = e.touches[0].clientX; }, { passive: true });
-  track.addEventListener(
-    "touchend",
-    (e) => {
-      if (touchStartX === null) return;
-      const delta = e.changedTouches[0].clientX - touchStartX;
-      if (Math.abs(delta) > 40) {
-        delta < 0 ? next() : prev();
-        startAutoplay();
-      }
-      touchStartX = null;
-    },
-    { passive: true }
-  );
-
-  startAutoplay();
-}
-
 /* ---------- Section 4: Experience Design flow (interactive stage nodes) ---------- */
 function renderDesignFlow(item) {
   const section = document.getElementById("xp-design-section");
