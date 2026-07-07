@@ -336,8 +336,8 @@ const SITE_CONTENT = {
       // Picked this line over an excerpt of fullSynopsis[0] because it
       // stands alone as a teaser without repeating the opening paragraph
       // word-for-word right above it on the detail page.
-      shortDescription: "What Clings asks what ways of relating still exist beneath the surface of everyday life, waiting to be noticed, practiced, and shared again.",
-      description: "What Clings asks what ways of relating still exist beneath the surface of everyday life, waiting to be noticed, practiced, and shared again.",
+      shortDescription: "What ways of relating still exist beneath the surface of everyday life, waiting to be noticed, practiced, and shared again.",
+      description: "What ways of relating still exist beneath the surface of everyday life, waiting to be noticed, practiced, and shared again.",
       placeholderSrc: "/assets/experiences/what-clings-gallery/photo-01.jpg",
       heroPhoto: "/assets/experiences/what-clings-gallery/photo-01.jpg",
       // Curated for the small photo-grid preview (see renderHeroGrid) —
@@ -393,7 +393,7 @@ const SITE_CONTENT = {
         "What Clings grew out of a summer of community gatherings across Brooklyn — walks through Greenwood Cemetery and Williamsburg, collaborative drawing sessions, clay workshops, dance improvisations, water balloon fights, zine making, and birthday celebrations. Those gatherings became the foundation for a three-room exhibition, each room transforming a different piece of that summer into an environment visitors could enter and continue.",
         "At the heart of the project is an interest in experiences that once felt ordinary but have become increasingly uncommon: looking up and seeing a sky full of stars, making something with strangers, celebrating one another through shared rituals. These possibilities haven't disappeared — they've simply become less common as the ways we gather, create, and spend time together have changed.",
         "Each room created a different set of conditions for visitors to discover, contribute, and celebrate together — reading hidden messages by UV light, touching and rearranging unfinished artworks, adding their own card to a communal birthday cake. Nothing stayed fixed: the exhibition remained unfinished until someone new walked in, and every visitor left having shaped it a little further for the next.",
-        "What Clings asks what ways of relating still exist beneath the surface of everyday life, waiting to be noticed, practiced, and shared again.",
+        "What ways of relating still exist beneath the surface of everyday life, waiting to be noticed, practiced, and shared again.",
       ],
       // Each photo is tagged with the Experience Design element it belongs
       // to (must match an experienceDesign[].title below exactly) so the
