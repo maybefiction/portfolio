@@ -31,7 +31,6 @@ document.addEventListener("DOMContentLoaded", () => {
   renderHero(item);
   renderMeta(item);
   renderImpactStats(item);
-  renderHeroMedia(item);
   syncMetaHeights();
   window.addEventListener("resize", () => {
     clearTimeout(metaResizeTimer);
@@ -67,17 +66,87 @@ function renderNotFound() {
   `;
 }
 
-/* ---------- Section 1: Hero ---------- */
-function renderHero(item) {
-  const heroImg = document.getElementById("xp-hero-image");
-  heroImg.src = item.placeholderSrc;
-  heroImg.alt = item.title;
+/* ---------- Section 1: Hero (cover photo, auto-advancing across the
+   gallery when one exists) + filmstrip band directly beneath it ---------- */
+const HERO_AUTOPLAY_MS = 5000;
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+function renderHero(item) {
   const heroTag = document.getElementById("xp-hero-tag");
   heroTag.textContent = item.tag;
   heroTag.classList.add(`tag-${item.category}`);
-
   document.getElementById("xp-hero-title").textContent = item.title;
+
+  const gallery = item.gallery ? item.gallery.map(photoSrc) : [];
+  // item.heroPhoto (when set and not already the lead gallery photo) opens
+  // the carousel — e.g. Jornada's cover shot is a Madrid photo even though
+  // the rest of the carousel is the NYC 2024 gallery.
+  const slides = item.heroPhoto && gallery[0] !== item.heroPhoto ? [item.heroPhoto, ...gallery] : gallery;
+
+  const track = document.getElementById("xp-hero-track");
+  const prevBtn = document.getElementById("xp-hero-prev");
+  const nextBtn = document.getElementById("xp-hero-next");
+  const counter = document.getElementById("xp-hero-counter");
+  const filmstripBand = document.getElementById("xp-hero-filmstrip-band");
+  const filmstrip = document.getElementById("xp-hero-filmstrip");
+
+  if (slides.length < 2) {
+    const single = slides[0] || item.placeholderSrc;
+    track.innerHTML = `<img class="xp-hero-slide-image" src="${single}" alt="${item.title}" />`;
+    return;
+  }
+
+  track.innerHTML = slides
+    .map((src, i) => `<img class="xp-hero-slide-image" src="${src}" alt="${item.title} — photo ${i + 1}" loading="${i === 0 ? "eager" : "lazy"}" />`)
+    .join("");
+
+  filmstripBand.hidden = false;
+  filmstrip.innerHTML = slides
+    .map(
+      (src, i) => `
+    <button class="xp-hero-filmstrip-thumb ${i === 0 ? "is-active" : ""}" data-index="${i}" aria-label="Show photo ${i + 1} of ${slides.length}">
+      <img src="${src}" alt="" loading="lazy" />
+    </button>`
+    )
+    .join("");
+  const thumbs = Array.from(filmstrip.querySelectorAll(".xp-hero-filmstrip-thumb"));
+
+  let current = 0;
+  let timer = null;
+
+  function show(index) {
+    current = (index + slides.length) % slides.length;
+    track.style.transform = `translateX(-${current * 100}%)`;
+    thumbs.forEach((t, i) => t.classList.toggle("is-active", i === current));
+    counter.textContent = `${current + 1} / ${slides.length}`;
+    thumbs[current].scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+  }
+
+  function restartAutoplay() {
+    clearInterval(timer);
+    if (prefersReducedMotion) return;
+    timer = setInterval(() => show(current + 1), HERO_AUTOPLAY_MS);
+  }
+
+  function goTo(index) {
+    show(index);
+    restartAutoplay();
+  }
+
+  prevBtn.hidden = false;
+  nextBtn.hidden = false;
+  counter.hidden = false;
+  prevBtn.addEventListener("click", () => goTo(current - 1));
+  nextBtn.addEventListener("click", () => goTo(current + 1));
+  thumbs.forEach((thumb, i) => thumb.addEventListener("click", () => goTo(i)));
+  track.addEventListener("click", () => openScopedLightbox(slides, current, item.title));
+
+  const heroSection = document.getElementById("xp-hero");
+  heroSection.addEventListener("mouseenter", () => clearInterval(timer));
+  heroSection.addEventListener("mouseleave", restartAutoplay);
+
+  show(0);
+  restartAutoplay();
 }
 
 /* ---------- Section 2: Basics/Credits (1/4) + Description (3/4) ---------- */
@@ -107,7 +176,7 @@ function renderMeta(item) {
 let metaResizeTimer = null;
 
 // Caps .xp-meta-side (Details + Credits) to the height of .xp-meta-main
-// (description + carousel) beside it when Credits is long enough to make
+// (the short description) beside it when Credits is long enough to make
 // the side column naturally taller — see the .is-height-capped CSS for why
 // plain align-self:stretch can't express this on its own.
 function syncMetaHeights() {
@@ -234,57 +303,10 @@ function renderImpactStats(item) {
     .join("");
 }
 
-/* ---------- Section 3: Hero media (lives under the description in xp-meta-main) ---------- */
-// A gallery carousel is preferred (gives a fuller sense of the work than one
-// static frame); items without a gallery fall back to a single photo, so this
-// slot always carries a visual instead of leaving a gap between the short and
-// detailed description.
 // Gallery entries are either a plain src string, or (for items with
 // per-element photo tagging, e.g. What Clings) an { src, element } object.
 function photoSrc(photo) {
   return typeof photo === "string" ? photo : photo.src;
-}
-
-function renderHeroMedia(item) {
-  const wrap = document.getElementById("xp-video-wrap");
-  if (item.gallery && item.gallery.length) {
-    renderHeroGrid(wrap, item, item.gallery.map(photoSrc));
-    return;
-  }
-  if (item.heroPhoto) {
-    wrap.innerHTML = `<img class="xp-video-fallback-image" src="${item.heroPhoto}" alt="${item.title}" />`;
-    return;
-  }
-  wrap.remove();
-}
-
-// A small curated mosaic (up to 5 photos) instead of a single-photo
-// carousel — see the CSS comment on .xp-hero-grid for why. item.heroGridPhotos
-// lets an item hand-pick which photos represent it here (see What Clings);
-// anything else just takes the first few from its gallery in existing order.
-function renderHeroGrid(wrap, item, gallery) {
-  const featured = (item.heroGridPhotos || gallery.slice(0, 5)).slice(0, 5);
-
-  if (featured.length < 2) {
-    wrap.innerHTML = `<img class="xp-video-fallback-image" src="${featured[0] || gallery[0]}" alt="${item.title}" />`;
-    return;
-  }
-
-  wrap.innerHTML = `
-    <div class="xp-hero-grid">
-      ${featured
-        .map(
-          (src, i) => `
-        <button class="xp-hero-grid-item" data-index="${gallery.indexOf(src)}" aria-label="Open photo ${i + 1}">
-          <img src="${src}" alt="${item.title} — photo ${i + 1}" loading="${i === 0 ? "eager" : "lazy"}" />
-        </button>`
-        )
-        .join("")}
-    </div>`;
-
-  wrap.querySelectorAll(".xp-hero-grid-item").forEach((btn) => {
-    btn.addEventListener("click", () => openScopedLightbox(gallery, Number(btn.dataset.index), item.title));
-  });
 }
 
 /* ---------- Section 4: Experience Design flow (interactive accordion) ---------- */
