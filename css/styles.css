@@ -897,6 +897,10 @@ button.founder-toggle.section-link {
 .experience-tag.tag-exhibition { color: var(--brand-teal-light); }
 .experience-tag.tag-event { color: var(--brand-pink-light); }
 .experience-tag.tag-workshop { color: var(--white); }
+/* Default (--brand-purple-light) reads too faint against warmer/lighter
+   cover photos like Jornada's — white holds contrast against the scrim
+   regardless of what's underneath it. */
+.experience-tag.tag-festival { color: var(--white); }
 
 .experience-card-overlay h3 {
   color: var(--white);
@@ -980,6 +984,11 @@ button.founder-toggle.section-link {
   border-color: var(--white);
   transform: translateY(-2px);
 }
+
+/* Plain full-bleed photo between the Contact section and the footer — same
+   treatment as .about-hero (no scrim/overlay, just the photo). */
+.contact-photo { height: 50vh; min-height: 340px; overflow: hidden; }
+.contact-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
 /* ---------- 9b. NEWSLETTER ---------- */
 .newsletter-inner { text-align: center; }
