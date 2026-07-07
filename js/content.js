@@ -1012,8 +1012,11 @@ const SITE_CONTENT = {
         "Celebration": "Ishaan Goel's 30th birthday — March 2025, Brooklyn Peace Center",
         "Designed & Hosted By": "maybe:fiction",
       },
-      gallery: Array.from({ length: 8 }, (_, i) =>
-        `/assets/events/birthdays/gallery-${String(i + 1).padStart(2, "0")}.jpg`
+      // gallery-06 (a posed group portrait) is deliberately excluded — this
+      // gallery sticks to shots of people in the space/activity rather than
+      // posed personal photos.
+      gallery: ["01", "02", "03", "04", "05", "07", "08"].map(
+        (n) => `/assets/events/birthdays/gallery-${n}.jpg`
       ),
     },
   ],
