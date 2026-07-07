@@ -46,7 +46,6 @@ document.addEventListener("DOMContentLoaded", () => {
   } else if (item.experienceDesignStyle === "card") {
     renderDesignFlowCards(item);
     renderGallery(item);
-    mergeDesignAndGallerySections();
   } else {
     renderDesignFlow(item);
     renderGallery(item);
@@ -375,27 +374,11 @@ function renderDesignFlowCards(item) {
         if (index === activeIndex) return;
         activeIndex = index;
         render();
-        // Keep the Gallery section (further down the page) filtered to
-        // whichever element is now selected up here.
-        if (galleryFilterApi) galleryFilterApi.setFilter(item.experienceDesign[index].title);
       });
     });
   }
 
   render();
-}
-
-// Only for "card"-style items (currently just What Clings) — their Gallery
-// filters in sync with the element tabs above it, so the two read better as
-// one continuous "Experience Design" section than as two separate sections
-// with their own headings. See the .is-merged CSS for the visual side.
-function mergeDesignAndGallerySections() {
-  document.getElementById("xp-design-section").classList.add("is-merged");
-  const gallerySection = document.getElementById("xp-gallery-section");
-  if (!gallerySection) return; // renderGallery already removed it (no gallery data)
-  gallerySection.classList.add("is-merged");
-  const heading = gallerySection.querySelector(".section-heading");
-  if (heading) heading.remove();
 }
 
 /* ---------- Section 4b: Edition tabs (items with multiple runs, e.g. Jornada) ---------- */
@@ -546,11 +529,6 @@ function initials(name) {
 // Used by single-run items only — edition-based items (Jornada) remove this
 // section entirely and show each edition's photos inside its own expandable
 // card instead (see renderEditionCards()).
-// Exposed so renderDesignFlowCards can keep the Gallery in sync when an
-// Experience Design element tab is clicked — set once renderGallery has run
-// for an item with per-photo element tags, null otherwise.
-let galleryFilterApi = null;
-
 function renderGallery(item) {
   const section = document.getElementById("xp-gallery-section");
   if (!item.gallery || !item.gallery.length) {
@@ -611,9 +589,6 @@ function renderGallery(item) {
     filterBar.querySelectorAll(".filter-tag").forEach((tag) => {
       tag.addEventListener("click", () => setFilter(tag.dataset.filter));
     });
-    galleryFilterApi = { setFilter };
-  } else {
-    galleryFilterApi = null;
   }
 
   renderGrid();
