@@ -104,6 +104,17 @@ const SITE_CONTENT = {
       // thumbnail, the two-figures shot is the stronger full-bleed cover.
       placeholderSrc: "/assets/experiences/jornada-gallery/madrid-2023-card.jpg",
       heroPhoto: "/assets/experiences/jornada-gallery/madrid-2023-hero.jpg",
+      // The 6 photos that tell the best story of the NYC 2024 edition —
+      // cycled in the cover carousel instead of all 24 (still fully
+      // browsable in each edition's own gallery card and the lightbox).
+      heroCarousel: [
+        "/assets/experiences/jornada-gallery/nyc-2024/photo-00-hero.jpg",
+        "/assets/experiences/jornada-gallery/nyc-2024/photo-02.jpg",
+        "/assets/experiences/jornada-gallery/nyc-2024/photo-04.jpg",
+        "/assets/experiences/jornada-gallery/nyc-2024/photo-08.jpg",
+        "/assets/experiences/jornada-gallery/nyc-2024/photo-14.jpg",
+        "/assets/experiences/jornada-gallery/nyc-2024/photo-16.jpg",
+      ],
       gradient: "grad-blue",
       hasImage: true,
       hasDetailPage: true,
@@ -230,6 +241,17 @@ const SITE_CONTENT = {
       shortDescription: "The thing around the thing is sometimes richer than the thing itself. In Between Things invites you to linger in the spaces around an experience and notice what emerges.",
       description: "The thing around the thing is sometimes richer than the thing itself. In Between Things invites you to linger in the spaces around an experience and notice what emerges.",
       placeholderSrc: "/assets/experiences/spontaneous-attachment.jpg",
+      // The 6 photos that tell the best story of the show — cycled in the
+      // cover carousel instead of all 15 (still fully browsable in the
+      // Gallery section and the lightbox).
+      heroCarousel: [
+        "/assets/experiences/spontaneous-attachment-gallery/photo-01.jpg",
+        "/assets/experiences/spontaneous-attachment-gallery/photo-02.jpg",
+        "/assets/experiences/spontaneous-attachment-gallery/photo-05.jpg",
+        "/assets/experiences/spontaneous-attachment-gallery/photo-06.jpg",
+        "/assets/experiences/spontaneous-attachment-gallery/photo-09.jpg",
+        "/assets/experiences/spontaneous-attachment-gallery/photo-15.jpg",
+      ],
       gradient: "grad-purple",
       hasImage: true,
       hasDetailPage: true,
@@ -340,17 +362,17 @@ const SITE_CONTENT = {
       description: "What ways of relating still exist beneath the surface of everyday life, waiting to be noticed, practiced, and shared again.",
       placeholderSrc: "/assets/experiences/what-clings-gallery/photo-01.jpg",
       heroPhoto: "/assets/experiences/what-clings-gallery/photo-01.jpg",
-      // Curated for the small photo-grid preview (see renderHeroGrid) —
-      // one striking anchor shot (the dot wall) plus one from each of the
-      // three rooms, plus a live-performance shot for human energy against
-      // the otherwise-empty installation photos. Deliberately avoids
-      // reusing photo-01 (already the hero banner above this).
-      heroGridPhotos: [
+      // The 6 photos that tell the best story of the project — cycled in
+      // the cover carousel instead of the full 26-photo gallery (which is
+      // still fully browsable in the Gallery section and the lightbox).
+      // Two shots per room (Cave, Anti-Gallery, Birthday) plus the hero.
+      heroCarousel: [
+        "/assets/experiences/what-clings-gallery/photo-01.jpg",
         "/assets/experiences/what-clings-gallery/photo-19.jpg",
         "/assets/experiences/what-clings-gallery/photo-09.jpg",
         "/assets/experiences/what-clings-gallery/photo-15.jpg",
         "/assets/experiences/what-clings-gallery/photo-18.jpg",
-        "/assets/experiences/what-clings-gallery/photo-25.jpg",
+        "/assets/experiences/what-clings-gallery/photo-26.jpg",
       ],
       gradient: "grad-blue",
       hasImage: true,
@@ -481,11 +503,15 @@ const SITE_CONTENT = {
       description: "when a friend knocks is an experimental, intimate art series taking place in Summer 2025, ending in a public exhibition.",
       placeholderSrc: "/assets/experiences/when-a-friend-knocks-gallery/photo-01.jpg",
       heroPhoto: "/assets/experiences/when-a-friend-knocks-gallery/photo-01.jpg",
-      heroGridPhotos: [
-        "/assets/experiences/when-a-friend-knocks-gallery/photo-13.jpg",
-        "/assets/experiences/when-a-friend-knocks-gallery/photo-09.jpg",
-        "/assets/experiences/when-a-friend-knocks-gallery/photo-24.jpg",
+      // The 6 photos that tell the best story of the season — cycled in the
+      // cover carousel instead of all 42 (still fully browsable in the
+      // Gallery section and the lightbox). Spans all 4 photographed episodes.
+      heroCarousel: [
+        "/assets/experiences/when-a-friend-knocks-gallery/photo-01.jpg",
         "/assets/experiences/when-a-friend-knocks-gallery/photo-06.jpg",
+        "/assets/experiences/when-a-friend-knocks-gallery/photo-09.jpg",
+        "/assets/experiences/when-a-friend-knocks-gallery/photo-13.jpg",
+        "/assets/experiences/when-a-friend-knocks-gallery/photo-24.jpg",
         "/assets/experiences/when-a-friend-knocks-gallery/photo-38.jpg",
       ],
       gradient: "grad-blue-purple",

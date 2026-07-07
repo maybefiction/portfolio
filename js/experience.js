@@ -78,11 +78,18 @@ function renderHero(item) {
   heroTag.classList.add(`tag-${item.category}`);
   document.getElementById("xp-hero-title").textContent = item.title;
 
-  const gallery = item.gallery ? item.gallery.map(photoSrc) : [];
-  // item.heroPhoto (when set and not already the lead gallery photo) opens
-  // the carousel — e.g. Jornada's cover shot is a Madrid photo even though
-  // the rest of the carousel is the NYC 2024 gallery.
+  // item.heroCarousel is a hand-picked set of ~6 photos that tell the best
+  // story of the project — falls back to the full gallery for any item
+  // without a curated list. item.heroPhoto (when set and not already the
+  // lead photo) opens the carousel — e.g. Jornada's cover shot is a Madrid
+  // photo even though the rest of the carousel is the NYC 2024 gallery.
+  const fullGallery = item.gallery ? item.gallery.map(photoSrc) : [];
+  const gallery = item.heroCarousel || fullGallery;
   const slides = item.heroPhoto && gallery[0] !== item.heroPhoto ? [item.heroPhoto, ...gallery] : gallery;
+  // Clicking the cover still opens the complete gallery in the lightbox
+  // (not just the curated 6) — the carousel narrows what auto-plays, not
+  // what's browsable.
+  const lightboxGallery = item.heroCarousel && fullGallery.length ? fullGallery : slides;
 
   const track = document.getElementById("xp-hero-track");
   const prevBtn = document.getElementById("xp-hero-prev");
@@ -140,7 +147,10 @@ function renderHero(item) {
   prevBtn.addEventListener("click", () => goTo(current - 1));
   nextBtn.addEventListener("click", () => goTo(current + 1));
   thumbs.forEach((thumb, i) => thumb.addEventListener("click", () => goTo(i)));
-  track.addEventListener("click", () => openScopedLightbox(slides, current, item.title));
+  track.addEventListener("click", () => {
+    const startIndex = lightboxGallery === slides ? current : Math.max(0, lightboxGallery.indexOf(slides[current]));
+    openScopedLightbox(lightboxGallery, startIndex, item.title);
+  });
 
   const heroSection = document.getElementById("xp-hero");
   heroSection.addEventListener("mouseenter", () => clearInterval(timer));
