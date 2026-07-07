@@ -380,6 +380,7 @@
 /* ---------- 4a. EXPERIENCE DESIGN CARD (parallel-spaces items, e.g. What Clings) ---------- */
 .xp-design-card {
   display: flex;
+  align-items: flex-start;
   gap: 40px;
   background: var(--white);
   border-radius: var(--radius-md);
@@ -387,24 +388,38 @@
   box-shadow: var(--shadow-soft);
   animation: xpFadeIn 0.4s var(--ease-smooth);
 }
-.xp-design-card-main { flex: 1; min-width: 0; }
-.xp-design-card-title { margin: 0 0 8px; }
-/* Orients the visitor before the longer tagline/body — what the room asks
-   you to do, in one short sentence, ahead of why it exists. */
-.xp-design-card-dek {
-  font-weight: 600;
-  font-size: 1.05rem;
-  color: var(--ink);
-  margin: 0 0 12px;
+/* One consistent rhythm down the card via gap, instead of a different
+   margin-bottom on every element — the header (title + dek) is its own
+   tighter-spaced group since those two read as one unit. */
+.xp-design-card-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
 }
+.xp-design-card-header { display: flex; flex-direction: column; gap: 6px; }
+.xp-design-card-title { margin: 0; }
+.xp-design-card-dek {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.15rem;
+  color: var(--ink);
+  margin: 0;
+}
+/* Styled as a quiet pull-quote (left rule, not full-size italic type) so it
+   reads as an aside on why the room exists, rather than competing with the
+   dek above it for the same "headline" weight. */
 .xp-design-card-tagline {
   font-family: var(--font-display);
   font-style: italic;
-  font-size: 1.15rem;
-  color: var(--brand-purple);
-  margin: 0 0 16px;
+  font-size: 1rem;
+  color: var(--ink-soft);
+  border-left: 3px solid var(--brand-purple-light);
+  padding-left: 16px;
+  margin: 0;
 }
-.xp-design-card-materials { margin: 0 0 28px; }
+.xp-design-card-materials { margin: 0; }
 .xp-design-card-materials .xp-meta-label { font-size: 0.8rem; margin: 0 0 10px; }
 .xp-design-card-tags {
   display: flex;
@@ -421,11 +436,13 @@
   padding: 5px 14px;
   border-radius: var(--radius-pill);
 }
-.xp-design-card-text { margin: 0 0 28px; font-size: 1.08rem; line-height: 1.65; }
+.xp-design-card-text { margin: 0; font-size: 1.08rem; line-height: 1.7; }
 .xp-design-card-gatherings .xp-meta-label { font-size: 0.8rem; }
 .xp-design-card-gatherings .xp-design-card-tags li { background: var(--brand-teal-light); color: var(--ink); }
 /* Right-hand Credits column, separated by a vertical divider — same
-   language as .xp-meta-side's divider further up the page. */
+   language as .xp-meta-side's divider further up the page. Top-aligned
+   (not stretched) so a one-line credit doesn't leave a tall column of
+   empty space beside a much longer body paragraph. */
 .xp-design-card-credits {
   flex: 0 0 200px;
   padding-left: 32px;

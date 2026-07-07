@@ -343,17 +343,17 @@ function renderDesignFlowCards(item) {
       </div>
       <div class="xp-design-card">
         <div class="xp-design-card-main">
-          <h3 class="xp-design-card-title">${stage.title}</h3>
-          ${stage.dek ? `<p class="xp-design-card-dek">${stage.dek}</p>` : ""}
+          <div class="xp-design-card-header">
+            <h3 class="xp-design-card-title">${stage.title}</h3>
+            ${stage.dek ? `<p class="xp-design-card-dek">${stage.dek}</p>` : ""}
+          </div>
           ${stage.tagline ? `<p class="xp-design-card-tagline">${stage.tagline}</p>` : ""}
           ${stage.materials ? `
           <div class="xp-design-card-materials">
             <h4 class="xp-meta-label">Materials</h4>
             ${renderTagPillsHTML(stage.materials)}
           </div>` : ""}
-          <div class="xp-design-card-body">
-            <p class="xp-design-card-text">${stage.text}</p>
-          </div>
+          <p class="xp-design-card-text">${stage.text}</p>
           ${stage.communityEvents ? `
           <div class="xp-design-card-materials xp-design-card-gatherings">
             <h4 class="xp-meta-label">From these gatherings</h4>
