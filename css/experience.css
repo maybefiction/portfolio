@@ -157,22 +157,65 @@
   align-items: start;
 }
 
-/* Full description sits below the grid, spanning the combined width of
-   both columns above it rather than being confined to the main column. */
-.xp-meta > .xp-description { margin-top: 48px; }
+/* Full description now flows directly under the blurb in the same column
+   (xp-meta-main) — the preceding element's own bottom margin (blurb or
+   impact stats) already provides the gap, so no extra top margin here. */
+.xp-meta-main .xp-description { margin-top: 0; }
 
 /* Stretched (not just top-aligned) so the divider reaches the full row
-   height even when Details is much shorter than the short description
-   beside it — without this, the empty space below a short Details list reads as an
-   accidental gap rather than a deliberate column split. */
+   height even when Details is much shorter than the blurb + description
+   beside it — without this, the empty space below a short Details list reads
+   as an accidental gap rather than a deliberate column split. */
 .xp-meta-side {
   display: flex;
   flex-direction: column;
-  gap: 32px;
   align-self: stretch;
   padding-right: 32px;
   border-right: 1px solid rgba(38, 37, 34, 0.12);
 }
+.xp-meta-side-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  position: relative;
+}
+
+/* Applied via JS (experience.js: syncMetaHeights) only when Credits runs
+   longer than the blurb + full description beside it (e.g. What Clings' 7
+   categories) — caps the column at that height with a fade + an explicit
+   "See more" button, instead of stretching the row or relying on a bare
+   internal scrollbar (people kept missing that it was scrollable at all). */
+.xp-meta-side.is-capped .xp-meta-side-inner {
+  max-height: var(--meta-cap-height);
+  overflow: hidden;
+}
+.xp-meta-side.is-capped .xp-meta-side-inner::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 64px;
+  background: linear-gradient(180deg, rgba(242, 242, 242, 0) 0%, var(--bg-base) 100%);
+  pointer-events: none;
+}
+.xp-meta-more-btn {
+  margin-top: 20px;
+  align-self: flex-start;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--brand-purple);
+  cursor: pointer;
+}
+.xp-meta-more-btn:hover { text-decoration: underline; }
+.xp-meta-more-btn::after { content: "↓"; font-size: 0.75rem; }
 
 .xp-meta-block + .xp-meta-block {
   padding-top: 32px;

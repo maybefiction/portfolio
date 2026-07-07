@@ -31,6 +31,13 @@ document.addEventListener("DOMContentLoaded", () => {
   renderHero(item);
   renderMeta(item);
   renderImpactStats(item);
+  syncMetaHeights();
+  document.getElementById("xp-meta-more-btn").addEventListener("click", expandMetaSide);
+  let metaResizeTimer = null;
+  window.addEventListener("resize", () => {
+    clearTimeout(metaResizeTimer);
+    metaResizeTimer = setTimeout(syncMetaHeights, 150);
+  });
   // Items with editions (currently just Jornada) get an expandable card per
   // edition instead of the classic act-based flow + a flat Gallery section —
   // each card carries its own Theme/Location/Credits/Artists/Gallery.
@@ -149,8 +156,7 @@ function renderHero(item) {
 // their per-edition specifics (Theme/Location/Credits/Artists/Gallery) in
 // the expandable cards from renderEditionCards() instead.
 function renderMeta(item) {
-  const side = document.getElementById("xp-meta-side");
-  side.innerHTML = renderMetaBlockHTML(item.basics, item.credits);
+  document.getElementById("xp-meta-side-inner").innerHTML = renderMetaBlockHTML(item.basics, item.credits);
 
   const shortDescription = item.shortDescription || item.description || "";
   document.getElementById("xp-short-description").textContent = shortDescription;
@@ -166,6 +172,42 @@ function renderMeta(item) {
   document.getElementById("xp-description").innerHTML = detailedParagraphs
     .map((para) => `<p class="xp-description-body">${para}</p>`)
     .join("");
+}
+
+// Caps Details/Credits (xp-meta-side) to the rendered height of the blurb +
+// full description beside it (xp-meta-main) when Credits is long enough to
+// run past it — e.g. What Clings' 7 credit categories. A fade + explicit
+// "See more" button (rather than a bare internal scrollbar, which people
+// kept missing entirely) expands it to full height on click.
+function syncMetaHeights() {
+  const side = document.getElementById("xp-meta-side");
+  const inner = document.getElementById("xp-meta-side-inner");
+  const main = document.querySelector(".xp-meta-main");
+  const moreBtn = document.getElementById("xp-meta-more-btn");
+  if (!side || !inner || !main || !moreBtn) return;
+
+  side.classList.remove("is-capped");
+  side.style.removeProperty("--meta-cap-height");
+  moreBtn.hidden = true;
+
+  // Only the desktop layout puts these two columns side by side (see the
+  // max-width: 1024px breakpoint) — stacked single-column has no height to match.
+  if (window.innerWidth <= 1024) return;
+
+  const mainHeight = main.getBoundingClientRect().height;
+  const innerHeight = inner.getBoundingClientRect().height;
+  if (innerHeight > mainHeight) {
+    side.style.setProperty("--meta-cap-height", `${mainHeight}px`);
+    side.classList.add("is-capped");
+    moreBtn.hidden = false;
+  }
+}
+
+function expandMetaSide() {
+  const side = document.getElementById("xp-meta-side");
+  side.classList.remove("is-capped");
+  side.style.removeProperty("--meta-cap-height");
+  document.getElementById("xp-meta-more-btn").hidden = true;
 }
 
 function renderMetaBlockHTML(basics, credits) {
