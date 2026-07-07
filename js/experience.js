@@ -67,103 +67,17 @@ function renderNotFound() {
   `;
 }
 
-/* ---------- Section 1: Hero (cover photo, auto-advancing across the
-   gallery when one exists) + filmstrip band directly beneath it ---------- */
-const HERO_AUTOPLAY_MS = 5000;
-const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
+/* ---------- Section 1: Hero (single static cover photo) ---------- */
 function renderHero(item) {
   const heroTag = document.getElementById("xp-hero-tag");
   heroTag.textContent = item.tag;
   heroTag.classList.add(`tag-${item.category}`);
   document.getElementById("xp-hero-title").textContent = item.title;
 
-  // item.heroCarousel is a hand-picked set of ~6 photos that tell the best
-  // story of the project — falls back to the full gallery for any item
-  // without a curated list. item.heroPhoto (when set and not already the
-  // lead photo) opens the carousel — e.g. Jornada's cover shot is a Madrid
-  // photo even though the rest of the carousel is the NYC 2024 gallery.
-  const fullGallery = item.gallery ? item.gallery.map(photoSrc) : [];
-  const gallery = item.heroCarousel || fullGallery;
-  const slides = item.heroPhoto && gallery[0] !== item.heroPhoto ? [item.heroPhoto, ...gallery] : gallery;
-  // Clicking the cover still opens the complete gallery in the lightbox
-  // (not just the curated 6) — the carousel narrows what auto-plays, not
-  // what's browsable.
-  const lightboxGallery = item.heroCarousel && fullGallery.length ? fullGallery : slides;
-
-  const track = document.getElementById("xp-hero-track");
-  const prevBtn = document.getElementById("xp-hero-prev");
-  const nextBtn = document.getElementById("xp-hero-next");
-  const counter = document.getElementById("xp-hero-counter");
-  const filmstripBand = document.getElementById("xp-hero-filmstrip-band");
-  const filmstrip = document.getElementById("xp-hero-filmstrip");
-
-  if (slides.length < 2) {
-    const single = slides[0] || item.placeholderSrc;
-    track.innerHTML = `<img class="xp-hero-slide-image" src="${single}" alt="${item.title}" />`;
-    return;
-  }
-
-  track.innerHTML = slides
-    .map((src, i) => `<img class="xp-hero-slide-image" src="${src}" alt="${item.title} — photo ${i + 1}" loading="${i === 0 ? "eager" : "lazy"}" />`)
-    .join("");
-
-  filmstripBand.hidden = false;
-  filmstrip.innerHTML = slides
-    .map(
-      (src, i) => `
-    <button class="xp-hero-filmstrip-thumb ${i === 0 ? "is-active" : ""}" data-index="${i}" aria-label="Show photo ${i + 1} of ${slides.length}">
-      <img src="${src}" alt="" loading="lazy" />
-    </button>`
-    )
-    .join("");
-  const thumbs = Array.from(filmstrip.querySelectorAll(".xp-hero-filmstrip-thumb"));
-
-  let current = 0;
-  let timer = null;
-
-  function show(index) {
-    current = (index + slides.length) % slides.length;
-    track.style.transform = `translateX(-${current * 100}%)`;
-    thumbs.forEach((t, i) => t.classList.toggle("is-active", i === current));
-    counter.textContent = `${current + 1} / ${slides.length}`;
-    // Scrolls only the filmstrip strip itself into view horizontally — never
-    // scrollIntoView() on the thumb directly, which also drags the whole
-    // page's vertical scroll back up to the filmstrip on every autoplay
-    // tick once the user has scrolled past it.
-    const activeThumb = thumbs[current];
-    const targetLeft = activeThumb.offsetLeft - filmstrip.clientWidth / 2 + activeThumb.clientWidth / 2;
-    filmstrip.scrollTo({ left: targetLeft, behavior: "smooth" });
-  }
-
-  function restartAutoplay() {
-    clearInterval(timer);
-    if (prefersReducedMotion) return;
-    timer = setInterval(() => show(current + 1), HERO_AUTOPLAY_MS);
-  }
-
-  function goTo(index) {
-    show(index);
-    restartAutoplay();
-  }
-
-  prevBtn.hidden = false;
-  nextBtn.hidden = false;
-  counter.hidden = false;
-  prevBtn.addEventListener("click", () => goTo(current - 1));
-  nextBtn.addEventListener("click", () => goTo(current + 1));
-  thumbs.forEach((thumb, i) => thumb.addEventListener("click", () => goTo(i)));
-  track.addEventListener("click", () => {
-    const startIndex = lightboxGallery === slides ? current : Math.max(0, lightboxGallery.indexOf(slides[current]));
-    openScopedLightbox(lightboxGallery, startIndex, item.title);
-  });
-
-  const heroSection = document.getElementById("xp-hero");
-  heroSection.addEventListener("mouseenter", () => clearInterval(timer));
-  heroSection.addEventListener("mouseleave", restartAutoplay);
-
-  show(0);
-  restartAutoplay();
+  const firstGalleryPhoto = item.gallery && item.gallery.length ? photoSrc(item.gallery[0]) : null;
+  const heroImg = document.getElementById("xp-hero-image");
+  heroImg.src = item.heroPhoto || firstGalleryPhoto || item.placeholderSrc;
+  heroImg.alt = item.title;
 }
 
 /* ---------- Section 2: Basics/Credits (1/4) + Description (3/4) ---------- */

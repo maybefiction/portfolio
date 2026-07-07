@@ -43,31 +43,16 @@
   <main id="main">
 
     <!-- =================== SECTION 1: HERO =================== -->
-    <!-- Cover photo doubles as an auto-advancing carousel across the whole
-         gallery when one exists (see renderHero) — arrows/counter live here,
-         title/tag/back-link stay fixed on top while slides cross-fade
-         underneath. Items without a gallery fall back to a single static
-         image (arrows/counter/filmstrip band simply don't render). -->
     <section class="xp-hero" id="xp-hero">
-      <div class="xp-hero-track" id="xp-hero-track"><!-- slide <img>s injected by JS --></div>
+      <img class="xp-hero-image" id="xp-hero-image" src="" alt="" />
       <div class="xp-hero-scrim" aria-hidden="true"></div>
       <a class="xp-back" href="/experiences.html">← All Experiences</a>
-      <button class="xp-hero-arrow prev" id="xp-hero-prev" aria-label="Previous photo" hidden>‹</button>
-      <button class="xp-hero-arrow next" id="xp-hero-next" aria-label="Next photo" hidden>›</button>
-      <div class="xp-hero-counter" id="xp-hero-counter" hidden></div>
       <div class="xp-hero-content">
         <div class="hero-scroll-sentinel" id="hero-scroll-sentinel" aria-hidden="true"></div>
         <span class="experience-tag" id="xp-hero-tag"></span>
         <h1 class="xp-hero-title" id="xp-hero-title"></h1>
       </div>
     </section>
-
-    <!-- Filmstrip band — sits directly beneath the cover, one line of every
-         photo in the gallery so you can see what's coming and jump straight
-         to it. Only rendered when there's a gallery (see renderHero). -->
-    <div class="xp-hero-filmstrip-band" id="xp-hero-filmstrip-band" hidden>
-      <div class="xp-hero-filmstrip" id="xp-hero-filmstrip"><!-- thumbnails injected by JS --></div>
-    </div>
 
     <!-- =================== SECTION 2+3: BASICS/CREDITS + DESCRIPTION =================== -->
     <section class="xp-meta section-inner">
