@@ -31,11 +31,6 @@ document.addEventListener("DOMContentLoaded", () => {
   renderHero(item);
   renderMeta(item);
   renderImpactStats(item);
-  syncMetaHeights();
-  window.addEventListener("resize", () => {
-    clearTimeout(metaResizeTimer);
-    metaResizeTimer = setTimeout(syncMetaHeights, 150);
-  });
   // Items with editions (currently just Jornada) get an expandable card per
   // edition instead of the classic act-based flow + a flat Gallery section —
   // each card carries its own Theme/Location/Credits/Artists/Gallery.
@@ -171,32 +166,6 @@ function renderMeta(item) {
   document.getElementById("xp-description").innerHTML = detailedParagraphs
     .map((para) => `<p class="xp-description-body">${para}</p>`)
     .join("");
-}
-
-let metaResizeTimer = null;
-
-// Caps .xp-meta-side (Details + Credits) to the height of .xp-meta-main
-// (the short description) beside it when Credits is long enough to make
-// the side column naturally taller — see the .is-height-capped CSS for why
-// plain align-self:stretch can't express this on its own.
-function syncMetaHeights() {
-  const side = document.getElementById("xp-meta-side");
-  const main = document.querySelector(".xp-meta-main");
-  if (!side || !main) return;
-
-  side.classList.remove("is-height-capped");
-  side.style.removeProperty("--meta-cap-height");
-
-  // Only the desktop layout puts these two columns side by side (see the
-  // max-width: 1024px breakpoint) — stacked single-column has no height to match.
-  if (window.innerWidth <= 1024) return;
-
-  const mainHeight = main.getBoundingClientRect().height;
-  const sideHeight = side.getBoundingClientRect().height;
-  if (sideHeight > mainHeight) {
-    side.style.setProperty("--meta-cap-height", `${mainHeight}px`);
-    side.classList.add("is-height-capped");
-  }
 }
 
 function renderMetaBlockHTML(basics, credits) {
