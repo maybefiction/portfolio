@@ -97,7 +97,12 @@ const SITE_CONTENT = {
       tag: "Festival",
       shortDescription: "A performance arts festival transforming homes into stages for encounter, collective creation, play and ritual",
       description: "A performance arts festival transforming homes into stages for encounter, collective creation, play and ritual",
-      placeholderSrc: "/assets/experiences/jornada-gallery/madrid-2023-hero.jpg",
+      // placeholderSrc drives card/listing thumbnails (Experiences grid,
+      // homepage Highlights, Next Experience) — heroPhoto is what the
+      // detail-page cover carousel opens on (see renderHero). Deliberately
+      // different photos here: the reading shot reads better as a small
+      // thumbnail, the two-figures shot is the stronger full-bleed cover.
+      placeholderSrc: "/assets/experiences/jornada-gallery/madrid-2023-card.jpg",
       heroPhoto: "/assets/experiences/jornada-gallery/madrid-2023-hero.jpg",
       gradient: "grad-blue",
       hasImage: true,
