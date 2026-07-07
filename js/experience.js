@@ -127,7 +127,13 @@ function renderHero(item) {
     track.style.transform = `translateX(-${current * 100}%)`;
     thumbs.forEach((t, i) => t.classList.toggle("is-active", i === current));
     counter.textContent = `${current + 1} / ${slides.length}`;
-    thumbs[current].scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+    // Scrolls only the filmstrip strip itself into view horizontally — never
+    // scrollIntoView() on the thumb directly, which also drags the whole
+    // page's vertical scroll back up to the filmstrip on every autoplay
+    // tick once the user has scrolled past it.
+    const activeThumb = thumbs[current];
+    const targetLeft = activeThumb.offsetLeft - filmstrip.clientWidth / 2 + activeThumb.clientWidth / 2;
+    filmstrip.scrollTo({ left: targetLeft, behavior: "smooth" });
   }
 
   function restartAutoplay() {
