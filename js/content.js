@@ -95,6 +95,9 @@ const SITE_CONTENT = {
       title: "Jornada de Puertas Abiertas",
       category: "festival",
       tag: "Festival",
+      // Flagship/most recent edition (NYC 2024) — matches the edition the
+      // card thumbnail and top-of-page gallery are drawn from.
+      cardDate: "June 2024",
       shortDescription: "A performance arts festival transforming homes into stages for encounter, collective creation, play and ritual",
       description: "A performance arts festival transforming homes into stages for encounter, collective creation, play and ritual",
       // placeholderSrc drives card/listing thumbnails (Experiences grid,
@@ -228,6 +231,7 @@ const SITE_CONTENT = {
       title: "In Between Things",
       category: "performance",
       tag: "Performance",
+      cardDate: "January 2026",
       shortDescription: "The thing around the thing is sometimes richer than the thing itself. In Between Things invites you to linger in the spaces around an experience and notice what emerges.",
       description: "The thing around the thing is sometimes richer than the thing itself. In Between Things invites you to linger in the spaces around an experience and notice what emerges.",
       placeholderSrc: "/assets/experiences/spontaneous-attachment.jpg",
@@ -331,6 +335,7 @@ const SITE_CONTENT = {
       title: "What Clings",
       category: "exhibition",
       tag: "Exhibition",
+      cardDate: "October 2025",
       // Verbatim from fullSynopsis[3] below (its closing line), not
       // independently written — see project feedback: this item's copy
       // should always track the synopsis doc as its single source of truth.
@@ -464,6 +469,7 @@ const SITE_CONTENT = {
       title: "When A Friend Knocks",
       category: "series",
       tag: "Series",
+      cardDate: "March 2025",
       // source: friendknocks_original_site.pdf (01_Media), the season's own promo one-pager --
       // Overview column, verbatim. Do not paraphrase; refresh from that doc if it changes.
       shortDescription: "when a friend knocks is an experimental, intimate art series taking place in Summer 2025, ending in a public exhibition.",

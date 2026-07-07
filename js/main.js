@@ -138,6 +138,7 @@ function renderHighlightCard(type, item) {
       ${media}
       <div class="experience-card-overlay">
         <span class="experience-tag ${tagClass}">${item.tag}</span>
+        ${type === "experience" && item.cardDate ? `<span class="experience-card-date">${item.cardDate}</span>` : ""}
         <h3>${item.title}</h3>
         ${desc ? `<p class="experience-card-desc">${desc}</p>` : ""}
       </div>

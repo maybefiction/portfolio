@@ -24,6 +24,7 @@ function renderExperiences() {
       const overlay = `
           <div class="experience-card-overlay">
             <span class="experience-tag tag-${item.category}">${item.tag}</span>
+            ${item.cardDate ? `<span class="experience-card-date">${item.cardDate}</span>` : ""}
             <h3>${item.title}</h3>
             ${desc ? `<p class="experience-card-desc">${desc}</p>` : ""}
           </div>`;
