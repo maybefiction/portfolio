@@ -243,6 +243,16 @@ ul { list-style: none; margin: 0; padding: 0; }
   margin-bottom: 48px;
 }
 
+/* Keeps the Experiences tagline on a single line at any viewport width,
+   scaling down with the viewport instead of wrapping. */
+/* Scales down with viewport width so the line only breaks as a last
+   resort on the narrowest phones, instead of wrapping at every width
+   the way a fixed ch-based max-width did. */
+.experiences-page .section-subheading {
+  max-width: none;
+  font-size: clamp(0.8rem, calc(2.16vw - 1.04px), 1.15rem);
+}
+
 /* Buttons */
 .btn {
   display: inline-flex;

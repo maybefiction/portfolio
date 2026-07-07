@@ -7,7 +7,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("footer-year").textContent = new Date().getFullYear();
   renderExperiences();
-  setupFilterBar();
   setupNav();
 });
 
@@ -42,26 +41,6 @@ function renderExperiences() {
         </article>`;
     })
     .join("");
-}
-
-/* ---------- Experiences filter bar ---------- */
-function setupFilterBar() {
-  const bar = document.getElementById("filter-bar");
-  const buttons = Array.from(bar.querySelectorAll(".filter-tag"));
-  const cards = () => Array.from(document.querySelectorAll(".experience-card"));
-
-  buttons.forEach((button) => {
-    button.addEventListener("click", () => {
-      buttons.forEach((b) => b.classList.remove("is-active"));
-      button.classList.add("is-active");
-
-      const filter = button.dataset.filter;
-      cards().forEach((card) => {
-        const matches = filter === "all" || card.dataset.category === filter;
-        card.classList.toggle("is-hidden", !matches);
-      });
-    });
-  });
 }
 
 /* ---------- Nav: mobile toggle ---------- */
