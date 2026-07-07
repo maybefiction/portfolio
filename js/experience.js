@@ -506,6 +506,21 @@ function renderEditionCards(item) {
     flow.innerHTML = `
       <div class="jpa-tabs" role="tablist">${tabsHTML}</div>
       <div class="jpa-edition-content">
+        ${
+          edition.gallery && edition.gallery.length
+            ? `<h4 class="jpa-subheading">Gallery</h4>
+               <div class="xp-gallery-grid jpa-gallery-grid">
+                 ${edition.gallery
+                   .map(
+                     (src, p) => `
+               <button class="xp-gallery-thumb" data-photo="${p}" aria-label="Open photo ${p + 1} of ${edition.gallery.length}">
+                 <img src="${src}" alt="${edition.label} — photo ${p + 1}" loading="lazy" />
+               </button>`
+                   )
+                   .join("")}
+               </div>`
+            : ""
+        }
         <div class="jpa-edition-fields">
           ${
             edition.theme
@@ -544,6 +559,11 @@ function renderEditionCards(item) {
                 </div>`
               : ""
           }
+          ${
+            edition.guests
+              ? `<div class="jpa-field"><h4 class="xp-meta-label">Guests</h4><p>${edition.guests}</p></div>`
+              : ""
+          }
         </div>
         ${
           artistNames.length
@@ -557,21 +577,6 @@ function renderEditionCards(item) {
                        : `<span class="jpa-avatar" aria-hidden="true">${initials(name)}</span>`;
                      return `<div class="jpa-artist">${avatar}<span class="jpa-artist-name">${name}</span></div>`;
                    })
-                   .join("")}
-               </div>`
-            : ""
-        }
-        ${
-          edition.gallery && edition.gallery.length
-            ? `<h4 class="jpa-subheading">Gallery</h4>
-               <div class="xp-gallery-grid jpa-gallery-grid">
-                 ${edition.gallery
-                   .map(
-                     (src, p) => `
-               <button class="xp-gallery-thumb" data-photo="${p}" aria-label="Open photo ${p + 1} of ${edition.gallery.length}">
-                 <img src="${src}" alt="${edition.label} — photo ${p + 1}" loading="lazy" />
-               </button>`
-                   )
                    .join("")}
                </div>`
             : ""

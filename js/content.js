@@ -153,8 +153,8 @@ const SITE_CONTENT = {
         {
           id: "nyc-2024",
           label: "NYC 2024",
-          theme: "Shared Intimacies",
-          themeSubtitle: "How do strangers become close?",
+          theme: "Roots",
+          themeSubtitle: "What allows us to feel at home, and what must we let go of in order to grow?",
           themeDescription: [
             "For its second edition, Jornada de Puertas Abiertas turned its attention to the many meanings of roots. Some roots anchor us; others entangle us. Some are inherited, while others are formed slowly through the relationships, rituals, and places that shape our lives.",
             "Presented across two homes, the festival invited audiences to move between these different understandings. Performances explored the body, childhood, migration, grief, celebration, memory, and belonging through shared rituals, participatory installations, music, dance, and live painting. Together, they suggested that home is not simply where we come from, but something we create with others, again and again.",
@@ -165,11 +165,11 @@ const SITE_CONTENT = {
             format: "Performance Art Festival",
             runtime: "4h",
           },
+          guests: "70 people",
           credits: {
             "Hosts": "Ishaan Goel, John Bowen",
             "Producers": "Super Alex, Ishaan Goel",
             "Artists": "Benedicto Figueroa, Brooke Leialoha, Gigi Tamayo, Guerilla Phart, Ishaan Goel, John Bowen, Justin Harmon, Mk7, Púyaloahí, Steinbock19, Super Alex, Taliyah Starr, V Tineo, Zaraith Hernández",
-            "Guests": "70 people",
           },
           // Real headshots, keyed by exact name as it appears in
           // credits.Artists above — falls back to initials for any name
@@ -200,8 +200,8 @@ const SITE_CONTENT = {
         {
           id: "madrid-2023",
           label: "Madrid 2023",
-          theme: "Roots",
-          themeSubtitle: "What allows us to feel at home, and what must we let go of in order to grow?",
+          theme: "Shared Intimacies",
+          themeSubtitle: "How do strangers become close?",
           themeDescription: [
             "The inaugural edition of Jornada de Puertas Abiertas explored the home as a site where intimacy could be constructed collectively, rather than hidden. The different performances revolved around how trust, vulnerability, and play might emerge between people who had only just met.",
             "The featured works transformed familiar rituals — playing games, doing the laundry, lying in bed, watching home-made videos, or gathering everyday objects — into opportunities for collective participation. Rather than presenting intimacy as something fixed or personal, the festival approached it as something created through shared experience: a fleeting condition that arises when people choose to spend time, attention, and imagination together.",
@@ -212,10 +212,11 @@ const SITE_CONTENT = {
             format: "Performance art festival",
             runtime: "3 hours",
           },
+          guests: "30 people",
           credits: {
             "Host / Founder / Producer": "Super Alex",
+            "Production Assistant": "Manuel F. Tirado",
             "Artists": "Ana García López, Beatriz Bonduel, Chico Trópico, Laura Nadeszhda, Pantalla Fantasma, Sally Hernández, Super Alex, Track ID",
-            "Guests": "30 people",
           },
           artistPhotos: {
             "Ana García López": "/assets/experiences/jornada-gallery/artists/ana-garcia-lopez.jpg",
