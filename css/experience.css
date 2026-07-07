@@ -167,6 +167,7 @@
    beside it — without this, the empty space below a short Details list reads
    as an accidental gap rather than a deliberate column split. */
 .xp-meta-side {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-self: stretch;
@@ -177,45 +178,35 @@
   display: flex;
   flex-direction: column;
   gap: 32px;
-  position: relative;
 }
 
 /* Applied via JS (experience.js: syncMetaHeights) only when Credits runs
    longer than the blurb + full description beside it (e.g. What Clings' 7
-   categories) — caps the column at that height with a fade + an explicit
-   "See more" button, instead of stretching the row or relying on a bare
-   internal scrollbar (people kept missing that it was scrollable at all). */
+   categories) — caps the column at that height and scrolls internally past
+   it. The scrollbar is styled to stay visible (not just appear on hover),
+   and the fade below is a sibling overlay (not a descendant of the
+   scrolling box), so it stays pinned at the visible cutoff instead of
+   scrolling away with the content. */
 .xp-meta-side.is-capped .xp-meta-side-inner {
   max-height: var(--meta-cap-height);
-  overflow: hidden;
+  overflow-y: scroll;
+  padding-right: 16px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--brand-purple) transparent;
 }
-.xp-meta-side.is-capped .xp-meta-side-inner::after {
+.xp-meta-side.is-capped .xp-meta-side-inner::-webkit-scrollbar { width: 8px; }
+.xp-meta-side.is-capped .xp-meta-side-inner::-webkit-scrollbar-track { background: rgba(38, 37, 34, 0.06); border-radius: var(--radius-pill); }
+.xp-meta-side.is-capped .xp-meta-side-inner::-webkit-scrollbar-thumb { background: var(--brand-purple); border-radius: var(--radius-pill); }
+.xp-meta-side.is-capped::after {
   content: "";
   position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
-  height: 64px;
+  height: 48px;
   background: linear-gradient(180deg, rgba(242, 242, 242, 0) 0%, var(--bg-base) 100%);
   pointer-events: none;
 }
-.xp-meta-more-btn {
-  margin-top: 20px;
-  align-self: flex-start;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  background: none;
-  border: none;
-  padding: 0;
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 0.9rem;
-  color: var(--brand-purple);
-  cursor: pointer;
-}
-.xp-meta-more-btn:hover { text-decoration: underline; }
-.xp-meta-more-btn::after { content: "↓"; font-size: 0.75rem; }
 
 .xp-meta-block + .xp-meta-block {
   padding-top: 32px;

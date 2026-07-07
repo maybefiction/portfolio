@@ -32,7 +32,6 @@ document.addEventListener("DOMContentLoaded", () => {
   renderMeta(item);
   renderImpactStats(item);
   syncMetaHeights();
-  document.getElementById("xp-meta-more-btn").addEventListener("click", expandMetaSide);
   let metaResizeTimer = null;
   window.addEventListener("resize", () => {
     clearTimeout(metaResizeTimer);
@@ -176,19 +175,17 @@ function renderMeta(item) {
 
 // Caps Details/Credits (xp-meta-side) to the rendered height of the blurb +
 // full description beside it (xp-meta-main) when Credits is long enough to
-// run past it — e.g. What Clings' 7 credit categories. A fade + explicit
-// "See more" button (rather than a bare internal scrollbar, which people
-// kept missing entirely) expands it to full height on click.
+// run past it — e.g. What Clings' 7 credit categories. Scrolls internally
+// past that height, with a visible (not just on-hover) scrollbar + bottom
+// fade so it reads as scrollable at a glance instead of just clipped.
 function syncMetaHeights() {
   const side = document.getElementById("xp-meta-side");
   const inner = document.getElementById("xp-meta-side-inner");
   const main = document.querySelector(".xp-meta-main");
-  const moreBtn = document.getElementById("xp-meta-more-btn");
-  if (!side || !inner || !main || !moreBtn) return;
+  if (!side || !inner || !main) return;
 
   side.classList.remove("is-capped");
   side.style.removeProperty("--meta-cap-height");
-  moreBtn.hidden = true;
 
   // Only the desktop layout puts these two columns side by side (see the
   // max-width: 1024px breakpoint) — stacked single-column has no height to match.
@@ -199,15 +196,7 @@ function syncMetaHeights() {
   if (innerHeight > mainHeight) {
     side.style.setProperty("--meta-cap-height", `${mainHeight}px`);
     side.classList.add("is-capped");
-    moreBtn.hidden = false;
   }
-}
-
-function expandMetaSide() {
-  const side = document.getElementById("xp-meta-side");
-  side.classList.remove("is-capped");
-  side.style.removeProperty("--meta-cap-height");
-  document.getElementById("xp-meta-more-btn").hidden = true;
 }
 
 function renderMetaBlockHTML(basics, credits) {
