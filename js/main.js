@@ -1,9 +1,9 @@
 /* ============================================================
    MAIN.JS — rendering + interactivity for maybe:fiction homepage.
    Reads all copy/data from js/content.js (SITE_CONTENT).
-   The homepage shows teasers for Experiences/Workshops/Events — each
+   The homepage shows teasers for Experiences/Workshops/Gatherings — each
    links out to its own full page (experiences.html, workshops.html,
-   events.html), which have their own JS files with the full render.
+   gatherings.html), which have their own JS files with the full render.
    About and Contact live on their own pages only — the homepage About
    teaser was removed as redundant with the hero tagline.
    ============================================================ */
@@ -130,7 +130,7 @@ function renderHighlightCard(type, item) {
   const href =
     type === "experience" ? `/experiences/${item.id}`
     : type === "workshop" ? `/workshops/${item.id}`
-    : `/events/${item.id}`;
+    : `/gatherings/${item.id}`;
   const desc = item.tagline || item.shortDescription || item.description || "";
 
   return `

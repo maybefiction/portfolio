@@ -2,6 +2,12 @@
   "rewrites": [
     { "source": "/experiences/:id", "destination": "/experience.html?id=:id" },
     { "source": "/workshops/:id", "destination": "/workshop.html?id=:id" },
-    { "source": "/events/:id", "destination": "/event.html?id=:id" }
+    { "source": "/gatherings", "destination": "/gatherings.html" },
+    { "source": "/gatherings/:id", "destination": "/event.html?id=:id" }
+  ],
+  "redirects": [
+    { "source": "/events.html", "destination": "/gatherings", "permanent": true },
+    { "source": "/events", "destination": "/gatherings", "permanent": true },
+    { "source": "/events/:id", "destination": "/gatherings/:id", "permanent": true }
   ]
 }

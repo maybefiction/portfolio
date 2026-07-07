@@ -1,5 +1,5 @@
 /* ============================================================
-   EVENTS.JS — renders the standalone Events page.
+   EVENTS.JS — renders the standalone Gatherings page.
    Reads all copy/data from js/content.js (SITE_CONTENT.events).
    ============================================================ */
 
@@ -20,7 +20,7 @@ function renderEvents() {
         ? `<img class="experience-card-media" src="${e.placeholderSrc}" alt="${e.title}" loading="lazy">`
         : `<div class="media-placeholder ${e.gradient}"></div>`;
       const href = e.hasDetailPage
-        ? `/events/${e.id}`
+        ? `/gatherings/${e.id}`
         : `/contact.html?event=${encodeURIComponent(e.title)}`;
       const desc = e.tagline || e.shortDescription || "";
       return `

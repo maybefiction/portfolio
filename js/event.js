@@ -5,8 +5,8 @@
    sections that item has data for — same partial-data philosophy,
    and now the same section structure, as experience.js.
 
-   ID is read from the URL path (e.g. /events/some-id), since the
-   Vercel rewrite that maps /events/:id -> /event.html does NOT
+   ID is read from the URL path (e.g. /gatherings/some-id), since the
+   Vercel rewrite that maps /gatherings/:id -> /event.html does NOT
    expose its destination query string to client-side JS. The ?id=
    query param is kept as a fallback for local testing directly
    against event.html.
@@ -42,7 +42,7 @@ function renderNotFound() {
       <p class="eyebrow">Hmm</p>
       <h1 class="section-heading">We couldn't find that gathering.</h1>
       <p class="section-subheading">It may have moved, or the link is out of date.</p>
-      <a class="btn btn-primary" href="/events.html">← Back to Gatherings</a>
+      <a class="btn btn-primary" href="/gatherings">← Back to Gatherings</a>
     </div>
   `;
 }
