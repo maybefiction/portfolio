@@ -303,7 +303,7 @@ const SITE_CONTENT = {
         {
           act: "II",
           title: "Transform",
-          subtitle: "Duet No. 1",
+          subtitle: "Duet",
           location: "Mainstage",
           image: "/assets/experiences/spontaneous-attachment-gallery/photo-02.jpg",
           text: "Guests were led upstairs for the premiere performance, seated along both sides of a runway-style stage — with no single front, where you sat shaped what you saw. Two dancers in pointe shoes, identities hidden at first, worked under one rule: never break eye contact with each other. Their movement travels from cold, structured geometry into something startlingly human, tracing how closeness actually happens between two people.",
