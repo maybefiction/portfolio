@@ -514,7 +514,7 @@ function renderDesignFlowIcons(item) {
     if (readStoryBtn) {
       readStoryBtn.addEventListener("click", () => {
         closePopout();
-        openStoryByTitle(stage.story);
+        openStoryPopout(story);
       });
     }
 
@@ -806,7 +806,8 @@ function openScopedLightbox(gallery, startIndex, title) {
 let activeLightboxHandlers = null;
 let documentKeydownBound = false;
 
-/* ---------- Section 6: Story Collection (native accordion, e.g. When A Friend Knocks) ---------- */
+/* ---------- Section 6: Story Collection (each row pops out the full story,
+   e.g. When A Friend Knocks) ---------- */
 function renderStoryCollection(item) {
   const section = document.getElementById("xp-stories-section");
   if (!item.storyCollection || !item.storyCollection.length) {
@@ -818,28 +819,58 @@ function renderStoryCollection(item) {
   list.innerHTML = item.storyCollection
     .map(
       (story, i) => `
-    <details class="xp-story" data-story-title="${story.title}" ${i === 0 ? "open" : ""}>
-      <summary class="xp-story-summary">
-        <span class="xp-story-index">${String(i + 1).padStart(2, "0")}</span>
-        <span class="xp-story-title">${story.title}</span>
-        <span class="xp-story-toggle" aria-hidden="true"></span>
-      </summary>
-      <div class="xp-story-body">
-        ${story.paragraphs.map((p) => `<p>${p}</p>`).join("")}
-      </div>
-    </details>`
+    <button class="xp-story" data-story-title="${story.title}">
+      <span class="xp-story-index">${String(i + 1).padStart(2, "0")}</span>
+      <span class="xp-story-title">${story.title}</span>
+      <span class="xp-story-arrow" aria-hidden="true">→</span>
+    </button>`
     )
     .join("");
+
+  list.querySelectorAll(".xp-story").forEach((btn, i) => {
+    btn.addEventListener("click", () => openStoryPopout(item.storyCollection[i]));
+  });
 }
 
-// Lets the icon-board pop-out (renderDesignFlowIcons) jump straight to a
-// specific story instead of duplicating its full text inline.
-function openStoryByTitle(title) {
-  const details = document.querySelector(`.xp-story[data-story-title="${CSS.escape(title)}"]`);
-  if (!details) return;
-  details.open = true;
-  details.scrollIntoView({ behavior: "smooth", block: "start" });
+// Shared full-story pop-out — used by the Stories list above and by the
+// Experience Design icon board's "Read the full story" link (see
+// renderDesignFlowIcons). Stacks above .xp-icon-popout (higher z-index) so
+// opening it from within a gathering pop-out layers on top instead of
+// replacing that content.
+function openStoryPopout(story) {
+  if (!story) return;
+  const popout = document.getElementById("xp-story-popout");
+  const content = document.getElementById("xp-story-popout-content");
+  const closeBtn = document.getElementById("xp-story-popout-close");
+
+  content.innerHTML = `
+    <h3 class="xp-story-popout-title">${story.title}</h3>
+    ${story.paragraphs.map((p) => `<p>${p}</p>`).join("")}
+  `;
+  content.scrollTop = 0;
+
+  function close() {
+    popout.classList.remove("is-open");
+    popout.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+  }
+
+  popout.classList.add("is-open");
+  popout.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
+
+  closeBtn.onclick = close;
+  popout.onclick = (e) => {
+    if (e.target === popout) close();
+  };
+  activeStoryPopoutClose = close;
 }
+let activeStoryPopoutClose = null;
+document.addEventListener("keydown", (e) => {
+  if (e.key !== "Escape" || !activeStoryPopoutClose) return;
+  const popout = document.getElementById("xp-story-popout");
+  if (popout && popout.classList.contains("is-open")) activeStoryPopoutClose();
+});
 
 /* ---------- Next Experience — only shown once 2+ detail pages exist ---------- */
 function renderNextExperience(item) {

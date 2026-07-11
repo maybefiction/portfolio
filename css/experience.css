@@ -712,27 +712,25 @@
 .jpa-gallery-grid .xp-gallery-thumb:hover { transform: translateY(-3px); }
 .jpa-gallery-grid .xp-gallery-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-/* ---------- 4c. STORY COLLECTION (native accordion, e.g. When A Friend Knocks) ---------- */
+/* ---------- 4d. STORY COLLECTION (each row pops out the full story —
+   e.g. When A Friend Knocks) ---------- */
 .xp-stories { padding-top: 0; padding-bottom: 56px; }
 .xp-stories .section-heading { margin-bottom: 32px; }
 .xp-stories-list { display: flex; flex-direction: column; gap: 12px; }
 
 .xp-story {
-  background: var(--white);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-soft);
-  overflow: hidden;
-}
-.xp-story-summary {
   display: flex;
   align-items: center;
   gap: 16px;
+  width: 100%;
+  background: var(--white);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-soft);
   padding: 22px 28px;
   cursor: pointer;
-  list-style: none;
-  user-select: none;
+  transition: transform 0.3s var(--ease-bounce), box-shadow 0.3s ease;
 }
-.xp-story-summary::-webkit-details-marker { display: none; }
+.xp-story:hover { transform: translateY(-3px); box-shadow: var(--shadow-lift); }
 .xp-story-index {
   font-family: var(--font-display);
   font-weight: 700;
@@ -746,28 +744,75 @@
   font-size: 1.1rem;
   color: var(--ink);
   flex: 1;
+  text-align: left;
 }
-.xp-story-toggle {
+.xp-story-arrow {
   flex: none;
-  width: 12px;
-  height: 12px;
-  border-right: 2px solid var(--ink-soft);
-  border-bottom: 2px solid var(--ink-soft);
-  transform: rotate(45deg);
-  transition: transform 0.25s ease;
+  color: var(--brand-purple);
+  font-size: 1.1rem;
+  transition: transform 0.25s var(--ease-bounce);
 }
-.xp-story[open] .xp-story-toggle { transform: rotate(-135deg); }
-.xp-story-body {
-  padding: 0 28px 32px;
-  max-width: 68ch;
+.xp-story:hover .xp-story-arrow { transform: translateX(4px); }
+
+/* Shared full-story pop-out — used by the Stories list above and by the
+   Experience Design icon board's "Read the full story" link. Higher
+   z-index than .xp-icon-popout so it visually layers on top when opened
+   from within a gathering pop-out instead of replacing it. */
+.xp-story-popout {
+  position: fixed;
+  inset: 0;
+  z-index: 1001;
+  background: rgba(38, 37, 34, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
 }
-.xp-story-body p {
+.xp-story-popout.is-open { opacity: 1; pointer-events: auto; }
+.xp-story-popout-inner {
+  position: relative;
+  background: var(--white);
+  border-radius: var(--radius-md);
+  max-width: 680px;
+  width: 100%;
+  max-height: 86vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-lift);
+}
+.xp-story-popout-content { padding: 48px; max-width: 68ch; }
+.xp-story-popout-title {
+  font-family: var(--font-display);
+  font-style: italic;
+  margin: 0 0 24px;
+}
+.xp-story-popout-content p {
   margin: 0 0 16px;
   font-size: 1rem;
   line-height: 1.7;
   color: var(--ink-soft);
 }
-.xp-story-body p:last-child { margin-bottom: 0; }
+.xp-story-popout-content p:last-child { margin-bottom: 0; }
+.xp-story-popout-close {
+  position: sticky;
+  float: right;
+  top: 16px;
+  right: 16px;
+  z-index: 1;
+  background: rgba(38, 37, 34, 0.08);
+  color: var(--ink);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.25s ease;
+}
+.xp-story-popout-close:hover { background: rgba(38, 37, 34, 0.16); }
 
 /* ---------- 5. GALLERY + LIGHTBOX ---------- */
 .xp-gallery { padding-top: 0; padding-bottom: 64px; }
