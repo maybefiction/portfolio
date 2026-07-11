@@ -558,17 +558,28 @@ const SITE_CONTENT = {
         { src: "photo-42.jpg", element: "Field Trips" },
       ].map((p) => ({ ...p, src: `/assets/experiences/when-a-friend-knocks-gallery/${p.src}` })),
 
-      experienceDesignStyle: "card",
+      // "icons" style renders the illustrated-icon board from Friend Knocks
+      // Note.pdf: one hand-drawn icon per gathering format, each popping out
+      // into a Story -> Gathering -> Artifact view instead of the flat
+      // node/panel or room-card layouts used elsewhere. See
+      // renderDesignFlowIcons() in experience.js.
+      experienceDesignStyle: "icons",
       // Episode copy grounded in the season's photo record + the promo
       // doc's Overview/Gatherings sections -- see friendknocks_original_site.pdf.
       // Treated as a fully separate project from What Clings (its season
       // finale) per project direction -- no reference or link between the two.
+      // `icon` keys a hand-drawn graphic in ICONS (experience.js); `story`
+      // names the storyCollection entry each gathering was built around
+      // (per Friend Knocks Note.pdf, #1 Three Decades <-> "A Sweet Kiss" --
+      // the other three pairings are inferred from theme, not yet confirmed).
       experienceDesign: [
         {
           act: "01",
           title: "Three Decades",
           tagline: "The pilot \u2014 Sat, March 1",
           image: "/assets/experiences/when-a-friend-knocks-gallery/photo-01.jpg",
+          icon: "cake",
+          story: "A Sweet Kiss",
           text: "The season premiere doubled as Ishaan's 30th birthday party — the same afternoon that later became the pilot for maybe:fiction's Adult Birthdays format. Guests wore birthday hats labeled by how they knew him (Art, Family & Family Friends, U Mich, South Brunswick, Sports), traded a piece of candy for the story of how they'd met, and stayed for cake, live music, and a dance performance at the Brooklyn Peace Center, with treats from Elemental Bakery.",
           credit: "Hosted with Brooklyn Peace Center & Elemental Bakery",
         },
@@ -577,6 +588,8 @@ const SITE_CONTENT = {
           title: "Red vs Blue",
           tagline: "Fri, June 21",
           image: "/assets/experiences/when-a-friend-knocks-gallery/photo-07.jpg",
+          icon: "battle",
+          story: "Rules of Engagement",
           text: "Fifty-plus guests split into Red and Blue teams for a community water balloon fight at Mount Prospect Park. Sidewalk chalk announced the sign-up on the pavement outside; buckets of balloons kept both sides armed until one team soaked the other.",
           credit: "Hosted with Third Nature",
         },
@@ -585,6 +598,8 @@ const SITE_CONTENT = {
           title: "Pop-Up Caf\u00e9s",
           tagline: "June 22 \u2013 Sept 21",
           image: "/assets/experiences/when-a-friend-knocks-gallery/photo-17.jpg",
+          icon: "cafe",
+          story: "The Price of Company",
           text: "Three community members turned their own homes, gardens, and family businesses into pop-up cafés over the summer. Ellen hosted a community quilt session at Ishaan's apartment with sweets by Sumra; Kelly ran a zine-making pop-up at Underhill Gardens with baked goods by Audrey; and Alice hosted a pigeon-drawing café inside her family's Chinese restaurant, surrounded by the pigeon paintings that lined its walls all season.",
           credit: "Community-hosted \u2014 Ellen (Community Quilt), Kelly (Zines, Underhill Gardens), Alice (Pigeons of New York)",
         },
@@ -593,12 +608,15 @@ const SITE_CONTENT = {
           title: "Field Trips",
           tagline: "June 22 \u2013 Sept 21",
           image: "/assets/experiences/when-a-friend-knocks-gallery/photo-35.jpg",
+          icon: "notebook",
+          story: "What Sully Found",
           text: "Smaller excursions ran in parallel with the pop-up cafés — a walk through Greenwood Cemetery, a rooftop session painting clay creatures, and a Dance & Draw gathering — each one a field trip to a different corner of the city instead of a shared host.",
         },
         {
           act: "05",
           title: "Crossing Paths",
           tagline: "Sat, Sept 26",
+          story: "Pointing At Trees",
           text: "The season's closing regular episode, held the week before its artifacts — sounds, images, writings, and objects gathered from every gathering — came together for the exhibition.",
         },
       ],

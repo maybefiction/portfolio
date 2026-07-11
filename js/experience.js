@@ -43,6 +43,9 @@ document.addEventListener("DOMContentLoaded", () => {
   if (item.editions && item.editions.length) {
     renderEditionCards(item);
     document.getElementById("xp-gallery-section").remove();
+  } else if (item.experienceDesignStyle === "icons") {
+    renderDesignFlowIcons(item);
+    renderGallery(item);
   } else if (item.experienceDesignStyle === "card") {
     renderDesignFlowCards(item);
     renderGallery(item);
@@ -381,6 +384,159 @@ function renderDesignFlowCards(item) {
   render();
 }
 
+// Simple line-art placeholders standing in for the hand-drawn icons in
+// Friend Knocks Note.pdf — swap these for real illustrated artwork later.
+// Keyed by experienceDesign[].icon.
+const ICONS = {
+  cake: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 44V26h28v18"/><path d="M10 34h28"/><path d="M16 26v-5a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v5"/><path d="M20 18v-4"/><path d="M28 18v-4"/><path d="M20 10c0-2 2-2 2-4s-2-2-2-4"/><path d="M28 10c0-2 2-2 2-4s-2-2-2-4"/></svg>`,
+  battle: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 30c4-10 8-16 8-20a4 4 0 0 1 8 0c0 4 4 10 8 20a8 8 0 0 1-24 0Z"/><path d="M32 22c2-5 4-8 4-10a2 2 0 0 1 4 0c0 2 2 5 4 10a6 6 0 0 1-12 0Z"/></svg>`,
+  cafe: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 20h22v12a8 8 0 0 1-8 8H18a8 8 0 0 1-8-8V20Z"/><path d="M32 22h4a5 5 0 0 1 0 10h-4"/><path d="M16 14c0-2 2-2 2-4s-2-2-2-4"/><path d="M22 14c0-2 2-2 2-4s-2-2-2-4"/></svg>`,
+  notebook: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="8" width="24" height="32" rx="2"/><path d="M15 16h12"/><path d="M15 23h12"/><path d="M15 30h8"/><path d="M33 32l6-6 4 4-6 6h-4v-4Z"/></svg>`,
+};
+
+/* ---------- Section 4c: Experience Design icon board (illustrated formats
+   that pop out into a Story -> Gathering -> Artifact view, e.g. When A
+   Friend Knocks) ---------- */
+function renderDesignFlowIcons(item) {
+  const section = document.getElementById("xp-design-section");
+  if (!item.experienceDesign || !item.experienceDesign.length) {
+    section.remove();
+    return;
+  }
+
+  const flow = document.getElementById("xp-flow");
+  // Entries with an icon pop out on click; entries without one (e.g. a
+  // closing/finale episode with no illustration yet) render as a plain
+  // note below the board instead.
+  const iconStages = item.experienceDesign.filter((s) => s.icon);
+  const plainStages = item.experienceDesign.filter((s) => !s.icon);
+
+  flow.innerHTML = `
+    <div class="xp-icon-board">
+      ${iconStages
+        .map(
+          (stage, i) => `
+        <button class="xp-icon-item" data-stage="${i}" aria-label="Open ${stage.title}">
+          <span class="xp-icon-graphic">${ICONS[stage.icon] || ""}</span>
+          <span class="xp-icon-label">${stage.title}</span>
+        </button>`
+        )
+        .join("")}
+    </div>
+    ${plainStages
+      .map(
+        (stage) => `
+      <div class="xp-icon-note">
+        ${stage.tagline ? `<span class="xp-flow-panel-act">${stage.tagline}</span>` : ""}
+        <h3>${stage.title}</h3>
+        <p>${stage.text}</p>
+      </div>`
+      )
+      .join("")}
+    <div class="xp-icon-popout" id="xp-icon-popout" aria-hidden="true">
+      <div class="xp-icon-popout-inner">
+        <button class="xp-icon-popout-close" id="xp-icon-popout-close" aria-label="Close">✕</button>
+        <div class="xp-icon-popout-content" id="xp-icon-popout-content"></div>
+      </div>
+    </div>
+  `;
+
+  const popout = document.getElementById("xp-icon-popout");
+  const popoutContent = document.getElementById("xp-icon-popout-content");
+  const closeBtn = document.getElementById("xp-icon-popout-close");
+
+  function closePopout() {
+    popout.classList.remove("is-open");
+    popout.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+  }
+
+  function openPopout(stage) {
+    const story = (item.storyCollection || []).find((s) => s.title === stage.story);
+    const photos = (item.gallery || [])
+      .filter((p) => p.element === stage.title)
+      .map(photoSrc);
+
+    popoutContent.innerHTML = `
+      ${stage.tagline ? `<span class="xp-icon-popout-eyebrow">${stage.tagline}</span>` : ""}
+      <h3 class="xp-icon-popout-title">${stage.title}</h3>
+
+      ${
+        story
+          ? `<div class="xp-icon-popout-block">
+              <h4 class="xp-meta-label">Story</h4>
+              <p class="xp-icon-popout-story-title">${story.title}</p>
+              <p class="xp-icon-popout-excerpt">${story.paragraphs[0]}</p>
+              <button class="xp-icon-popout-link" id="xp-icon-popout-read-story">Read the full story →</button>
+            </div>`
+          : ""
+      }
+
+      <div class="xp-icon-popout-block">
+        <h4 class="xp-meta-label">Gathering</h4>
+        <p>${stage.text}</p>
+        ${stage.credit ? `<p class="xp-design-card-credit">${stage.credit}</p>` : ""}
+      </div>
+
+      ${
+        photos.length
+          ? `<div class="xp-icon-popout-block">
+              <h4 class="xp-meta-label">Artifact</h4>
+              <div class="xp-icon-popout-artifact">
+                <button class="xp-icon-popout-hero" data-photo="0">
+                  <img src="${photos[0]}" alt="${stage.title} — photo 1" loading="lazy" />
+                </button>
+                ${
+                  photos.length > 1
+                    ? `<div class="xp-icon-popout-strip">
+                        ${photos
+                          .slice(1, 6)
+                          .map(
+                            (src, i) => `
+                        <button class="xp-icon-popout-thumb" data-photo="${i + 1}">
+                          <img src="${src}" alt="${stage.title} — photo ${i + 2}" loading="lazy" />
+                        </button>`
+                          )
+                          .join("")}
+                      </div>`
+                    : ""
+                }
+              </div>
+            </div>`
+          : ""
+      }
+    `;
+
+    popoutContent.querySelectorAll("[data-photo]").forEach((btn) => {
+      btn.addEventListener("click", () => openScopedLightbox(photos, Number(btn.dataset.photo), stage.title));
+    });
+    const readStoryBtn = document.getElementById("xp-icon-popout-read-story");
+    if (readStoryBtn) {
+      readStoryBtn.addEventListener("click", () => {
+        closePopout();
+        openStoryByTitle(stage.story);
+      });
+    }
+
+    popout.classList.add("is-open");
+    popout.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+    popoutContent.scrollTop = 0;
+  }
+
+  flow.querySelectorAll(".xp-icon-item").forEach((btn) => {
+    btn.addEventListener("click", () => openPopout(iconStages[Number(btn.dataset.stage)]));
+  });
+
+  closeBtn.addEventListener("click", closePopout);
+  popout.addEventListener("click", (e) => {
+    if (e.target === popout) closePopout();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (popout.classList.contains("is-open") && e.key === "Escape") closePopout();
+  });
+}
+
 /* ---------- Section 4b: Edition tabs (items with multiple runs, e.g. Jornada) ---------- */
 // Renders a small tab per edition into the same #xp-design-section /
 // #xp-flow containers renderDesignFlow uses — only one item type needs this
@@ -662,7 +818,7 @@ function renderStoryCollection(item) {
   list.innerHTML = item.storyCollection
     .map(
       (story, i) => `
-    <details class="xp-story" ${i === 0 ? "open" : ""}>
+    <details class="xp-story" data-story-title="${story.title}" ${i === 0 ? "open" : ""}>
       <summary class="xp-story-summary">
         <span class="xp-story-index">${String(i + 1).padStart(2, "0")}</span>
         <span class="xp-story-title">${story.title}</span>
@@ -674,6 +830,15 @@ function renderStoryCollection(item) {
     </details>`
     )
     .join("");
+}
+
+// Lets the icon-board pop-out (renderDesignFlowIcons) jump straight to a
+// specific story instead of duplicating its full text inline.
+function openStoryByTitle(title) {
+  const details = document.querySelector(`.xp-story[data-story-title="${CSS.escape(title)}"]`);
+  if (!details) return;
+  details.open = true;
+  details.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
 /* ---------- Next Experience — only shown once 2+ detail pages exist ---------- */

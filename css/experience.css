@@ -451,6 +451,139 @@
 .xp-design-card-credits .xp-meta-label { margin: 0 0 10px; }
 .xp-design-card-credit { margin: 0; font-size: 0.92rem; color: var(--ink); }
 
+/* ---------- 4c. EXPERIENCE DESIGN ICON BOARD (illustrated formats that pop
+   out into a Story -> Gathering -> Artifact view, e.g. When A Friend
+   Knocks) ---------- */
+.xp-icon-board {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 20px;
+}
+.xp-icon-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  background: var(--white);
+  border-radius: var(--radius-md);
+  padding: 28px 16px;
+  box-shadow: var(--shadow-soft);
+  cursor: pointer;
+  transition: transform 0.3s var(--ease-bounce), box-shadow 0.3s ease;
+}
+.xp-icon-item:hover { transform: translateY(-4px); box-shadow: var(--shadow-lift); }
+.xp-icon-graphic {
+  width: 56px;
+  height: 56px;
+  color: var(--brand-purple);
+}
+.xp-icon-graphic svg { width: 100%; height: 100%; }
+.xp-icon-label {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--ink);
+  text-align: center;
+}
+/* Closing/finale entries with no illustration (e.g. Crossing Paths) — a
+   plain note rather than a board tile. */
+.xp-icon-note {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(38, 37, 34, 0.12);
+}
+.xp-icon-note h3 { margin: 4px 0 8px; }
+.xp-icon-note p { margin: 0; font-size: 1.05rem; color: var(--ink-soft); }
+
+.xp-icon-popout {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(38, 37, 34, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.xp-icon-popout.is-open { opacity: 1; pointer-events: auto; }
+.xp-icon-popout-inner {
+  position: relative;
+  background: var(--white);
+  border-radius: var(--radius-md);
+  max-width: 640px;
+  width: 100%;
+  max-height: 86vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-lift);
+}
+.xp-icon-popout-content { padding: 40px; }
+.xp-icon-popout-close {
+  position: sticky;
+  float: right;
+  top: 16px;
+  right: 16px;
+  z-index: 1;
+  background: rgba(38, 37, 34, 0.08);
+  color: var(--ink);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.25s ease;
+}
+.xp-icon-popout-close:hover { background: rgba(38, 37, 34, 0.16); }
+.xp-icon-popout-eyebrow {
+  display: block;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--brand-purple);
+  margin-bottom: 6px;
+}
+.xp-icon-popout-title { margin: 0 0 24px; }
+.xp-icon-popout-block { margin-bottom: 28px; }
+.xp-icon-popout-block:last-child { margin-bottom: 0; }
+.xp-icon-popout-story-title {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--ink);
+  margin: 0 0 8px;
+}
+.xp-icon-popout-excerpt { margin: 0 0 12px; color: var(--ink-soft); line-height: 1.65; }
+.xp-icon-popout-link {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--brand-purple);
+  transition: opacity 0.2s ease;
+}
+.xp-icon-popout-link:hover { opacity: 0.7; }
+.xp-icon-popout-artifact { display: flex; flex-direction: column; gap: 10px; }
+.xp-icon-popout-hero {
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  cursor: pointer;
+}
+.xp-icon-popout-hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.xp-icon-popout-strip { display: flex; gap: 8px; }
+.xp-icon-popout-thumb {
+  flex: 1;
+  aspect-ratio: 1 / 1;
+  border-radius: 6px;
+  overflow: hidden;
+  cursor: pointer;
+}
+.xp-icon-popout-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
 /* ---------- 4b. EDITION TABS (items with multiple runs, e.g. Jornada) ---------- */
 /* Tabs are plain labels, not content-holding cards — clicking one swaps the
    content below instantly. Nothing expands or collapses, so this never
