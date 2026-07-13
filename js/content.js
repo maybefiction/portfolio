@@ -395,33 +395,34 @@ const SITE_CONTENT = {
       // element: null means "whole-exhibition" photos (signage, a live
       // performance night) that don't belong to one of the three spaces —
       // these only show under the Gallery's "All" filter.
+      // Curated per project direction: interleaved across the three rooms
+      // (plus the two whole-exhibition/signage shots) instead of grouped by
+      // room, so the default "All" filter reads as one mixed set rather than
+      // a wall of each room in turn. Near-duplicate frames of the same
+      // moment were dropped (e.g. two near-identical Cave DJ shots, two
+      // near-identical hanging-pigeon-drawing shots, three sequential frames
+      // of the same live-performance moment) — cut photo-03, -05, -09, -13,
+      // -19, -23, -25. Per-room filters still work; this only changes order.
       gallery: [
-        { src: "photo-01.jpg", element: "The Cave" },
-        { src: "photo-02.jpg", element: "Your Birthday Party" },
-        { src: "photo-03.jpg", element: "Your Birthday Party" },
-        { src: "photo-04.jpg", element: "Your Birthday Party" },
-        { src: "photo-05.jpg", element: "Your Birthday Party" },
-        { src: "photo-06.jpg", element: "Your Birthday Party" },
-        { src: "photo-07.jpg", element: "The Anti-Gallery" },
-        { src: "photo-08.jpg", element: "The Cave" },
-        { src: "photo-09.jpg", element: "The Cave" },
-        { src: "photo-10.jpg", element: "The Anti-Gallery" },
-        { src: "photo-11.jpg", element: "The Cave" },
         { src: "photo-12.jpg", element: null },
-        { src: "photo-13.jpg", element: "The Anti-Gallery" },
-        { src: "photo-14.jpg", element: "The Anti-Gallery" },
+        { src: "photo-01.jpg", element: "The Cave" },
+        { src: "photo-07.jpg", element: "The Anti-Gallery" },
+        { src: "photo-02.jpg", element: "Your Birthday Party" },
         { src: "photo-15.jpg", element: "The Anti-Gallery" },
-        { src: "photo-16.jpg", element: "The Anti-Gallery" },
-        { src: "photo-17.jpg", element: "The Anti-Gallery" },
+        { src: "photo-08.jpg", element: "The Cave" },
         { src: "photo-18.jpg", element: "Your Birthday Party" },
-        { src: "photo-19.jpg", element: "The Anti-Gallery" },
-        { src: "photo-20.jpg", element: "The Anti-Gallery" },
-        { src: "photo-21.jpg", element: "Your Birthday Party" },
-        { src: "photo-22.jpg", element: "The Anti-Gallery" },
-        { src: "photo-23.jpg", element: null },
+        { src: "photo-17.jpg", element: "The Anti-Gallery" },
         { src: "photo-24.jpg", element: null },
-        { src: "photo-25.jpg", element: null },
+        { src: "photo-06.jpg", element: "Your Birthday Party" },
+        { src: "photo-14.jpg", element: "The Anti-Gallery" },
+        { src: "photo-11.jpg", element: "The Cave" },
+        { src: "photo-04.jpg", element: "Your Birthday Party" },
+        { src: "photo-10.jpg", element: "The Anti-Gallery" },
+        { src: "photo-21.jpg", element: "Your Birthday Party" },
+        { src: "photo-16.jpg", element: "The Anti-Gallery" },
         { src: "photo-26.jpg", element: "Your Birthday Party" },
+        { src: "photo-20.jpg", element: "The Anti-Gallery" },
+        { src: "photo-22.jpg", element: "The Anti-Gallery" },
       ].map((p) => ({ ...p, src: `/assets/experiences/what-clings-gallery/${p.src}` })),
       // Card-style Experience Design section (see renderDesignFlowCards in
       // experience.js) — distinct from the act-based accordion used by
