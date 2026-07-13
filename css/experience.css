@@ -439,14 +439,25 @@
 .xp-design-card-text { margin: 0; font-size: 1.08rem; line-height: 1.7; }
 .xp-design-card-gatherings .xp-meta-label { font-size: 0.8rem; }
 .xp-design-card-gatherings .xp-design-card-tags li { background: var(--brand-teal-light); color: var(--ink); }
-/* Right-hand Credits column, separated by a vertical divider — same
-   language as .xp-meta-side's divider further up the page. Top-aligned
-   (not stretched) so a one-line credit doesn't leave a tall column of
-   empty space beside a much longer body paragraph. */
-.xp-design-card-credits {
-  flex: 0 0 200px;
+/* Right-hand rail — Materials, From These Gatherings, and Credits stacked
+   as one "about this room" column, separated by a vertical divider from
+   the narrative main column (title/tagline/text). Same divider + stacked-
+   block language as .xp-meta-side/.xp-meta-block further up the page, so
+   the two rails read as one family. Widened relative to the old
+   credit-only rail since it now carries real content (materials and
+   gathering-source tags, which need room to wrap), with the main column
+   narrowed in turn to make space. */
+.xp-design-card-side {
+  flex: 0 0 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
   padding-left: 32px;
   border-left: 1px solid rgba(38, 37, 34, 0.12);
+}
+.xp-design-card-side-block + .xp-design-card-side-block {
+  padding-top: 24px;
+  border-top: 1px solid rgba(38, 37, 34, 0.12);
 }
 .xp-design-card-credits .xp-meta-label { margin: 0 0 10px; }
 .xp-design-card-credit { margin: 0; font-size: 0.92rem; color: var(--ink); }
@@ -967,8 +978,8 @@
 
   .xp-design-card { flex-direction: column; padding: 24px; }
   /* Divider only makes sense splitting side-by-side columns — stacked,
-     it becomes a border above the credits block instead. */
-  .xp-design-card-credits {
+     it becomes a border above the side rail instead. */
+  .xp-design-card-side {
     flex: none;
     padding-left: 0;
     padding-top: 24px;

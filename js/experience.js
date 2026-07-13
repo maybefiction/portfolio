@@ -351,23 +351,25 @@ function renderDesignFlowCards(item) {
             ${stage.dek ? `<p class="xp-design-card-dek">${stage.dek}</p>` : ""}
           </div>
           ${stage.tagline ? `<p class="xp-design-card-tagline">${stage.tagline}</p>` : ""}
+          <p class="xp-design-card-text">${stage.text}</p>
+        </div>
+        <div class="xp-design-card-side">
           ${stage.materials ? `
-          <div class="xp-design-card-materials">
+          <div class="xp-design-card-side-block xp-design-card-materials">
             <h4 class="xp-meta-label">Materials</h4>
             ${renderTagPillsHTML(stage.materials)}
           </div>` : ""}
-          <p class="xp-design-card-text">${stage.text}</p>
           ${stage.communityEvents ? `
-          <div class="xp-design-card-materials xp-design-card-gatherings">
+          <div class="xp-design-card-side-block xp-design-card-materials xp-design-card-gatherings">
             <h4 class="xp-meta-label">From these gatherings</h4>
             ${renderTagPillsHTML(stage.communityEvents)}
           </div>` : ""}
+          ${stage.credit ? `
+          <div class="xp-design-card-side-block xp-design-card-credits">
+            <h4 class="xp-meta-label">Credits</h4>
+            <p class="xp-design-card-credit">${stage.credit}</p>
+          </div>` : ""}
         </div>
-        ${stage.credit ? `
-        <div class="xp-design-card-credits">
-          <h4 class="xp-meta-label">Credits</h4>
-          <p class="xp-design-card-credit">${stage.credit}</p>
-        </div>` : ""}
       </div>
     `;
 
