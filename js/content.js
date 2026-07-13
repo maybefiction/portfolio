@@ -312,7 +312,7 @@ const SITE_CONTENT = {
           subtitle: "Celebration",
           location: "Mainstage Exit",
           image: "/assets/experiences/spontaneous-attachment-gallery/photo-10.jpg",
-          text: "The formal program ended, but the night didn't. Audience members received a piece of dark chocolate on their way out, then stayed to unwind. With the performances behind them, guests mixed casually with the dancers, musicians, and crew — turning the closing minutes into the kind of conversation the whole night had been building toward.",
+          text: "The formal program ended with audience members receiving a piece of dark chocolate on their way out, but many lingered to chat with one another even if they had only just met.",
         },
       ],
     },
