@@ -43,11 +43,10 @@ const SITE_CONTENT = {
     // just the two of them, no staging.
     heroPhoto: "/assets/about/ishaan-alex-jornada.jpg",
     body: [
-      "maybe:fiction is an interdisciplinary studio that designs experiences for people to gather, create, and relate through communal making, play, and ritual. Our work spans performance, installation, pop-up galleries, festivals, celebrations, and workshops.",
-      "We believe art is something to practice together, not consume alone. We work in the spaces between things: artist and audience, public and private, celebratory and mundane — designing the conditions where intimacy, wonder, and participation can emerge from ordinary places.",
-      "Performance, movement, music, visual art, writing, games, and food are not separate disciplines to us — they are materials. We combine them to create experiences no single medium or sense could produce alone.",
-      "Play can be profound, rituals can be secular, creativity belongs to everyone, and ordinary places can become sites of wonder when approached with curiosity, care, and participation.",
-      "How we make things matters as much as what we make. We work collaboratively, embrace improvisation, and treat process as inseparable from outcome.",
+      "We make performances, installations, gatherings, festivals, workshops, and other things that don't fit neatly into one category. Dance, music, visual art, writing, food, games, and the people in the room all become part of the same work.",
+      "We're interested in familiar things: the ways people gather, celebrate, make, play, eat, and spend time together. Rather than inventing entirely new worlds, we like to take these ordinary parts of life and shift them slightly — making them more sensory, participatory, playful, or strange.",
+      "That's where the name <strong>maybe:fiction</strong> comes from. We're not interested in escaping ordinary life so much as playing with it. The people you meet are real, and so is the room you're standing in. But change the rules a little — add a performance, build something together, give everyone a small role to play — and the line between what is happening and what has been imagined gets harder to place.",
+      "We make things this way, too. Our work grows through collaboration, improvisation, and trying things in rooms with other people.",
     ],
     founders: [
       {
