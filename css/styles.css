@@ -253,6 +253,15 @@ ul { list-style: none; margin: 0; padding: 0; }
   font-size: clamp(0.8rem, calc(2.16vw - 1.04px), 1.15rem);
 }
 
+/* Work With Us intro reads as a standalone pitch line rather than a
+   heading's subtitle, so it's centered across the page instead of
+   following the site's usual left-aligned heading/subheading pairing. */
+.work-page .section-subheading {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
 /* Buttons */
 .btn {
   display: inline-flex;
