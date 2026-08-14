@@ -12,7 +12,7 @@ const SITE_CONTENT = {
   // it from that doc whenever it changes (keep hero.tagline in sync too).
   brand: {
     name: "maybe:fiction",
-    tagline: "maybe:fiction creates multisensory art experiences and gatherings that reimagine ordinary spaces, rituals, and encounters",
+    tagline: "We create multisensory art experiences and gatherings that reimagine ordinary spaces, rituals, and encounters",
     email: "hello@maybefiction.com",
   },
 
@@ -20,7 +20,7 @@ const SITE_CONTENT = {
   hero: {
     heading: "maybe:fiction",
     // See brand.tagline above — same field, same doc source.
-    tagline: "maybe:fiction creates multisensory art experiences and gatherings that reimagine ordinary spaces, rituals, and encounters",
+    tagline: "We create multisensory art experiences and gatherings that reimagine ordinary spaces, rituals, and encounters",
     // One real photo per fully-realized experience — swapped out the old 4th
     // slot (eclectic-pathetic.jpg), which has no real copy or detail page
     // yet, for a spread across the three complete case studies instead of
