@@ -31,7 +31,7 @@ function renderExperiences() {
 
       if (item.hasDetailPage) {
         return `
-        <a class="experience-card" data-category="${item.category}" href="/experiences/${item.id}">
+        <a class="experience-card" data-category="${item.category}" href="/experiences/${item.id}/">
           ${media}${overlay}
         </a>`;
       }
