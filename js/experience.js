@@ -889,7 +889,7 @@ function renderNextExperience(item) {
   const currentIndex = detailPages.findIndex((e) => e.id === item.id);
   const next = detailPages[(currentIndex + 1) % detailPages.length];
 
-  el.href = `/experiences/${next.id}`;
+  el.href = `/experiences/${next.id}/`;
   document.getElementById("xp-next-image").src = next.placeholderSrc;
   document.getElementById("xp-next-image").alt = next.title;
   document.getElementById("xp-next-title").textContent = next.title;
