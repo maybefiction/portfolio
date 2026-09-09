@@ -128,9 +128,9 @@ function renderHighlightCard(type, item) {
 
   const tagClass = type === "experience" ? `tag-${item.category}` : `tag-${type}`;
   const href =
-    type === "experience" ? `/experiences/${item.id}`
-    : type === "workshop" ? `/workshops/${item.id}`
-    : `/gatherings/${item.id}`;
+    type === "experience" ? `/experiences/${item.id}/`
+    : type === "workshop" ? `/workshops/${item.id}/`
+    : `/gatherings/${item.id}/`;
   const desc = item.tagline || item.shortDescription || item.description || "";
 
   return `
